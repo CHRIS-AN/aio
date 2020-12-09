@@ -82,17 +82,27 @@ CREATE TABLE empl
     name varchar2(20) NOT NULL,
     birth varchar2(40) NOT NULL,
     address varchar2(100) NOT NULL,
+    post_num number not null,
     phone varchar2(50) NOT NULL,
     -- 부서(인사,재무,제품,물류,영업)
     dept varchar2(20) NOT NULL,
     pw varchar2(100) NOT NULL,
     photo clob NOT NULL,
     email varchar2(100) NOT NULL,
-    empl_status varchar2(20) NOT NULL,
     empl_jumin varchar2(20) NOT NULL,
     work_state varchar2(20) NOT NULL,
+    empl_regdate varchar2(40) not null,
+    empl_resigdate varchar2(40),
     PRIMARY KEY (empl_id)
 );
+
+CREATE TABLE Calendar
+{
+    empl_id varchar2(100) not null,
+    cal_workt date not null,
+    cal_resigdate date,
+    work_state varchar2(20) not null,
+}
 
 
 CREATE TABLE orders
@@ -206,6 +216,11 @@ CREATE TABLE workt
 
 
 /* Create Foreign Keys */
+ALTER TABLE calendar
+    ADD FOREIGN KEY (empl_id)
+        REFERENCES empl (empl_id)
+;
+
 
 ALTER TABLE slip
     ADD FOREIGN KEY (account_uid)
