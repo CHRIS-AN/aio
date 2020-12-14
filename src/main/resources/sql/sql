@@ -60,19 +60,25 @@ CREATE TABLE corp
     PRIMARY KEY (corp_id)
 );
 
-
 CREATE TABLE derivative
 (
     -- D + 입고날짜 + 0001
     deriv_id varchar2(40) NOT NULL,
-    deriv_cnt number,
-    deriv_date date NOT NULL,
+    deriv_regdate date NOT NULL default SYSDATE,
     -- O000000001
     order_id varchar2(40) NOT NULL,
-    deriv_state varchar2(20) NOT NULL,
     PRIMARY KEY (deriv_id)
+
 );
 
+CREATE TABLE derivative_ok
+(
+    deriv_ok_totcnt number default 0,
+    deriv_ok_confirmdate date NOT NULL default SYSDATE,
+    deriv_state varchar2(20) NOT NULL,
+    deriv_id varchar2(40) NOT NULL,
+    PRIMARY KEY (deriv_id)
+);
 
 CREATE TABLE empl
 (
@@ -144,25 +150,36 @@ CREATE TABLE release
     -- R + 출고일자 + 0001
     --
     relea_id varchar2(40) NOT NULL,
-    relea_cnt number,
-    relea_date date NOT NULL,
-    --
-    --
+    relea_cnt number default 0,
+    relea_regdate date NOT NULL default SYSDATE,
+
     empl_id varchar2(100) NOT NULL,
-    relea_state varchar2(20) NOT NULL,
+    -- Q + 0001
+    request_id varchar2(20) NOT NULL,
     PRIMARY KEY (relea_id)
 );
 
-
-CREATE TABLE relea_dummy
+CREATE TABLE request_dummy_table
 (
-    dum_cnt number NOT NULL,
-    dum_price number NOT NULL,
-    dum_regdate date NOT NULL,
-    -- M + 0001
-    dum_id varchar2(20) NOT NULL,
+    -- Q + 0001
+    request_id varchar2(20) NOT NULL,
+    request_totcnt number NOT NULL,
+    request_totprice number NOT NULL,
+    request_regdate date NOT NULL default SYSDATE,
+    request_state varchar2(20) NOT NULL,
+    PRIMARY KEY (request_id)
+
+);
+
+CREATE TABLE request_dummy_list
+(
+    request_cnt number NOT NULL,
+    request_price number NOT NULL,
+
     -- c00000001
-    prod_id number NOT NULL
+    prod_id number NOT NULL,
+    -- Q + 0001
+    request_id varchar2(20) NOT NULL
 );
 
 
