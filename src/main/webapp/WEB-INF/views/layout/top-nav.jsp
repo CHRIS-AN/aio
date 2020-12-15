@@ -9,12 +9,21 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="">
                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <img src="../../resources/static/node_modules/gentelella/production/images/img.jpg" alt="">John Doe
+                        <img src="/node_modules/gentelella/production/images/img.jpg" alt="">John Doe
                         <span class=" fa fa-angle-down"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu pull-right">
                         <li><a href="#"> 내 인사 정보 </a></li>
-                        <li><a href="/logout"><i class="fa fa-sign-out pull-right"></i> 로그아웃 </a></li>
+                        <li>
+                            <a>
+                                <form class="" action="/logout" method="post">
+                                        <button type="submit" style="border: none; background: none;">
+                                            <i class="fa fa-sign-out pull-right"></i> 로그아웃
+                                        </button>
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                </form>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 

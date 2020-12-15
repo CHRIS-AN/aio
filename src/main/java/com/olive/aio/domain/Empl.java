@@ -12,7 +12,8 @@ import javax.validation.constraints.NotBlank;
 public class Empl {
 
     @Id
-    private String empl_id;
+    @Column(name = "empl_id")
+    private String emplId;
 
     @NotBlank
     private String name;
@@ -33,7 +34,7 @@ public class Empl {
     private String dept;
 
     @NotBlank
-    private String pw;
+    private String password;
 
     @NotBlank @Lob @Basic(fetch = FetchType.EAGER)
     private String photo;

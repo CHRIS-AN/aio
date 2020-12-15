@@ -1,8 +1,9 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html lang="ko">
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
 
 <!-- head -->
-<c:import url="layout/header.jsp" />
+<jsp:include page="../layout/header.jsp" />
 
 </head>
 <!-- head -->
@@ -10,11 +11,11 @@
 <div class="container body">
     <div class="main_container">
         <!-- sidebar -->
-        <c:import url="<%=application.getContextPath()%>/src/main/webapp/WEB-INF/views/layout/side-bar.jsp" />
+        <jsp:include page="../layout/side-bar.jsp" />
         <!-- /sidebar -->
 
         <!-- top-nav -->
-        <c:import url="<%=application.getContextPath()%>/src/main/webapp/WEB-INF/views/layout/top-nav.jsp" />
+        <jsp:include page="../layout/top-nav.jsp" />
         <!-- top-nav -->
 
         <div class="right_col" role="main">
@@ -710,7 +711,7 @@
             </div>
 
             <!-- footer  -->
-        <c:import url="<%=application.getContextPath()%>/src/main/webapp/WEB-INF/views/layout/footer.jsp" />
+        <jsp:include page="../layout/footer.jsp" />
             <!-- /footer  -->
 
         </div>
@@ -720,7 +721,7 @@
     </div>
 </div>
 <!-- script -->
-<c:import url="<%=application.getContextPath()%>/src/main/webapp/WEB-INF/views/layout/script.jsp" />
+<jsp:include page="../layout/script.jsp" />
 <!-- /script -->
 </body>
 </html>

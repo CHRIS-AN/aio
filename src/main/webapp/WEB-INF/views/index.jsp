@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <!-- head -->
-<jsp:include page="<%=application.getContextPath()%>/src/main/webapp/WEB-INF/views/layout/header.jsp" />
+<jsp:include page="layout/header.jsp" />
 </head>
 <!-- head -->
 <body class="nav-md">
@@ -10,11 +10,11 @@
         <div class="main_container">
 
             <!-- sidebar -->
-            <jsp:include page="<%=application.getContextPath()%>/src/main/webapp/WEB-INF/views/layout/side-bar.jsp" />
+            <jsp:include page="layout/side-bar.jsp" />
             <!-- /sidebar -->
 
             <!-- top-nav -->
-            <jsp:include page="<%=application.getContextPath()%>/src/main/webapp/WEB-INF/views/layout/top-nav.jsp" />
+            <jsp:include page="layout/top-nav.jsp" />
             <!-- top-nav -->
 
 
@@ -22,7 +22,7 @@
             <div class="right_col" role="main">
 
                 <!-- footer  -->
-                <jsp:include page="<%=application.getContextPath()%>/src/main/webapp/WEB-INF/views/layout/footer.jsp" />
+                <jsp:include page="layout/footer.jsp" />
                 <!-- /footer  -->
             </div>
             <!-- /content -->
@@ -31,7 +31,7 @@
         </div>
     </div>
 <!-- script -->
-    <jsp:include page="<%=application.getContextPath()%>/src/main/webapp/WEB-INF/views/layout/script.jsp" />
+    <jsp:include page="layout/script.jsp" />
 <!-- /script -->
 </body>
 </html>
