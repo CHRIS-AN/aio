@@ -10,8 +10,19 @@ public class MainController {
 
     @GetMapping("/")
     public String index() {
-        System.out.println("index()");
+
         return "index";
     }
+
+    @GetMapping("/login")
+    public String login() {
+        return "yeonsup/login";
+    }
+
+    @GetMapping("/example")
+    public String example() {
+        return "layout/example";
+    }
+
 
 }
