@@ -19,8 +19,4 @@ public class AccountSubject {
     private Long account_id;
 
     private String account_name;
-
-
-
-
 }
