@@ -1,4 +1,4 @@
-package com.olive.aio.Employee;
+package com.olive.aio.employee;
 
 import com.olive.aio.domain.Empl;
 import org.springframework.data.jpa.repository.JpaRepository;

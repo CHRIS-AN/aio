@@ -5,6 +5,8 @@ import org.hibernate.annotations.LazyToOne;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter @EqualsAndHashCode(of = "empl_id")
@@ -15,43 +17,43 @@ public class Empl {
     @Column(name = "empl_id")
     private String emplId;
 
-    @NotBlank
+
     private String name;
 
-    @NotBlank
-    private String birth;
 
-    @NotBlank
+    private String jumin;
+
+
     private String address;
 
-    @NotBlank
+
     private Integer post_num;
 
-    @NotBlank
+
     private String phone;
 
-    @NotBlank
+
     private String dept;
 
-    @NotBlank
+
     private String password;
 
-    @NotBlank @Lob @Basic(fetch = FetchType.EAGER)
+    @Lob @Basic(fetch = FetchType.EAGER)
     private String photo;
 
-    @NotBlank
+
     private String email;
 
-    @NotBlank
+
     private String empl_jumin;
 
-    @NotBlank
-    private String work_state;
 
-    @NotBlank
-    private String empl_regdate;
+    private String work_state = "재직";
 
-    @NotBlank
-    private String empl_resigdate;
+    @Column(name = "empl_regdate")
+    private String emplRegdate;
+
+    @Column(name = "empl_resigdate")
+    private String emplResigdate;
 
 }

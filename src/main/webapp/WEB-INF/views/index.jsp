@@ -14,7 +14,9 @@
             <!-- /sidebar -->
 
             <!-- top-nav -->
-            <jsp:include page="layout/top-nav.jsp" />
+            <jsp:include page="layout/top-nav.jsp" >
+                <jsp:param name="empl" value="${empl}"/>
+            </jsp:include>
             <!-- top-nav -->
 
 

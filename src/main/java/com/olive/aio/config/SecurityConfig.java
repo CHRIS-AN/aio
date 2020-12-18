@@ -28,17 +28,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http.authorizeRequests()
-                .mvcMatchers("/", "/login", "/example", "/hr").permitAll()
+                .mvcMatchers("/", "/login", "/example").permitAll()
+                .mvcMatchers("/").hasAuthority("ROLE_ALL")
                 .anyRequest().authenticated();
+
+
 
         http.formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/")
-                .permitAll();
+                .defaultSuccessUrl("/");
 
-//        http.cors().and();
-//        http.csrf().disable();
 
         http.logout()
                 .logoutSuccessUrl("/login");
@@ -58,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
-                .mvcMatchers("/node_modules/**")
+                .mvcMatchers("/node_modules/**", "/static/js/**", "/static/css/**")
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
 }

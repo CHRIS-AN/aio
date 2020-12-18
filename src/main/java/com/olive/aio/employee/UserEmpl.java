@@ -1,4 +1,4 @@
-package com.olive.aio.Employee;
+package com.olive.aio.employee;
 
 import com.olive.aio.domain.Empl;
 import lombok.Getter;
@@ -11,8 +11,8 @@ public class UserEmpl extends User {
 
     private Empl empl;
 
-    public UserEmpl(Empl empl) {
-        super(empl.getEmplId(), empl.getPassword(), List.of(new SimpleGrantedAuthority("ROLE_USER")));
+    public UserEmpl(Empl empl, String role) {
+        super(empl.getEmplId(), empl.getPassword(), List.of(new SimpleGrantedAuthority(role)));
         this.empl = empl;
     }
 }
