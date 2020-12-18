@@ -1,0 +1,35 @@
+#resigDialog, #detailDialog, #updateDialog {
+    position: fixed;
+    z-index: 9999999;
+    width: 800px;
+    top: 20%;
+    left: 30%;
+    border: 1px solid #372c81;
+    display: none;
+}
+
+#resetpwDialog {
+    position: fixed;
+    z-index: 9999999;
+    width: 500px;
+    display: none;
+    border: 1px solid #372c81;
+    top: 40%;
+    left: 40%;
+}
+.cus-title {
+    color: #372c81;
+    border-bottom: 2px solid #372c81;
+}
+.cus-title h2 {
+    font-weight: bold;
+}
+.x_panel {
+    margin-bottom: 0;
+}
+
+.profile_details {
+    max-height: 300px;
+    max-width: 200px;
+}
+
