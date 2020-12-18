@@ -9,4 +9,5 @@ public class Empl {
 
     @Id @GeneratedValue
     private String id;
+
 }

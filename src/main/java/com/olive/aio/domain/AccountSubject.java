@@ -13,12 +13,10 @@ import javax.persistence.Id;
 @Builder @AllArgsConstructor @NoArgsConstructor
 public class AccountSubject {
 
+// 계정 과목 dumy table
+
     @Id @GeneratedValue
     private Long account_id;
 
     private String account_name;
-
-
-
-
 }
