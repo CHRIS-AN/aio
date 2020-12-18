@@ -18,9 +18,8 @@ public class SlipRepositoryExtentionImpl extends QuerydslRepositorySupport imple
 
     @Override
     public List<Slip> findByKeyword(String keyword) {
-        QSlip slip = QSlip.slip;
-        JPQLQuery<Slip> slipJPQLQuery = from(slip).where(slip.slip_write.containsIgnoreCase(keyword)
-                                                .n or(slip.corp.containsIgnoreCase(keyword)));
+//        QSlip slip = QSlip.slip;
+//        JPQLQuery<Slip> slipJPQLQuery = from(slip).where(slip.slip_write.containsIgnoreCase(keyword));
 
         return null;
     }

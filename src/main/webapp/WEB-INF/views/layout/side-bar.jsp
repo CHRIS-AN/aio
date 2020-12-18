@@ -46,8 +46,8 @@
                         <ul class="nav child_menu">
                             <li><a href="#">지출결의서</a></li>
                             <li><a href="#">입금보고서</a></li>
-                            <li><a href="#">매출/매입거래</a></li>
-                            <li><a href="#">결제승인대기</a></li>
+                            <li><a href="/finance/purchaseSalesTradingRegister">매출/매입거래</a></li>
+                            <li><a href="/finance/outstandingAuthorization">결제승인대기</a></li>
                             <li><a href="#">전표관리</a></li>
                             <li><a href="#">손익계산서</a></li>
                         </ul>

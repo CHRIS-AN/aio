@@ -150,6 +150,7 @@ public class SlipController {
     @GetMapping("/search/slip")
     public String searchSlip(String keyword, Model model) {
         List<Slip> slipList = slipRepository.findByKeyword(keyword);
+        return null;
     }
 
 }
