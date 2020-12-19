@@ -1,4 +1,4 @@
-package com.olive.aio.order;
+package com.olive.aio.orders;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class OrdersController {
     public String getAllOrdersList(Model model, Orders orders) {
         List<Orders> ordersList = ordersService.findAll(orders); //발주목록 가져오기
         model.addAttribute("ordersList", ordersList);
-        return "yeonji/ordersList";
+        return "orders";
     }
 
 //    // 발주 전체 조회
