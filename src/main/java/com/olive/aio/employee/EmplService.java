@@ -19,7 +19,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Email;
 import java.util.*;
 
 @Slf4j
@@ -67,6 +66,9 @@ public class EmplService implements UserDetailsService {
             switch (dept) {
                 case "인사":
                     role = "ROLE_HR";
+                    break;
+                case "영업":
+                    role = "ROLE_SALES";
                     break;
                 //TODO 각 부서마다 권한을 정해주세요.
                 // 제품 영업 물류 회계

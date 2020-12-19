@@ -75,7 +75,15 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-                            <form action="/hr" method="post" class="form" enctype="multipart/form-data">
+                            <form action="/hr" method="post" class="form">
+                                <div class="form-group has-feedback col-md-12 com-sm-12">
+                                    <label class="col-md-12">사진</label>
+                                    <img src="${emplForm.photo}" id="profile-image" class="col-md-3 img img-responsive">
+                                    <div class="col-md-7">
+                                        <input type="file" class="form-control" id="image-input-file">
+                                        <input type="hidden" id="photo" name="photo">
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="form-group has-feedback col-md-6 com-sm-6">
                                         <label>사원번호</label>
@@ -122,7 +130,7 @@
                                 <div class="row">
                                 <div class="form-group has-feedback col-md-6 com-sm-6">
                                     <label>연락처</label>
-                                    <input type="text" name="phone" class="form-control" id="phone" placeholder="핸드폰 번호">
+                                    <input type="text" name="phone" value="${emplForm.phone}" class="form-control" id="phone" placeholder="핸드폰 번호">
                                     <span>${valid_phone}</span>
                                 </div>
                                 <div class="form-group has-feedback col-md-6 com-sm-6">
@@ -135,20 +143,14 @@
                                     <label class="col-md-12">주소</label>
                                     <div class="col-md-5 col-sm-5">
                                         <input type="text" name="post_num" value="${emplForm.post_num}" class="form-control" id="postnum" placeholder="우편번호">
+                                        <span>${valid_post_num}</span>
                                     </div>
                                     <button id="postnumBtn" class="btn btn-default">검색</button>
-                                    <span>${valid_post_num}</span>
                                 </div>
                                 <div class="form-group has-feedback col-md-12 com-sm-12">
                                     <div class="col-md-12">
                                         <input type="text" name="address" value="${emplForm.address}" class="form-control" id="address" placeholder="주소">
                                         <span>${valid_address}</span>
-                                    </div>
-                                </div>
-                                <div class="form-group has-feedback col-md-12 com-sm-12">
-                                    <label class="col-md-12">사진</label>
-                                    <div class="col-md-12">
-                                        <input type="file" name="photo" class="form-control" id="photo">
                                     </div>
                                 </div>
                                 <div class="form-group text-right has-feedback col-md-12 com-sm-12">

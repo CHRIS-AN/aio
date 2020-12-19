@@ -29,7 +29,7 @@ public class EmplUpdateForm {
     @NotBlank
     private String dept;
 
-    private MultipartFile photo;
+    private String photo;
 
     @NotBlank
     private String email;

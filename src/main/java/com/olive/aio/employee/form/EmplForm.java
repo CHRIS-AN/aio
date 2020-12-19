@@ -36,7 +36,7 @@ public class EmplForm {
 
     private String password;
 
-    private MultipartFile photo;
+    private String photo;
 
     @NotBlank
     private String email;
