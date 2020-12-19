@@ -33,9 +33,9 @@ public class SlipService {
     }
 
 
-    public Slip viewSlip(Long slip_uid) {
-        Slip slipList = repository.findBySlipId(slip_uid);
-        checkIfExistingStudy(slip_uid, slipList);
+    public Slip viewSlip(Long slipId) {
+        Slip slipList = repository.findBySlipId(slipId);
+        checkIfExistingStudy(slipId, slipList);
         return slipList;
     }
 
@@ -48,20 +48,22 @@ public class SlipService {
         return slipList;
     }
 
-    private void checkIfExistingStudy(Long slip_uid, Slip slip) {
+    private void checkIfExistingStudy(Long slipId, Slip slip) {
         if (slip == null) {
-            throw new IllegalArgumentException(slip_uid + "에 해당하는 스터디가 없습니다.");
+            throw new IllegalArgumentException(slipId + "에 해당하는 스터디가 없습니다.");
         }
     }
 
-    public void updateSlip(SlipForm newForm, Long slip_uid) {
-        Slip bySlipId = repository.findBySlipId(slip_uid);
+    public void updateSlip(SlipForm newForm, Long slipId) {
+        Slip bySlipId = repository.findBySlipId(slipId);
         System.out.println("##############################");
+        System.out.println("bySlipId : " + bySlipId);
         modelMapper.map(newForm, bySlipId);
+        System.out.println("여긴아니고?");
     }
 
-    public void deleteSlip(SlipForm slip_uid) {
-        Slip slip = repository.findBySlipId(slip_uid.getSlipId());
+    public void deleteSlip(SlipForm slipId) {
+        Slip slip = repository.findBySlipId(slipId.getSlipId());
         repository.delete(slip);
     }
 }

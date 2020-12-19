@@ -5,5 +5,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional(readOnly = true)
 public interface SlipRepository extends JpaRepository<Slip, Long>, SlipRepositoryExtention {
-    Slip findBySlipId(Long id);
+
+    Slip findBySlipId(Long SlipId);
 }

@@ -9,6 +9,6 @@ import java.util.List;
 @Transactional(readOnly = true)
 public interface SlipRepositoryExtention {
 
-    //Page<Slip> findByKeyword(String keyword, Pageable pageable);
-    List<Slip> findByKeyword(String keyword);
+    Page<Slip> findByKeyword(String keyword, Pageable pageable);
+    Page<Slip> findByKeyword(Pageable pageable);
 }

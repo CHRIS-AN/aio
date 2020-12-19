@@ -8,8 +8,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
-import java.util.List;
-
 public class SlipRepositoryExtentionImpl extends QuerydslRepositorySupport implements  SlipRepositoryExtention{
 
     public SlipRepositoryExtentionImpl() {
@@ -17,11 +15,26 @@ public class SlipRepositoryExtentionImpl extends QuerydslRepositorySupport imple
     }
 
     @Override
-    public List<Slip> findByKeyword(String keyword) {
-//        QSlip slip = QSlip.slip;
-//        JPQLQuery<Slip> slipJPQLQuery = from(slip).where(slip.slip_write.containsIgnoreCase(keyword));
+    public Page<Slip> findByKeyword(String keyword, Pageable pageable) {
+        QSlip slip = QSlip.slip;
+        JPQLQuery<Slip> slipJPQLQuery = from(slip).where(
+                slip.slip_write.containsIgnoreCase(keyword)
+        .or(slip.corp.containsIgnoreCase(keyword)));
 
-        return null;
+        JPQLQuery<Slip> pageableQuery = getQuerydsl().applyPagination(pageable, slipJPQLQuery); // 페이징 처리가 된 쿼리.
+        QueryResults<Slip> slipQueryResults = pageableQuery.fetchResults();
+        System.out.println("페이징쿼리일까?    :" + pageableQuery);
+        return new PageImpl<>(slipQueryResults.getResults(), pageable, slipQueryResults.getTotal());
+    }
+
+    @Override
+    public Page<Slip> findByKeyword(Pageable pageable) {
+        QSlip slip = QSlip.slip;
+        JPQLQuery<Slip> slipJPQLQuery = from(slip);
+        JPQLQuery<Slip> pageableQuery = getQuerydsl().applyPagination(pageable, slipJPQLQuery); // 페이징 처리가 된 쿼리.
+        QueryResults<Slip> slipQueryResults = pageableQuery.fetchResults();
+        System.out.println("페이징쿼리일까?    :" + pageableQuery);
+        return new PageImpl<>(slipQueryResults.getResults(), pageable, slipQueryResults.getTotal());
     }
 
 //    @Override

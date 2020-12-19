@@ -17,19 +17,19 @@
 <body>
 <div class="container mt-5">
     <div class="row mb-5">
+
         <span class="col-12 text-center">
             <h2>승인 요청 대기</h2>
             <span class="row form-group">
                 <div class="col-6"></div>
                 <h2><i class="fa fas fa-search col-1 mt-5"></i></h2>
                 <span class="col-5 mt-5">
-                    <form action="search/slip" class="form-inline" method="get">
+                    <form action="/finance/search/slip" class="form-inline" method="get">
                         <input type="search" class="form-control" placeholder="검색어를 입력해주세요." maxlength="20"
                                        aria-label="Search" name="keyword"/>
                     </form>
                 </span>
             </span>
-
 
             <div class="col-3 mt-5">
 <%--                <c:if test="${studyPage.getTotalElements() == 0}">--%>
@@ -40,6 +40,7 @@
 <%--                     <strong id="keyword" class="context">${keyword}</strong>에 해당하는 전표를 찾았습니다.--%>
 <%--                </c:if>--%>
             </div>
+
             <div>
                 <table class="table table-striped">
                     <thead>
@@ -79,7 +80,6 @@
 <%--                                               role="button">수정</a>--%>
                                         </c:otherwise>
                                     </c:choose>
-
                                 </td>
                             </tr>
                         </c:forEach>
@@ -87,7 +87,34 @@
                 </table>
             </div>
         </span>
+
+        <div class="row justify-content-center">
+            <div class="col-sm-10">
+                <nav>
+                    <ul class="pagination justify-content-center">
+                        <!-- Previous -->
+                        <li class="page-item" value="${!slipList.hasPrevious()}? disabled">
+                            <a href="/finance/search/slip?keyword=${keword}&sort=${sortProperty}desc&page=${slipList.getNumber()-1}"
+                                        class="page-link" tabindex="-1" aria-disabled="true">
+                            </a>
+                        </li>
+                        <!-- Page -->
+                        <li class="page-item" ${i == slipList.getNumber()}? active
+                        </li>
+                        <!-- Next -->
+                        <li></li>
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+
     </div>
 </div>
+
+
+<script>
+
+</script>
 </body>
 </html>

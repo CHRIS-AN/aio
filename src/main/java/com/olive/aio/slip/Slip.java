@@ -23,7 +23,6 @@ public class Slip {
     // 자동 생성 전략
     @Id
     @GeneratedValue
-    @Column(name = "slip_uid")
     private Long slipId; // 전표 고유번호
 
     @NotBlank(message="이 값은 비어있을 수 없습니다!!")
@@ -64,10 +63,4 @@ public class Slip {
 
     @Enumerated(EnumType.STRING)
     private PayStatement slip_ok; // 전표 결제승인
-
-    @ManyToMany
-    private Set<Empl> managers = new HashSet<>(); // 회원중 관리자
-
-    @ManyToMany
-    private Set<Empl> users = new HashSet<>(); // 회원중 유저
 }
