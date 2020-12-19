@@ -76,22 +76,28 @@
                         </div>
                         <div class="x_content">
                             <form action="/hr" method="post" class="form" enctype="multipart/form-data">
+                                <div class="form-group has-feedback col-md-12 com-sm-12">
+                                    <label class="col-md-12">사진</label>
+                                    <div class="col-md-12">
+                                        <input type="file" name="photo" class="form-control" id="photo">
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="form-group has-feedback col-md-6 com-sm-6">
                                         <label>사원번호</label>
-                                        <input type="text" name="emplId" value="${emplForm.emplId}" class="form-control" id="empl-id" placeholder="사원번호"/>
+                                        <input type="text" name="emplId" value="${emplForm.emplId}" class="form-control" id="empl-id" placeholder="사원번호" required/>
                                         <span>${valid_emplId}</span>
                                     </div>
                                     <div class="form-group has-feedback col-md-6 com-sm-6">
                                         <label>성명</label>
-                                        <input type="text" name="name" value="${emplForm.name}" class="form-control" id="name" placeholder="사원이름">
+                                        <input type="text" name="name" value="${emplForm.name}" min="2" max="8" class="form-control" id="name" placeholder="사원이름" required>
                                         <span>${valid_name}</span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group has-feedback col-md-6 com-sm-6">
                                         <label>주민등록 번호</label>
-                                        <input type="text" name="jumin" value="${emplForm.jumin}" class="form-control" id="jumin" placeholder="900000-1111111">
+                                        <input type="text" name="jumin" value="${emplForm.jumin}" class="form-control" id="jumin" min="12" max="12" placeholder="900000-1111111" required>
                                         <span>${valid_jumin}</span>
                                     </div>
                                     <div class="form-group has-feedback col-md-6 com-sm-6">
@@ -122,33 +128,27 @@
                                 <div class="row">
                                 <div class="form-group has-feedback col-md-6 com-sm-6">
                                     <label>연락처</label>
-                                    <input type="text" name="phone" class="form-control" id="phone" placeholder="핸드폰 번호">
+                                    <input type="text" name="phone" class="form-control" id="phone" placeholder="핸드폰 번호" min="10" max="11" required>
                                     <span>${valid_phone}</span>
                                 </div>
                                 <div class="form-group has-feedback col-md-6 com-sm-6">
                                     <label>Email</label>
-                                    <input type="text" name="email" value="${emplForm.email}" class="form-control" id="email" placeholder="Email">
+                                    <input type="text" name="email" value="${emplForm.email}" class="form-control" id="email" placeholder="Email" required>
                                     <span>${valid_email}</span>
                                 </div>
                                 </div>
                                 <div class="form-group has-feedback col-md-12 com-sm-12">
                                     <label class="col-md-12">주소</label>
                                     <div class="col-md-5 col-sm-5">
-                                        <input type="text" name="post_num" value="${emplForm.post_num}" class="form-control" id="postnum" placeholder="우편번호">
+                                        <input type="text" name="post_num" value="${emplForm.post_num}" class="form-control" min="5" max="5" id="postnum" placeholder="우편번호" required>
                                     </div>
                                     <button id="postnumBtn" class="btn btn-default">검색</button>
                                     <span>${valid_post_num}</span>
                                 </div>
                                 <div class="form-group has-feedback col-md-12 com-sm-12">
                                     <div class="col-md-12">
-                                        <input type="text" name="address" value="${emplForm.address}" class="form-control" id="address" placeholder="주소">
+                                        <input type="text" name="address" value="${emplForm.address}" class="form-control" id="address" placeholder="주소" required>
                                         <span>${valid_address}</span>
-                                    </div>
-                                </div>
-                                <div class="form-group has-feedback col-md-12 com-sm-12">
-                                    <label class="col-md-12">사진</label>
-                                    <div class="col-md-12">
-                                        <input type="file" name="photo" class="form-control" id="photo">
                                     </div>
                                 </div>
                                 <div class="form-group text-right has-feedback col-md-12 com-sm-12">
@@ -235,6 +235,25 @@
     if(${not empty error}) {
         $("#resigDialog").show();
     }
+    (function () {
+        'use strict';
+
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+
+            // Loop over them and prevent submission
+            Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        }, false)
+    }())
 </script>
 <script src="/js/manage.js"></script>
 <!-- script -->

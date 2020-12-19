@@ -183,94 +183,94 @@ function showEmpldetail(data) {
 
 }
 
-function clickupdate(data) {
-    console.log(data);
-    let select1 = data[0].dept === "인사" ? "selected" : "";
-    let select2 = data[0].dept === "제품" ? "selected" : "";
-    let select3 = data[0].dept === "영업" ? "selected" : "";
-    let select4 = data[0].dept === "물류" ? "selected" : "";
-    let select5 = data[0].dept === "회계" ? "selected" : "";
-
-    let html = "<form class=\"form\" enctype='multipart/form-data' method='post' id='forms' >\n" +
-        "                                <div class=\"row\">\n" +
-        "                                    <div class=\"form-group has-feedback col-md-6 com-sm-6\">\n" +
-        "                                        <label>사원번호</label>\n" +
-        "                                        <input type=\"text\" name=\"emplId\" value=\"" + data[0].emplId + "\" class=\"form-control\" id=\"empl-id\" placeholder=\"사원번호\" disabled/>\n" +
-        "                                    </div>\n" +
-        "                                    <div class=\"form-group has-feedback col-md-6 com-sm-6\">\n" +
-        "                                        <label>성명</label>\n" +
-        "                                        <input type=\"text\" name=\"name\" value=\"" + data[0].name + "\" class=\"form-control\" id=\"name\" placeholder=\"사원이름\">\n" +
-        "                                    </div>\n" +
-        "                                </div>\n" +
-        "                                <div class=\"row\">\n" +
-        "                                    <div class=\"form-group has-feedback col-md-6 com-sm-6\">\n" +
-        "                                        <label>주민등록 번호</label>\n" +
-        "                                        <input type=\"text\" name=\"jumin\" value=\"" + data[0].jumin + "\" class=\"form-control\" id=\"jumin\" placeholder=\"900000-1111111\">\n" +
-        "                                    </div>\n" +
-        "                                    <div class=\"form-group has-feedback col-md-6 com-sm-6\">\n" +
-        "                                        <label>입사일자</label>\n" +
-        "                                        <input class=\"date-picker form-control\"  name=\"emplRegdate\" value=\"" + data[0].emplRegdate + "\" placeholder=\"yyyy-mm-dd\" type=\"date\" required=\"required\"\n" +
-        "                                               onfocus=\"this.type='date'\" onmouseover=\"this.type='date'\" onclick=\"this.type='date'\" onblur=\"this.type='text'\"\n" +
-        "                                               onmouseout=\"timeFunctionLong(this)\" disabled>\n" +
-        "                                    </div>\n" +
-        "                                </div>\n" +
-        "                                <div class=\"row\">\n" +
-        "                                    <div class=\"form-group has-feedback col-md-6 com-sm-6\">\n" +
-        "                                        <label>부서명</label>\n" +
-        "                                        <select name=\"dept\"  class=\"form-control\">\n" +
-        "                                            <option value=\"인사\" " + select1 + ">인사</option>\n" +
-        "                                            <option value=\"제품\" " + select2 + ">제품</option>\n" +
-        "                                            <option value=\"영업\" " + select3 + ">영업</option>\n" +
-        "                                            <option value=\"물류\" " + select4 + ">물류</option>\n" +
-        "                                            <option value=\"회계\" " + select5 + ">회계</option>\n" +
-        "                                        </select>\n" +
-        "                                    </div>\n" +
-        "                                    <div class=\"form-group has-feedback col-md-6 com-sm-6\">\n" +
-        "                                        <label>퇴사일자</label>\n" +
-        "                                        <input class=\"date-picker form-control\" value='" + data[0].emplResigdate + "' name=\"emplResigdate\" placeholder=\"yyyy-mm-dd\" type=\"date\" required=\"required\"\n" +
-        "                                               onfocus=\"this.type='date'\" onmouseover=\"this.type='date'\" onclick=\"this.type='date'\" onblur=\"this.type='text'\"\n" +
-        "                                               onmouseout=\"timeFunctionLong(this)\">\n" +
-        "                                    </div>\n" +
-        "                                </div>\n" +
-        "                                <div class=\"row\">\n" +
-        "                                    <div class=\"form-group has-feedback col-md-6 com-sm-6\">\n" +
-        "                                        <label>연락처</label>\n" +
-        "                                        <input type=\"text\" name=\"phone\" value='" + data[0].phone + "' class=\"form-control\" id=\"phone\" placeholder=\"핸드폰 번호\">\n" +
-        "                                    </div>\n" +
-        "                                    <div class=\"form-group has-feedback col-md-6 com-sm-6\">\n" +
-        "                                        <label>Email</label>\n" +
-        "                                        <input type=\"text\" name=\"email\" value=\"" + data[0].email + "\" class=\"form-control\" id=\"email\" placeholder=\"Email\">\n" +
-        "                                    </div>\n" +
-        "                                </div>\n" +
-        "                                <div class=\"form-group has-feedback col-md-12 com-sm-12\">\n" +
-        "                                    <label class=\"col-md-12\">주소</label>\n" +
-        "                                    <div class=\"col-md-5 col-sm-5\">\n" +
-        "                                        <input type=\"text\" name=\"post_num\" value=\"" + data[0].post_num + "\" class=\"form-control\" id=\"postnum\" placeholder=\"우편번호\">\n" +
-        "                                    </div>\n" +
-        "                                    <button id=\"postnumBtn\" class=\"btn btn-default\">검색</button>\n" +
-        "                                </div>\n" +
-        "                                <div class=\"form-group has-feedback col-md-12 com-sm-12\">\n" +
-        "                                    <div class=\"col-md-12\">\n" +
-        "                                        <input type=\"text\" name=\"address\" value=\"" + data[0].address + "\" class=\"form-control\" id=\"address\" placeholder=\"주소\">\n" +
-        "                                    </div>\n" +
-        "                                </div>\n" +
-        "                                <div class=\"form-group has-feedback col-md-12 com-sm-12\">\n" +
-        "                                    <label class=\"col-md-12\">사진</label>\n" +
-        "                                    <div class=\"col-md-12\">\n" +
-        "                                        <input type=\"file\" name=\"photo\" class=\"form-control\" id=\"photo\">\n" +
-        "                                    </div>\n" +
-        "                                </div>" +
-        "                                <div class=\"form-group text-right has-feedback col-md-12 com-sm-12\">\n" +
-        "                                    <button type=\"button\" onclick='showresetpwModal(\"" + data[0].emplId + "\")' id=\"resetBtn\" class=\"btn btn-default\">비빌번호 초기화</button>\n" +
-        "                                </div>\n" +
-        "                                <div class=\"form-group text-right has-feedback col-md-12 com-sm-12\">\n" +
-        "                                    <button type=\"button\" onclick='updateAjax()' id=\"updateEmplBtn\" class=\"btn btn-default\">등록</button>\n" +
-        "                                </div>\n" +
-        "                            </form>";
-    $("#updateContent").html(html);
-    $("#detailDialog").hide();
-    $("#updateDialog").show();
-}
+// function clickupdate(data) {
+//     console.log(data);
+//     let select1 = data[0].dept === "인사" ? "selected" : "";
+//     let select2 = data[0].dept === "제품" ? "selected" : "";
+//     let select3 = data[0].dept === "영업" ? "selected" : "";
+//     let select4 = data[0].dept === "물류" ? "selected" : "";
+//     let select5 = data[0].dept === "회계" ? "selected" : "";
+//
+//     let html = "<form class=\"form\" enctype='multipart/form-data' method='post' id='forms' >\n" +
+//         "                                <div class=\"row\">\n" +
+//         "                                    <div class=\"form-group has-feedback col-md-6 com-sm-6\">\n" +
+//         "                                        <label>사원번호</label>\n" +
+//         "                                        <input type=\"text\" name=\"emplId\" value=\"" + data[0].emplId + "\" class=\"form-control\" id=\"empl-id\" placeholder=\"사원번호\" disabled/>\n" +
+//         "                                    </div>\n" +
+//         "                                    <div class=\"form-group has-feedback col-md-6 com-sm-6\">\n" +
+//         "                                        <label>성명</label>\n" +
+//         "                                        <input type=\"text\" name=\"name\" value=\"" + data[0].name + "\" class=\"form-control\" id=\"name\" placeholder=\"사원이름\">\n" +
+//         "                                    </div>\n" +
+//         "                                </div>\n" +
+//         "                                <div class=\"row\">\n" +
+//         "                                    <div class=\"form-group has-feedback col-md-6 com-sm-6\">\n" +
+//         "                                        <label>주민등록 번호</label>\n" +
+//         "                                        <input type=\"text\" name=\"jumin\" value=\"" + data[0].jumin + "\" class=\"form-control\" id=\"jumin\" placeholder=\"900000-1111111\">\n" +
+//         "                                    </div>\n" +
+//         "                                    <div class=\"form-group has-feedback col-md-6 com-sm-6\">\n" +
+//         "                                        <label>입사일자</label>\n" +
+//         "                                        <input class=\"date-picker form-control\"  name=\"emplRegdate\" value=\"" + data[0].emplRegdate + "\" placeholder=\"yyyy-mm-dd\" type=\"date\" required=\"required\"\n" +
+//         "                                               onfocus=\"this.type='date'\" onmouseover=\"this.type='date'\" onclick=\"this.type='date'\" onblur=\"this.type='text'\"\n" +
+//         "                                               onmouseout=\"timeFunctionLong(this)\" disabled>\n" +
+//         "                                    </div>\n" +
+//         "                                </div>\n" +
+//         "                                <div class=\"row\">\n" +
+//         "                                    <div class=\"form-group has-feedback col-md-6 com-sm-6\">\n" +
+//         "                                        <label>부서명</label>\n" +
+//         "                                        <select name=\"dept\"  class=\"form-control\">\n" +
+//         "                                            <option value=\"인사\" " + select1 + ">인사</option>\n" +
+//         "                                            <option value=\"제품\" " + select2 + ">제품</option>\n" +
+//         "                                            <option value=\"영업\" " + select3 + ">영업</option>\n" +
+//         "                                            <option value=\"물류\" " + select4 + ">물류</option>\n" +
+//         "                                            <option value=\"회계\" " + select5 + ">회계</option>\n" +
+//         "                                        </select>\n" +
+//         "                                    </div>\n" +
+//         "                                    <div class=\"form-group has-feedback col-md-6 com-sm-6\">\n" +
+//         "                                        <label>퇴사일자</label>\n" +
+//         "                                        <input class=\"date-picker form-control\" value='" + data[0].emplResigdate + "' name=\"emplResigdate\" placeholder=\"yyyy-mm-dd\" type=\"date\" required=\"required\"\n" +
+//         "                                               onfocus=\"this.type='date'\" onmouseover=\"this.type='date'\" onclick=\"this.type='date'\" onblur=\"this.type='text'\"\n" +
+//         "                                               onmouseout=\"timeFunctionLong(this)\">\n" +
+//         "                                    </div>\n" +
+//         "                                </div>\n" +
+//         "                                <div class=\"row\">\n" +
+//         "                                    <div class=\"form-group has-feedback col-md-6 com-sm-6\">\n" +
+//         "                                        <label>연락처</label>\n" +
+//         "                                        <input type=\"text\" name=\"phone\" value='" + data[0].phone + "' class=\"form-control\" id=\"phone\" placeholder=\"핸드폰 번호\">\n" +
+//         "                                    </div>\n" +
+//         "                                    <div class=\"form-group has-feedback col-md-6 com-sm-6\">\n" +
+//         "                                        <label>Email</label>\n" +
+//         "                                        <input type=\"text\" name=\"email\" value=\"" + data[0].email + "\" class=\"form-control\" id=\"email\" placeholder=\"Email\">\n" +
+//         "                                    </div>\n" +
+//         "                                </div>\n" +
+//         "                                <div class=\"form-group has-feedback col-md-12 com-sm-12\">\n" +
+//         "                                    <label class=\"col-md-12\">주소</label>\n" +
+//         "                                    <div class=\"col-md-5 col-sm-5\">\n" +
+//         "                                        <input type=\"text\" name=\"post_num\" value=\"" + data[0].post_num + "\" class=\"form-control\" id=\"postnum\" placeholder=\"우편번호\">\n" +
+//         "                                    </div>\n" +
+//         "                                    <button id=\"postnumBtn\" class=\"btn btn-default\">검색</button>\n" +
+//         "                                </div>\n" +
+//         "                                <div class=\"form-group has-feedback col-md-12 com-sm-12\">\n" +
+//         "                                    <div class=\"col-md-12\">\n" +
+//         "                                        <input type=\"text\" name=\"address\" value=\"" + data[0].address + "\" class=\"form-control\" id=\"address\" placeholder=\"주소\">\n" +
+//         "                                    </div>\n" +
+//         "                                </div>\n" +
+//         "                                <div class=\"form-group has-feedback col-md-12 com-sm-12\">\n" +
+//         "                                    <label class=\"col-md-12\">사진</label>\n" +
+//         "                                    <div class=\"col-md-12\">\n" +
+//         "                                        <input type=\"file\" name=\"photo\" class=\"form-control\" id=\"photo\">\n" +
+//         "                                    </div>\n" +
+//         "                                </div>" +
+//         "                                <div class=\"form-group text-right has-feedback col-md-12 com-sm-12\">\n" +
+//         "                                    <button type=\"button\" onclick='showresetpwModal(\"" + data[0].emplId + "\")' id=\"resetBtn\" class=\"btn btn-default\">비빌번호 초기화</button>\n" +
+//         "                                </div>\n" +
+//         "                                <div class=\"form-group text-right has-feedback col-md-12 com-sm-12\">\n" +
+//         "                                    <button type=\"button\" onclick='updateAjax()' id=\"updateEmplBtn\" class=\"btn btn-default\">등록</button>\n" +
+//         "                                </div>\n" +
+//         "                            </form>";
+//     $("#updateContent").html(html);
+//     $("#detailDialog").hide();
+//     $("#updateDialog").show();
+// }
 function updateAjax () {
     let data = $("#forms")[0];
     var formData = new FormData(data);
@@ -321,7 +321,7 @@ function updateAjaxError(data, errors) {
     html += "</div>";
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
     html += "<label>성명</label>";
-    html += "<input type=\"text\" name=\"name\" value=\"" + data[0].name + "\" class=\"form-control\" id=\"name\" placeholder=\"사원이름\">"
+    html += "<input type=\"text\" name=\"name\" value=\"" + data[0].name + "\" class=\"form-control\" min=\"2\" max=\"8\" id=\"name\" placeholder=\"사원이름\" required>"
     if(errors.valid_name != undefined) {
         html += "<sapn>" + errors.valid_name + "</span>";
     }
@@ -330,7 +330,7 @@ function updateAjaxError(data, errors) {
     html += "<div class=\"row\">";
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
     html += "<label>주민등록 번호</label>";
-    html += "<input type=\"text\" name=\"jumin\" value=\"" + data[0].jumin + "\" class=\"form-control\" id=\"jumin\" placeholder=\"900000-1111111\">";
+    html += "<input type=\"text\" name=\"jumin\" value=\"" + data[0].jumin + "\" class=\"form-control\" min=\"12\" max=\"12\" id=\"jumin\" placeholder=\"900000-1111111\" required>";
     if(errors.valid_jumin != undefined) {
         html += "<sapn>" + errors.valid_jumin + "</span>";
     }
@@ -363,14 +363,14 @@ function updateAjaxError(data, errors) {
     html += "<div class=\"row\">";
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
     html += "<label>연락처</label>";
-    html += "<input type=\"text\" name=\"phone\" value='" + data[0].phone + "' class=\"form-control\" id=\"phone\" placeholder=\"핸드폰 번호\">";
+    html += "<input type=\"text\" name=\"phone\" value='" + data[0].phone + "' class=\"form-control\" min=\"10\" max=\"11\" id=\"phone\" placeholder=\"핸드폰 번호\" required>";
     if(errors.valid_phone != undefined) {
         html += "<sapn>" + errors.valid_phone + "</span>";
     }
     html += "</div>";
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
     html += "<label>Email</label>";
-    html += "<input type=\"text\" name=\"email\" value=\"" + data[0].email + "\" class=\"form-control\" id=\"email\" placeholder=\"Email\">;"
+    html += "<input type=\"text\" name=\"email\" value=\"" + data[0].email + "\" class=\"form-control\" id=\"email\" placeholder=\"Email\" required>;"
     if(errors.valid_email != undefined) {
         html += "<sapn>" + errors.valid_email + "</span>";
     }
@@ -379,7 +379,7 @@ function updateAjaxError(data, errors) {
     html += "<div class=\"form-group has-feedback col-md-12 com-sm-12\">";
     html += "<label class=\"col-md-12\">주소</label>";
     html += "<div class=\"col-md-5 col-sm-5\">";
-    html += "<input type=\"text\" name=\"post_num\" value=\"" + data[0].post_num + "\" class=\"form-control\" id=\"postnum\" placeholder=\"우편번호\">";
+    html += "<input type=\"text\" name=\"post_num\" value=\"" + data[0].post_num + "\" min=\"5\" max=\"5\"  class=\"form-control\" id=\"postnum\" placeholder=\"우편번호\" required>";
     html += "</div>";
     html += "<button id=\"postnumBtn\" class=\"btn btn-default\">검색</button>";
     if(errors.valid_post_num != undefined) {
@@ -388,7 +388,7 @@ function updateAjaxError(data, errors) {
     html += "</div>";
     html += "<div class=\"form-group has-feedback col-md-12 com-sm-12\">";
     html += "<div class=\"col-md-12\">";
-    html += "<input type=\"text\" name=\"address\" value=\"" + data[0].address + "\" class=\"form-control\" id=\"address\" placeholder=\"주소\">";
+    html += "<input type=\"text\" name=\"address\" value=\"" + data[0].address + "\" class=\"form-control\" id=\"address\" placeholder=\"주소\" required>";
     if(errors.valid_address != undefined) {
         html += "<sapn>" + errors.valid_address + "</span>";
     }
@@ -409,6 +409,7 @@ function updateAjaxError(data, errors) {
     html += "</form>";
 
     $("#updateContent").html(html);
+    $("#detailDialog").hide();
     $("#updateDialog").show();
 }
 
