@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -33,6 +34,7 @@ public class Orders implements Serializable {
 
     @NotNull //null 허용안함
 //    @Temporal(TemporalType.DATE) // 년-월-일 의 Date 타입
+    @Future
     private String orders_regdate; //납기일자
 
     @NotEmpty //null과 "" 허용안함

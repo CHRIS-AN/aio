@@ -21,7 +21,7 @@ public class OrdersController {
     public String getAllOrdersList(Model model, Orders orders) {
         List<Orders> ordersList = ordersService.findAll(orders); //발주목록 가져오기
         model.addAttribute("ordersList", ordersList);
-        return "orders";
+        return "yeonji/ordersList";
     }
 
 //    // 발주 전체 조회

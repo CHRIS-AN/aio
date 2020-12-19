@@ -19,7 +19,7 @@ public class DraftValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         //발주 희망날짜가 현재날짜보다 과거이면 안됨
-        if(draftRepository)
+//        if(draftRepository)
 
     }
 }
