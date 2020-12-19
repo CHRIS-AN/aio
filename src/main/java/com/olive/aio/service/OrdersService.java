@@ -1,6 +1,6 @@
-package com.olive.aio.order;
+package com.olive.aio.service;
 
-import com.olive.aio.order.Orders;
+import com.olive.aio.domain.Orders;
 
 import java.util.List;
 

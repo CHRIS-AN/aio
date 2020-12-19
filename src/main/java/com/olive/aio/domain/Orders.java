@@ -1,4 +1,4 @@
-package com.olive.aio.order;
+package com.olive.aio.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
