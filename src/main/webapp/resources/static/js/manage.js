@@ -45,24 +45,7 @@ $(document).ready(function (){
         }
     });
 
-    $("#image-input-file").change(function (e) {
-        if (e.target.files.length === 1) {
-            const reader = new FileReader();
-            reader.onload = e => {
-                if (e.target.result) {
 
-                    if (!e.target.result.startsWith("data:image")) {
-                        alert("이미지 파일을 선택하세요.");
-                        return;
-                    }
-                    $("#photo").attr("value", e.target.result);
-                    $("#profile-image").attr("src", e.target.result);
-                }
-            };
-
-            reader.readAsDataURL(e.target.files[0]);
-        }
-    });
 
 });
 function showEmpldetailAjax(emplId) {
@@ -288,7 +271,6 @@ function showEmpldetail(data) {
 //     $("#detailDialog").hide();
 //     $("#updateDialog").show();
 // }
-
 function updateAjax () {
     let data = $("#forms")[0];
     var formData = new FormData(data);
@@ -339,7 +321,7 @@ function updateAjaxError(data, errors) {
     html += "</div>";
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
     html += "<label>성명</label>";
-    html += "<input type=\"text\" name=\"name\" value=\"" + data[0].name + "\" class=\"form-control\" id=\"name\" placeholder=\"사원이름\">"
+    html += "<input type=\"text\" name=\"name\" value=\"" + data[0].name + "\" class=\"form-control\" min=\"2\" max=\"8\" id=\"name\" placeholder=\"사원이름\" required>"
     if(errors.valid_name != undefined) {
         html += "<sapn>" + errors.valid_name + "</span>";
     }
@@ -348,7 +330,7 @@ function updateAjaxError(data, errors) {
     html += "<div class=\"row\">";
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
     html += "<label>주민등록 번호</label>";
-    html += "<input type=\"text\" name=\"jumin\" value=\"" + data[0].jumin + "\" class=\"form-control\" id=\"jumin\" placeholder=\"900000-1111111\">";
+    html += "<input type=\"text\" name=\"jumin\" value=\"" + data[0].jumin + "\" class=\"form-control\" min=\"12\" max=\"12\" id=\"jumin\" placeholder=\"900000-1111111\" required>";
     if(errors.valid_jumin != undefined) {
         html += "<sapn>" + errors.valid_jumin + "</span>";
     }
@@ -381,14 +363,14 @@ function updateAjaxError(data, errors) {
     html += "<div class=\"row\">";
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
     html += "<label>연락처</label>";
-    html += "<input type=\"text\" name=\"phone\" value='" + data[0].phone + "' class=\"form-control\" id=\"phone\" placeholder=\"핸드폰 번호\">";
+    html += "<input type=\"text\" name=\"phone\" value='" + data[0].phone + "' class=\"form-control\" min=\"10\" max=\"11\" id=\"phone\" placeholder=\"핸드폰 번호\" required>";
     if(errors.valid_phone != undefined) {
         html += "<sapn>" + errors.valid_phone + "</span>";
     }
     html += "</div>";
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
     html += "<label>Email</label>";
-    html += "<input type=\"text\" name=\"email\" value=\"" + data[0].email + "\" class=\"form-control\" id=\"email\" placeholder=\"Email\">;"
+    html += "<input type=\"text\" name=\"email\" value=\"" + data[0].email + "\" class=\"form-control\" id=\"email\" placeholder=\"Email\" required>;"
     if(errors.valid_email != undefined) {
         html += "<sapn>" + errors.valid_email + "</span>";
     }
@@ -397,7 +379,7 @@ function updateAjaxError(data, errors) {
     html += "<div class=\"form-group has-feedback col-md-12 com-sm-12\">";
     html += "<label class=\"col-md-12\">주소</label>";
     html += "<div class=\"col-md-5 col-sm-5\">";
-    html += "<input type=\"text\" name=\"post_num\" value=\"" + data[0].post_num + "\" class=\"form-control\" id=\"postnum\" placeholder=\"우편번호\">";
+    html += "<input type=\"text\" name=\"post_num\" value=\"" + data[0].post_num + "\" min=\"5\" max=\"5\"  class=\"form-control\" id=\"postnum\" placeholder=\"우편번호\" required>";
     html += "</div>";
     html += "<button id=\"postnumBtn\" class=\"btn btn-default\">검색</button>";
     if(errors.valid_post_num != undefined) {
@@ -406,7 +388,7 @@ function updateAjaxError(data, errors) {
     html += "</div>";
     html += "<div class=\"form-group has-feedback col-md-12 com-sm-12\">";
     html += "<div class=\"col-md-12\">";
-    html += "<input type=\"text\" name=\"address\" value=\"" + data[0].address + "\" class=\"form-control\" id=\"address\" placeholder=\"주소\">";
+    html += "<input type=\"text\" name=\"address\" value=\"" + data[0].address + "\" class=\"form-control\" id=\"address\" placeholder=\"주소\" required>";
     if(errors.valid_address != undefined) {
         html += "<sapn>" + errors.valid_address + "</span>";
     }
@@ -427,6 +409,7 @@ function updateAjaxError(data, errors) {
     html += "</form>";
 
     $("#updateContent").html(html);
+    $("#detailDialog").hide();
     $("#updateDialog").show();
 }
 
