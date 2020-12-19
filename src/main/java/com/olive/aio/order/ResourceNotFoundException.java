@@ -1,4 +1,4 @@
-package com.olive.aio.exception;
+package com.olive.aio.order;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

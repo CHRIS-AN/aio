@@ -1,6 +1,5 @@
-package com.olive.aio.repository;
+package com.olive.aio.order;
 
-import com.olive.aio.domain.Orders;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

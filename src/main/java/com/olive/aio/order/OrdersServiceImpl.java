@@ -1,7 +1,5 @@
-package com.olive.aio.service;
+package com.olive.aio.order;
 
-import com.olive.aio.domain.Orders;
-import com.olive.aio.repository.OrdersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
