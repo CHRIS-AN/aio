@@ -28,16 +28,22 @@ public class CorpController {
         return "yeonji/corpList";
     }
 
-    //거래처 등록하기
-    @GetMapping("corpInsert")
-    public String corpAdd(Corp corp){
-        log.info("Get으로 Insert 했냐?");
-        return "yeonji/corpInsert";
-    }
-
-    //거래처등록 submit 후 값 검증
+    //거래처 등록 & submit 후 값 검증
     @PostMapping("corpInsert")
     public String corpInsertSubmit(@Valid Corp corp, Errors errors) {
+        log.info("Post로 Insert 했냐?");
+        if(errors.hasErrors()) { //에러가 있다면
+            log.info("에러냐?");
+            return null;
+        }
+        log.info("에러 아니다.");
+        corpService.insertCorp(corp);
+        //TODO 거래처 추가 처리
+        return "redirect:corpList";
+    }
+
+    @PostMapping("corpUpdate")
+    public String corpUpdate(@Valid Corp corp, Errors errors) {
         log.info("Post로 Insert 했냐?");
         if(errors.hasErrors()) { //에러가 있다면
             log.info("에러냐?");

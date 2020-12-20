@@ -30,9 +30,7 @@
             <input type="text" name="corpSearch">
         </div>
         <div>
-           <a href="corpInsert">
-               <button type="button" name="corpAdd" class="btn btn-primary" data-toggle="modal" data-target="#Modal_1">+</button>
-           </a>
+            <button type="button" name="corpAdd" class="btn btn-primary" data-toggle="modal" data-target="#Modal_1">+</button>
         </div>
 
         <table class="table table-bordered">
@@ -47,7 +45,8 @@
             </thead>
             <tbody>
             <c:forEach var="c" items="${corp}">
-                <tr>
+                <tr data-toggle="modal" data-target="#Modal_2"
+                    onclick="modal2(${c.corp_id}, '${c.corp_name}', '${c.corp_num}', '${c.corp_ceo}', '${c.corp_call}', '${c.corp_address}')" >
                     <td>${c.corp_id}</td>
                     <td>${c.corp_name}</td>
                     <td>${c.corp_ceo}</td>
@@ -59,35 +58,185 @@
         </table>
 
 
-    <!-- -->
     <%--  모달 1 : 거래처 등록록  --%>
     <div class="modal" id="Modal_1">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Modal Heading</h4>
+                    <h4 class="modal-title">거래처 등록</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    Modal body..
-                </div>
 
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                </div>
+                    <form action="corpInsert" method="post">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>상호</th>
+                                <th><input type="text" name="corp_name" placeholder="내용을 입력해주세요" value="" autofocus></th>
+                            </tr>
+                            <tr>
+                                <th>사업자 등록번호</th>
+                                <th><input type="text" name="corp_num" placeholder="ex)000-00-00000" value="" autofocus></th>
+                            </tr>
+                            <tr>
+                                <th>대표자</th>
+                                <th><input type="text" name="corp_ceo" placeholder="내용을 입력해주세요" value="" autofocus></th>
+                            </tr>
+                            <tr>
+                                <th>연락처</th>
+                                <th><input type="text" name="corp_call" placeholder="연락처를 입력해주세요" value="" autofocus></th>
+                            </tr>
+                            <tr>
+                                <th>주소</th>
+                                <th><input type="text" name="corp_address" placeholder="도로명 주소" value="" autofocus><input type="button" value="주소 검색"></th>
+                                <%--                <th><input type="text" name="corp_address" placeholder="상세정보" autofocus></th>--%>
+                            </tr>
+                        </table>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-primary" value="등록" >
+                        </div>
+                    </form>
 
+                </div>
             </div>
         </div>
     </div>
 
+
+    <%--  모달 2 : 거래처 상세정보  --%>
+    <div class="modal" id="Modal_2">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">거래처 등록</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>상호</th>
+                                <th><span id="modal2_1"></span>(<span id="modal2_2"></span>)</th>
+                            </tr>
+                            <tr>
+                                <th>사업자 등록번호</th>
+                                <th><span id="modal2_3"></span></th>
+                            </tr>
+                            <tr>
+                                <th>대표자</th>
+                                <th><span id="modal2_4"></span></th>
+                            </tr>
+                            <tr>
+                                <th>연락처</th>
+                                <th><span id="modal2_5"></span></th>
+                            </tr>
+                            <tr>
+                                <th>주소</th>
+                                <th><span id="modal2_6"></span></th>
+                            </tr>
+                            <tr>
+                                <th>담당자</th>
+                                <th>누구냐넌</th>
+                            </tr>
+                            <tr>
+                                <th>발주 품목</th>
+                                <th>할수잇냐</th>
+                            </tr>
+                        </table>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" name="corpUpdate" class="btn btn-primary" data-toggle="modal" data-target="#Modal_3" data-dismiss="modal">수정</button>
+                            <button type="button" name="corpDelete" class="btn btn-primary" data-toggle="modal" data-target="#Modal_4">삭제</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function modal2(corp_id,corp_name,corp_num,corp_ceo,corp_call,corp_address) {
+            $("#modal2_1").html(corp_name);
+            $("#modal2_2").html(corp_id);
+            $("#modal2_3").html(corp_num);
+            $("#modal2_4").html(corp_ceo);
+            $("#modal2_5").html(corp_call);
+            $("#modal2_6").html(corp_address);
+        }
+    </script>
+
+    <%--  모달 3 : 거래처 수정  --%>
+    <div class="modal" id="Modal_3">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">거래처 수정</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="corpUpdate" method="post">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>상호</th>
+                                <th><input id="modal3_1"/>(<input id="modal3_2" />)</th>
+                            </tr>
+                            <tr>
+                                <th>사업자 등록번호</th>
+                                <th><span id="modal3_3"></span></th>
+                            </tr>
+                            <tr>
+                                <th>대표자</th>
+                                <th><span id="modal3_4"></span></th>
+                            </tr>
+                            <tr>
+                                <th>연락처</th>
+                                <th><span id="modal3_5"></span></th>
+                            </tr>
+                            <tr>
+                                <th>주소</th>
+                                <th><span id="modal3_6"></span></th>
+                            </tr>
+                            <tr>
+                                <th>담당자</th>
+                                <th>누구냐넌</th>
+                            </tr>
+                            <tr>
+                                <th>발주 품목</th>
+                                <th>할수잇냐</th>
+                            </tr>
+                        </table>
+                    </form>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary" value="수정" >
+                        <input type="submit" class="btn btn-primary" value="삭제" >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function modal3(corp_id,corp_name,corp_num,corp_name,corp_call,corp_address) {
+            $("#modal3_1").html(corp_name);
+            $("#modal3_2").html(corp_id);
+            $("#modal3_3").html(corp_num);
+            $("#modal3_4").html(corp_name);
+            $("#modal3_5").html(corp_call);
+            $("#modal3_6").html(corp_address);
+        }
+    </script>
+
 </div> <!-- End container -->
-
-
 
 
 <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
