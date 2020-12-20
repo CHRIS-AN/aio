@@ -26,7 +26,6 @@ public class EmplForm {
     private String address;
 
     @NotNull
-    @Length(min = 5, max = 5)
     private Integer post_num;
 
     @NotBlank

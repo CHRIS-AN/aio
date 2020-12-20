@@ -35,11 +35,12 @@ $(document).ready(function (){
             const reader = new FileReader();
             reader.onload = e => {
                 if (e.target.result) {
-
+                    console.log(e.target.result);
                     if (!e.target.result.startsWith("data:image")) {
                         alert("이미지 파일을 선택하세요.");
                         return;
                     }
+
                     $("#photo").attr("value", e.target.result);
                     $("#profile-image").attr("src", e.target.result);
                 }
@@ -171,13 +172,16 @@ function listHumanResource(data) {
     }
         html += "</table>";
         html += "<div>";
+        html += "<a class='btn btn-default' onclick='changePage(" + 0 + ")'>&lt;&lt;</a>";
+        html += "<a class='btn btn-default' onclick='changePage(" + (first-1) + ")'>Previous</a>";
         for(let i = first; i < data.totalPages; i++) {
             console.log("들어와라")
             html += "<a onclick='changePage(this)' class='btn btn-default text-center linkpage'>"
             html += i+1 + ""
             html += "</a>"
         }
-        html += "";
+        html += "<a class='btn btn-default' onclick='changePage(" + (first+1) + ")'>Next</a>";
+        html += "<a class='btn btn-default' onclick='changePage(" + data.totalPages + ")'>&gt;&gt;</a>";
         html += "</div>";
 
     $("#hrm").html(html);
@@ -378,16 +382,16 @@ function clickupdate(data, errors) {
     html += "<div class=\"form-group has-feedback col-md-12 com-sm-12\">";
     html += "<label class=\"col-md-12\">주소</label>";
     html += "<div class=\"col-md-5 col-sm-5\">";
-    html += "<input type=\"text\" name=\"post_num\" value=\"" + data[0].post_num + "\" min=\"5\" max=\"5\"  class=\"form-control\" id=\"postnum\" placeholder=\"우편번호\" required>";
+    html += "<input type=\"text\" name=\"post_num\" value=\"" + data[0].post_num + "\" min=\"5\" max=\"5\"  class=\"form-control\" id=\"uptnum\" placeholder=\"우편번호\" required>";
     html += "</div>";
-    html += "<button id=\"postnumBtn\" class=\"btn btn-default\">검색</button>";
+    html += "<button id=\"postnumBtn\" onclick='showjusoPopup(\"수정\")' class=\"btn btn-default\">검색</button>";
     if(errors != undefined && errors.valid_post_num != undefined) {
         html += "<sapn>" + errors.valid_post_num + "</span>";
     }
     html += "</div>";
     html += "<div class=\"form-group has-feedback col-md-12 com-sm-12\">";
     html += "<div class=\"col-md-12\">";
-    html += "<input type=\"text\" name=\"address\" value=\"" + data[0].address + "\" class=\"form-control\" id=\"address\" placeholder=\"주소\" required>";
+    html += "<input type=\"text\" name=\"address\" value=\"" + data[0].address + "\" class=\"form-control\" id=\"updateAddr\" placeholder=\"주소\" required>";
     if(errors != undefined && errors.valid_address != undefined) {
         html += "<sapn>" + errors.valid_address + "</span>";
     }

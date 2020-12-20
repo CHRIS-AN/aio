@@ -73,6 +73,10 @@ public class MainController {
         return "thymeleaf/thymeleaf";
     }
 
+    @GetMapping("/popup/jusoPopup")
+    public void showJusoPopup() {
+
+    }
 
 
 }
