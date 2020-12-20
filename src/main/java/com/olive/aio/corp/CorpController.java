@@ -1,13 +1,18 @@
 package com.olive.aio.corp;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequestMapping("yeonji/")
 public class CorpController {
@@ -23,8 +28,28 @@ public class CorpController {
         return "yeonji/corpList";
     }
 
-    @GetMapping("corpadd")
-    public String corpAdd(){
-        return "yeonji/corpAdd";
+    //거래처 등록하기
+    @GetMapping("corpInsert")
+    public String corpAdd(Corp corp){
+        log.info("Get으로 Insert 했냐?");
+        return "yeonji/corpInsert";
     }
+
+    //거래처등록 submit 후 값 검증
+    @PostMapping("corpInsert")
+    public String corpInsertSubmit(@Valid Corp corp, Errors errors) {
+        log.info("Post로 Insert 했냐?");
+        if(errors.hasErrors()) { //에러가 있다면
+            log.info("에러냐?");
+            return "yeonji/corpInsert";
+        }
+        log.info("에러 아니다.");
+        corpService.insertCorp(corp);
+        //TODO 거래처 추가 처리
+        return "redirect:corpList";
+    }
+
+
+
+
 }

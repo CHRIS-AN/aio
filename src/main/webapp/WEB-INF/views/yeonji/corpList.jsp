@@ -30,7 +30,9 @@
             <input type="text" name="corpSearch">
         </div>
         <div>
-            <input type="button" name="corpAdd" value="+" >
+           <a href="corpInsert">
+               <button type="button" name="corpAdd" class="btn btn-primary" data-toggle="modal" data-target="#Modal_1">+</button>
+           </a>
         </div>
 
         <table class="table table-bordered">
@@ -56,7 +58,36 @@
             </tbody>
         </table>
 
-</div>
+
+    <!-- -->
+    <%--  모달 1 : 거래처 등록록  --%>
+    <div class="modal" id="Modal_1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Modal body..
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div> <!-- End container -->
+
+
 
 
 <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
