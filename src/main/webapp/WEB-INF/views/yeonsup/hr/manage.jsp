@@ -37,24 +37,46 @@
                     </div>
                 </div>
                 <div id="datatable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="row" id="hrm">
-
+                    <form id="searchfrm">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <select id="cnt" class="">
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                                <select id="dept" class="">
+                                    <option value="부서명">부서명</option>
+                                    <option value="인사">인사</option>
+                                    <option value="제품">제품</option>
+                                    <option value="영업">영업</option>
+                                    <option value="물류">물류</option>
+                                    <option value="회계">회계</option>
+                                </select>
+                            </div>
+                            <div class="text-right col-md-10">
+                                <input type="text" id="keyword" />
+                                <button type="button" id="searchBtn">검색</button>
+                            </div>
                         </div>
-                        <div class="row text-right">
-                            <div class="col-md-12">
-                                <btn id="resigBtn" class="btn btn-default">
-                                    사원등록
-                                </btn>
+                    </form>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="row" id="hrm">
+
+                            </div>
+                            <div class="row text-right">
+                                <div class="col-md-12">
+                                    <btn id="resigBtn" class="btn btn-default">
+                                        사원등록
+                                    </btn>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                </div>
             </div>
-
-
         </div>
         <!-- footer  -->
         <jsp:include page="../../layout/footer.jsp" />

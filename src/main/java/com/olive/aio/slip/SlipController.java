@@ -60,7 +60,7 @@ public class SlipController {
             Map<String, String> validatorResult = SlipService.validateHandling(errors);
             for (String key : validatorResult.keySet()) {
                 model.addAttribute(key, validatorResult.get(key));
-                log.info(key);
+
             }
             return FINANCE + PSTR;
         }

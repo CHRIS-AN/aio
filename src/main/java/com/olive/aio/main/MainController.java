@@ -67,6 +67,11 @@ public class MainController {
         return "redirect:/hr";
     }
 
+    @GetMapping("/thymeleaf")
+    public String th (Model model) {
+        model.addAttribute("welcome","hello World!");
+        return "thymeleaf/thymeleaf";
+    }
 
 
 

@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
-public interface EmplRepository extends JpaRepository<Empl, String> {
+public interface EmplRepository extends JpaRepository<Empl, String>, EmplRepositoryExtention {
     Empl findByEmplId(String empl_id);
 }

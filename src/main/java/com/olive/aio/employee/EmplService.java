@@ -8,6 +8,8 @@ import com.olive.aio.employee.form.EmplUpdateForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -43,7 +45,7 @@ public class EmplService implements UserDetailsService {
         } else {
             role = decideAuth(username, empl, role);
         }
-
+        log.info("role {}" + role);
         return new UserEmpl(empl, role);
     }
 
@@ -76,7 +78,6 @@ public class EmplService implements UserDetailsService {
         } else {
             role = "ROLE_ALL";
         }
-        log.info(role);
         return role;
     }
 
@@ -98,7 +99,7 @@ public class EmplService implements UserDetailsService {
     }
 
     public void updateEmpl(Empl empl, @Valid EmplUpdateForm emplForm) {
-        Empl byEmplId = emplRepository.findByEmplId(empl.getEmplId());
+        Empl byEmplId = emplRepository.findByEmplId(emplForm.getEmplId());
 
         if(emplForm.getEmplResigdate().length() > 0) {
             emplForm.setWork_state("퇴사");
@@ -160,6 +161,14 @@ public class EmplService implements UserDetailsService {
                 .build();
 
         emailService.sendEmail(emailMessage);
+    }
+
+    public Page<Empl> search(String dept, String keyword, Pageable pageable) {
+
+        Page<Empl> emplList = emplRepository.findByKeyword(dept, keyword, pageable);
+
+
+        return emplList;
     }
 }
 
