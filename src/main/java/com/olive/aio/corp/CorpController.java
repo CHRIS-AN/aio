@@ -19,7 +19,7 @@ public class CorpController {
 
     @Autowired
     private CorpService corpService;
-
+//김민종 멍청이 바보 똥꼬 맨날 똥싸고 먹으먄 바로 싼대요! 김먼지보다 아래인 김민종 맨날 물리고 맞고 산대여~~
     //모든 거래처 목록 조회
     @GetMapping("corpList")
     public String corpList(Model model, Corp corp){

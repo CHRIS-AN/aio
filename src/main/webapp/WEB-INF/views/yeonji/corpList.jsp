@@ -30,7 +30,7 @@
             <input type="text" name="corpSearch">
         </div>
         <div>
-            <button type="button" name="corpAdd" class="btn btn-primary" data-toggle="modal" data-target="#Modal_1">+</button>
+            <button type="button" name="corpAdd" class="btn btn-primary" data-toggle="modal" data-target="#modal_1">+</button>
         </div>
 
         <table class="table table-bordered">
@@ -45,8 +45,8 @@
             </thead>
             <tbody>
             <c:forEach var="c" items="${corp}">
-                <tr data-toggle="modal" data-target="#Modal_2"
-                    onclick="modal2(${c.corp_id}, '${c.corp_name}', '${c.corp_num}', '${c.corp_ceo}', '${c.corp_call}', '${c.corp_address}')" >
+                <tr id="tr${c.corp_id}" data-toggle="modal" data-target="#modal_2"
+                    onclick="modal2(${c.corp_id}, '${c.corp_name}', '${c.corp_num}', '${c.corp_ceo}', '${c.corp_call}', '${c.corp_address}'),update(${c.corp_id}, '${c.corp_name}', '${c.corp_num}', '${c.corp_ceo}', '${c.corp_call}', '${c.corp_address}')" >
                     <td>${c.corp_id}</td>
                     <td>${c.corp_name}</td>
                     <td>${c.corp_ceo}</td>
@@ -59,7 +59,7 @@
 
 
     <%--  모달 1 : 거래처 등록록  --%>
-    <div class="modal" id="Modal_1">
+    <div class="modal" id="modal_1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
 
@@ -109,7 +109,7 @@
 
 
     <%--  모달 2 : 거래처 상세정보  --%>
-    <div class="modal" id="Modal_2">
+    <div class="modal" id="modal_2">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
 
@@ -153,8 +153,8 @@
                         </table>
                         <!-- Modal footer -->
                         <div class="modal-footer">
-                            <button type="button" name="corpUpdate" class="btn btn-primary" data-toggle="modal" data-target="#Modal_3" data-dismiss="modal">수정</button>
-                            <button type="button" name="corpDelete" class="btn btn-primary" data-toggle="modal" data-target="#Modal_4">삭제</button>
+                            <button name="corpUpdate" value="modal2_2" class="btn btn-warning" data-toggle="modal" data-target="#modal_3" data-dismiss="modal" onclick="update()">수정</button>
+                            <button name="corpDelete" class="btn btn-primary" data-toggle="modal" data-target="#Modal_4">삭제</button>
                         </div>
                 </div>
             </div>
@@ -172,7 +172,7 @@
     </script>
 
     <%--  모달 3 : 거래처 수정  --%>
-    <div class="modal" id="Modal_3">
+    <div class="modal" id="modal_3">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
 
@@ -184,15 +184,15 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form action="corpUpdate" method="post">
+                    <form action="corpUpdate" method="put">
                         <table class="table table-bordered">
                             <tr>
                                 <th>상호</th>
-                                <th><input id="modal3_1"/>(<input id="modal3_2" />)</th>
+                                <th><input type="text" class="form_control" id="modal3_1"/>(<input type="text" class="form_control"  id="modal3_2" />)</th>
                             </tr>
                             <tr>
                                 <th>사업자 등록번호</th>
-                                <th><span id="modal3_3"></span></th>
+                                <th><span id="corp_num"></span></th>
                             </tr>
                             <tr>
                                 <th>대표자</th>
@@ -215,25 +215,33 @@
                                 <th>할수잇냐</th>
                             </tr>
                         </table>
+                        <div class="modal-footer">
+                            <input type="button" class="btn btn-primary" data-dismiss="modal" value="취소" >
+                            <input type="submit" class="btn btn-primary" value="확인" >
+                        </div>
+
                     </form>
                     <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <input type="submit" class="btn btn-primary" value="수정" >
-                        <input type="submit" class="btn btn-primary" value="삭제" >
-                    </div>
                 </div>
             </div>
         </div>
     </div>
     <script>
-        function modal3(corp_id,corp_name,corp_num,corp_name,corp_call,corp_address) {
-            $("#modal3_1").html(corp_name);
-            $("#modal3_2").html(corp_id);
-            $("#modal3_3").html(corp_num);
-            $("#modal3_4").html(corp_name);
-            $("#modal3_5").html(corp_call);
-            $("#modal3_6").html(corp_address);
+        //수정하기
+        function update(corp_id,corp_name,corp_num,corp_ceo,corp_call,corp_address) {
+            $('#modal_3').on('show.bs.modal', function (event) {
+                var name = $(event.relatedTarget).data(corp_name);
+                $("#modal3_1").val(name);
+            })
+
+            
+            $("#modal3_2").val(corp_id);
+            $("#modal3_3").val(corp_num);
+            $("#modal3_4").val(corp_ceo);
+            $("#modal3_5").val(corp_call);
+            $("#modal3_6").val(corp_address);
         }
+
     </script>
 
 </div> <!-- End container -->
