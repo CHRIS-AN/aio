@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -18,6 +17,7 @@ import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("MJ_view")
 public class ProductController {
 
     private final InsertFormValidator insertFormValidator;
@@ -34,12 +34,12 @@ public class ProductController {
     public String getProductList(Model model, Product product){
         List<Product> productsList = productService.getProductList(product);
         model.addAttribute("productList", productsList);
-        return "productList";
+        return "MJ_view/productList";
     }
 
     @GetMapping("/insertProduct")
     public String insertProductView(Product product){
-        return "insertProduct";
+        return "MJ_view/insertProduct";
     }
     @PostMapping("/insertProduct")
     public String insertProduct(@Valid Product product, Errors errors, Model model) {
@@ -52,7 +52,7 @@ public class ProductController {
             for (String key : validatorResult.keySet()){
                 model.addAttribute(key, validatorResult.get(key));
             }
-            return "/insertProduct";
+            return "MJ_view/insertProduct";
 
         }
         // 제품명 중복 검사
@@ -62,13 +62,13 @@ public class ProductController {
 //        }
 
         productService.insertProduct(product);
-        return "redirect:getProductList";
+        return "redirect:MJ_view/getProductList";
     }
 
     @GetMapping("/getProduct")
     public String getProduct(Product product, Model model){
         model.addAttribute("product", productService.getProduct(product));
-        return "getProduct";
+        return "MJ_view/getProduct";
     }
 
     @PostMapping("/updateProduct")
@@ -83,18 +83,18 @@ public class ProductController {
             for (String key : validatorResult.keySet()){
                 model.addAttribute(key, validatorResult.get(key));
             }
-            return "/getProduct";
+            return "MJ_view/getProduct";
 
         }
 
         productService.updateProduct(product);
-        return "forward:getProductList";
+        return "forward:MJ_view/getProductList";
     }
 
     @GetMapping("/deleteProduct")
     public String deleteProduct(Product product) {
         productService.deleteProduct(product);
-        return "forward:getProductList";
+        return "forward:MJ_view/getProductList";
     }
 
 
