@@ -24,22 +24,23 @@ public class CorpServiceImpl implements CorpService {
         corpRepository.save(corp);
     }
 
-//    //거래처 상세정보
-//    @Override
-//    public Corp getCorp(Corp corp) {
-//        return corpRepository.findById(corp.getCorp_id()).get();
-//    }
-//
-//    //거래처 수정
-//    @Override
-//    public void updateCorp(Corp corp) {
-//
-//    }
-//
-//    //거래처 삭제
-//    @Override
-//    public void deleteCorp(Corp corp) {
-//
-//    }
+
+    //거래처 수정
+    @Override
+    public void updateCorp(Corp corp) {
+        Corp beforeCorp = corpRepository.findById(corp.getCorp_id()).get();
+        beforeCorp.setCorp_name(corp.getCorp_name());
+        beforeCorp.setCorp_num(corp.getCorp_num());
+        beforeCorp.setCorp_ceo(corp.getCorp_ceo());
+        beforeCorp.setCorp_call(corp.getCorp_call());
+        beforeCorp.setCorp_address(corp.getCorp_address());
+        corpRepository.save(beforeCorp);
+    }
+
+    //거래처 삭제
+    @Override
+    public void deleteCorp(Corp corp) {
+        corpRepository.deleteById(corp.getCorp_id());
+    }
 
 }

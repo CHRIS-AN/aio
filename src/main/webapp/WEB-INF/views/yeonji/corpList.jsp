@@ -18,6 +18,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <![endif]-->
 
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 </head>
 <body>
@@ -45,8 +47,8 @@
             </thead>
             <tbody>
             <c:forEach var="c" items="${corp}">
-                <tr id="tr${c.corp_id}" data-toggle="modal" data-target="#modal_2"
-                    onclick="modal2(${c.corp_id}, '${c.corp_name}', '${c.corp_num}', '${c.corp_ceo}', '${c.corp_call}', '${c.corp_address}'),update(${c.corp_id}, '${c.corp_name}', '${c.corp_num}', '${c.corp_ceo}', '${c.corp_call}', '${c.corp_address}')" >
+                <tr id="tr${c.corp_id}" onclick="detail()" data-toggle="modal" data-target="#modal_2"
+                   data-corpid="${c.corp_id}" data-corpname='${c.corp_name}' data-corpnum='${c.corp_num}' data-corpceo='${c.corp_ceo}' data-corpcall='${c.corp_call}' data-corpaddress='${c.corp_address}' >
                     <td>${c.corp_id}</td>
                     <td>${c.corp_name}</td>
                     <td>${c.corp_ceo}</td>
@@ -154,21 +156,32 @@
                         <!-- Modal footer -->
                         <div class="modal-footer">
                             <button name="corpUpdate" value="modal2_2" class="btn btn-warning" data-toggle="modal" data-target="#modal_3" data-dismiss="modal" onclick="update()">수정</button>
-                            <button name="corpDelete" class="btn btn-primary" data-toggle="modal" data-target="#Modal_4">삭제</button>
+                            <button name="corpDelete" class="btn btn-primary" data-toggle="modal" data-target="#modal_4" onclick="corpDelete()">삭제</button>
                         </div>
                 </div>
             </div>
         </div>
     </div>
     <script>
-        function modal2(corp_id,corp_name,corp_num,corp_ceo,corp_call,corp_address) {
-            $("#modal2_1").html(corp_name);
-            $("#modal2_2").html(corp_id);
-            $("#modal2_3").html(corp_num);
-            $("#modal2_4").html(corp_ceo);
-            $("#modal2_5").html(corp_call);
-            $("#modal2_6").html(corp_address);
-        }
+    //거래처 상세정보
+    function detail() {
+        $('#modal_2').on('show.bs.modal', function (event) {
+            var corpid = $(event.relatedTarget).data('corpid');
+            var corpname = $(event.relatedTarget).data('corpname');
+            var corpnum = $(event.relatedTarget).data('corpnum');
+            var corpceo = $(event.relatedTarget).data('corpceo');
+            var corpcall = $(event.relatedTarget).data('corpcall');
+            var corpaddress = $(event.relatedTarget).data('corpaddress');
+
+            $(this).find("#modal2_1").text(corpname);
+            $(this).find("#modal2_2").text(corpid);
+            $(this).find("#modal2_3").text(corpnum);
+            $(this).find("#modal2_4").text(corpceo);
+            $(this).find("#modal2_5").text(corpcall);
+            $(this).find("#modal2_6").text(corpaddress);
+        });
+    }
+
     </script>
 
     <%--  모달 3 : 거래처 수정  --%>
@@ -188,23 +201,23 @@
                         <table class="table table-bordered">
                             <tr>
                                 <th>상호</th>
-                                <th><input type="text" class="form_control" id="modal3_1"/>(<input type="text" class="form_control"  id="modal3_2" />)</th>
+                                <th><input type="text" id="modal3_1"/>(<span id="modal3_2" ></span>)</th>
                             </tr>
                             <tr>
                                 <th>사업자 등록번호</th>
-                                <th><span id="corp_num"></span></th>
+                                <th><input type="text" id="modal3_3"/></th>
                             </tr>
                             <tr>
                                 <th>대표자</th>
-                                <th><span id="modal3_4"></span></th>
+                                <th><input type="text" id="modal3_4"/></th>
                             </tr>
                             <tr>
                                 <th>연락처</th>
-                                <th><span id="modal3_5"></span></th>
+                                <th><input type="text" id="modal3_5"/></th>
                             </tr>
                             <tr>
                                 <th>주소</th>
-                                <th><span id="modal3_6"></span></th>
+                                <th><input type="text" id="modal3_6"/></th>
                             </tr>
                             <tr>
                                 <th>담당자</th>
@@ -228,25 +241,65 @@
     </div>
     <script>
         //수정하기
-        function update(corp_id,corp_name,corp_num,corp_ceo,corp_call,corp_address) {
+        function update() {
             $('#modal_3').on('show.bs.modal', function (event) {
-                var name = $(event.relatedTarget).data(corp_name);
-                $("#modal3_1").val(name);
-            })
+                var corpname = $('#modal2_1').text();
+                var corpid = $('#modal2_2').text();
+                var corpnum = $('#modal2_3').text();
+                var corpceo = $('#modal2_4').text();
+                var corpcall = $('#modal2_5').text();
+                var corpaddress = $('#modal2_6').text();
 
-            
-            $("#modal3_2").val(corp_id);
-            $("#modal3_3").val(corp_num);
-            $("#modal3_4").val(corp_ceo);
-            $("#modal3_5").val(corp_call);
-            $("#modal3_6").val(corp_address);
+                $(this).find("#modal3_1").val(corpname);
+                $(this).find("#modal3_2").text(corpid);
+                $(this).find("#modal3_3").val(corpnum);
+                $(this).find("#modal3_4").val(corpceo);
+                $(this).find("#modal3_5").val(corpcall);
+                $(this).find("#modal3_6").val(corpaddress);
+            });
+
         }
 
     </script>
 
+    <%--  모달 4 : 거래처 삭제  --%>
+    <div class="modal fade" id="modal_4">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">거래처 수정</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    거래처를 정말로 삭제하시겠습니까?
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-primary" data-dismiss="modal" value="취소" >
+                        <input type="submit" class="btn btn-primary" value="확인" >
+                    </div>
+                    <!-- Modal footer -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        //수정하기
+        function corpDelete() {
+
+
+        }
+
+    </script>
 </div> <!-- End container -->
 
+<!-- autocomplete from jQuery Ui -->
 
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
