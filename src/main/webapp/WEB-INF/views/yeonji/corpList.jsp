@@ -6,9 +6,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
     <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
-    <title>발주서 작성</title>
+    <title>거래처 조회</title>
 
     <!-- 부트스트랩 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -16,48 +19,81 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <![endif]-->
+    <!--[endif]-->
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+    <!-- Custom styles for this template -->
+    <link href="../../../resources/static/css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="../../../resources/static/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+
 </head>
 <body>
-<h1>거래처 목록</h1>
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">거래처</h1>
 
 <div class="container">
 
-        <div>
-            <label>거래처 검색 :</label>
-            <input type="text" name="corpSearch">
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">거래처 조회</h6>
         </div>
-        <div>
-            <button type="button" name="corpAdd" class="btn btn-primary" data-toggle="modal" data-target="#modal_1">+</button>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>업체코드</th>
+                        <th>기업</th>
+                        <th>대표자</th>
+                        <th>연락처</th>
+                        <th>담당자(사원번호)</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>업체코드</th>
+                        <th>기업</th>
+                        <th>대표자</th>
+                        <th>연락처</th>
+                        <th>담당자(사원번호)</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    <c:forEach var="c" items="${corp}">
+                        <tr id="tr${c.corp_id}" onclick="detail()" data-toggle="modal" data-target="#modal_2"
+                            data-corpid="${c.corp_id}" data-corpname='${c.corp_name}' data-corpnum='${c.corp_num}' data-corpceo='${c.corp_ceo}' data-corpcall='${c.corp_call}' data-corpaddress='${c.corp_address}' >
+                            <td>${c.corp_id}</td>
+                            <td>${c.corp_name}</td>
+                            <td>${c.corp_ceo}</td>
+                            <td>${c.corp_call}</td>
+                            <td>누구냐넌</td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
         </div>
+    </div>
 
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>업체코드</th>
-                <th>기업</th>
-                <th>대표자</th>
-                <th>연락처</th>
-                <th>담당자(사원번호)</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="c" items="${corp}">
-                <tr id="tr${c.corp_id}" onclick="detail()" data-toggle="modal" data-target="#modal_2"
-                   data-corpid="${c.corp_id}" data-corpname='${c.corp_name}' data-corpnum='${c.corp_num}' data-corpceo='${c.corp_ceo}' data-corpcall='${c.corp_call}' data-corpaddress='${c.corp_address}' >
-                    <td>${c.corp_id}</td>
-                    <td>${c.corp_name}</td>
-                    <td>${c.corp_ceo}</td>
-                    <td>${c.corp_call}</td>
-                    <td>누구냐넌</td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
+</div>
+<!-- /.container-fluid -->
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     <%--  모달 1 : 거래처 등록록  --%>
@@ -308,5 +344,23 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap core JavaScript-->
+<script src="../../../resources/static/js/jquery.min.js"></script>
+<script src="../../../resources/static/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="../../../resources/static/js/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="../../../resources/static/js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="../../../resources/static/js/jquery.dataTables.min.js"></script>
+<script src="../../../resources/static/js/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts / 검색&페이징 등 -->
+<script src="../../../resources/static/js/datatables-demo.js"></script>
+
 </body>
 </html>
