@@ -13,7 +13,7 @@ public interface CorpService {
     void updateCorp(Corp corp);
 
     //거래처 삭제
-    void deleteCorp(Corp corp);
+    void deleteById(Corp corp);
 
 
 }

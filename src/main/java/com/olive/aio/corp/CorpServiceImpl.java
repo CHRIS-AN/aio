@@ -1,11 +1,13 @@
 package com.olive.aio.corp;
 
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@AllArgsConstructor
 @Service
 public class CorpServiceImpl implements CorpService {
 
@@ -39,7 +41,7 @@ public class CorpServiceImpl implements CorpService {
 
     //거래처 삭제
     @Override
-    public void deleteCorp(Corp corp) {
+    public void deleteById(Corp corp) {
         corpRepository.deleteById(corp.getCorp_id());
     }
 

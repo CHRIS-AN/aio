@@ -156,7 +156,7 @@
                         <!-- Modal footer -->
                         <div class="modal-footer">
                             <button name="corpUpdate" value="modal2_2" class="btn btn-warning" data-toggle="modal" data-target="#modal_3" data-dismiss="modal" onclick="update()">수정</button>
-                            <button name="corpDelete" class="btn btn-primary" data-toggle="modal" data-target="#modal_4" onclick="corpDelete()">삭제</button>
+                            <button name="corpDelete" class="btn btn-primary" data-toggle="modal" data-target="#modal_4">삭제</button>
                         </div>
                 </div>
             </div>
@@ -277,8 +277,11 @@
                 <div class="modal-body">
                     거래처를 정말로 삭제하시겠습니까?
                     <div class="modal-footer">
-                        <input type="button" class="btn btn-primary" data-dismiss="modal" value="취소" >
-                        <input type="submit" class="btn btn-primary" value="확인" >
+                        <form action="corpDelete" method="delete">
+                            <input type="hidden" id="modal4_2">
+                            <input type="button" class="btn btn-primary" data-dismiss="modal" value="취소" >
+                            <input type="submit" class="btn btn-primary" value="확인"  onclick="corpDelete()">
+                        </form>
                     </div>
                     <!-- Modal footer -->
                 </div>
@@ -288,8 +291,10 @@
     <script>
         //수정하기
         function corpDelete() {
-
-
+            $('#modal_3').on('show.bs.modal', function (event) {
+                var corpid = $('#modal2_2').text();
+                $(this).find("#modal4_2").val(corpid);
+            });
         }
 
     </script>
