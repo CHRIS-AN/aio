@@ -8,7 +8,7 @@ import java.util.Map;
 
 public interface ProductService {
 
-    List<Product> getProductList(Product product);
+    List<Product> productList(Product product);
 
     void insertProduct(Product product);
 

@@ -4,6 +4,8 @@
 <html>
 <head>
     <meta content="text/html; charset=UFT-8" http-equiv="Content-Type">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>제품 등록 form</title>
 </head>
 <body>
