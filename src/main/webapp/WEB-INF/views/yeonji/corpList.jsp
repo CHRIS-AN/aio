@@ -18,6 +18,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <![endif]-->
 
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 </head>
 <body>
@@ -45,8 +47,8 @@
             </thead>
             <tbody>
             <c:forEach var="c" items="${corp}">
-                <tr id="tr${c.corp_id}" data-toggle="modal" data-target="#modal_2"
-                    onclick="modal2(${c.corp_id}, '${c.corp_name}', '${c.corp_num}', '${c.corp_ceo}', '${c.corp_call}', '${c.corp_address}'),update(${c.corp_id}, '${c.corp_name}', '${c.corp_num}', '${c.corp_ceo}', '${c.corp_call}', '${c.corp_address}')" >
+                <tr id="tr${c.corp_id}" onclick="detail()" data-toggle="modal" data-target="#modal_2"
+                   data-corpid="${c.corp_id}" data-corpname='${c.corp_name}' data-corpnum='${c.corp_num}' data-corpceo='${c.corp_ceo}' data-corpcall='${c.corp_call}' data-corpaddress='${c.corp_address}' >
                     <td>${c.corp_id}</td>
                     <td>${c.corp_name}</td>
                     <td>${c.corp_ceo}</td>
@@ -161,14 +163,25 @@
         </div>
     </div>
     <script>
-        function modal2(corp_id,corp_name,corp_num,corp_ceo,corp_call,corp_address) {
-            $("#modal2_1").html(corp_name);
-            $("#modal2_2").html(corp_id);
-            $("#modal2_3").html(corp_num);
-            $("#modal2_4").html(corp_ceo);
-            $("#modal2_5").html(corp_call);
-            $("#modal2_6").html(corp_address);
-        }
+    //거래처 상세정보
+    function detail() {
+        $('#modal_2').on('show.bs.modal', function (event) {
+            var corpid = $(event.relatedTarget).data('corpid');
+            var corpname = $(event.relatedTarget).data('corpname');
+            var corpnum = $(event.relatedTarget).data('corpnum');
+            var corpceo = $(event.relatedTarget).data('corpceo');
+            var corpcall = $(event.relatedTarget).data('corpcall');
+            var corpaddress = $(event.relatedTarget).data('corpaddress');
+
+            $(this).find("#modal2_1").text(corpname);
+            $(this).find("#modal2_2").text(corpid);
+            $(this).find("#modal2_3").text(corpnum);
+            $(this).find("#modal2_4").text(corpceo);
+            $(this).find("#modal2_5").text(corpcall);
+            $(this).find("#modal2_6").text(corpaddress);
+        });
+    }
+
     </script>
 
     <%--  모달 3 : 거래처 수정  --%>
@@ -246,10 +259,7 @@
             });
 
         }
-
     </script>
-
-
 
     <%--  모달 4 : 거래처 삭제  --%>
     <div class="modal fade" id="modal_4">
@@ -266,7 +276,7 @@
                 <div class="modal-body">
                     거래처를 정말로 삭제하시겠습니까?
                     <div class="modal-footer">
-                        <form action="corpDelete" method="post">
+                        <form action="corpDelete" method="delete">
                             <input type="hidden" id="modal4_2">
                             <input type="button" class="btn btn-primary" data-dismiss="modal" value="취소" >
                             <input type="submit" class="btn btn-primary" value="확인"  onclick="corpDelete()">
@@ -278,20 +288,22 @@
         </div>
     </div>
     <script>
-        //삭제하기
+        //수정하기
         function corpDelete() {
             $('#modal_3').on('show.bs.modal', function (event) {
                 var corpid = $('#modal2_2').text();
-                alert(corpid);
                 $(this).find("#modal4_2").val(corpid);
             });
         }
 
     </script>
-
 </div> <!-- End container -->
 
+<!-- autocomplete from jQuery Ui -->
 
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
