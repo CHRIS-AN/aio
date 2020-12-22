@@ -52,7 +52,8 @@ public class ProductController {
             for (String key : validatorResult.keySet()){
                 model.addAttribute(key, validatorResult.get(key));
             }
-            return null;
+            return "MJ_view/insertProduct";
+
         }
         // 제품명 중복 검사
 //        insertFormValidator.validate(product,errors);
