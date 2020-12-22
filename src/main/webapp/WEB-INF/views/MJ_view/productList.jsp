@@ -36,114 +36,43 @@
 
         <!-- content -->
         <div class="right_col" role="main">
-            <div class="">
-                <h1 style="text-align: center">제품 목록</h1>
-                <div style="text-align: right">
-                    <label>제품 검색 :</label>
-                    <input type="text" name="prodSearch">
-                </div>
-                <div style="text-align: right">
-                    <a href="insertProduct"><button type="button" class="btn btn-primary" href="insertProduct">제품 등록</button></a>
+            <h1 style="text-align: center">제품 목록</h1>
+            <div style="text-align: right">
+                <label>제품 검색 :</label>
+                <input type="text" name="prodSearch">
+            </div>
+            <div style="text-align: right">
+                <a href="insertProduct">
+                    <button type="button" class="btn btn-primary" href="insertProduct">제품 등록</button>
+                </a>
 
 
+            </div>
 
-                </div>
-
-                <table class="table table-bordered">
-                    <thead>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>제품명</th>
+                    <th>단위</th>
+                    <th>카테고리</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="vo" items="${productList}">
                     <tr>
-                        <th>번호</th>
-                        <th>제품명</th>
-                        <th>단위</th>
-                        <th>카테고리</th>
+                        <td>${vo.prod_id}</td>
+                        <td align="left"><a href="getProduct?prod_id=${vo.prod_id}">${vo.prodName}</a></td>
+                        <td>${vo.prod_bundle}</td>
+                        <td>${vo.prod_catag}</td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="vo" items="${productList}">
-                        <tr>
-                            <td>${vo.prod_id}</td>
-                            <td align="left"><a href="getProduct?prod_id=${vo.prod_id}">${vo.prodName}</a></td>
-                            <td>${vo.prod_bundle}</td>
-                            <td>${vo.prod_catag}</td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-
-
-<%--                &lt;%&ndash;      모달 1 : 거래처 등록록&ndash;%&gt;--%>
-<%--                <div class="modal" id="Modal_1">--%>
-<%--                    <div class="modal-dialog modal-dialog-centered">--%>
-<%--                        <div class="modal-content">--%>
-
-<%--                            <!-- Modal Header -->--%>
-<%--                            <div class="modal-header">--%>
-<%--                                <h4 class="modal-title">제품 등록</h4>--%>
-<%--                            </div>--%>
-
-<%--                            <!-- Modal body -->--%>
-<%--                            <div class="modal-body">--%>
-<%--                                <form action="insertProduct" method="post">--%>
-<%--                                    <table class="table table-bordered">--%>
-<%--                                        <tr>--%>
-<%--                                            <th>제품명</th>--%>
-<%--                                            <th><input type="text" name="prodName" placeholder="내용을 입력해주세요" value=""--%>
-<%--                                                       autofocus>--%>
-<%--                                                ${valid_prodName}--%>
-<%--                                                <form:errors path="prodName"/>--%>
-<%--                                            </th>--%>
-<%--                                        </tr>--%>
-<%--                                        <tr>--%>
-<%--                                            </th>--%>
-<%--                                            <th>단위</th>--%>
-<%--                                            <th><input type="text" name="prod_bundle" placeholder="내용을 입력해주세요"--%>
-<%--                                                       value="" autofocus>--%>
-<%--                                                ${valid_prod_bundle}--%>
-<%--                                            </th>--%>
-<%--                                        </tr>--%>
-<%--                                        <tr>--%>
-<%--                                            <th>판매가</th>--%>
-<%--                                            <th><input type="text" name="sell_price" placeholder="내용을 입력해주세요"--%>
-<%--                                                       value="" autofocus>--%>
-<%--                                                ${valid_sell_price}--%>
-<%--                                            </th>--%>
-<%--                                        </tr>--%>
-<%--                                        <tr>--%>
-<%--                                            <th>구매가</th>--%>
-<%--                                            <th><input type="text" name="buy_price" placeholder="내용을 입력해주세요"--%>
-<%--                                                       value="" autofocus></th>--%>
-<%--                                            ${valid_buy_price}--%>
-<%--                                        </tr>--%>
-<%--                                        <tr>--%>
-<%--                                            <th>카테고리</th>--%>
-<%--                                            <th><input type="text" name="prod_catag" placeholder="내용을 입력해주세요"--%>
-<%--                                                       value="" autofocus>--%>
-<%--                                                ${valid_prod_catag}--%>
-<%--                                            </th>--%>
-<%--                                        </tr>--%>
-<%--                                        <tr>--%>
-<%--                                            <th>제품 설명</th>--%>
-<%--                                            <th><input type="text" name="prod_explain" placeholder="내용을 입력해주세요"--%>
-<%--                                                       value="" autofocus>--%>
-<%--                                            </th>--%>
-<%--                                        </tr>--%>
-<%--                                    </table>--%>
-<%--                                    <!-- Modal footer -->--%>
-<%--                                    <div class="modal-footer">--%>
-<%--                                        <input type="submit" class="btn btn-primary" value="등록">--%>
-<%--                                    </div>--%>
-<%--                                </form>--%>
-
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-
-            </div> <!-- End container -->
-            <!-- footer  -->
-            <jsp:include page="../layout/footer.jsp"/>
-            <!-- /footer  -->
+                </c:forEach>
+                </tbody>
+            </table>
         </div>
+        <!-- footer  -->
+        <jsp:include page="../layout/footer.jsp"/>
+        <!-- /footer  -->
     </div>
 </div>
 
