@@ -44,6 +44,9 @@ public class EmplUpdateForm {
     @NotBlank
     private String work_state  = "재직";
 
+    @Column(name = "empl_regdate")
+    private String emplRegdate;
+
     @Column(name = "empl_resigdate")
     private String emplResigdate;
 }

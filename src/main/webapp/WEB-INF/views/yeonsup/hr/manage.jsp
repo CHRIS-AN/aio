@@ -97,7 +97,7 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-                            <form action="/hr" method="post" class="form">
+                            <form action="/hr" method="post" class="form needs-validation">
                                 <div class="form-group has-feedback col-md-12 com-sm-12">
                                     <label class="col-md-12">사진</label>
                                     <img src="${emplForm.photo}" id="profile-image" class="col-md-3 img img-responsive">
@@ -263,6 +263,25 @@
 </script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+    (function () {
+        'use strict';
+
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+
+            // Loop over them and prevent submission
+            Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        }, false)
+    }())
 var type = ""
 function showjusoPopup(type1){
     type = type1;

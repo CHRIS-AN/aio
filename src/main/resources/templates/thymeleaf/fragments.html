@@ -1,5 +1,13 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="col-md-3 left_col">
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head">
+
+</head>
+
+
+<div th:fragment="side-bar" class="col-md-3 left_col">
     <div class="left_col scroll-view">
         <div class="navbar nav_title" style="">
             <a href="/" class="site_title"><i class="fa fa-moon-o"></i> <span> All In One</span></a>
@@ -59,3 +67,44 @@
     </div>
 </div>
 
+<div th:fragment="top-nav" class="top_nav">
+    <div class="nav_menu">
+        <nav>
+            <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <img th:src="${empl.photo}" alt=""><span th:text="${empl.name}"></span>
+                        <span class=" fa fa-angle-down"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-usermenu pull-right">
+                        <li><a href="/mypage"> 내 인사 정보 </a></li>
+                        <li>
+                            <a>
+                                <form class="" action="/logout" method="post">
+                                    <button type="submit" style="border: none; background: none;">
+                                        <i class="fa fa-sign-out pull-right"></i> 로그아웃
+                                    </button>
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                </form>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<footer th:fragment="footer">
+    <div class="pull-right">
+        Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+    </div>
+    <div class="clearfix"></div>
+</footer>
+
+</html>

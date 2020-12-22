@@ -31,8 +31,8 @@ public class MainController {
     private static final String EMPL_VIEW_PREFIX = "yeonsup/hr/";
 
     @GetMapping("/")
-    public String index() {
-
+    public String index(@CurrentEmpl Empl empl, Model model) {
+        model.addAttribute(empl);
         return "index";
     }
 
@@ -67,15 +67,11 @@ public class MainController {
         return "redirect:/hr";
     }
 
-    @GetMapping("/thymeleaf")
-    public String th (Model model) {
-        model.addAttribute("welcome","hello World!");
-        return "thymeleaf/thymeleaf";
-    }
-
-    @GetMapping("/popup/jusoPopup")
-    public void showJusoPopup() {
-
+    @GetMapping("/work")
+    public String goWork(@CurrentEmpl Empl empl, Model model) {
+        emplService.updateGoWork(empl, model);
+        model.addAttribute(empl);
+        return "redirect:/";
     }
 
 

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <!-- Bootstrap -->
+    <link href="/node_modules/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/node_modules/gentelella/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/node_modules/gentelella/vendors/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
+    <link href="/node_modules/gentelella/vendors/fullcalendar/dist/fullcalendar.print.css" rel="stylesheet" media="print">
+    <!-- Custom Theme Style -->
+    <link href="/node_modules/gentelella/build/css/custom.css" rel="stylesheet">
+    <script src="/node_modules/gentelella/vendors/jquery/dist/jquery.min.js"></script>
+    <title>AIO</title>
+
+    <style>
+        label {
+            font-size: 15px;
+        }
+
+        .mg-3 {
+            margin: 0.5em;
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+            font-size: 14px;
+        }
+
+        #external-events {
+            position: fixed;
+            z-index: 2;
+            top: 300px;
+            left: 140px;
+            width: 150px;
+            padding: 0 10px;
+            border: 1px solid #ccc;
+            background: #eee;
+        }
+
+        .demo-topbar + #external-events { /* will get stripped out */
+            top: 60px;
+        }
+
+        #external-events .fc-event {
+            margin: 1em 0;
+            cursor: move;
+        }
+
+        #calendar-container {
+            position: relative;
+            z-index: 1;
+            margin-left: 200px;
+        }
+
+        #calendar {
+            max-width: 900px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+
+        <div th:replace="thymeleaf/fragments.html :: side-bar"></div>
+
+        <div th:replace="thymeleaf/fragments.html :: top-nav"></div>
+
+        <div class="right_col" role="main">
+            <div>
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>내 인사 정보</h3>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>내 근태관리</h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <div id='calendar'></div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <footer th:replace="thymeleaf/fragments.html :: footer"></footer>
+
+    </div>
+</div>
+
+
+
+
+
+<script src="/node_modules/gentelella/vendors/moment/min/moment.min.js"></script>
+<!--<script src="/node_modules/gentelella/vendors/fullcalendar/dist/lang/ko.js"></script>-->
+<script src="/node_modules/gentelella/vendors/fullcalendar/dist/fullcalendar.min.js"></script>
+<!-- Bootstrap -->
+<script src="/node_modules/gentelella/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- Custom Theme Scripts -->
+<script src="/node_modules/gentelella/build/js/custom.js"></script>
+<script src="/js/myCalendar.js"></script>
+</body>
+</html>

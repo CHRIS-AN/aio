@@ -1,6 +1,8 @@
 package com.olive.aio.employee;
 
+import com.olive.aio.MyPage.MyCalendarRepository;
 import com.olive.aio.domain.Empl;
+import com.olive.aio.domain.MyCalendar;
 import com.olive.aio.email.EmailMessage;
 import com.olive.aio.email.EmailService;
 import com.olive.aio.employee.form.EmplForm;
@@ -33,6 +35,7 @@ public class EmplService implements UserDetailsService {
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
     private final EmailService emailService;
+    private final MyCalendarRepository myCalendarRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -45,7 +48,7 @@ public class EmplService implements UserDetailsService {
         } else {
             role = decideAuth(username, empl, role);
         }
-        log.info("role {}" + role);
+        log.info("role {}", role);
         return new UserEmpl(empl, role);
     }
 
@@ -98,16 +101,17 @@ public class EmplService implements UserDetailsService {
         return byEmplId;
     }
 
-    public void updateEmpl(Empl empl, @Valid EmplUpdateForm emplForm) {
+    public Empl updateEmpl(Empl empl, EmplUpdateForm emplForm) {
         Empl byEmplId = emplRepository.findByEmplId(emplForm.getEmplId());
 
-        if(emplForm.getEmplResigdate().length() > 0) {
+        if(emplForm.getEmplResigdate() != null && emplForm.getEmplResigdate().length() > 0) {
             emplForm.setWork_state("퇴사");
         }
 
         modelMapper.map(emplForm, byEmplId);
+        loadUserByUsername(byEmplId.getEmplId());
 
-        return;
+        return byEmplId;
     }
 
     public boolean addErrors(@Valid EmplForm emplForm, Errors errors, Model model) {
@@ -169,6 +173,26 @@ public class EmplService implements UserDetailsService {
 
 
         return emplList;
+    }
+
+    public Empl updateGoWork(Empl empl, Model model) {
+        log.info("empl {} ", empl);
+        log.info("empl.getAttendance {} ", empl.getAttendance());
+        if(empl.getAttendance().equals("퇴근")) {
+            MyCalendar myCalendar = new MyCalendar();
+            empl.setAttendance("출근");
+            empl.addMyCalendar(myCalendar);
+            model.addAttribute("workDate", myCalendar.getCalWorkDate());
+            myCalendarRepository.save(myCalendar);
+        } else if(empl.getAttendance().equals("출근")) {
+            MyCalendar myCalendar = new MyCalendar();
+            empl.setAttendance("퇴근");
+            empl.addMyCalendar(myCalendar);
+            model.addAttribute("workDate", myCalendar.getCalWorkDate());
+            myCalendarRepository.save(myCalendar);
+        }
+        emplRepository.save(empl);
+        return empl;
     }
 }
 
