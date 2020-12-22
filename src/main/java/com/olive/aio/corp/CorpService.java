@@ -7,11 +7,9 @@ public interface CorpService {
 
     void insertCorp(Corp corp);;
 
-//    Corp getCorp(Corp corp);
-//
-//    void updateCorp(Corp corp);
-//
-//    void deleteCorp(Corp corp);
+    void updateCorp(Corp corp);
+
+    void deleteById(Corp corp);
 
 
 }

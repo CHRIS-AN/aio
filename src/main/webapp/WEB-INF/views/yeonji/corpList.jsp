@@ -154,7 +154,7 @@
                         <!-- Modal footer -->
                         <div class="modal-footer">
                             <button name="corpUpdate" value="modal2_2" class="btn btn-warning" data-toggle="modal" data-target="#modal_3" data-dismiss="modal" onclick="update()">수정</button>
-                            <button name="corpDelete" class="btn btn-primary" data-toggle="modal" data-target="#Modal_4">삭제</button>
+                            <button name="corpDelete" class="btn btn-primary" data-toggle="modal" data-target="#modal_4">삭제</button>
                         </div>
                 </div>
             </div>
@@ -184,27 +184,27 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form action="corpUpdate" method="put">
+                    <form action="corpUpdate" method="post">
                         <table class="table table-bordered">
                             <tr>
                                 <th>상호</th>
-                                <th><input type="text" class="form_control" id="modal3_1"/>(<input type="text" class="form_control"  id="modal3_2" />)</th>
+                                <th><input type="text" id="modal3_1"/>(<input type="text" id="modal3_2"/>)</th>
                             </tr>
                             <tr>
                                 <th>사업자 등록번호</th>
-                                <th><span id="corp_num"></span></th>
+                                <th><input type="text" id="modal3_3"/></th>
                             </tr>
                             <tr>
                                 <th>대표자</th>
-                                <th><span id="modal3_4"></span></th>
+                                <th><input type="text" id="modal3_4"/></th>
                             </tr>
                             <tr>
                                 <th>연락처</th>
-                                <th><span id="modal3_5"></span></th>
+                                <th><input type="text" id="modal3_5"/></th>
                             </tr>
                             <tr>
                                 <th>주소</th>
-                                <th><span id="modal3_6"></span></th>
+                                <th><input type="text" id="modal3_6"/></th>
                             </tr>
                             <tr>
                                 <th>담당자</th>
@@ -228,18 +228,63 @@
     </div>
     <script>
         //수정하기
-        function update(corp_id,corp_name,corp_num,corp_ceo,corp_call,corp_address) {
+        function update() {
             $('#modal_3').on('show.bs.modal', function (event) {
-                var name = $(event.relatedTarget).data(corp_name);
-                $("#modal3_1").val(name);
-            })
+                var corpname = $('#modal2_1').text();
+                var corpid = $('#modal2_2').text();
+                var corpnum = $('#modal2_3').text();
+                var corpceo = $('#modal2_4').text();
+                var corpcall = $('#modal2_5').text();
+                var corpaddress = $('#modal2_6').text();
 
-            
-            $("#modal3_2").val(corp_id);
-            $("#modal3_3").val(corp_num);
-            $("#modal3_4").val(corp_ceo);
-            $("#modal3_5").val(corp_call);
-            $("#modal3_6").val(corp_address);
+                $(this).find("#modal3_1").val(corpname);
+                $(this).find("#modal3_2").val(corpid);
+                $(this).find("#modal3_3").val(corpnum);
+                $(this).find("#modal3_4").val(corpceo);
+                $(this).find("#modal3_5").val(corpcall);
+                $(this).find("#modal3_6").val(corpaddress);
+            });
+
+        }
+
+    </script>
+
+
+
+    <%--  모달 4 : 거래처 삭제  --%>
+    <div class="modal fade" id="modal_4">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">거래처 수정</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    거래처를 정말로 삭제하시겠습니까?
+                    <div class="modal-footer">
+                        <form action="corpDelete" method="post">
+                            <input type="hidden" id="modal4_2">
+                            <input type="button" class="btn btn-primary" data-dismiss="modal" value="취소" >
+                            <input type="submit" class="btn btn-primary" value="확인"  onclick="corpDelete()">
+                        </form>
+                    </div>
+                    <!-- Modal footer -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        //삭제하기
+        function corpDelete() {
+            $('#modal_3').on('show.bs.modal', function (event) {
+                var corpid = $('#modal2_2').text();
+                alert(corpid);
+                $(this).find("#modal4_2").val(corpid);
+            });
         }
 
     </script>
