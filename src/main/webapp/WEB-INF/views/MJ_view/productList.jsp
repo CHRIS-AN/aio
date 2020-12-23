@@ -15,28 +15,28 @@
 
     <!-- head -->
     <!-- Datatables -->
-    <%--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">--%>
-    <link href="../../../../resources/static/node_modules/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../../../resources/static/node_modules/gentelella/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-    <link href="../../../../resources/static/node_modules/gentelella/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css"
+<%--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">--%>
+    <link href="/node_modules/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/node_modules/gentelella/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="/node_modules/gentelella/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css"
           rel="stylesheet">
-    <link href="../../../../resources/static/node_modules/gentelella/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css"
+    <link href="/node_modules/gentelella/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css"
           rel="stylesheet">
-    <link href="../../../../resources/static/node_modules/gentelella/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css"
+    <link href="/node_modules/gentelella/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css"
           rel="stylesheet">
-    <link href="../../../../resources/static/node_modules/gentelella/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css"
+    <link href="/node_modules/gentelella/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css"
           rel="stylesheet">
-    <link href="../../../../resources/static/node_modules/gentelella/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/node_modules/gentelella/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- Custom Theme Style -->
-    <link href="../../../../resources/static/node_modules/gentelella/build/css/custom.css" rel="stylesheet">
+    <link href="/node_modules/gentelella/build/css/custom.css" rel="stylesheet">
     <%--    <link href="/css/manage.css" rel="stylesheet">--%>
-    <script src="../../../../resources/static/node_modules/gentelella/vendors/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/gentelella/vendors/jquery/dist/jquery.min.js"></script>
 
     <!-- Custom styles for this template -->
-    <link href="../../../../resources/static/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- Custom styles for this page -->
-    <link href="../../../../resources/static/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 
 </head>
@@ -55,7 +55,7 @@
 
         <!-- content -->
         <div class="right_col" role="main">
-            <h1 class="h3 mb-2 text-gray-800"  style="text-align: center" >제품 목록</h1>
+            <h1 class="h3 mb-2 text-gray-800" style="text-align: center">제품 목록</h1>
 
             <div class="container">
                 <!-- DataTales Example -->
@@ -98,49 +98,51 @@
                     </div>
                 </div>
             </div>
-            <!-- footer  -->
-            <jsp:include page="../layout/footer.jsp"/>
-            <!-- /footer  -->
         </div>
     </div>
+    <!-- footer  -->
+    <jsp:include page="../layout/footer.jsp"/>
+    <!-- /footer  -->
 </div>
 
 <!-- script -->
-<jsp:include page="../layout/script.jsp"/>
+
 
 <!-- Datatables -->
-<script src="../../../../resources/static/node_modules/gentelella/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="../../../../resources/static/node_modules/gentelella/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script src="../../../../resources/static/node_modules/gentelella/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-<script src="../../../../resources/static/node_modules/gentelella/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-<script src="../../../../resources/static/node_modules/gentelella/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-<script src="../../../../resources/static/node_modules/gentelella/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-<script src="../../../../resources/static/node_modules/gentelella/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-<script src="../../../../resources/static/node_modules/gentelella/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-<script src="../../../../resources/static/node_modules/gentelella/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-<script src="../../../../resources/static/node_modules/gentelella/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-<script src="../../../../resources/static/node_modules/gentelella/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-<script src="../../../../resources/static/node_modules/gentelella/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-<script src="../../../../resources/static/node_modules/gentelella/vendors/jszip/dist/jszip.min.js"></script>
-<script src="../../../../resources/static/node_modules/gentelella/vendors/pdfmake/build/pdfmake.min.js"></script>
-<script src="../../../../resources/static/node_modules/gentelella/vendors/pdfmake/build/vfs_fonts.js"></script>
+<%--<script src="/node_modules/gentelella/vendors/datatables.net/js/jquery.dataTables.min.js"></script>--%>
+<%--<script src="/node_modules/gentelella/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>--%>
+<%--<script src="/node_modules/gentelella/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>--%>
+<%--<script src="/node_modules/gentelella/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>--%>
+<%--<script src="/node_modules/gentelella/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>--%>
+<%--<script src="/node_modules/gentelella/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>--%>
+<%--<script src="/node_modules/gentelella/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>--%>
+<%--<script src="/node_modules/gentelella/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>--%>
+<%--<script src="/node_modules/gentelella/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>--%>
+<%--<script src="/node_modules/gentelella/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>--%>
+<%--<script src="/node_modules/gentelella/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>--%>
+<%--<script src="/node_modules/gentelella/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>--%>
+<%--<script src="/node_modules/gentelella/vendors/jszip/dist/jszip.min.js"></script>--%>
+<%--<script src="/node_modules/gentelella/vendors/pdfmake/build/pdfmake.min.js"></script>--%>
+<%--<script src="/node_modules/gentelella/vendors/pdfmake/build/vfs_fonts.js"></script>--%>
 
 <!-- Bootstrap core JavaScript-->
-<script src="../../../../resources/static/js/jquery.min.js"></script>
-<script src="../../../../resources/static/js/bootstrap.bundle.min.js"></script>
+<%--<script src="/js/jquery.min.js"></script>--%>
+<script src="/js/bootstrap.bundle.min.js"></script>
 
 <!-- Core plugin JavaScript-->
-<script src="../../../../resources/static/js/jquery.easing.min.js"></script>
+<script src="/js/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="../../../../resources/static/js/sb-admin-2.min.js"></script>
+<script src="/js/sb-admin-2.min.js"></script>
 
 <!-- Page level plugins -->
-<script src="../../../../resources/static/js/jquery.dataTables.min.js"></script>
-<script src="../../../../resources/static/js/dataTables.bootstrap4.min.js"></script>
+<script src="/js/jquery.dataTables.min.js"></script>
+<script src="/js/dataTables.bootstrap4.min.js"></script>
 
 <!-- Page level custom scripts / 검색&페이징 등 -->
-<script src="../../../../resources/static/js/datatables-demo.js"></script>
+<script src="/js/datatables-demo.js"></script>
+<jsp:include page="../layout/script.jsp"/>
+
 
 </body>
 </html>
