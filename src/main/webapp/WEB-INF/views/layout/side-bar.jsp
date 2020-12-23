@@ -26,12 +26,12 @@
                     </li>
                     <li><a><i class="fa fa-desktop"></i> 제품관리 <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="#">메뉴1</a></li>
+                            <li><a href="productList">메뉴1</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-table"></i> 영업관리 <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="#">메뉴1</a></li>
+                            <li><a href="/yeonji/corpList">메뉴1</a></li>
 
                         </ul>
                     </li>
