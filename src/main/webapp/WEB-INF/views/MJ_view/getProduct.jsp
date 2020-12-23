@@ -79,6 +79,8 @@
                     <tr>
                         <td colspan="2" align="center">
                             <input type="submit" value="수정하기"/>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
                         </td>
                     </tr>
                 </table>
