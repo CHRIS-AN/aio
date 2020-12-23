@@ -20,5 +20,4 @@ public interface ProductService {
 
     Map<String, String> validateHandling(Errors errors);
 
-
 }

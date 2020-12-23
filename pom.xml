@@ -117,7 +117,7 @@
                 <version>1.8.0</version>
                 <configuration>
                     <nodeVersion>v4.6.0</nodeVersion>
-                    <workingDirectory>src/main/webapp/resources/static</workingDirectory>
+                    <workingDirectory>src/main/resources/static</workingDirectory>
                 </configuration>
                 <executions>
                     <execution>
