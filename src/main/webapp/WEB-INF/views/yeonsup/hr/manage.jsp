@@ -37,24 +37,46 @@
                     </div>
                 </div>
                 <div id="datatable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="row" id="hrm">
-
+                    <form id="searchfrm">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <select id="cnt" class="">
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                                <select id="dept" class="">
+                                    <option value="부서명">부서명</option>
+                                    <option value="인사">인사</option>
+                                    <option value="제품">제품</option>
+                                    <option value="영업">영업</option>
+                                    <option value="물류">물류</option>
+                                    <option value="회계">회계</option>
+                                </select>
+                            </div>
+                            <div class="text-right col-md-10">
+                                <input type="text" id="keyword" />
+                                <button type="button" id="searchBtn">검색</button>
+                            </div>
                         </div>
-                        <div class="row text-right">
-                            <div class="col-md-12">
-                                <btn id="resigBtn" class="btn btn-default">
-                                    사원등록
-                                </btn>
+                    </form>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="row" id="hrm">
+
+                            </div>
+                            <div class="row text-right">
+                                <div class="col-md-12">
+                                    <btn id="resigBtn" class="btn btn-default">
+                                        사원등록
+                                    </btn>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                </div>
             </div>
-
-
         </div>
         <!-- footer  -->
         <jsp:include page="../../layout/footer.jsp" />
@@ -75,7 +97,7 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-                            <form action="/hr" method="post" class="form">
+                            <form action="/hr" method="post" class="form needs-validation">
                                 <div class="form-group has-feedback col-md-12 com-sm-12">
                                     <label class="col-md-12">사진</label>
                                     <img src="${emplForm.photo}" id="profile-image" class="col-md-3 img img-responsive">
@@ -113,11 +135,11 @@
                                 <div class="form-group has-feedback col-md-6 com-sm-6">
                                     <label>부서명</label>
                                     <select name="dept" class="form-control">
-                                        <option value="인사" selected="${emplForm.dept eq "인사"}">인사</option>
-                                        <option value="제품" selected="${emplForm.dept eq "제품"}">제품</option>
-                                        <option value="영업" selected="${emplForm.dept eq "영업"}">영업</option>
-                                        <option value="물류" selected="${emplForm.dept eq "물류"}">물류</option>
-                                        <option value="회계" selected="${emplForm.dept eq "회계"}">회계</option>
+                                        <option value="인사" ${emplForm.dept == '인사'? 'selected' : ''}>인사</option>
+                                        <option value="제품" ${emplForm.dept == "제품"? 'selected' : ''}>제품</option>
+                                        <option value="영업" ${emplForm.dept == "영업"? 'selected' : ''}>영업</option>
+                                        <option value="물류" ${emplForm.dept == "물류"? 'selected' : ''}>물류</option>
+                                        <option value="회계" ${emplForm.dept == "회계"? 'selected' : ''}>회계</option>
                                     </select>
                                 </div>
                                 <div class="form-group has-feedback col-md-6 com-sm-6">
@@ -142,10 +164,10 @@
                                 <div class="form-group has-feedback col-md-12 com-sm-12">
                                     <label class="col-md-12">주소</label>
                                     <div class="col-md-5 col-sm-5">
-                                        <input type="text" name="post_num" value="${emplForm.post_num}" class="form-control" id="postnum" placeholder="우편번호">
+                                        <input type="text" name="post_num" value="${emplForm.post_num}" class="form-control" id="postnum" placeholder="우편번호" readonly>
                                         <span>${valid_post_num}</span>
                                     </div>
-                                    <button id="postnumBtn" class="btn btn-default">검색</button>
+                                    <button type="button" id="postnumBtn" onclick="showjusoPopup('등록')" class="btn btn-default">검색</button>
                                 </div>
                                 <div class="form-group has-feedback col-md-12 com-sm-12">
                                     <div class="col-md-12">
@@ -169,7 +191,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title cus-title">
-                            <h2> 사원 등록 <small>different form elements</small></h2>
+                            <h2> 사원 상세정보 <small>different form elements</small></h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -237,6 +259,67 @@
     if(${not empty error}) {
         $("#resigDialog").show();
     }
+
+</script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    (function () {
+        'use strict';
+
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+
+            // Loop over them and prevent submission
+            Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        }, false)
+    }())
+var type = ""
+function showjusoPopup(type1){
+    type = type1;
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+
+            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                addr = data.roadAddress;
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                addr = data.jibunAddress;
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+
+
+            if(type == "등록"){
+                $("#postnum").val(data.zonecode);
+                $("#address").val(addr);
+                $("#address").focus();
+                // var extraAddr = ''; // 참고항목 변수
+            } else if(type == "수정") {
+                $("#pdtnum").val(data.zonecode);
+                $("#updateAddr").val(addr);
+                $("#updateAddr").focus();
+            }
+            // 커서를 상세주소 필드로 이동한다.
+
+        }
+    }).open({autoClose:true});
+}
 </script>
 <script src="/js/manage.js"></script>
 <!-- script -->

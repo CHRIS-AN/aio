@@ -7,14 +7,14 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.*;
 
 @Entity
-@Getter @Setter @EqualsAndHashCode(of = "empl_id")
+@Getter @Setter @EqualsAndHashCode(of = "emplId")
 @NoArgsConstructor @AllArgsConstructor
 public class Empl {
 
     @Id
-    @Column(name = "empl_id")
     private String emplId;
 
 
@@ -47,13 +47,41 @@ public class Empl {
 
     private String empl_jumin;
 
-
     private String work_state = "재직";
 
-    @Column(name = "empl_regdate")
     private String emplRegdate;
 
-    @Column(name = "empl_resigdate")
     private String emplResigdate;
+
+    private String attendance = "퇴근";
+
+    private boolean goWork = false;
+
+    private boolean goHome = false;
+
+    @OneToMany(mappedBy = "empl", fetch = FetchType.EAGER)
+    private Set<MyCalendar> myCalendar = new HashSet<>();
+
+    public boolean isGoWork(int cnt) {
+        if(cnt == 0){
+
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isGoHome(int cnt) {
+        if(cnt == 0){
+            return false;
+        }
+        return true;
+    }
+
+    public void addMyCalendar(MyCalendar calendar) {
+        calendar.setEmpl(this);
+        calendar.setAttendance(getAttendance());
+        calendar.setNow();
+        myCalendar.add(calendar);
+    }
 
 }

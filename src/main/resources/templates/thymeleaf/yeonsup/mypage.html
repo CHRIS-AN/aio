@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap -->
+<link href="/node_modules/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Font Awesome -->
+<link href="/node_modules/gentelella/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<!-- Custom Theme Style -->
+<link href="/node_modules/gentelella/build/css/custom.css" rel="stylesheet">
+<script src="/node_modules/gentelella/vendors/jquery/dist/jquery.min.js"></script>
+<title>AIO</title>
+
+<style>
+    label {
+        font-size: 15px;
+    }
+    .myInfo { font-size: 15px;}
+
+    .mg-3 {
+        margin: 0.5em;
+    }
+
+</style>
+</head>
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+
+        <div th:replace="thymeleaf/fragments.html :: side-bar"></div>
+
+        <div th:replace="thymeleaf/fragments.html :: top-nav"></div>
+
+        <div class="right_col" role="main">
+            <div>
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>내 인사 정보</h3>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>내 정보</h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <div class="profile_img">
+                                            <div id="crop-avatar">
+                                                <!-- Current avatar -->
+                                                <img class="img-responsive avatar-view" th:src="${empl.photo}"
+                                                    width="200px" height="300px"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                        <div class="row mg-3">
+                                            <label class="col-md-3">사원번호</label>
+                                            <span class="col-md-6 myInfo" th:text="${empl.emplId}"></span>
+                                        </div>
+                                        <div class="row mg-3">
+                                            <label class="col-md-3">성명</label>
+                                            <span class="col-md-6 myInfo" th:text="${empl.name}"></span>
+                                        </div>
+                                        <div class="row mg-3">
+                                            <label class="col-md-3">부서명</label>
+                                            <span class="col-md-6 myInfo" th:text="${empl.dept}"></span>
+                                        </div>
+                                        <div class="row mg-3">
+                                            <label class="col-md-3">주민등록 번호</label>
+                                            <span class="col-md-6 myInfo" th:text="${empl.jumin}"></span>
+                                        </div>
+                                        <div class="row mg-3">
+                                            <label class="col-md-3">연락처</label>
+                                            <span class="col-md-6 myInfo" th:text="${empl.phone}"></span>
+                                        </div>
+                                        <div class="row mg-3">
+                                            <label class="col-md-3">Email</label>
+                                            <span class="col-md-6 myInfo" th:text="${empl.email}"></span>
+                                        </div>
+                                        <div class="row mg-3">
+                                            <label class="col-md-3">주소</label>
+                                            <span class="col-md-6 myInfo" th:text="|${empl.address} &#40${empl.post_num}&#41;|"></span>
+                                        </div>
+                                        <div class="row mg-3">
+                                            <label class="col-md-3">재직상태</label>
+                                            <span class="col-md-6 myInfo" th:text="${empl.work_state}"></span>
+                                        </div>
+                                        <div class="row mg-3">
+                                            <label class="col-md-3">입사일자</label>
+                                            <span class="col-md-6" th:text="${empl.emplRegdate}"></span>
+                                        </div>
+                                        <div class="row mg-3">
+                                            <label class="col-md-3">퇴사날짜</label>
+                                            <span class="col-md-6 myInfo" th:text="${empl.emplResigdate}"></span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row mg-3 text-right">
+                                    <a th:href="@{/mypage/update}" class="btn btn-default">수정</a>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <footer th:replace="thymeleaf/fragments.html :: footer"></footer>
+
+    </div>
+</div>
+
+
+
+
+
+
+<!-- Bootstrap -->
+<script src="/node_modules/gentelella/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- Custom Theme Scripts -->
+<script src="/node_modules/gentelella/build/js/custom.min.js"></script>
+</body>
+</html>

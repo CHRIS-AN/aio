@@ -11,8 +11,12 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "node index.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.5.3",
+    "gentelella": "^1.4.0"
+  }
 }
