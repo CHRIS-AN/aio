@@ -3,13 +3,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
-    <%--    <title>매출 / 매입 거래서</title>--%>
-    <%--    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500&display=swap" rel="stylesheet">--%>
-    <%--    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css"/>--%>
-    <%--    <link rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.min.css"/>--%>
-    <%--    <script src="/node_modules/jquery/dist/jquery.min.js"></script>--%>
-    <%--    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>--%>
-    <%--    <script src="/node_modules/jdenticon/dist/jdenticon.min.js"></script>--%>
     <jsp:include page="../layout/header.jsp"/>
 </head>
 <body class="nav-md">
@@ -45,9 +38,10 @@
                                   action="/finance/purchaseSalesTradingRegister" method="post">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                 <div class="row form-group">
-                                    <div class="form-group col-md-4" style="">
+                                    <div class="form-group col-md-4">
                                         <span class="fa fas fa-archive form-control-feedback left"></span>
                                         <select name="tradingType" class="form-control has-feedback-left" id="trading">
+                                            <option disabled selected>전표 타입</option>
                                             <option>매출 거래</option>
                                             <option>매입 거래</option>
                                         </select>
@@ -55,11 +49,11 @@
                                     <div class="col-md-2"></div>
                                     <div class="form-group col-md-6">
                                         <span class="glyphicon glyphicon-user form-control-feedback left"></span>
-                                        <input name="slip_write" type="text" class="form-control has-feedback-left"
+                                        <input name="slipWrite" type="text" class="form-control has-feedback-left"
                                                placeholder="작성자"
-                                               maxlength="20" value="${slip.slip_write}">
+                                               maxlength="20" value="${slip.slipWrite}">
                                         <small class="form-text text-danger">
-                                            ${valid_slip_write}
+                                            ${valid_slipWrite}
                                         </small>
                                     </div>
                                 </div>
@@ -67,27 +61,35 @@
                                 <div class="form-group row">
                                     <div class="col-md-12">
                                         <span class="fa far fa-calendar form-control-feedback left"></span>
-                                        <input name="slip_date" type="date" class="form-control has-feedback-left"
+                                        <input name="slipDate" type="date" class="form-control has-feedback-left"
                                                id="date"
-                                               placeholder="전표등록 일자" value="${slip.slip_date}">
+                                               placeholder="전표등록 일자" value="${slip.slipDate}">
                                         <small class="form-text text-danger">
-                                            ${valid_slip_date}
+                                            ${valid_slipDate}
                                         </small>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <i class="fa fas fa-tasks form-control-feedback left"></i>
-                                        <input name="slip_code" type="text" class="form-control has-feedback-left"
-                                               id="slipCode"
-                                               placeholder="계정 코드" value="${slip.slip_code}">
+                                        <span class="fa fas fa-tasks form-control-feedback left"></span>
+                                        <select name="slip_code" class="form-control has-feedback-left" id="code">
+                                            <option disabled selected>계정 과목</option>
+                                            <option>상품 (701)</option>
+                                            <option>외상매입금 (801)</option>
+                                            <option>지급어음 (802)</option>
+                                            <option>미지급금 (803)</option>
+                                            <option>예수금 (804)</option>
+                                            <option>선수수익 (805)</option>
+                                        </select>
+
                                         <small class="form-text text-danger">
                                             ${valid_slip_code}
                                         </small>
                                     </div>
                                 </div>
 
+                                <!-- corp 연관관계 설정 -->
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <i class="fa far fa-retweet form-control-feedback left"></i>
@@ -103,7 +105,7 @@
                                     <div class="col-md-12">
                                         <i class="fa fas fa-dollar form-control-feedback left"></i>
                                         <input name="slip_account" type="text" class="form-control has-feedback-left"
-                                               id="slipPrice"
+                                               id="money" onkeyup="numberWithCommas(this.value)"
                                                placeholder="거래 금액" value="${slip.slip_account}">
                                         <small class="form-text text-danger">
                                             ${valid_slip_account}
@@ -115,7 +117,7 @@
                                     <div class="col-md-12">
                                         <i class="fa far fa-plus form-control-feedback left"></i>
                                         <input name="slip_vat" type="text" class="form-control has-feedback-left"
-                                               id="vax"
+                                               id="moneyVAT" onkeyup="numberWithCommas(this.value)"
                                                placeholder="부가세" value="${slip.slip_vat}">
                                         <small class="form-text text-danger">
                                             ${valid_slip_vat}
@@ -138,6 +140,7 @@
                                     <div class="col-md-12">
                                         <i class="fa far fa-credit-card"></i>
                                         <select name="paymentType" class="form-control" id="paymentType">
+                                            <option disabled selected>결제 수단</option>
                                             <option>현금</option>
                                             <option>신한은행 213123-123-123213</option>
                                             <option>하나은행 86391-11-1123321</option>
@@ -145,11 +148,12 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-12 text-right">
-                                    <button type="submit" class="btn btn-default" style="" onclick="registerClick()">전표
-                                        등록
-                                    </button>
+
+                                <div> </div>
+                                <div class="col-sm-12 text-right">
+                                    <button type="submit" class="btn btn-primary" onclick="registerClick()"><em>전표 등록</em></button>
                                 </div>
+
                             </form>
                         </div>
 
@@ -166,6 +170,16 @@
 <script>
     function registerClick() {
         alert("확인하시겠습니까?")
+    }
+    function numberWithCommas(x) {
+        let y = "";
+        x = x.replace(/[^0-9]/g,'');
+        if(x != "") {
+            y = parseInt(x)/10;
+        }
+        $("#money").val(x.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        $("#moneyVAT").val((""+y).replace(/\B(?=(\d{3})+(?!\d))/g, ",")); // NaN 뜸 !! , 을인식을 하니 수정해야함.
+
     }
 </script>
 

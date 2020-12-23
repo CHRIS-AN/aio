@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="kor" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <head>
+        <title>승인 요청 대기</title>
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="/node_modules/gentelella/vendors/font-awesome/css/font-awesome.min.css"/>
+        <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    </head>
+</head>
+<body>
+<div class="container mt-5">
+    <a onclick="history.back()"><h1><i class="fa far fa-reply-all"></i></h1></a>
+
+    <div class="row mb-5">
+
+        <span class="col-12 text-center">
+            <h2>승인 요청 대기</h2>
+            <span class="row form-group">
+                <div class="col-6"></div>
+                <h2><i class="fa fas fa-search col-1 mt-5"></i></h2>
+                <span class="col-4 mt-5">
+                    <form th:action="@{/finance/search/slip}" method="get">
+                        <input class="form-control" name="keyword" type="search" placeholder="작성자명, 거래처로 검색해주세요." aria-label="Search" />
+                    </form>
+                </span>
+            </span>
+            <div class="mt-5">
+            승인 대기 중 전표 수
+                <strong><h3><span th:text="${slipList.getTotalElements()}"></span></h3></strong><br>
+            </div>
+            <strong th:text="${keyword}" id="keyword" name="keyword" class="context"></strong>
+        <div class="row justify-content-center mt-5">
+            <div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th style="text-align: center">전표번호</th>
+                        <th style="text-align: center">등록날짜</th>
+                        <th style="text-align: center">거래유형</th>
+                        <th style="text-align: center">계정코드</th>
+                        <th style="text-align: center">금액</th>
+                        <th style="text-align: center">거래처명</th>
+                        <th style="text-align: center">적요</th>
+                        <th style="text-align: center">작성자명</th>
+                        <th style="text-align: center">결제 승인/취소</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr th:each= "slip : ${slipList}" th:onclick="'window.location.href = \'' + @{/finance/outstandingAuthorizationDetailView/{slipId} (slipId=${slip.slipId})} + '\''">
+                            <td th:text="${slip.slipId}"></td>
+                            <td th:text="${slip.slipDate}"></td>
+                            <td th:text="${slip.tradingType}"></td>
+                            <td th:text="${slip.slip_code}"></td>
+                            <td th:text="${slip.slip_account}"></td>
+                            <td class="context" th:text="${slip.corp}"></td>
+                            <td th:text="${slip.slip_summary}"></td>
+                            <td class="context" th:text="${slip.slipWrite}"></td>
+                            <td>
+                                <a th:href="@{/finance/slipPayment/approve(slipId=${slip.slipId}, keyword=${param.keyword})}">승인</a>/
+                                <a th:href="@{/finance/slipPayment/reject(slipId=${slip.slipId}, keyword=${param.keyword})}">거절</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="row justify-content-center mt-5">
+                    <div class="col-sm-10">
+                        <nav>
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item" th:classappend="${!slipList.hasPrevious()}? disabled">
+                                    <a th:href="@{'/finance/search/slip?keyword=' + ${keyword} + '&page=' + ${slipList.getNumber() - 1}}"
+                                       class="page-link" tabindex="-1" aria-disabled="true">
+                                        Previous
+                                    </a>
+                                </li>
+                                <li class="page-item" th:classappend="${i == slipList.getNumber()}? active"
+                                    th:each="i: ${#numbers.sequence(0, slipList.getTotalPages() - 1)}">
+                                    <a th:href="@{'/finance/search/slip?keyword=' + ${keyword} + '&page=' + ${i}}"
+                                       class="page-link" href="#" th:text="${i + 1}">1</a>
+                                </li>
+                                <li class="page-item" th:classappend="${!slipList.hasNext()}? disabled">
+                                    <a th:href="@{'/finance/search/slip?keyword=' + ${keyword} + '&page=' + ${slipList.getNumber() + 1}}"
+                                       class="page-link">
+                                        Next
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </span>
+    </div>
+</div>
+
+<script src="/node_modules/mark.js/dist/jquery.mark.min.js"></script>
+<script type="application/javascript">
+    $(function(){
+        var mark = function() {
+            // Read the keyword
+            var keyword = $("#keyword").text();
+
+            var options = {
+                "each": function(element) {
+                    setTimeout(function() {
+                        $(element).addClass("text-danger");
+                    }, 150);
+                }
+            };
+            // Mark the keyword inside the context
+            $(".context").unmark({
+                done: function() {
+                    $(".context").mark(keyword, options);
+                }
+            });
+        };
+        mark();
+    });
+</script>
+</body>
+</html>

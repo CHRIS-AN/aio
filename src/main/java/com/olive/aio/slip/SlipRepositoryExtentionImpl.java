@@ -1,12 +1,16 @@
 package com.olive.aio.slip;
 
 
+import com.olive.aio.domain.QSlip;
+import com.olive.aio.domain.Slip;
 import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.JPQLQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
+
+import java.time.LocalDateTime;
 
 public class SlipRepositoryExtentionImpl extends QuerydslRepositorySupport implements  SlipRepositoryExtention{
 
@@ -15,39 +19,39 @@ public class SlipRepositoryExtentionImpl extends QuerydslRepositorySupport imple
     }
 
     @Override
-    public Page<Slip> findByKeyword(String keyword, Pageable pageable) {
+    public Page<Slip> findByKeywordAndPayStatementType(String keyword, Pageable pageable) {
         QSlip slip = QSlip.slip;
-        JPQLQuery<Slip> slipJPQLQuery = from(slip).where(
-                slip.slip_write.containsIgnoreCase(keyword)
-        .or(slip.corp.containsIgnoreCase(keyword)));
+        JPQLQuery<Slip> slipJPQLQuery = from(slip).where(slip.payStatementntType.containsIgnoreCase("대기")
+               .and((slip.slipWrite.containsIgnoreCase(keyword))
+        .or(slip.corp.containsIgnoreCase(keyword))));
 
-        JPQLQuery<Slip> pageableQuery = getQuerydsl().applyPagination(pageable, slipJPQLQuery); // 페이징 처리가 된 쿼리.
+
+        System.out.println("쿼리문 : " + slipJPQLQuery);
+        JPQLQuery<Slip> pageableQuery = getQuerydsl().applyPagination(pageable, slipJPQLQuery);
         QueryResults<Slip> slipQueryResults = pageableQuery.fetchResults();
-        System.out.println("페이징쿼리일까?    :" + pageableQuery);
         return new PageImpl<>(slipQueryResults.getResults(), pageable, slipQueryResults.getTotal());
     }
 
     @Override
-    public Page<Slip> findByKeyword(Pageable pageable) {
+    public Page<Slip> findByKeywordAndPayStatementType(Pageable pageable) {
         QSlip slip = QSlip.slip;
-        JPQLQuery<Slip> slipJPQLQuery = from(slip);
-        JPQLQuery<Slip> pageableQuery = getQuerydsl().applyPagination(pageable, slipJPQLQuery); // 페이징 처리가 된 쿼리.
+        JPQLQuery<Slip> slipJPQLQuery = from(slip).where(slip.payStatementntType.containsIgnoreCase("대기"));
+        JPQLQuery<Slip> pageableQuery = getQuerydsl().applyPagination(pageable, slipJPQLQuery);
         QueryResults<Slip> slipQueryResults = pageableQuery.fetchResults();
-        System.out.println("페이징쿼리일까?    :" + pageableQuery);
         return new PageImpl<>(slipQueryResults.getResults(), pageable, slipQueryResults.getTotal());
     }
 
-//    @Override
-//    public Page<Slip> findByKeyword(String keyword, Pageable pageable) {
-//        System.out.println("pageableImpl : " + pageable);
-//        System.out.println("keywordImpl : " + keyword);
-//        System.out.println(QSlip.slip);
-//        JPQLQuery<Slip> query = from(QSlip.slip);
-//        System.out.println("query : " + query);
-//        JPQLQuery<Slip> pageableQuery = getQuerydsl().applyPagination(pageable, query);
-//        QueryResults<Slip> fetchResults = pageableQuery.fetchResults();
-//        return new PageImpl<>(fetchResults.getResults(), pageable, fetchResults.getTotal());
-//    } // search 키워드 Slip 구현체
+    @Override
+    public Page<Slip> findByKeywordAndPayStatementTypeStartDateAfter(
+            String keyword, Pageable pageable, LocalDateTime now, LocalDateTime minusMonths) {
+        QSlip slip = QSlip.slip;
+        JPQLQuery<Slip> slipJPQLQuery = from(slip).where((slip.payStatementntType.containsIgnoreCase("승인")
+                .and((slip.slipWrite.containsIgnoreCase(keyword))
+                        .or(slip.corp.containsIgnoreCase(keyword)))
+                ));
+
+        return null;
+    }
 
 
 }
