@@ -70,6 +70,9 @@ public class EmplService implements UserDetailsService {
                 case "영업":
                     role = "ROLE_SALES";
                     break;
+                case "제품":
+                    role = "ROLE_PRODUCT";
+                    break;
                 //TODO 각 부서마다 권한을 정해주세요.
                 // 제품 영업 물류 회계
             }
