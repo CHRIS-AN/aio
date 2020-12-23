@@ -52,15 +52,17 @@
         <!-- Page Heading -->
 
         <div class="right_col" role="main">
-        <h1 class="h3 mb-2 text-gray-800">거래처</h1>
+
 
         <div class="">
 
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">거래처 조회</h6>
-                    <div>
+                    <div style="float:left">
+                    <h3 class="m-0 font-weight-bold text-primary">거래처 조회</h3>
+                    </div>
+                    <div style="float: right">
                         <button type="button" name="corpAdd" class="btn btn-primary" data-toggle="modal"
                                 data-target="#modal_1">+
                         </button>
