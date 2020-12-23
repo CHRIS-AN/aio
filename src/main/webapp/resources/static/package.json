@@ -9,7 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^4.5.3",
-    "jquery": "^3.5.1"
+    "gentelella": "^1.4.0"
   }
 }
