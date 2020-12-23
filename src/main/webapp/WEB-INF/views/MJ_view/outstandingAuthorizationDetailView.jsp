@@ -13,6 +13,7 @@
 </head>
 <body>
 <div class="container mt-5">
+    <a onclick="history.back()"><h1><i class="fa far fa-reply-all"></i></h1></a>
     <div class="row">
         <span class="col-12 text-center">
            <h2>승인 대기 전표 상세보기</h2>
@@ -36,14 +37,14 @@
                         <div class="form-group col-4 mt-3">
                             <i class="fa far fa-id-badge"></i>
                             <label>작성자</label><br>
-                            :  ${slip.slip_write}
+                            :  ${slip.slipWrite}
                         </div>
                     </span>
 
                         <div class="form-group mt-2">
                             <i class="fa far fa-calendar"></i>
                             <label>전표 등록 일자</label><br>
-                            : ${slip.slip_date}
+                            : ${slip.slipDate}
                         </div>
 
                         <div class="form-group mt-2">
@@ -83,39 +84,56 @@
                             : ${slip.paymentType}
                         </div>
 
-
-                        <span class="row form-group">
-                        <div class="col-5"></div>
-                        <div class="form-group col-2 mt-5">
-                            <a href="/finance/outstandingAuthorizationDetailView/${slip.slipId}/edit"
-                               class="btn btn-primary" role="button">eidt</a>
-                        </div>
-                        <div class="col-5"></div>
-                    </span>
                     </div>
                 </form>
             </div>
         </div>
     </c:forEach>
 
-   <c:forEach items="${slipList}" var="slip">
-    <div class="container mt-5">
-        <div class="row">
-            <span class="col-12 text-center">
-                <form id="delete-form" action="/finance/outstandingAuthorizationDetailView/delete" method="post">
-                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                     <span class="row form-group">
-                        <div class="col-3"></div>
-                        <div class="col-6" style="">
-                            <button type="submit">delete</button>
-                            <input type="hidden" value="${slip.slipId}" name="slipId">
-                        </div>
-                        <div class="col-3"></div>
-                     </span>
-                </form>
-             </span>
+    <c:forEach items="${slipList}" var="slip">
+        <div class="container mt-5">
+            <span class="row justify-content-center">
+
+                <div class="col-3"></div>
+
+                <div class="form-group col-4">
+                    <a href="/finance/outstandingAuthorizationDetailView/${slip.slipId}/edit"
+                                   class="btn btn-primary" role="button">eidt</a>
+                </div>
+
+
+                <div class="form-group col-4">
+                    <form id="delete-form" action="/finance/outstandingAuthorizationDetailView/delete" method="post">
+                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                         <span class="row form-group">
+                            <div class="col-6" style="">
+                                <button type="submit" class="btn btn-primary">delete</button>
+                                <input type="hidden" value="${slip.slipId}" name="slipId">
+                            </div>
+                            <div class="col-3"></div>
+                         </span>
+                    </form>
+                </div>
+            </span>
+
+
+
+
+
+<%--            <span class="col-12 text-center">--%>
+<%--                <form id="delete-form" action="/finance/outstandingAuthorizationDetailView/delete" method="post">--%>
+<%--                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
+<%--                     <span class="row form-group">--%>
+<%--                        <div class="col-3"></div>--%>
+<%--                        <div class="col-6" style="">--%>
+<%--                            <button type="submit">delete</button>--%>
+<%--                            <input type="hidden" value="${slip.slipId}" name="slipId">--%>
+<%--                        </div>--%>
+<%--                        <div class="col-3"></div>--%>
+<%--                     </span>--%>
+<%--                </form>--%>
+<%--             </span>--%>
         </div>
-    </div>
     </c:forEach>
 </div>
 </body>
