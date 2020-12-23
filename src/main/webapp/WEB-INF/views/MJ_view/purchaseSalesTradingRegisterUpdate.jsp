@@ -1,4 +1,4 @@
-/<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
@@ -15,6 +15,7 @@
 </head>
 <body>
 <div class="container mt-5">
+    <a onclick="history.back()"><h1><i class="fa far fa-reply-all"></i></h1></a>
     <div class="row mb-5">
         <span class="col-12 text-center">
            <h2><i class="fa far fa-edit"> 매출/매입 거래서</i></h2>
@@ -38,20 +39,20 @@
                             <div class="col-2"></div>
                             <div class="form-group col-6">
                                 <i class="fa far fa-id-badge"></i>
-                                <input name="slip_write" type="text" class="form-control" placeholder="작성자"
-                                       maxlength="20" value="${slip.slip_write}">
+                                <input name="slipWrite" type="text" class="form-control" placeholder="작성자"
+                                       maxlength="20" value="${slip.slipWrite}">
                                 <small class="form-text text-danger">
-                                    ${valid_slip_write}
+                                    ${valid_slipWrite}
                                 </small>
                             </div>
                         </span>
 
                         <div class="form-group">
                             <i class="fa far fa-calendar"></i>
-                            <input name="slip_date" type="date" class="form-control" id="date"
-                                   placeholder="전표등록 일자" value="${slip.slip_date}" >
+                            <input name="slipDate" type="date" class="form-control" id="date"
+                                   placeholder="전표등록 일자" value="${slip.slipDate}" >
                             <small class="form-text text-danger">
-                                ${valid_slip_date}
+                                ${valid_slipDate}
                             </small>
                         </div>
 

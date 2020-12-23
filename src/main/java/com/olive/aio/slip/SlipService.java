@@ -1,6 +1,7 @@
 package com.olive.aio.slip;
 
 
+import com.olive.aio.domain.Slip;
 import com.olive.aio.slip.form.SlipForm;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -21,6 +22,8 @@ public class SlipService {
     private final SlipRepository repository;
     private final ModelMapper modelMapper;
 
+
+    // 유효성검증
     public static Map<String, String> validateHandling(Errors errors) {
         Map<String, String> validatorResult = new HashMap<>();
 
@@ -28,14 +31,19 @@ public class SlipService {
             String validKeyName = String.format("valid_%s", error.getField());
             validatorResult.put(validKeyName, error.getDefaultMessage());
         }
-
         return validatorResult;
     }
 
-
+    // 상세보기 수정
     public Slip viewSlip(Long slipId) {
         Slip slipList = repository.findBySlipId(slipId);
         checkIfExistingStudy(slipId, slipList);
+        return slipList;
+    }
+
+    // 전표관리 수정
+    public Slip viewSlip(String slipId) {
+        Slip slipList = repository.findBySlipId(slipId);
         return slipList;
     }
 
@@ -44,26 +52,47 @@ public class SlipService {
     }
 
     public List<Slip> listSlip() {
-        List<Slip> slipList = repository.findAll();
+        List<Slip> slipList = repository.findByPayStatementntType("대기");
         return slipList;
     }
 
     private void checkIfExistingStudy(Long slipId, Slip slip) {
         if (slip == null) {
-            throw new IllegalArgumentException(slipId + "에 해당하는 스터디가 없습니다.");
+            throw new IllegalArgumentException(slipId + "에 해당하는 전표가 없습니다.");
         }
     }
 
+
+    // 상세보기 수정 submit
     public void updateSlip(SlipForm newForm, Long slipId) {
         Slip bySlipId = repository.findBySlipId(slipId);
-        System.out.println("##############################");
-        System.out.println("bySlipId : " + bySlipId);
         modelMapper.map(newForm, bySlipId);
-        System.out.println("여긴아니고?");
+        //SlipForm.builder().slipId().build()
+    }
+
+    // 전표관리 수정 submit
+    public void updateSlip(SlipForm newForm, String slipId) {
+        Slip bySlipId = repository.findBySlipId(slipId);
+        modelMapper.map(newForm, bySlipId);
     }
 
     public void deleteSlip(SlipForm slipId) {
         Slip slip = repository.findBySlipId(slipId.getSlipId());
         repository.delete(slip);
     }
+
+
+    public Slip paymentApprove(Long slipId) {
+        Slip bySlipId = repository.findBySlipId(slipId);
+        bySlipId.setPayStatementntType("승인");
+        return bySlipId;
+    }
+
+
+    public Slip paymentRemove(Long slipId) {
+        Slip bySlipId = repository.findBySlipId(slipId);
+        bySlipId.setPayStatementntType("거절");
+        return bySlipId;
+    }
+
 }
