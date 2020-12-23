@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<!--
+
+    * 매출원가 : 수익을 얻기 위하여 발생한 비용, 고객에게 인도한 상품의 원가
+    * 매출원가 = 기초상품재고액 + 당기상품매입액 - 기말상품재고액이나 상품 금액으로 대체
+    costOfGoodsSold : 상품판매가격격
+    maintenanceSales : 판매비와관리비
+
+    * 매출액 : netSales/
+
+    * 매출총이익 = 매출액 - 매출원가
+    grossProfit : 영업이익
+
+
+    * 영업이익 = 매출총이익 - 판관비
+    salesIncome : 영업이익 => 매출총이익(grossProfit) - 판관비
+        etcIncome : 기타수익
+        etcCost : 기타비용
+
+    * 법인세비용차감전순이익 = 영업이익(salesIncome) + 영업외이익(etcSalesIncome) - 영업외비용
+        corporateTaxIncome : 법인세비용차감전순이익
+        currentIncome : 당기순이익
+-->
+
+<head>
+    <meta charset="UTF-8">
+    <title>엑셀 업로드</title>
+</head>
+
+<body>
+<form th:action="@{/excel/read}" method="POST" enctype="multipart/form-data">
+    <input type="file" th:name="file">
+    <input th:type="submit" value="제출" />
+</form>
+</body>
+</html>

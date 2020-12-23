@@ -16,7 +16,7 @@
     <a onclick="history.back()"><h1><i class="fa far fa-reply-all"></i></h1></a>
     <div class="row">
         <span class="col-12 text-center">
-           <h2>승인 대기 전표 상세보기</h2>
+           <h2>전표 상세보기</h2>
         </span>
     </div>
     <hr>
