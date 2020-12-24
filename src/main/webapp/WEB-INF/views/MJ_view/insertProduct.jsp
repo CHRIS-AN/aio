@@ -70,7 +70,7 @@
                     </tr>
                     <tr>
                         <td colspan="2" align="center">
-                            <input type="submit" value="등록하기">
+                            <input class="btn btn-primary" type="submit" value="등록하기">
                             <button type="reset" class="btn btn-primary" onclick="history.back()">돌아가기</button>
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 

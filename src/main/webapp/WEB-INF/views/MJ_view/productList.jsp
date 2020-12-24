@@ -38,7 +38,15 @@
     <!-- Custom styles for this page -->
     <link href="/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+    <style>
+        .btn-primary{
+            position: absolute;
+            right: 0;
+            top: 0px;
+            font-size: 27px;
+        }
 
+    </style>
 </head>
 
 
@@ -61,6 +69,7 @@
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h1 class="m-0 font-weight-bold text-primary">제품 목록</h1>
+                        <button type="button" class="btn btn-primary" onclick="location.href='insertProduct'">제품 추가</button>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
