@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
@@ -21,7 +22,7 @@ public class Corp {
     @GeneratedValue
     private long corp_id; // 거래처 고유번호
 
-    @NotBlank(message = "상호를 입력해주세요.")
+    @NotNull(message = "상호를 입력해주세요.")
 //    @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-zA-Z]", message = "유효한 기업명을 작성해주세요.")
     private String corp_name; // 거래처명
 

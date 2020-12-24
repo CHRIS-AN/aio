@@ -16,23 +16,22 @@ import java.util.List;
 @Slf4j
 @Controller
 @AllArgsConstructor
-@RequestMapping("/yeonji")
+@RequestMapping("/yeonji/")
 public class CorpController {
 
     @Autowired
     private CorpService corpService;
 
     // 모든 거래처 목록 조회
-    @GetMapping("/corpList")
+    @GetMapping("corpList")
     public String corpList(Model model, Corp corp){
         List<Corp> corpList = corpService.findAll(corp);
-        System.out.println(corpList);
         model.addAttribute("corp", corpList);
         return "yeonji/corpList";
     }
 
     // 거래처 등록 & submit 후 값 검증
-    @PostMapping("/corpInsert")
+    @PostMapping("corpInsert")
     public String corpInsertSubmit(@Valid Corp corp, Errors errors) {
         log.info("Post로 Insert 했냐?");
         if(errors.hasErrors()) { //에러가 있다면
@@ -46,7 +45,7 @@ public class CorpController {
     }
 
     // 거래처 수정
-    @PostMapping("/corpUpdate")
+    @PostMapping("corpUpdate")
     public String corpUpdate(@Valid Corp corp,Model model, Errors errors) {
 
         if(errors.hasErrors()) { //에러가 있다면
@@ -58,7 +57,7 @@ public class CorpController {
     }
 
     // 거래처 삭제
-    @PostMapping("/corpDelete")
+    @PostMapping("corpDelete")
     public String corpDelete(Corp corp){
         corpService.deleteById(corp);
         return "redirect:corpList";
