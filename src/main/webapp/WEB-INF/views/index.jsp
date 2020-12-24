@@ -47,7 +47,7 @@
                                 </c:if>
                                 <c:if test="${!empl.goWork}">
                                     <div class="col-md-6 text-right">
-                                        <a href="/work" class="btn" style="background: blue; color: white">출근</a>
+                                        <a href="/work/gowork" class="btn" style="background: blue; color: white">출근</a>
                                     </div>
                                 </c:if>
                                 <c:if test="${empl.goHome}">
@@ -57,7 +57,7 @@
                                 </c:if>
                                 <c:if test="${!empl.goHome}">
                                     <div class="col-md-6 text-left">
-                                        <a href="/work" class="btn" style="background: purple; color: white">퇴근</a>
+                                        <a href="/work/gohome" class="btn" style="background: purple; color: white">퇴근</a>
                                     </div>
                                 </c:if>
                             </div>

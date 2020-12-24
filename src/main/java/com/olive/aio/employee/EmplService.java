@@ -185,16 +185,16 @@ public class EmplService implements UserDetailsService {
         return emplList;
     }
 
-    public Empl updateGoWork(Empl empl, Model model) {
+    public Empl updateGoWork(Empl empl, Model model, String state) {
         log.info("empl {} ", empl);
         log.info("empl.getAttendance {} ", empl.getAttendance());
-        if(empl.getAttendance().equals("퇴근")) {
+        if(state.equals("gowork")) {
             MyCalendar myCalendar = new MyCalendar();
             empl.setAttendance("출근");
             empl.addMyCalendar(myCalendar);
             model.addAttribute("workDate", myCalendar.getCalWorkDate());
             myCalendarRepository.save(myCalendar);
-        } else if(empl.getAttendance().equals("출근")) {
+        } else if(state.equals("gohome")) {
             MyCalendar myCalendar = new MyCalendar();
             empl.setAttendance("퇴근");
             empl.addMyCalendar(myCalendar);

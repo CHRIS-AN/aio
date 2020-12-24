@@ -24,7 +24,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-public class EmplController {
+public class EmplRestController {
 
     private final EmplService emplService;
     private final ObjectMapper objectMapper;

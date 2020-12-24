@@ -11,10 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -26,9 +23,6 @@ import java.util.Map;
 public class MainController {
 
     private final EmplService emplService;
-    private final ObjectMapper objectMapper;
-
-    private static final String EMPL_VIEW_PREFIX = "yeonsup/hr/";
 
     @GetMapping("/")
     public String index(@CurrentEmpl Empl empl, Model model) {
@@ -46,33 +40,6 @@ public class MainController {
         return "layout/example";
     }
 
-
-    @GetMapping("/hr")
-    public String manageHR(Model model, @CurrentEmpl Empl empl) {
-        model.addAttribute(new EmplForm());
-        model.addAttribute("empl", empl);
-
-        return EMPL_VIEW_PREFIX + "manage";
-    }
-
-    @PostMapping("/hr")
-    public String createMember(@CurrentEmpl Empl empl, @Valid EmplForm emplForm, Errors errors, Model model) {
-        model.addAttribute(empl);
-        log.info(emplForm.toString());
-        if (emplService.addErrors(emplForm, errors, model)) {
-
-            return EMPL_VIEW_PREFIX + "manage";
-        }
-        emplService.saveEmpl(emplForm);
-        return "redirect:/hr";
-    }
-
-    @GetMapping("/work")
-    public String goWork(@CurrentEmpl Empl empl, Model model) {
-        emplService.updateGoWork(empl, model);
-        model.addAttribute(empl);
-        return "redirect:/";
-    }
 
 
 }
