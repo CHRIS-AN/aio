@@ -356,8 +356,6 @@
                     var corpid = $('#modal2_2').text();
                     $(this).find("#deleteCorpName").html(corpname);
                     $(this).find("#deleteCorpId").val(corpid);
-                    console.log("+++++++++++++++corpname"+corpname+"}");
-                    console.log("+++++++++++++++corpid"+corpid+"}");
                 });
             }
         </script>
