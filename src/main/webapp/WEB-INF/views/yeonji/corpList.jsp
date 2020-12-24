@@ -330,13 +330,13 @@
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <form name="deleteCorpForm">
+                        <form action="corpDelete" method="post">
                             <span id="deleteCorpName"></span> 을(를) 정말 삭제하시겠습니까?
+                            <input type="hidden" id="deleteCorpId" name="corp_id" value="">
                             <div class="modal-footer">
-                                <input type="submit" class="btn btn-primary" value="확인" onclick="deleteCorpForm()">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                <input type="submit" class="btn btn-primary" value="확인" />
                             </div>
-
                         </form>
                     </div>
                 </div>
@@ -346,18 +346,13 @@
             //삭제하기
             function corpDelete() {
                 $('#modal_4').on('show.bs.modal', function (event) {
-                        var corpname = $('#modal2_1').text();
-                        $(this).find("#deleteCorpName").html(corpname);
+                    var corpname = $('#modal2_1').text();
+                    var corpid = $('#modal2_2').text();
+                    $(this).find("#deleteCorpName").html(corpname);
+                    $(this).find("#deleteCorpId").val(corpid);
+                    console.log("+++++++++++++++corpname"+corpname+"}");
+                    console.log("+++++++++++++++corpid"+corpid+"}");
                 });
-            }
-
-            function deleteCorpForm() {
-                var deleteForm = document.deleteCorpForm;
-                var corpid = $('#modal2_2').text();
-                deleteForm.method="get";
-                deleteForm.action="corpDelete?corp_id={"+corpid+"}";
-                console.log("corpDelete?corp_id={"+corpid+"}");
-                deleteForm.submit();
             }
         </script>
     </div> <!-- End container -->

@@ -60,7 +60,8 @@ public class CorpController {
         return "redirect:corpList";
     }
 
-    @GetMapping("/corpDelete")
+    // 거래처 삭제
+    @PostMapping("/corpDelete")
     public String corpDelete(Corp corp){
         corpService.deleteById(corp);
         return "redirect:corpList";
