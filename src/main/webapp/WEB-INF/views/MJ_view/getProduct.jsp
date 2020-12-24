@@ -95,11 +95,12 @@
             <a class="btn btn-primary" href="productList">리스트</a>&nbsp;&nbsp;&nbsp;&nbsp;
 
 
-            <!-- footer  -->
-            <jsp:include page="../layout/footer.jsp"/>
-            <!-- /footer  -->
+
         </div>
     </div><!-- End main_container -->
+    <!-- footer  -->
+    <jsp:include page="../layout/footer.jsp"/>
+    <!-- /footer  -->
 </div>
 
 <!-- script -->
