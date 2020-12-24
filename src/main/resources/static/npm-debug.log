@@ -1,0 +1,152 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\olive\\aio\\src\\main\\resources\\static\\node\\node.exe',
+1 verbose cli   'C:\\olive\\aio\\src\\main\\resources\\static\\node\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install' ]
+2 info using npm@2.15.9
+3 info using node@v4.6.0
+4 verbose readDependencies loading dependencies from C:\olive\aio\src\main\resources\static\package.json
+5 warn package.json static@1.0.0 No description
+6 warn package.json static@1.0.0 No repository field.
+7 warn package.json static@1.0.0 No README data
+8 verbose install where, deps [ 'C:\\olive\\aio\\src\\main\\resources\\static',
+8 verbose install   [ 'bootstrap',
+8 verbose install     'font-awesome',
+8 verbose install     'gentelella',
+8 verbose install     'jdenticon',
+8 verbose install     'jquery' ] ]
+9 verbose install where, peers [ 'C:\\olive\\aio\\src\\main\\resources\\static', [] ]
+10 verbose installManyTop reading for lifecycle C:\olive\aio\src\main\resources\static\package.json
+11 info preinstall static@1.0.0
+12 verbose installManyTop reading scoped package data from C:\olive\aio\src\main\resources\static\node_modules\canvas-renderer\package.json
+13 verbose installManyTop reading scoped package data from C:\olive\aio\src\main\resources\static\node_modules\font-awesome\package.json
+14 verbose installManyTop reading scoped package data from C:\olive\aio\src\main\resources\static\node_modules\jdenticon\package.json
+15 verbose installManyTop reading scoped package data from C:\olive\aio\src\main\resources\static\node_modules\@types\node\package.json
+16 verbose readDependencies loading dependencies from C:\olive\aio\src\main\resources\static\package.json
+17 verbose targetResolver reading package data from C:\olive\aio\src\main\resources\static\node_modules\canvas-renderer\package.json
+18 verbose targetResolver reading package data from C:\olive\aio\src\main\resources\static\node_modules\font-awesome\package.json
+19 verbose targetResolver reading package data from C:\olive\aio\src\main\resources\static\node_modules\jdenticon\package.json
+20 verbose targetResolver reading package data from C:\olive\aio\src\main\resources\static\node_modules\@types\node\package.json
+21 verbose targetResolver reading package data from C:\olive\aio\src\main\resources\static\node_modules\.bin\jdenticon\package.json
+22 verbose targetResolver reading package data from C:\olive\aio\src\main\resources\static\node_modules\.bin\jdenticon.cmd\package.json
+23 verbose targetResolver reading package data from C:\olive\aio\src\main\resources\static\node_modules\.bin\jdenticon.ps1\package.json
+24 silly cache add args [ 'gentelella@^1.4.0', null ]
+25 verbose cache add spec gentelella@^1.4.0
+26 silly cache add parsed spec Result {
+26 silly cache add   raw: 'gentelella@^1.4.0',
+26 silly cache add   scope: null,
+26 silly cache add   name: 'gentelella',
+26 silly cache add   rawSpec: '^1.4.0',
+26 silly cache add   spec: '>=1.4.0 <2.0.0',
+26 silly cache add   type: 'range' }
+27 silly addNamed gentelella@>=1.4.0 <2.0.0
+28 verbose addNamed ">=1.4.0 <2.0.0" is a valid semver range for gentelella
+29 silly addNameRange { name: 'gentelella', range: '>=1.4.0 <2.0.0', hasData: false }
+30 silly mapToRegistry name gentelella
+31 silly mapToRegistry using default registry
+32 silly mapToRegistry registry https://registry.npmjs.org/
+33 silly mapToRegistry data Result {
+33 silly mapToRegistry   raw: 'gentelella',
+33 silly mapToRegistry   scope: null,
+33 silly mapToRegistry   name: 'gentelella',
+33 silly mapToRegistry   rawSpec: '',
+33 silly mapToRegistry   spec: 'latest',
+33 silly mapToRegistry   type: 'tag' }
+34 silly mapToRegistry uri https://registry.npmjs.org/gentelella
+35 verbose addNameRange registry:https://registry.npmjs.org/gentelella not in flight; fetching
+36 verbose already installed skipping jdenticon@^3.1.0 C:\olive\aio\src\main\resources\static
+37 silly cache add args [ 'jquery@^3.5.1', null ]
+38 verbose cache add spec jquery@^3.5.1
+39 silly cache add parsed spec Result {
+39 silly cache add   raw: 'jquery@^3.5.1',
+39 silly cache add   scope: null,
+39 silly cache add   name: 'jquery',
+39 silly cache add   rawSpec: '^3.5.1',
+39 silly cache add   spec: '>=3.5.1 <4.0.0',
+39 silly cache add   type: 'range' }
+40 silly addNamed jquery@>=3.5.1 <4.0.0
+41 verbose addNamed ">=3.5.1 <4.0.0" is a valid semver range for jquery
+42 silly addNameRange { name: 'jquery', range: '>=3.5.1 <4.0.0', hasData: false }
+43 silly mapToRegistry name jquery
+44 silly mapToRegistry using default registry
+45 silly mapToRegistry registry https://registry.npmjs.org/
+46 silly mapToRegistry data Result {
+46 silly mapToRegistry   raw: 'jquery',
+46 silly mapToRegistry   scope: null,
+46 silly mapToRegistry   name: 'jquery',
+46 silly mapToRegistry   rawSpec: '',
+46 silly mapToRegistry   spec: 'latest',
+46 silly mapToRegistry   type: 'tag' }
+47 silly mapToRegistry uri https://registry.npmjs.org/jquery
+48 verbose addNameRange registry:https://registry.npmjs.org/jquery not in flight; fetching
+49 silly cache add args [ 'bootstrap@^4.5.3', null ]
+50 verbose cache add spec bootstrap@^4.5.3
+51 silly cache add parsed spec Result {
+51 silly cache add   raw: 'bootstrap@^4.5.3',
+51 silly cache add   scope: null,
+51 silly cache add   name: 'bootstrap',
+51 silly cache add   rawSpec: '^4.5.3',
+51 silly cache add   spec: '>=4.5.3 <5.0.0',
+51 silly cache add   type: 'range' }
+52 silly addNamed bootstrap@>=4.5.3 <5.0.0
+53 verbose addNamed ">=4.5.3 <5.0.0" is a valid semver range for bootstrap
+54 silly addNameRange { name: 'bootstrap', range: '>=4.5.3 <5.0.0', hasData: false }
+55 silly mapToRegistry name bootstrap
+56 silly mapToRegistry using default registry
+57 silly mapToRegistry registry https://registry.npmjs.org/
+58 silly mapToRegistry data Result {
+58 silly mapToRegistry   raw: 'bootstrap',
+58 silly mapToRegistry   scope: null,
+58 silly mapToRegistry   name: 'bootstrap',
+58 silly mapToRegistry   rawSpec: '',
+58 silly mapToRegistry   spec: 'latest',
+58 silly mapToRegistry   type: 'tag' }
+59 silly mapToRegistry uri https://registry.npmjs.org/bootstrap
+60 verbose addNameRange registry:https://registry.npmjs.org/bootstrap not in flight; fetching
+61 verbose already installed skipping font-awesome@^4.7.0 C:\olive\aio\src\main\resources\static
+62 verbose request uri https://registry.npmjs.org/gentelella
+63 verbose request no auth needed
+64 info attempt registry request try #1 at 12:12:22
+65 verbose request id 53a76aa38135943a
+66 http request GET https://registry.npmjs.org/gentelella
+67 verbose request uri https://registry.npmjs.org/jquery
+68 verbose request no auth needed
+69 info attempt registry request try #1 at 12:12:22
+70 http request GET https://registry.npmjs.org/jquery
+71 verbose request uri https://registry.npmjs.org/bootstrap
+72 verbose request no auth needed
+73 info attempt registry request try #1 at 12:12:22
+74 http request GET https://registry.npmjs.org/bootstrap
+75 info retry will retry, error on last attempt: Error: write EPROTO 101057795:error:1408D07B:SSL routines:ssl3_get_key_exchange:bad signature:openssl\ssl\s3_clnt.c:2010:
+76 info retry will retry, error on last attempt: Error: write EPROTO 101057795:error:1408D07B:SSL routines:ssl3_get_key_exchange:bad signature:openssl\ssl\s3_clnt.c:2010:
+77 info retry will retry, error on last attempt: Error: write EPROTO 101057795:error:1408D07B:SSL routines:ssl3_get_key_exchange:bad signature:openssl\ssl\s3_clnt.c:2010:
+78 info attempt registry request try #2 at 12:12:32
+79 http request GET https://registry.npmjs.org/gentelella
+80 info attempt registry request try #2 at 12:12:32
+81 http request GET https://registry.npmjs.org/bootstrap
+82 info attempt registry request try #2 at 12:12:32
+83 http request GET https://registry.npmjs.org/jquery
+84 info retry will retry, error on last attempt: Error: write EPROTO 101057795:error:1408D07B:SSL routines:ssl3_get_key_exchange:bad signature:openssl\ssl\s3_clnt.c:2010:
+85 info retry will retry, error on last attempt: Error: write EPROTO 101057795:error:1408D07B:SSL routines:ssl3_get_key_exchange:bad signature:openssl\ssl\s3_clnt.c:2010:
+86 info retry will retry, error on last attempt: Error: write EPROTO 101057795:error:1408D07B:SSL routines:ssl3_get_key_exchange:bad signature:openssl\ssl\s3_clnt.c:2010:
+87 info attempt registry request try #3 at 12:13:32
+88 http request GET https://registry.npmjs.org/gentelella
+89 info attempt registry request try #3 at 12:13:32
+90 http request GET https://registry.npmjs.org/bootstrap
+91 info attempt registry request try #3 at 12:13:32
+92 http request GET https://registry.npmjs.org/jquery
+93 verbose stack Error: write EPROTO 101057795:error:1408D07B:SSL routines:ssl3_get_key_exchange:bad signature:openssl\ssl\s3_clnt.c:2010:
+93 verbose stack
+93 verbose stack     at exports._errnoException (util.js:907:11)
+93 verbose stack     at WriteWrap.afterWrite (net.js:785:14)
+94 verbose cwd C:\olive\aio\src\main\resources\static
+95 error Windows_NT 10.0.18363
+96 error argv "C:\\olive\\aio\\src\\main\\resources\\static\\node\\node.exe" "C:\\olive\\aio\\src\\main\\resources\\static\\node\\node_modules\\npm\\bin\\npm-cli.js" "install"
+97 error node v4.6.0
+98 error npm  v2.15.9
+99 error code EPROTO
+100 error errno EPROTO
+101 error syscall write
+102 error write EPROTO 101057795:error:1408D07B:SSL routines:ssl3_get_key_exchange:bad signature:openssl\ssl\s3_clnt.c:2010:
+103 error If you need help, you may report this error at:
+103 error     <https://github.com/npm/npm/issues>
+104 verbose exit [ 1, true ]
