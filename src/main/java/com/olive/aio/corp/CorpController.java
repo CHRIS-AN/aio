@@ -28,7 +28,7 @@ public class CorpController {
         List<Corp> corpList = corpService.findAll(corp);
         System.out.println(corpList);
         model.addAttribute("corp", corpList);
-        return "/yeonji/corpList";
+        return "yeonji/corpList";
     }
 
     // 거래처 등록 & submit 후 값 검증
@@ -42,23 +42,29 @@ public class CorpController {
         log.info("에러 아니다.");
         corpService.insertCorp(corp);
         //TODO 거래처 추가 처리
-        return "redirect:/yeonji/corpList";
+        return "redirect:yeonji/corpList";
     }
 
     // 거래처 수정
     @PostMapping("/corpUpdate")
-    public String corpUpdate(Corp corp, Model model) {
+    public String corpUpdate(@Valid Corp corp, Model model, Errors errors) {
 
         log.info("수정시작");
+        if(errors.hasErrors()) { //에러가 있다면
+            log.info("에러냐?");
+            return null;
+        }
         corpService.updateCorp(corp);
         log.info("수정완료");
         //TODO 거래처 수정 처리
-        return "/yeonji/corpList";
+        return "redirect:corpList";
     }
 
+    // 거래처 삭제
     @PostMapping("/corpDelete")
-    public void corpDelete(Corp corp){
+    public String corpDelete(Corp corp){
         corpService.deleteById(corp);
+        return "redirect:corpList";
     }
 
 }
