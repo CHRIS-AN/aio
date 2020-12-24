@@ -258,7 +258,9 @@
                             <table class="table table-bordered">
                                 <tr>
                                     <th>상호(업체코드)</th>
-                                    <th><input type="text" id="modal3_1" name="corp_name" value=""/>(<span type="text" name="corp_id" id="modal3_2" value=""></span>)</th>
+                                    <th><input type="text" id="modal3_1" name="corp_name" value=""/>
+                                        (<span type="text" id="modal3_2_1" value=""></span>
+                                        <input type="hidden" name="corp_id" id="modal3_2_2" value="">)</th>
                                 </tr>
                                 <tr>
                                     <th>사업자 등록번호</th>
@@ -308,7 +310,8 @@
                     var corpcall = $('#modal2_5').text();
                     var corpaddress = $('#modal2_6').text();
                     $(this).find("#modal3_1").val(corpname);
-                    $(this).find("#modal3_2").html(corpid);
+                    $(this).find("#modal3_2_1").html(corpid);
+                    $(this).find("#modal3_2_2").val(corpid);
                     $(this).find("#modal3_3").val(corpnum);
                     $(this).find("#modal3_4").val(corpceo);
                     $(this).find("#modal3_5").val(corpcall);

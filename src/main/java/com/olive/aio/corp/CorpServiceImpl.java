@@ -30,7 +30,6 @@ public class CorpServiceImpl implements CorpService {
     @Override
     public void updateCorp(Corp corp) {
         Corp beforeCorp = corpRepository.findById(corp.getCorp_id()).get();
-        beforeCorp.setCorp_id(corp.getCorp_id());
         beforeCorp.setCorp_name(corp.getCorp_name());
         beforeCorp.setCorp_num(corp.getCorp_num());
         beforeCorp.setCorp_ceo(corp.getCorp_ceo());
