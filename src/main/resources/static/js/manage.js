@@ -75,6 +75,8 @@ function search() {
     let deptVal = $("#dept").val();
     let keywordVal = $("#keyword").val();
 
+
+
     let url = "";
     console.log(keywordVal)
     if(keywordVal === "") {
@@ -151,6 +153,17 @@ function updateloadAjax(emplId) {
 
 function listHumanResource(data) {
     let first = 0;
+    let curPage = data.pageable.pageNumber;
+
+    if(curPage < 0) curPage = 0;
+    if(curPage > data.totalPages) curPage = data.totalPages;
+
+    let nextPage = curPage + 1;
+    let previousPage = curPage - 1;
+    if(nextPage > data.totalPages) nextPage = data.totalPages
+    if(previousPage < 0) previousPage = 0;
+
+
     if(data.number - data.pageable.pageSize < 0) {
         first = 0
     } else {
@@ -171,13 +184,13 @@ function listHumanResource(data) {
         html += "</table>";
         html += "<div>";
         html += "<a class='btn btn-default' onclick='changePage(" + 0 + ")'>&lt;&lt;</a>";
-        html += "<a class='btn btn-default' onclick='changePage(" + (data.pageable.pageNumber - 1) + ")'>Previous</a>";
+        html += "<a class='btn btn-default' onclick='changePage(" + nextPage + ")'>Previous</a>";
         for(let i = first; i < data.totalPages; i++) {
             html += "<a onclick='changePage(" + i + ")' class='btn btn-default text-center linkpage'>"
             html += i+1 + ""
             html += "</a>"
         }
-        html += "<a class='btn btn-default' onclick='changePage(" + (data.pageable.pageNumber + 1) + ")'>Next</a>";
+        html += "<a class='btn btn-default' onclick='changePage(" + previousPage + ")'>Next</a>";
         html += "<a class='btn btn-default' onclick='changePage(" + (data.totalPages - 1) + ")'>&gt;&gt;</a>";
         html += "</div>";
 

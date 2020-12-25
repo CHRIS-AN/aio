@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -28,7 +29,7 @@ public class MyPageController {
     private final ModelMapper modelMapper;
     private final EmplService emplService;
     private final MyPageService myInfoService;
-    private final ObjectMapper objectMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/mypage")
     public String myPage(@CurrentEmpl Empl empl, Model model) {
@@ -94,6 +95,20 @@ public class MyPageController {
         emplService.updateGoWork(empl, model, state);
         model.addAttribute(empl);
         return "redirect:/";
+    }
+
+    @PostMapping("/cp")
+    public String changePW(@CurrentEmpl Empl empl, Model model, String originPw ,String newPw) {
+        if(!passwordEncoder.matches(passwordEncoder.encode(originPw), empl.getPassword())) {
+            model.addAttribute(empl);
+            model.addAttribute("failed", "비밀번호가 맞지 않습니다.");
+            return "thymeleaf/yeonsup/update";
+        }
+
+        myInfoService.newPw(empl, newPw);
+        model.addAttribute("good", 1);
+
+        return "yeonsup/good";
     }
 
 

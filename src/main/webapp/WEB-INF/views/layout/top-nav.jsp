@@ -8,7 +8,7 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li class="">
-                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="cus-dropdown" aria-expanded="false">
                         <img src="${empl.photo}" alt=""><span>${empl.name}</span>
                         <span class=" fa fa-angle-down"></span>
                     </a>

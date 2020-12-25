@@ -5,18 +5,14 @@
   "main": "index.js",
   "dependencies": {
     "bootstrap": "^4.5.3",
-    "gentelella": "^1.4.0",
-    "jquery": "^3.5.1",
-    "mark.js": "^8.11.1"
+    "gentelella": "^1.4.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "magic-snowflakes": "^4.1.6"
+  },
   "scripts": {
     "serve": "node index.js"
   },
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "bootstrap": "^4.5.3",
-    "gentelella": "^1.4.0"
-  }
+  "license": "ISC"
 }

@@ -87,7 +87,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title cus-title">
-                            <h2> 사원 등록 <small>different form elements</small></h2>
+                            <h2> 사원 등록 <small>Employee registration</small></h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -191,7 +191,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title cus-title">
-                            <h2> 사원 상세정보 <small>different form elements</small></h2>
+                            <h2> 사원 상세정보 <small>Details Employee</small></h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -213,7 +213,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title cus-title">
-                            <h2> 사원 수정 <small>different form elements</small></h2>
+                            <h2> 사원 수정 <small>Employee Modification</small></h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
