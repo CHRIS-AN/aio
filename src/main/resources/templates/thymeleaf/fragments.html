@@ -34,7 +34,8 @@
                     </li>
                     <li><a><i class="fa fa-desktop"></i> 제품관리 <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="#">메뉴1</a></li>
+                            <li><a href="/yeonji/corpList">메뉴1</a></li>
+                            <li><a href="#">발주관리</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-table"></i> 영업관리 <span class="fa fa-chevron-down"></span></a>
@@ -89,7 +90,7 @@
                                     <button type="submit" style="border: none; background: none;">
                                         <i class="fa fa-sign-out pull-right"></i> 로그아웃
                                     </button>
-                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                                 </form>
                             </a>
                         </li>

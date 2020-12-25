@@ -64,8 +64,8 @@ $(document).ready(function (){
 
 });
 
-function changePage(alink) {
-    page = alink.innerHTML;
+function changePage(pageNum) {
+    page = pageNum;
     search();
 }
 
@@ -74,8 +74,6 @@ function search() {
     let cntVal = $("#cnt").val();
     let deptVal = $("#dept").val();
     let keywordVal = $("#keyword").val();
-
-    if(page > 0) page = page - 1;
 
     let url = "";
     console.log(keywordVal)
@@ -156,7 +154,7 @@ function listHumanResource(data) {
     if(data.number - data.pageable.pageSize < 0) {
         first = 0
     } else {
-        first = data.pageable.pageNumber;
+        first = data.pageable.pageNumber - data.number;
     }
 
     let html = "<table id='datatable' class='table table-striped table-bordered dataTable'>";
@@ -173,15 +171,14 @@ function listHumanResource(data) {
         html += "</table>";
         html += "<div>";
         html += "<a class='btn btn-default' onclick='changePage(" + 0 + ")'>&lt;&lt;</a>";
-        html += "<a class='btn btn-default' onclick='changePage(" + (first-1) + ")'>Previous</a>";
+        html += "<a class='btn btn-default' onclick='changePage(" + (data.pageable.pageNumber - 1) + ")'>Previous</a>";
         for(let i = first; i < data.totalPages; i++) {
-            console.log("들어와라")
-            html += "<a onclick='changePage(this)' class='btn btn-default text-center linkpage'>"
+            html += "<a onclick='changePage(" + i + ")' class='btn btn-default text-center linkpage'>"
             html += i+1 + ""
             html += "</a>"
         }
-        html += "<a class='btn btn-default' onclick='changePage(" + (first+1) + ")'>Next</a>";
-        html += "<a class='btn btn-default' onclick='changePage(" + data.totalPages + ")'>&gt;&gt;</a>";
+        html += "<a class='btn btn-default' onclick='changePage(" + (data.pageable.pageNumber + 1) + ")'>Next</a>";
+        html += "<a class='btn btn-default' onclick='changePage(" + (data.totalPages - 1) + ")'>&gt;&gt;</a>";
         html += "</div>";
 
     $("#hrm").html(html);

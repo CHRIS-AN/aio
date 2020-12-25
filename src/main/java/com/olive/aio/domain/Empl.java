@@ -1,5 +1,6 @@
 package com.olive.aio.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.LazyToOne;
 
@@ -44,9 +45,6 @@ public class Empl {
 
     private String email;
 
-
-    private String empl_jumin;
-
     private String work_state = "재직";
 
     private String emplRegdate;
@@ -59,6 +57,7 @@ public class Empl {
 
     private boolean goHome = false;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "empl", fetch = FetchType.EAGER)
     private Set<MyCalendar> myCalendar = new HashSet<>();
 

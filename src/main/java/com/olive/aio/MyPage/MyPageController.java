@@ -7,6 +7,7 @@ import com.olive.aio.employee.EmplService;
 import com.olive.aio.employee.form.EmplUpdateForm;
 import lombok.RequiredArgsConstructor;
 
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class MyPageController {
@@ -69,7 +71,7 @@ public class MyPageController {
 
     @GetMapping("/searchCorwork")
     public String readCoworker(@CurrentEmpl Empl empl, Model model, String keyword, String dept,
-                              @PageableDefault(size = 9, page = 5, sort = "emplId", direction = Sort.Direction.ASC) Pageable pageable) {
+                              @PageableDefault(size = 9, page = 0, sort = "emplId", direction = Sort.Direction.ASC) Pageable pageable) {
         model.addAttribute(empl);
         if(keyword == null) {
             keyword = "";
@@ -79,9 +81,11 @@ public class MyPageController {
         }
 
         Page<Empl> search = emplService.search(dept, keyword, pageable);
+
+        log.info("search{}:", search);
         model.addAttribute("emplList", search);
-        model.addAttribute(keyword);
-        model.addAttribute(dept);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("dept", dept);
         return "thymeleaf/yeonsup/search";
     };
 

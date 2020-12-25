@@ -103,7 +103,7 @@
                                     <img src="${emplForm.photo}" id="profile-image" class="col-md-3 img img-responsive">
                                     <div class="col-md-7">
                                         <input type="file" class="form-control" id="image-input-file">
-                                        <input type="hidden" id="photo" name="photo">
+                                        <input type="hidden" value="${emplForm.photo}" id="photo" name="photo">
                                     </div>
                                 </div>
                                 <div class="row">
