@@ -4,14 +4,8 @@
 <meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
 <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}"/>
 <!-- head -->
-<jsp:include page="../../layout/header.jsp" />
-<!-- Datatables -->
-<link href="/node_modules/gentelella/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-<link href="/node_modules/gentelella/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-<link href="/node_modules/gentelella/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-<link href="/node_modules/gentelella/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-<link href="/node_modules/gentelella/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-<link href="/css/manage.css" rel="stylesheet">
+<jsp:include page="../layout/header.jsp" />
+
 </head>
 <!-- head -->
 <body class="nav-md">
@@ -39,7 +33,7 @@
                 <div id="datatable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
                     <form id="corpSelectForm">
                         <%--     거래처 등록 row    --%>
-                        <div class="row">
+                        <div class="row p-4 bg-white ">
                             <div class="col-md-3">
                                 거래처
                             </div>
@@ -55,33 +49,56 @@
                         <div class="row">
                             <label>납기일:</label>
                             <input type="date" name="orders_regdate"/>
+                            <button type="button" name="registerModalBtn" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#registerModal">+
+                            </button>
                         </div>
                         <%--     발주물품 테이블 row    --%>
                         <div class="row">
-                            <table id="datatable" class="table table-striped table-bordered dataTable">
+                            <table id="" class="table table-striped table-bordered dataTable">
                                 <thead>
                                 <tr>
                                     <th>No.</th>
                                     <th>상품명</th>
                                     <th>단위</th>
+                                    <th>가격</th>
                                     <th>수량</th>
-                                    <th>금액</th>
+                                    <th>합계</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <c:set var = "totcnt" value = "0" />
+                                <c:set var = "totprice" value = "0" />
                                 <c:forEach var="d" items="${draft}">
-                                    <tr id="tr${d.draft_seq}" onclick="detail()" data-toggle="modal" data-target="#modal_detail"
-                                        data-draftseq="${d.draft_seq}" data-draftcnt='${d.draft_cnt}'
-                                        data-draftprodprice='${d.draft_prod_price}' >
+                                    <tr id="tr${d.draft_seq}" onclick="update()" data-toggle="modal" data-target="#updateModal"
+                                        data-draftseq='${d.draft_seq}' data-draftcnt='${d.draft_cnt}' data-draftprodprice='${d.draft_prod_price}' >
                                         <td>${d.draft_seq}</td>
                                         <td>어떤 물건이냐?</td>
                                         <td>단위는?</td>
+                                        <td>가격은?</td>
                                         <td>${d.draft_cnt}</td>
                                         <td>${d.draft_prod_price}</td>
+                                        <c:set var= "totcnt" value="${totcnt + d.draft_cnt}"/>
+                                        <c:set var= "totprice" value="${totprice + d.draft_prod_price}"/>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th>총수량:<c:out value="${totcnt}"/> 개</th>
+                                        <th>총합계:<c:out value="${totprice}"/> 원</th>
+                                    </tr>
+                                </tfoot>
                             </table>
+                        </div>
+
+                        <div class="row">
+                            <input type="submit" value="발주요청">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                         </div>
                     </form>
                 </div>
@@ -91,264 +108,276 @@
         <jsp:include page="../layout/footer.jsp" />
         <!-- /footer  -->
 
-        <div id="resigDialog">
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="x_panel">
-                        <div class="x_title cus-title">
-                            <h2> 사원 등록 <small>different form elements</small></h2>
-                            <ul class="nav navbar-right panel_toolbox">
-                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                </li>
-                                <li><a id="close" class=""><i class="fa fa-close"></i></a>
-                                </li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="x_content">
-                            <form action="/hr" method="post" class="form needs-validation">
-                                <div class="form-group has-feedback col-md-12 com-sm-12">
-                                    <label class="col-md-12">사진</label>
-                                    <img src="${emplForm.photo}" id="profile-image" class="col-md-3 img img-responsive">
-                                    <div class="col-md-7">
-                                        <input type="file" class="form-control" id="image-input-file">
-                                        <input type="hidden" id="photo" name="photo">
-                                    </div>
+        <%--  모달 1 : 발주 물품 등록  --%>
+        <div class="modal" id="registerModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="x_panel">
+                                <div class="x_title cus-title">
+                                    <h2> 발주 물품 등록 </h2>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </ul>
+                                    <div class="clearfix"></div>
                                 </div>
-                                <div class="row">
-                                    <div class="form-group has-feedback col-md-6 com-sm-6">
-                                        <label>사원번호</label>
-                                        <input type="text" name="emplId" value="${emplForm.emplId}" class="form-control" id="empl-id" placeholder="사원번호"/>
-                                        <span>${valid_emplId}</span>
-                                    </div>
-                                    <div class="form-group has-feedback col-md-6 com-sm-6">
-                                        <label>성명</label>
-                                        <input type="text" name="name" value="${emplForm.name}" class="form-control" id="name" placeholder="사원이름">
-                                        <span>${valid_name}</span>
-                                    </div>
+                                <div class="x_content">
+                                    <form action="draftInsert" method="post" class="form needs-validation">
+
+                                        <div class="row">
+                                            <div class="form-group has-feedback col-md-3 com-sm-3">
+                                                <label>발주 물품</label>
+                                            </div>
+                                            <div class="form-group has-feedback col-md-6 com-sm-6">
+                                                <span name="goods" class="goods" placeholder="물품을 등록해주세요">스킨</span>
+                                                <span>${valid_goods}</span>
+                                            </div>
+                                            <div class="form-group col-md-3 com-sm-3">
+                                                <button class="goodsSearch">물품 검색</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group has-feedback col-md-3 com-sm-3">
+                                                <label>단위</label>
+                                            </div>
+                                            <div class="form-group has-feedback col-md-9 com-sm-9">
+                                                <span name="goodsunit" class="goodsunit" placeholder="정보 없음" >5</span>
+                                                <span>${valid_goodsunit}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group has-feedback col-md-3 com-sm-3">
+                                                <label>가격</label>
+                                            </div>
+                                            <div class="form-group has-feedback col-md-9 com-sm-9">
+                                                <span name="goodsprice" class="goodsprice" placeholder="정보 없음">10</span>
+                                                <span>${valid_goodsprice}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group has-feedback col-md-3 com-sm-3">
+                                                <label>수량</label>
+                                            </div>
+                                            <div class="form-group has-feedback col-md-9 com-sm-9">
+                                                <input type="text" name="draft_cnt" value="" class="form-control goodsnumber numkeyup" placeholder="수량을 입력해주세요">
+                                                <span>${valid_goodsnumber}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group has-feedback col-md-3 com-sm-3">
+                                                <label>합계</label>
+                                            </div>
+                                            <div class="form-group has-feedback col-md-9 com-sm-9">
+                                                <span class="goodssum" placeholder="0"></span>
+                                                <input type="hidden" name="draft_prod_price" value="" class="form-control goodssum" id="amount" >
+                                                <span>${valid_amount}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group text-center has-feedback col-md-12 com-sm-12">
+                                            <input type="submit" id="newGoodsBtn" class="btn btn-default" value="등록"/>
+                                        </div>
+                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                    </form>
                                 </div>
-                                <div class="row">
-                                    <div class="form-group has-feedback col-md-6 com-sm-6">
-                                        <label>주민등록 번호</label>
-                                        <input type="text" name="jumin" value="${emplForm.jumin}" class="form-control" id="jumin" placeholder="900000-1111111">
-                                        <span>${valid_jumin}</span>
-                                    </div>
-                                    <div class="form-group has-feedback col-md-6 com-sm-6">
-                                        <label>입사일자</label>
-                                        <input class="date-picker form-control"  name="emplRegdate" value="${emplForm.emplRegdate}" placeholder="yyyy-mm-dd" type="date" required="required"
-                                               onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'"
-                                               onmouseout="timeFunctionLong(this)">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group has-feedback col-md-6 com-sm-6">
-                                        <label>부서명</label>
-                                        <select name="dept" class="form-control">
-                                            <option value="인사" ${emplForm.dept == '인사'? 'selected' : ''}>인사</option>
-                                            <option value="제품" ${emplForm.dept == "제품"? 'selected' : ''}>제품</option>
-                                            <option value="영업" ${emplForm.dept == "영업"? 'selected' : ''}>영업</option>
-                                            <option value="물류" ${emplForm.dept == "물류"? 'selected' : ''}>물류</option>
-                                            <option value="회계" ${emplForm.dept == "회계"? 'selected' : ''}>회계</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group has-feedback col-md-6 com-sm-6">
-                                        <label>퇴사일자</label>
-                                        <input class="date-picker form-control" name="emplResigdate" placeholder="yyyy-mm-dd" type="date" required="required"
-                                               onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'"
-                                               onmouseout="timeFunctionLong(this)" disabled>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group has-feedback col-md-6 com-sm-6">
-                                        <label>연락처</label>
-                                        <input type="text" name="phone" value="${emplForm.phone}" class="form-control" id="phone" placeholder="핸드폰 번호">
-                                        <span>${valid_phone}</span>
-                                    </div>
-                                    <div class="form-group has-feedback col-md-6 com-sm-6">
-                                        <label>Email</label>
-                                        <input type="text" name="email" value="${emplForm.email}" class="form-control" id="email" placeholder="Email">
-                                        <span>${valid_email}</span>
-                                    </div>
-                                </div>
-                                <div class="form-group has-feedback col-md-12 com-sm-12">
-                                    <label class="col-md-12">주소</label>
-                                    <div class="col-md-5 col-sm-5">
-                                        <input type="text" name="post_num" value="${emplForm.post_num}" class="form-control" id="postnum" placeholder="우편번호" readonly>
-                                        <span>${valid_post_num}</span>
-                                    </div>
-                                    <button type="button" id="postnumBtn" onclick="showjusoPopup('등록')" class="btn btn-default">검색</button>
-                                </div>
-                                <div class="form-group has-feedback col-md-12 com-sm-12">
-                                    <div class="col-md-12">
-                                        <input type="text" name="address" value="${emplForm.address}" class="form-control" id="address" placeholder="주소">
-                                        <span>${valid_address}</span>
-                                    </div>
-                                </div>
-                                <div class="form-group text-right has-feedback col-md-12 com-sm-12">
-                                    <button type="submit" id="newEmplBtn" class="btn btn-default">등록</button>
-                                </div>
-                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                            </form>
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
 
-        <div id="detailDialog">
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="x_panel">
-                        <div class="x_title cus-title">
-                            <h2> 사원 상세정보 <small>different form elements</small></h2>
-                            <ul class="nav navbar-right panel_toolbox">
-                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                </li>
-                                <li><a id="close1" class=""><i class="fa fa-close"></i></a>
-                                </li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div id="detailContent" class="x_content">
+        <script>
+            $('input.numkeyup').on('keyup',function(){
+                var cnt = $("input.goodsnumber").length;
+                console.log(cnt);
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="updateDialog">
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="x_panel">
-                        <div class="x_title cus-title">
-                            <h2> 사원 수정 <small>different form elements</small></h2>
-                            <ul class="nav navbar-right panel_toolbox">
-                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                </li>
-                                <li><a id="close2" class=""><i class="fa fa-close"></i></a>
-                                </li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div id="updateContent" class="x_content">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="resetpwDialog">
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="x_panel">
-                        <div class="x_title cus-title">
-                            <h2> 비밀번호 초기화</h2>
-                            <ul class="nav navbar-right panel_toolbox">
-                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                </li>
-                                <li><a id="close3" class=""><i class="fa fa-close"></i></a>
-                                </li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-
-                        <div id="resetpwContent" class="x_content">
-
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<script>
-    if(${not empty error}) {
-        $("#resigDialog").show();
-    }
-
-</script>
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
-    (function () {
-        'use strict';
-
-        window.addEventListener('load', function () {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-
-            // Loop over them and prevent submission
-            Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated')
-                }, false)
-            })
-        }, false)
-    }())
-    var type = ""
-    function showjusoPopup(type1){
-        type = type1;
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-                // 예제를 참고하여 다양한 활용법을 확인해 보세요.
-
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-
-                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                    addr = data.roadAddress;
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                    addr = data.jibunAddress;
+                for( var i=1; i< cnt; i++){
+                    var sum = parseInt($(this).val() || 0 );
+                    sum++
+                    console.log(sum);
                 }
 
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                // input 값을 가져오며 계산하지만 값이 없을경우 0이 대입된다  뒷부분에 ( || 0 ) 없을경우 합계에 오류가 생겨 NaN 값이 떨어진다
+                var sum1 = parseInt($("span.goodsprice").text() || 0);      // span으로 된 가격 값 가져오기
+                var sum2 = parseInt($("input.goodsnumber").val() || 0);     // input으로 된 수량 값 가져오기
+                console.log(sum1);
+                console.log(sum2);
+
+                var sum = sum1 * sum2;
+                console.log(sum);
+
+                $("span.goodssum").html(sum);
+                $("input.goodssum").val(sum);
+            });
+        </script>
 
 
-                if(type == "등록"){
-                    $("#postnum").val(data.zonecode);
-                    $("#address").val(addr);
-                    $("#address").focus();
-                    // var extraAddr = ''; // 참고항목 변수
-                } else if(type == "수정") {
-                    $("#pdtnum").val(data.zonecode);
-                    $("#updateAddr").val(addr);
-                    $("#updateAddr").focus();
-                }
-                // 커서를 상세주소 필드로 이동한다.
+        <%--  모달 2 : 발주물품 수정  --%>
+        <div class="modal" id="updateModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
 
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="x_panel">
+                                <div class="x_title cus-title">
+                                    <h2> 발주 물품 수정 </h2>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <form action="draftUpdate" method="post" class="form needs-validation">
+                                        <input type="hidden" name="draft_seq" id="draftseq">
+                                        <div class="row">
+                                            <div class="form-group has-feedback col-md-3 com-sm-3">
+                                                <label>발주 물품</label>
+                                            </div>
+                                            <div class="form-group has-feedback col-md-6 com-sm-6">
+                                                <span name="goods" class="goods" placeholder="물품을 등록해주세요">스킨</span>
+                                                <span>${valid_goods}</span>
+                                            </div>
+                                            <div class="form-group col-md-3 com-sm-3">
+                                                <button class="goodsSearch">물품 검색</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group has-feedback col-md-3 com-sm-3">
+                                                <label>단위</label>
+                                            </div>
+                                            <div class="form-group has-feedback col-md-9 com-sm-9">
+                                                <span name="goodsunit" class="goodsunit" placeholder="정보 없음" >5</span>
+                                                <span>${valid_goodsunit}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group has-feedback col-md-3 com-sm-3">
+                                                <label>가격</label>
+                                            </div>
+                                            <div class="form-group has-feedback col-md-9 com-sm-9">
+                                                <span name="goodsprice" class="goodsprice2" placeholder="정보 없음">1000</span>
+                                                <span>${valid_goodsprice}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group has-feedback col-md-3 com-sm-3">
+                                                <label>수량</label>
+                                            </div>
+                                            <div class="form-group has-feedback col-md-9 com-sm-9">
+                                                <input type="text" name="draft_cnt" id="draftcnt" class="form-control goodsnumber2 numkeyup2" placeholder="수량을 입력해주세요">
+                                                <span>${valid_goodsnumber}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group has-feedback col-md-3 com-sm-3">
+                                                <label>합계</label>
+                                            </div>
+                                            <div class="form-group has-feedback col-md-9 com-sm-9">
+                                                <span id="goodssum_1" class="goodssum2" placeholder="0"></span>
+                                                <input type="hidden" name="draft_prod_price" id="goodssum_2"  class="form-control goodssum2">
+                                                <span>${valid_amount}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group text-center has-feedback col-md-12 com-sm-12">
+                                            <input type="button" id="deleteBtn" class="btn btn-default" value="삭제" data-toggle="modal"
+                                                   data-target="#deleteModal" onclick="draftDelete()"/>
+                                            <input type="submit" id="updateBtn" class="btn btn-default" value="수정"/>
+                                        </div>
+                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <script>
+            //발주 물품 수정
+            function update() {
+                $('#updateModal').on('show.bs.modal', function (event) {
+                    var draftseq = $(event.relatedTarget).data('draftseq');
+                    var draftcnt = $(event.relatedTarget).data('draftcnt');
+                    var draftprodprice = $(event.relatedTarget).data('draftprodprice');
+
+                    $(this).find("#draftseq").val(draftseq);
+                    $(this).find("#draftcnt").val(draftcnt);
+                    $(this).find("#goodssum_1").text(draftprodprice);
+                    $(this).find("#goodssum_2").val(draftprodprice);
+                });
+
+                $('input.numkeyup2').on('keyup',function(){
+                    var cnt = $("input.goodsnumber2").length;
+                    console.log(cnt);
+
+                    // input 값을 가져오며 계산하지만 값이 없을경우 0이 대입된다  뒷부분에 ( || 0 ) 없을경우 합계에 오류가 생겨 NaN 값이 떨어진다
+                    var sum1 = parseInt($("span.goodsprice2").text() || 0);      // span으로 된 가격 값 가져오기
+                    var sum2 = parseInt($("input.goodsnumber2").val() || 0);     // input으로 된 수량 값 가져오기
+                    console.log(sum1);
+                    console.log(sum2);
+
+                    var sum = sum1 * sum2;
+                    console.log(sum);
+
+                    $("span.goodssum2").html(sum);
+                    $("input.goodssum2").val(sum);
+                });
             }
-        }).open({autoClose:true});
-    }
-</script>
-<script src="/js/manage.js"></script>
+        </script>
+
+        <%--  모달 4 : 발주 물품 삭제  --%>
+        <div class="modal" id="deleteModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">발주 물품 삭제</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form action="draftDelete" method="post">
+                            정말 삭제하시겠습니까?
+                            <input type="hidden" id="deleteDraftId" name="draft_seq" value="">
+                            <div class="modal-footer">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                <input type="submit" class="btn btn-primary" value="확인" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            //삭제하기
+            function draftDelete() {
+                $('#deleteModal').on('show.bs.modal', function (event) {
+                    var draftseq = $('#draftseq').val();
+                    $(this).find("#deleteDraftId").val(draftseq);
+                });
+            }
+        </script>
+
 <!-- script -->
 <jsp:include page="../layout/script.jsp" />
-<!-- Datatables -->
-<script src="/node_modules/gentelella/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="/node_modules/gentelella/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script src="/node_modules/gentelella/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-<script src="/node_modules/gentelella/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-<script src="/node_modules/gentelella/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-<script src="/node_modules/gentelella/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-<script src="/node_modules/gentelella/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-<script src="/node_modules/gentelella/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-<script src="/node_modules/gentelella/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-<script src="/node_modules/gentelella/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-<script src="/node_modules/gentelella/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-<script src="/node_modules/gentelella/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-<script src="/node_modules/gentelella/vendors/jszip/dist/jszip.min.js"></script>
-<script src="/node_modules/gentelella/vendors/pdfmake/build/pdfmake.min.js"></script>
-<script src="/node_modules/gentelella/vendors/pdfmake/build/vfs_fonts.js"></script>
 
 
 <!-- /script -->

@@ -5,7 +5,6 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
 
 @Data
 @Entity
@@ -19,7 +18,7 @@ public class Draft {
     @GeneratedValue
     private Long draft_seq; //물품순서
 
-    @NotBlank
+//    @NotBlank
 //    @Pattern(regexp = "^[0-9]{1,10}$")
     private int draft_cnt; //물품수량
 
