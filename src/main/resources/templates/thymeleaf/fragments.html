@@ -24,7 +24,6 @@
                         <ul class="nav child_menu">
                             <li><a href="/mypage">인사 정보</a></li>
                             <li><a href="/mypage/myCalendar">내 근태관리</a></li>
-                            <li><a href="#">스케쥴 관리</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-edit"></i> 인사관리 <span class="fa fa-chevron-down"></span></a>
@@ -78,7 +77,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="">
                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="cus-dropdown" aria-expanded="false">
-                        <img th:src="${empl.photo}" alt=""><span th:text="${empl.name}"></span>
+                        <img th:if="${#strings.isEmpty(empl?.photo)}" src="/images/default-image.png" alt=""><span th:text="${empl.name}"></span>
+                        <img th:if="${!#strings.isEmpty(empl?.photo)}" th:src="${empl.photo}" alt=""><span th:text="${empl.name}"></span>
                         <span class=" fa fa-angle-down"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -104,7 +104,7 @@
 
 <footer th:fragment="footer">
     <div class="pull-right">
-        Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+        Olive Brother - AIO &nbsp;&nbsp; 정민, 예솔, 연지, 연섭, 민종
     </div>
     <div class="clearfix"></div>
 </footer>

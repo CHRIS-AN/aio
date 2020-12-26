@@ -46,7 +46,7 @@ public class MyPageController {
 
         modelMapper.map(empl, myInfoForm);
 
-        model.addAttribute(myInfoForm);
+        model.addAttribute("myInfoForm", myInfoForm);
 
         return "thymeleaf/yeonsup/update";
     }
@@ -102,7 +102,7 @@ public class MyPageController {
         if(!passwordEncoder.matches(passwordEncoder.encode(originPw), empl.getPassword())) {
             model.addAttribute(empl);
             model.addAttribute("failed", "비밀번호가 맞지 않습니다.");
-            return "thymeleaf/yeonsup/update";
+            return "thymeleaf/yeonsup/mypage";
         }
 
         myInfoService.newPw(empl, newPw);

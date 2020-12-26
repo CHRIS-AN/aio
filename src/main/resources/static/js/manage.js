@@ -64,6 +64,11 @@ $(document).ready(function (){
 
 });
 
+function clearImg() {
+    $("#photo").val("")
+    $("#profile-image").src("")
+}
+
 function changePage(pageNum) {
     page = pageNum;
     search();
@@ -160,7 +165,7 @@ function listHumanResource(data) {
 
     let nextPage = curPage + 1;
     let previousPage = curPage - 1;
-    if(nextPage > data.totalPages) nextPage = data.totalPages
+    if(nextPage >= data.totalPages) nextPage = data.totalPages-1;
     if(previousPage < 0) previousPage = 0;
 
 
@@ -174,7 +179,7 @@ function listHumanResource(data) {
         html += "<thead><tr><th>사원번호</th> <th>이름</th> <th>부서명</th><th>입사일자</th>\<th>연락처</th></tr></thead>";
     for (let i = 0; i < data.content.length; i++) {
         html += "<tr>";
-        html += "<td><a class='btn-link' onclick=\"showEmpldetailAjax('" + data.content[i].emplId + "')\">" + data.content[i].emplId + "</a></td>";
+        html += "<td><a class='btn-link' style='cursor: pointer;' onclick=\"showEmpldetailAjax('" + data.content[i].emplId + "')\">" + data.content[i].emplId + "</a></td>";
         html += "<td>" + data.content[i].name + "</td>";
         html += "<td>" + data.content[i].dept + "</td>";
         html += "<td>" + data.content[i].emplRegdate + "</td>";
@@ -184,13 +189,13 @@ function listHumanResource(data) {
         html += "</table>";
         html += "<div>";
         html += "<a class='btn btn-default' onclick='changePage(" + 0 + ")'>&lt;&lt;</a>";
-        html += "<a class='btn btn-default' onclick='changePage(" + nextPage + ")'>Previous</a>";
+        html += "<a class='btn btn-default' onclick='changePage(" + previousPage + ")'>Previous</a>";
         for(let i = first; i < data.totalPages; i++) {
             html += "<a onclick='changePage(" + i + ")' class='btn btn-default text-center linkpage'>"
             html += i+1 + ""
             html += "</a>"
         }
-        html += "<a class='btn btn-default' onclick='changePage(" + previousPage + ")'>Next</a>";
+        html += "<a class='btn btn-default' onclick='changePage(" + nextPage + ")'>Next</a>";
         html += "<a class='btn btn-default' onclick='changePage(" + (data.totalPages - 1) + ")'>&gt;&gt;</a>";
         html += "</div>";
 
@@ -200,15 +205,16 @@ function listHumanResource(data) {
 function showEmpldetail(data) {
     let detailContent = $("#detailContent");
     let html = "";
-        html += "<div class='row'>";
-        html += "<div class='col-lg-3'>"
+        html += "<div class='col-md-3'>";
+        html += "<div class='col-lg-12'>"
         html += "<img src='" + data[0].photo + "' alt='' class='img-responsive'/>";
         html += "</div>";
         html += "</div>"
-        html += "<div class='row'>";
+        html += "<div class='col-md-9'>";
+        html += "<div class='row m-div'>";
         html += "<div class=\"col-md-6 com-sm-6\">";
-        html += "<label class='col-md-4'>사원번호</label>";
-        html += "<span class='col-md-8'>" + data[0].emplId + "</span>";
+        html += "<label class='col-md-5'>사원번호</label>";
+        html += "<span class='col-md-7'>" + data[0].emplId + "</span>";
         html += "</div>";
         html += "<div class=\"col-md-6 com-sm-6\">";
         html += "<label class='col-md-4'>성명</label>";
@@ -216,10 +222,10 @@ function showEmpldetail(data) {
         html += "</div>";
         html += "</div>";
 
-    html += "<div class='row'>";
+    html += "<div class='row m-div'>";
     html += "<div class=\"col-md-6 com-sm-6\">";
-    html += "<label class='col-md-4'>주민등록 번호</label>";
-    html += "<span class='col-md-8'>" + data[0].jumin + "</span>";
+    html += "<label class='col-md-5'>주민등록 번호</label>";
+    html += "<span class='col-md-7'>" + data[0].jumin + "</span>";
     html += "</div>";
     html += "<div class=\"col-md-6 com-sm-6\">";
     html += "<label class='col-md-4'>입사일자</label>";
@@ -227,10 +233,10 @@ function showEmpldetail(data) {
     html += "</div>";
     html += "</div>";
 
-    html += "<div class='row'>";
+    html += "<div class='row m-div'>";
     html += "<div class=\"col-md-6 com-sm-6\">";
-    html += "<label class='col-md-4'>부서명</label>";
-    html += "<span class='col-md-8'>" + data[0].dept + "</span>";
+    html += "<label class='col-md-5'>부서명</label>";
+    html += "<span class='col-md-7'>" + data[0].dept + "</span>";
     html += "</div>";
     html += "<div class=\"col-md-6 com-sm-6\">";
     html += "<label class='col-md-4'>퇴사일자</label>";
@@ -238,10 +244,10 @@ function showEmpldetail(data) {
     html += "</div>";
     html += "</div>";
 
-    html += "<div class='row'>";
+    html += "<div class='row m-div'>";
     html += "<div class=\"col-md-6 com-sm-6\">";
-    html += "<label class='col-md-4'>연락처</label>";
-    html += "<span class='col-md-8'>" + data[0].phone + "</span>";
+    html += "<label class='col-md-5'>연락처</label>";
+    html += "<span class='col-md-7'>" + data[0].phone + "</span>";
     html += "</div>";
     html += "<div class=\"col-md-6 com-sm-6\">";
     html += "<label class='col-md-4'>사원번호</label>";
@@ -249,25 +255,27 @@ function showEmpldetail(data) {
     html += "</div>";
     html += "</div>";
 
-    html += "<div class='row'>";
+    html += "<div class='row m-div'>";
     html += "<div class=\"col-md-6 com-sm-6\">";
-    html += "<label class='col-md-4'>재직상태</label>";
-    html += "<span class='col-md-8'>" + data[0].work_state + "</span>";
+    html += "<label class='col-md-5'>재직상태</label>";
+    html += "<span class='col-md-7'>" + data[0].work_state + "</span>";
     html += "</div>";
     html += "</div>";
 
-    html += "<div class=\"col-md-5 com-sm-5\">";
-    html += "<label class='col-md-12'>주소</label>";
-    html += "<span class='col-md-9'>" + data[0].post_num + "</span>";
+    html += "<div class='row m-div'>";
+    html += "<div class=\"col-md-12 com-sm-5\">";
+    html += "<label class='col-md-5'>주소</label>";
+    html += "<span class='col-md-9'>(우편번호) " + data[0].post_num + "</span>";
     html += "</div>"
     html += "<div class=\"col-md-12 com-sm-12\">";
+    html += "<label class='col-md-5'></label>";
     html += "<span class='col-md-9'>" + data[0].address + "</span>";
     html += "</div>";
     html += "<div class='col-md-12 text-right'>";
-    html += "<button id='btnclose' type='button'>닫기</button>"
-    html += "<button id='btnupdate' onclick='updateloadAjax(\"" + data[0].emplId + "\")' type='button'>수정</button>"
+    html += "<button id='btnupdate' class='btn btn-default' onclick='updateloadAjax(\"" + data[0].emplId + "\")' type='button'>수정</button>"
     html += "</div>"
-
+    html += "</div>"
+    html += "</div>";
     detailContent.html(html);
     $("#detailDialog").show();
 
@@ -316,17 +324,19 @@ function clickupdate(data, errors) {
     let select5 = data.dept === "회계" ? "selected" : "";
 
     let html = "<form id='forms' enctype='multipart/form-data' method='post' class=\"form needs-validation\">";
-    html += "<div class=\"form-group has-feedback col-md-12 com-sm-12\">";
-    html += "<label class=\"col-md-12\">사진</label>";
-    html += "<img src=\"" + data[0].photo + "\" id=\"profile-image\" class=\"col-md-3 img img-responsive\">";
-    html += "<div class=\"col-md-7\">";
+    html += "<div class=\"form-group has-feedback col-md-4 com-sm-4\">";
+    html += "<img src=\"" + data[0].photo + "\" id=\"profile-image\" class=\"col-md-12 img img-responsive\">";
+    html += "<div class=\"col-md-12 filebox my-form\">";
+    html += "<label for='image-input-file'>이미지 등록</label>"
     html += "<input type=\"file\" class=\"form-control\" id=\"image-input-file\" required>";
     html += "<input type=\"hidden\" id=\"photo\" name=\"photo\" value='" + data[0].photo + "' required>";
+    html += "<button type=\"button\" class=\"btn btn-default btn-100\" onclick=\"clearImg()\">이미지 삭제</button>"
     if(errors != undefined && errors.valid_photo != undefined) {
         html += "<sapn>" + errors.valid_photo + "</span>";
     }
     html += "</div>";
     html += "</div>";
+    html += "<div class=\"col-md-8\">";
     html += "<div class=\"row\">";
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
     html += "<label>사원번호</label>";
@@ -383,7 +393,7 @@ function clickupdate(data, errors) {
     html += "</div>";
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
     html += "<label>Email</label>";
-    html += "<input type=\"text\" name=\"email\" value=\"" + data[0].email + "\" class=\"form-control\" id=\"email\" placeholder=\"Email\" required>;"
+    html += "<input type=\"text\" name=\"email\" value=\"" + data[0].email + "\" class=\"form-control\" id=\"email\" placeholder=\"Email\" required>"
     if(errors != undefined && errors.valid_email != undefined) {
         html += "<sapn>" + errors.valid_email + "</span>";
     }
@@ -405,6 +415,7 @@ function clickupdate(data, errors) {
     if(errors != undefined && errors.valid_address != undefined) {
         html += "<sapn>" + errors.valid_address + "</span>";
     }
+    html += "</div>";
     html += "</div>";
     html += "</div>";
     html += "<div class=\"form-group text-right has-feedback col-md-12 com-sm-12\">";

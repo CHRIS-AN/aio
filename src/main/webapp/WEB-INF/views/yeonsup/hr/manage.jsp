@@ -98,14 +98,18 @@
                         </div>
                         <div class="x_content">
                             <form action="/hr" method="post" class="form needs-validation">
-                                <div class="form-group has-feedback col-md-12 com-sm-12">
-                                    <label class="col-md-12">사진</label>
-                                    <img src="${emplForm.photo}" id="profile-image" class="col-md-3 img img-responsive">
-                                    <div class="col-md-7">
-                                        <input type="file" class="form-control" id="image-input-file">
-                                        <input type="hidden" value="${emplForm.photo}" id="photo" name="photo">
+                                <div class="form-group has-feedback col-md-4 com-sm-4">
+                                    <div class="row text-center">
+                                        <img src="${emplForm.photo}" id="profile-image" class="img col-md-12 img-responsive">
                                     </div>
+                                    <div class="filebox my-form">
+                                        <label for="image-input-file">이미지 첨부</label>
+                                        <input type="file" class="" id="image-input-file">
+                                        <button type="button" class="btn btn-default btn-100" onclick="clearImg()">이미지 삭제</button>
+                                    </div>
+                                    <input type="hidden" value="${emplForm.photo}" id="photo" name="photo">
                                 </div>
+                                <div class="col-md-8">
                                 <div class="row">
                                     <div class="form-group has-feedback col-md-6 com-sm-6">
                                         <label>사원번호</label>
@@ -179,6 +183,7 @@
                                     <button type="submit" id="newEmplBtn" class="btn btn-default">등록</button>
                                 </div>
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                </div>
                             </form>
                         </div>
                     </div>

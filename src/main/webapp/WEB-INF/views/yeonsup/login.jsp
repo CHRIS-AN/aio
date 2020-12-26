@@ -17,31 +17,90 @@
 
 
     <style>
-        .default-color {
-            color: #372c81;
+        html {
+            overflow: hidden;
         }
+
+        .body {
+            overflow: auto;
+        }
+
+        .body::before {
+            background-image: url("/images/login_wolf2.jpg");
+            background-repeat: no-repeat;
+            background-size: fill;
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            z-index: -1;
+            filter: blur(5px);
+            -webkit-filter: blur(5px);
+            -moz-filter: blur(5px);
+            -o-filter: blur(5px);
+            transform: scale(1.02);
+
+        }
+
+        .gray-color {
+            color: #515053;
+        }
+
         .login-box {
             margin: auto;
-            margin-top: 20%;
-            box-shadow: 0 0 10px #777777;
+            margin-top: 18%;
+            box-shadow: 0 0 10px #888888;
             border-radius: 15px;
+            padding: 0;
+            padding-right: 0;
+            padding-left: 0;
+            background: white;
+        }
+
+        .login-inner-box {
+            padding: 3em;
+        }
+
+        #corp-details {
+            padding-right: 0;
+            padding-left: 0;
+            overflow: hidden;
+            background: #b8b7b7;
+            border-radius: 15px 0 0 15px;
+        }
+
+        .image {
+            width: 100%;
+            height: auto;
+            bottom: 0;
+            position: absolute;
+            opacity: 0.9888;
+        }
+
+        .hrNum {
+            color: #16358d;
+            font-weight: bold;
         }
     </style>
 </head>
 <body class="body">
 <div class="container-fluid">
     <div class="container">
-        <div class="col-md-1"></div>
-        <div class="row login-box col-md-10 p-lg-5">
-            <div class="col-md-6">
-
+        <div class="row login-box col-md-11">
+            <div id="corp-details" class="col-md-6">
+                <div class="image"><img src="/images/login_winter.png" width="100%"></div>
             </div>
-            <div class="col-md-6">
-                <div class="row my-5">
+            <div class="col-md-6 login-inner-box">
 
-                </div>
+                <h1 class="my-lg-4">AIO <small>All In One</small></h1>
+                <small>AIO에 오신 것을 환영 합니다! 흰눈사이로~ 썰매를 타고~ 새해 복 많이 받으세요</small><br/>
+                <small class="text-danger">비밀번호 초기 설정은 핸드폰 번호 뒤 4자리를 입력하시면 됩니다.</small>
+
                 <form action="/login" method="post" class="needs-validation" novalidate>
-                    <h3 class="mb-5 default-color">로그인</h3>
+                    <h3 class="my-5 gray-color">로그인</h3>
                     <div class="form-group my-lg-4">
                         <div>
                             <label>사원번호 </label>
@@ -55,7 +114,7 @@
                         </div>
                     </div>
                     <div class="form-group my-lg-4">
-                        <button class="btn btn-default col-sm-2" type="submit">
+                        <button class="btn btn-default col-sm-2 float-right" type="submit">
                             로그인
                         </button>
                     </div>
@@ -63,9 +122,8 @@
                 </form>
 
                 <br/>
-                <br/>
                 <hr>
-                <a href="">비밀번호를 잊어버렸을시 여기를 클릭하세요.</a>
+                <a class="btn btn-link" onclick="showFGModal()">비밀번호를 잊어버렸을시 여기를 클릭하세요.</a>
                 <c:if test="${param.error != null}">
                     <div class="row mx-auto my-4">
                         <div class="alert alert-danger" role="alert">
@@ -77,9 +135,28 @@
             </div>
         </div>
         <div class="col-md-1"></div>
+
+    </div>
+    <div class="modal" id="pwmodal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Forgot Password</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <p>비밀번호를 잊어버리셨나요?</p>
+                    <p><span class="hrNum">0341</span> 여기로 전화주세요.</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<script type="application/javascript" th:fragment="form-validation">
+<script type="application/javascript">
     (function () {
         'use strict';
 
@@ -99,13 +176,27 @@
             })
         }, false)
     }())
+    $(".close").click(function (){
+        $("#pwmodal").hide();
+    });
+    function showFGModal() {
+        $("#pwmodal").show();
+
+    }
 </script>
 <script src='https://unpkg.com/magic-snowflakes/dist/snowflakes.min.js'></script>
 <script>
+
     var sf = new Snowflakes({
+        color: '#fff',
         count: 75, // 갯수
-        minOpacity: 0.0, // 최소 투명도 0: 투명 | 1: 불투명
-        maxOpacity: 0.6 // 최대 투명도
+        container: document.querySelector('#corp-details'),
+        minSize: 2,
+        maxSize: 10,
+        speed: 0.5,
+        minOpacity: 1, // 최소 투명도 0: 투명 | 1: 불투명
+        maxOpacity: 1, // 최대 투명도
+        zIndex: 9999
     });
 </script>
 <script src="/js/bootstrap.bundle.min.js"></script>

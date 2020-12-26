@@ -57,12 +57,11 @@
                 <div class="row mt-3">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_content m-2">
-                            <div class="col-md-2" th:each="item : ${emplList}">
-                                <div class="card m-3 " style="width: 150px">
+                            <div class="col-md-3" th:each="item : ${emplList}">
+                                <div class="card m-3 " style="width: 250px">
                                     <div class="card-header">
                                         <span style="color: #372C81" th:text="${item.emplId}"></span>
                                     </div>
-                                    <img th:src="${item.photo}" class="card-img-top" alt="profileImage">
                                     <div class="card-body ">
                                         <h3 class="card-title d-inline-block" th:text="${item.name}">name</h3>
                                         <p class="card-text" th:text="${item.dept}">dept</p>
@@ -120,51 +119,51 @@
                         <!-- Modal body -->
                         <div class="modal-body">
                             <div class="col-md-4">
-                                <div class="row">
-                                    <img id="photo" src="" width="180px" height="250px" />
-                                </div>
-                                <div class="row">
-                                    <h2 id="name"></h2>
-                                </div>
-                                <div class="row">
-                                    <span id="dept"></span>
-                                </div>
-                                <div id="gowork" class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <img id="photo" src="" width="200px" height="auto" />
+                                    </div>
+                                    <div class="row mt-lg-4 my-2">
+                                        <h2 id="name"></h2>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <span id="dept"></span>
+                                    </div>
+                                    <div id="gowork" class="row mt-2">
 
-                                </div>
-
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <label>사원번호</label>
-                                    <span id="emplId"></span>
-                                </div>
-                                <div class="row">
-                                    <label>연락처</label>
-                                    <span id="phone"></span>
-                                </div>
-                                <div class="row">
-                                    <label>Email</label>
-                                    <span id="email"></span>
-                                </div>
-                                <div class="row">
-                                    <label>주소</label>
-                                    <span id="address"></span>
-                                </div>
-                                <div class="row">
-                                    <label>입사일자</label>
-                                    <span id="regdate"></span>
-                                </div>
-                                <div class="row">
-                                    <label>재직상태</label>
-                                    <span id="workState"></span>
-                                </div>
-                                <div class="row">
-                                    <label>퇴사일자</label>
-                                    <span id="resigdate"></span>
+                                    </div>
                                 </div>
                             </div>
-
+                            <div class="col-md-8 mt-lg-3">
+                                <div class="row my-lg-2 info-box">
+                                    <label class="col-md-4">사원번호</label>
+                                    <span class="col-md-8" id="emplId"></span>
+                                </div>
+                                <div class="row my-lg-2 info-box">
+                                    <label class="col-md-4">연락처</label>
+                                    <span class="col-md-8" id="phone"></span>
+                                </div>
+                                <div class="row my-lg-2 info-box">
+                                    <label class="col-md-4">Email</label>
+                                    <span class="col-md-8" id="email"></span>
+                                </div>
+                                <div class="row my-lg-2 info-box">
+                                    <label class="col-md-4">주소</label>
+                                    <span class="col-md-8" id="address"></span>
+                                </div>
+                                <div class="row my-lg-2 info-box">
+                                    <label class="col-md-4">입사일자</label>
+                                    <span class="col-md-8" id="regdate"></span>
+                                </div>
+                                <div class="row my-lg-2 info-box">
+                                    <label class="col-md-4">재직상태</label>
+                                    <span class="col-md-8" id="workState"></span>
+                                </div>
+                                <div class="row my-lg-2 info-box">
+                                    <label class="col-md-4">퇴사일자</label>
+                                    <span class="col-md-8" id="resigdate"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -180,6 +179,10 @@
     // <a th:attr="onclick=|showDetails('${item.emplId}', '${item.name}', '${item.address}', '${item.phone}',
     //'${item.dept}', '${item.photo}', '${item.email}', '${item.work_state}', '${item.attendance}' )|"
     function showDetails(emplId, name, address, phone, dept, photo, email, workState, attendance, regDate, resigDate) {
+
+        if(resigDate == null) {
+            resigDate = "";
+        }
 
         let $modal = $('#modal');
         let $close = $("#close");
@@ -200,7 +203,12 @@
         let html = "";
 
         // 데이터 넣기
-        $photo.attr("src", photo);
+        if(photo == null) {
+            $photo.attr("src", "/images/default-image.png");
+        } else {
+            $photo.attr("src", photo);
+        }
+
         $name.html(name)
         $dept.html(dept)
         $emplId.html(emplId)

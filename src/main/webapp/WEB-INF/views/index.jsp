@@ -3,6 +3,38 @@
 <html>
 <!-- head -->
 <jsp:include page="layout/header.jsp" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+
+<style>
+    .mt-5 {
+        margin-top: 2em;
+    }
+    .mt-2 {
+        margin-top: 1em;
+    }
+    .my-5 {
+        margin-top: 2em;
+        margin-bottom: 2em;
+    }
+    .weather-pannel {
+        background-color : rgb(51,122,183);
+        color: white;
+    }
+    .weather-pannel small, .weather-pannel i {
+        color: white;
+    }
+    .text-right {
+        text-align: right;
+    }
+    .w-span {
+        font-size: 30px;
+        color: white;
+    }
+    .x_title span {
+        color: white;
+    }
+
+</style>
 </head>
 <!-- head -->
 <body class="nav-md">
@@ -22,6 +54,9 @@
 
             <!-- content -->
             <div class="right_col" role="main">
+                <div class="col-md-12 my-5">
+                    <h1>AIO <small>All In One</small></h1>
+                </div>
                 <div class="col-md-5 col-lg-5 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
@@ -64,6 +99,46 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-4">
+                    <div class="x_panel weather-pannel">
+                        <div class="x_title">
+                            <img class="col-md-4" id="weatherIcon" src="">
+                            <div class="col-md-8 mt-5">
+                                <div class="row text-right ">
+                                    <span id="temp" class="w-span"></span>
+                                </div>
+                                <div class="row text-right">
+                                    <span id="weather" class="w-span"></span>
+                                </div>
+                                <div class="row text-right">
+                                    <span id="city" class="w-span"></span>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-4">
+                                <div class="row text-center mt-2">
+                                    <span class="w-span mt-2"><i class="fas fa-wind"></i></span><br />
+                                    <h5 id="windy"></h5>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row text-center mt-2">
+                                    <span class="w-span mt-2"><i class="fas fa-tint"></i></span><br />
+                                    <h5 id="waterDrop"></h5>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row text-center mt-2">
+                                    <span class="w-span mt-2"><i class="fas fa-cloud-upload-alt"></i></span><br />
+                                    <h5 id="cloudy"></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- /content -->
 
@@ -73,6 +148,36 @@
 
         </div>
     </div>
+    <script type="application/javascript">
+        var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Seoul&appid="+"6a450e4848c92eaf1d0d9c7fd313f05d";
+        $.ajax({
+            url: apiURI,
+            dataType: "json",
+            type: "GET",
+            async: "false",
+            success: function(resp) {
+                var img_url='http://openweathermap.org/img/wn/' + resp.weather[0].icon + '@2x.png';
+                console.log(resp);
+                console.log("현재온도 : "+ (resp.main.temp- 273.15) );
+                console.log("현재습도 : "+ resp.main.humidity);
+                console.log("날씨 : "+ resp.weather[0].main );
+                console.log("상세날씨설명 : "+ resp.weather[0].description );
+                console.log("날씨 이미지 : "+ resp.weather[0].icon );
+                console.log("바람   : "+ resp.wind.speed );
+                console.log("나라   : "+ resp.sys.country );
+                console.log("도시이름  : "+ resp.name );
+                console.log("구름  : "+ (resp.clouds.all) +"%" );
+                $("#weatherIcon").attr("src", img_url)
+                $("#temp").html(resp.main.temp- 273.15);
+                $("#weather").html(resp.weather[0].description);
+                $("#city").html(resp.name + ", " +  resp.sys.country);
+                $("#windy").html(resp.wind.speed + " m/s");
+                $("#waterDrop").html(resp.main.humidity + " %");
+                $("#cloudy").html(resp.clouds.all + " %");
+
+            }
+        });
+    </script>
 <!-- script -->
     <jsp:include page="layout/script.jsp" />
 <!-- /script -->

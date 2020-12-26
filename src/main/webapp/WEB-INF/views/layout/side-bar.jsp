@@ -16,7 +16,6 @@
                         <ul class="nav child_menu">
                             <li><a href="/mypage">인사 정보</a></li>
                             <li><a href="/mypage/myCalendar">내 근태관리</a></li>
-                            <li><a href="#">스케쥴 관리</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-edit"></i> 인사관리 <span class="fa fa-chevron-down"></span></a>

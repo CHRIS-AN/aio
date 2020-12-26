@@ -29,6 +29,7 @@ function setCal(event) {
             center: 'title',
             right: 'month,agendaWeek,agendaDay,listMonth'
         },
+        eventLimit: true,
         selectable: true,
         editable: true,
         droppable: true, // this allows things to be dropped onto the calendar

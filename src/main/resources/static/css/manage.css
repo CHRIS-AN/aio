@@ -1,7 +1,7 @@
 #resigDialog, #detailDialog, #updateDialog {
     position: fixed;
     z-index: 9999999;
-    width: 800px;
+    width: 900px;
     top: 10%;
     left: 30%;
     border: 1px solid #372c81;
@@ -32,4 +32,50 @@
     max-height: 320px;
     max-width: 200px;
 }
+.filebox label {
+    display: inline-block;
+    padding: .5em .75em;
+    color: #fff;
+    font-size: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    text-align: center;
+    background-color: #372c81;
+    cursor: pointer;
+    border: 1px solid #372c81;
+    border-radius: .25em;
+    -webkit-transition: background-color 0.2s;
+    transition: background-color 0.2s;
+    width: 100%;
+}
 
+.filebox label:hover {
+    background-color: #4a3cad;
+}
+.filebox label:active {
+    background-color: #4a3cad;
+}
+
+.filebox input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.my-form {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+.btn-100 {
+    width: 100%;
+}
+
+.m-div {
+    padding: 0.3em;
+    font-size: 15px;
+}
