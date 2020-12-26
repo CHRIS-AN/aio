@@ -22,6 +22,11 @@
     <link href="/node_modules/gentelella/build/css/custom.css" rel="stylesheet">
     <%--    <link href="/css/manage.css" rel="stylesheet">--%>
     <script src="/node_modules/gentelella/vendors/jquery/dist/jquery.min.js"></script>
+    <style>
+        a{
+
+        }
+    </style>
 </head>
 <!-- head -->
 <body class="nav-md">
@@ -78,14 +83,16 @@
                     </tr>
                     <tr>
                         <td colspan="2" align="center">
-                            <input type="submit" value="수정하기"/>
+                            <input class="btn btn-primary" type="submit" value="수정하기"/>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
                         </td>
                     </tr>
                 </table>
             </form>
             <hr>
-            <a href="deleteProduct?prod_id=${product.prod_id}">글 삭제</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="productList">리스트</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="btn btn-primary" href="deleteProduct?prod_id=${product.prod_id}">글 삭제</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="btn btn-primary" href="productList">리스트</a>&nbsp;&nbsp;&nbsp;&nbsp;
 
 
             <!-- footer  -->

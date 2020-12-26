@@ -14,8 +14,8 @@
                 <ul class="nav side-menu">
                     <li><a><i class="fa fa-home"></i> 내 인사 정보 <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="#">인사 정보</a></li>
-                            <li><a href="#">내 근태관리</a></li>
+                            <li><a href="/mypage">인사 정보</a></li>
+                            <li><a href="/mypage/myCalendar">내 근태관리</a></li>
                             <li><a href="#">스케쥴 관리</a></li>
                         </ul>
                     </li>
@@ -26,13 +26,13 @@
                     </li>
                     <li><a><i class="fa fa-desktop"></i> 제품관리 <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="productList">메뉴1</a></li>
+                            <li><a href="/MJ_view/productList">메뉴1</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-table"></i> 영업관리 <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="/yeonji/corpList">메뉴1</a></li>
-
+                            <li><a href="/yeonji/corpList">거래처관리</a></li>
+                            <li><a href="#">발주관리</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-bar-chart-o"></i> 물류관리 <span class="fa fa-chevron-down"></span></a>

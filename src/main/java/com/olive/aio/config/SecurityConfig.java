@@ -26,11 +26,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .mvcMatchers("/**").permitAll();
-//                .mvcMatchers("/hr", "/hr/**").hasAnyAuthority("ROLE_HR", "ROLE_ALL")
-//                .mvcMatchers("/", "/login", "/example").permitAll()
-//                .mvcMatchers("/**").hasAuthority("ROLE_ALL")
-//                .anyRequest().authenticated();
+                .mvcMatchers("/hr", "/hr/**").hasAnyAuthority("ROLE_HR", "ROLE_ALL")
+                .mvcMatchers("/statementManagement/**").hasAnyAuthority("ROLE_FINANCE", "ROLE_ALL")
+                .mvcMatchers("/login").permitAll()
+                .anyRequest().authenticated();
 
 
 

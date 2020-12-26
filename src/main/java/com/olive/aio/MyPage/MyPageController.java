@@ -1,0 +1,96 @@
+package com.olive.aio.MyPage;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.olive.aio.domain.Empl;
+import com.olive.aio.employee.CurrentEmpl;
+import com.olive.aio.employee.EmplService;
+import com.olive.aio.employee.form.EmplUpdateForm;
+import lombok.RequiredArgsConstructor;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+
+@Controller
+@RequiredArgsConstructor
+public class MyPageController {
+
+    private final ModelMapper modelMapper;
+    private final EmplService emplService;
+    private final MyPageService myInfoService;
+    private final ObjectMapper objectMapper;
+
+    @GetMapping("/mypage")
+    public String myPage(@CurrentEmpl Empl empl, Model model) {
+
+
+        model.addAttribute(empl);
+
+        return "thymeleaf/yeonsup/mypage";
+    }
+
+    @GetMapping("/mypage/update")
+    public String updateMyInfo(@CurrentEmpl Empl empl, EmplUpdateForm myInfoForm, Model model) {
+        model.addAttribute(empl);
+
+        modelMapper.map(empl, myInfoForm);
+
+        model.addAttribute(myInfoForm);
+
+        return "thymeleaf/yeonsup/update";
+    }
+
+    @PostMapping("/mypage/update")
+    public String submitUpdateMyInfo(@CurrentEmpl Empl empl, @Valid EmplUpdateForm myInfoForm, Errors errors, Model model) {
+
+        if(errors.hasErrors()) {
+            model.addAttribute(myInfoForm);
+            return "thymeleaf/yeonsup/update";
+        }
+
+        myInfoService.updateMyInfo(empl, myInfoForm);
+
+        return "redirect:/mypage";
+    }
+
+    @GetMapping("/mypage/myCalendar")
+    public String myCalendar(@CurrentEmpl Empl empl, Model model) {
+        model.addAttribute(empl);
+        return "thymeleaf/yeonsup/myCalendar";
+    }
+
+    @GetMapping("/searchCorwork")
+    public String readCoworker(@CurrentEmpl Empl empl, Model model, String keyword, String dept,
+                              @PageableDefault(size = 9, page = 5, sort = "emplId", direction = Sort.Direction.ASC) Pageable pageable) {
+        model.addAttribute(empl);
+        if(keyword == null) {
+            keyword = "";
+        }
+        if(dept == null) {
+            dept = "";
+        }
+
+        Page<Empl> search = emplService.search(dept, keyword, pageable);
+        model.addAttribute("emplList", search);
+        model.addAttribute(keyword);
+        model.addAttribute(dept);
+        return "thymeleaf/yeonsup/search";
+    };
+
+    @GetMapping("/work/{state}")
+    public String goWork(@CurrentEmpl Empl empl, Model model, @PathVariable String state) {
+        emplService.updateGoWork(empl, model, state);
+        model.addAttribute(empl);
+        return "redirect:/";
+    }
+
+
+}

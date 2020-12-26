@@ -1,6 +1,7 @@
 package com.olive.aio.employee.form;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -13,23 +14,22 @@ public class EmplForm {
     private String emplId;
 
     @NotBlank
-    @Min(2) @Max(8)
+    @Length(min = 2, max = 8)
     @Pattern(regexp = "^[ㄱ-ㅎ가-힣]{2,8}$")
     private String name;
 
     @NotBlank(message = "주민등록번호는 필수 입력 값 입니다.")
-    @Min(12) @Max(12)
+    @Length(min = 14, max = 14)
     private String jumin;
 
     @NotBlank
     private String address;
 
     @NotNull
-    @Min(4) @Max(4)
     private Integer post_num;
 
     @NotBlank
-    @Min(10) @Max(11)
+    @Length(min = 12, max = 13)
     private String phone;
 
     @NotBlank

@@ -13,7 +13,8 @@
                         <span class=" fa fa-angle-down"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu pull-right">
-                        <li><a href="#"> 내 인사 정보 </a></li>
+                        <li><a href="/mypage"> 내 인사 정보 </a></li>
+                        <li><a href="/searchCorwork"> 사원 검색하기 </a></li>
                         <li>
                             <a>
                                 <form class="" action="/logout" method="post">

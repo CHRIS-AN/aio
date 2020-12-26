@@ -58,7 +58,7 @@ public class SlipController {
             Map<String, String> validatorResult = SlipService.validateHandling(errors);
             for (String key : validatorResult.keySet()) {
                 model.addAttribute(key, validatorResult.get(key));
-                log.info(key);
+
             }
             return FINANCE + PSTR;
         }
@@ -182,7 +182,7 @@ public class SlipController {
     }
 
     //  전표관리 섹션.  statementManagement.html
-    @GetMapping("/statementManagement/list")
+    @GetMapping(SM + "/list")
     public String slipList(@PageableDefault(size = 5, page = 0, sort = "slipDate", direction = Sort.Direction.DESC)
                                    Pageable pageable, Model model, String keyword, Integer months) {
         System.out.println("months : " + months);

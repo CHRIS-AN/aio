@@ -1,6 +1,8 @@
 package com.olive.aio.employee;
 
+import com.olive.aio.MyPage.MyCalendarRepository;
 import com.olive.aio.domain.Empl;
+import com.olive.aio.domain.MyCalendar;
 import com.olive.aio.email.EmailMessage;
 import com.olive.aio.email.EmailService;
 import com.olive.aio.employee.form.EmplForm;
@@ -8,6 +10,8 @@ import com.olive.aio.employee.form.EmplUpdateForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -31,6 +35,7 @@ public class EmplService implements UserDetailsService {
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
     private final EmailService emailService;
+    private final MyCalendarRepository myCalendarRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -43,7 +48,7 @@ public class EmplService implements UserDetailsService {
         } else {
             role = decideAuth(username, empl, role);
         }
-
+        log.info("role {}", role);
         return new UserEmpl(empl, role);
     }
 
@@ -67,8 +72,17 @@ public class EmplService implements UserDetailsService {
                 case "인사":
                     role = "ROLE_HR";
                     break;
+                case "제품":
+                    role = "ROLE_PRODUCT";
+                    break;
                 case "영업":
                     role = "ROLE_SALES";
+                    break;
+                case "회계":
+                    role = "ROLE_FINANCE";
+                    break;
+                case "물류":
+                    role = "ROLE_LOGISTICS";
                     break;
                 case "회계":
                     role = "ROLE_FINANCE";
@@ -79,7 +93,6 @@ public class EmplService implements UserDetailsService {
         } else {
             role = "ROLE_ALL";
         }
-        log.info(role);
         return role;
     }
 
@@ -100,16 +113,17 @@ public class EmplService implements UserDetailsService {
         return byEmplId;
     }
 
-    public void updateEmpl(Empl empl, @Valid EmplUpdateForm emplForm) {
-        Empl byEmplId = emplRepository.findByEmplId(empl.getEmplId());
+    public Empl updateEmpl(Empl empl, EmplUpdateForm emplForm) {
+        Empl byEmplId = emplRepository.findByEmplId(emplForm.getEmplId());
 
-        if(emplForm.getEmplResigdate().length() > 0) {
+        if(emplForm.getEmplResigdate() != null && emplForm.getEmplResigdate().length() > 0) {
             emplForm.setWork_state("퇴사");
         }
 
         modelMapper.map(emplForm, byEmplId);
+        loadUserByUsername(byEmplId.getEmplId());
 
-        return;
+        return byEmplId;
     }
 
     public boolean addErrors(@Valid EmplForm emplForm, Errors errors, Model model) {
@@ -163,6 +177,34 @@ public class EmplService implements UserDetailsService {
                 .build();
 
         emailService.sendEmail(emailMessage);
+    }
+
+    public Page<Empl> search(String dept, String keyword, Pageable pageable) {
+
+        Page<Empl> emplList = emplRepository.findByKeyword(dept, keyword, pageable);
+
+
+        return emplList;
+    }
+
+    public Empl updateGoWork(Empl empl, Model model, String state) {
+        log.info("empl {} ", empl);
+        log.info("empl.getAttendance {} ", empl.getAttendance());
+        if(state.equals("gowork")) {
+            MyCalendar myCalendar = new MyCalendar();
+            empl.setAttendance("출근");
+            empl.addMyCalendar(myCalendar);
+            model.addAttribute("workDate", myCalendar.getCalWorkDate());
+            myCalendarRepository.save(myCalendar);
+        } else if(state.equals("gohome")) {
+            MyCalendar myCalendar = new MyCalendar();
+            empl.setAttendance("퇴근");
+            empl.addMyCalendar(myCalendar);
+            model.addAttribute("workDate", myCalendar.getCalWorkDate());
+            myCalendarRepository.save(myCalendar);
+        }
+        emplRepository.save(empl);
+        return empl;
     }
 }
 
