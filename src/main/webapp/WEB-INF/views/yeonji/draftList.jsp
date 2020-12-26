@@ -1,10 +1,33 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
-<meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
-<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}"/>
-<!-- head -->
-<jsp:include page="../layout/header.jsp" />
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}"/>
+
+    <title>AIO</title>
+
+    <!-- 부트스트랩 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Custom styles for this page -->
+    <link href="/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="/node_modules/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/node_modules/gentelella/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+
+    <link href="/node_modules/gentelella/build/css/custom.css" rel="stylesheet">
+    <script src="/node_modules/gentelella/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Custom styles for this template -->
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 <!-- head -->
@@ -25,15 +48,16 @@
         <div class="right_col" role="main">
 
             <div class="">
-                <div class="page-title">
-                    <div class="title_left">
-                        <h3>발주서 작성</h3>
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <div style="float:left">
+                            <h3 class="m-0 font-weight-bold text-primary">발주서 작성</h3>
+                        </div>
                     </div>
-                </div>
-                <div id="datatable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
+                    <div class="card-body">
                     <form id="corpSelectForm">
                         <%--     거래처 등록 row    --%>
-                        <div class="row p-4 bg-white ">
+                        <div class="row p-4 bg-gray-200 m-2">
                             <div class="col-md-3">
                                 거래처
                             </div>
@@ -42,20 +66,31 @@
                                 <input type="hidden" value="" />
                             </div>
                             <div class="col-md-2">
-                                <input type="button" value="거래처 검색" />
+                                <button type="button" class="btn btn-primary" >
+                                    거래처 검색
+                                </button>
                             </div>
                         </div>
                         <%--     납기일 row    --%>
-                        <div class="row">
-                            <label>납기일:</label>
-                            <input type="date" name="orders_regdate"/>
-                            <button type="button" name="registerModalBtn" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#registerModal">+
-                            </button>
+                        <div class="row p-3">
+                            <div class="col-md-11">
+                                <div style="float:left" class="p-1">
+                                    <label>납기일:</label>
+                                    <input type="date" name="orders_regdate"/>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div  style="float: right" class="p-1">
+                                    <button type="button" name="registerModalBtn" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#registerModal">+
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                         <%--     발주물품 테이블 row    --%>
                         <div class="row">
-                            <table id="" class="table table-striped table-bordered dataTable">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
                                     <th>No.</th>
@@ -95,12 +130,15 @@
                                 </tfoot>
                             </table>
                         </div>
-
-                        <div class="row">
-                            <input type="submit" value="발주요청">
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-md-12">
+                                <input type="submit" class="btn bg-gradient-primary" value="발주요청">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                            </div>
                         </div>
                     </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -135,7 +173,9 @@
                                                 <span>${valid_goods}</span>
                                             </div>
                                             <div class="form-group col-md-3 com-sm-3">
-                                                <button class="goodsSearch">물품 검색</button>
+                                                <button type="button" class="btn btn-primary goodsSearch" >
+                                                    물품 검색
+                                                </button>
                                             </div>
                                         </div>
 
@@ -224,7 +264,6 @@
         <div class="modal" id="updateModal">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
-
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
@@ -303,8 +342,6 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
@@ -377,9 +414,8 @@
         </script>
 
 <!-- script -->
+
 <jsp:include page="../layout/script.jsp" />
-
-
 <!-- /script -->
 </body>
 </html>
