@@ -83,6 +83,7 @@ public class SlipController {
         Slip slip = slipService.viewSlip(slipId);
         slipList.add(slip);
         model.addAttribute("slipList", slipList); // List의 정보를 가져오기.
+        model.addAttribute("title", "승인 대기 전표 상세보기");
         return "finance" + OA + "DetailView";
     }
 
@@ -212,6 +213,19 @@ public class SlipController {
 
         return "thymeleaf/searchList" + SM;
     }
+
+
+
+    @GetMapping(SM + "/{slipId}")
+    public String viewStatementManagement(@PathVariable Long slipId, Model model) {
+        List<Slip> slipList = new ArrayList<>();
+        Slip slip = slipService.viewSlip(slipId);
+        slipList.add(slip);
+        model.addAttribute("slipList", slipList); // List의 정보를 가져오기.
+        model.addAttribute("title", "전표 상세보기");
+        return "finance" + OA + "DetailView";
+    }
+
 
 
     // 전표관리 수정 Form

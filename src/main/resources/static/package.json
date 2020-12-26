@@ -5,7 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "bootstrap": "^4.5.3",
-    "gentelella": "^1.4.0"
+    "gentelella": "^1.4.0",
+    "mark.js": "^8.11.1"
   },
   "devDependencies": {
     "magic-snowflakes": "^4.1.6"

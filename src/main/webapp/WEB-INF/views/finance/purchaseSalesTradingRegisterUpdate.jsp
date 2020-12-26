@@ -1,18 +1,34 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
-
 <html>
 <head>
     <title>매출 / 매입 거래서</title>
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/node_modules/gentelella/vendors/font-awesome/css/font-awesome.min.css"/>
-    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="/node_modules/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/node_modules/gentelella/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="/node_modules/gentelella/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="/node_modules/gentelella/vendors/animate.css/animate.min.css" rel="stylesheet">
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+    <script src="/node_modules/gentelella/vendors/jquery/dist/jquery.min.js"></script>
+    <jsp:include page="../layout/header.jsp" />
 </head>
-<body>
-<div class="container mt-5">
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <!-- sidebar -->
+        <jsp:include page="../layout/side-bar.jsp"/>
+        <!-- /sidebar -->
+
+        <!-- top-nav -->
+        <jsp:include page="../layout/top-nav.jsp">
+            <jsp:param name="empl" value="${empl}"/>
+        </jsp:include>
+        <!-- top-nav -->
+        <div class="right_col" role="main">
     <a onclick="history.back()"><h1><i class="fa far fa-reply-all"></i></h1></a>
     <div class="row mb-5">
         <span class="col-12 text-center">
@@ -114,11 +130,19 @@
             </div>
         </div>
     </c:forEach>
+    </div>
+        <!-- footer  -->
+        <jsp:include page="../layout/footer.jsp" />
+        <!-- /footer  -->
+    </div>
 </div>
 <script>
     function registerClick() {
         alert("확인하시겠습니까?")
     }
 </script>
+<!-- script -->
+<jsp:include page="../layout/script.jsp" />
+<!-- /script -->
 </body>
 </html>

@@ -2,13 +2,36 @@
 <html>
 <head>
     <title>손익계산서</title>
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/node_modules/gentelella/vendors/font-awesome/css/font-awesome.min.css"/>
-    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link href="/node_modules/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/node_modules/gentelella/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="/node_modules/gentelella/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="/node_modules/gentelella/vendors/animate.css/animate.min.css" rel="stylesheet">
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+    <script src="/node_modules/gentelella/vendors/jquery/dist/jquery.min.js"></script>
+    <jsp:include page="../layout/header.jsp" />
 </head>
-<body>
-<div class="container mt-5">
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+
+        <!-- sidebar -->
+        <jsp:include page="../layout/side-bar.jsp" />
+        <!-- /sidebar -->
+
+        <!-- top-nav -->
+        <jsp:include page="../layout/top-nav.jsp" >
+            <jsp:param name="empl" value="${empl}"/>
+        </jsp:include>
+        <!-- top-nav -->
+
+
+        <!-- content -->
+        <div class="right_col" role="main">
+
     <div class="row">
         <span class="col-12 text-center mt-5">
            <h2>손익계산서</h2>
@@ -309,7 +332,10 @@
                 </tbody>
             </table>
         </div>
+        </div>
+        <jsp:include page="../layout/footer.jsp" />
     </div>
+</div>
 <script>
     function selectMonth() {
         var monthSelect = document.getElementById("months");
@@ -317,5 +343,8 @@
         location.href = "/finance/incomeStatement?months=" + months
     }
 </script>
+<!-- script -->
+<jsp:include page="../layout/script.jsp" />
+<!-- /script -->
 </body>
 </html>

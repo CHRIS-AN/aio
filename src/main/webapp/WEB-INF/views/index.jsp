@@ -168,7 +168,7 @@
                 console.log("도시이름  : "+ resp.name );
                 console.log("구름  : "+ (resp.clouds.all) +"%" );
                 $("#weatherIcon").attr("src", img_url)
-                $("#temp").html(resp.main.temp- 273.15);
+                $("#temp").html(Math.floor(resp.main.temp - 273.15) + " ℃");
                 $("#weather").html(resp.weather[0].description);
                 $("#city").html(resp.name + ", " +  resp.sys.country);
                 $("#windy").html(resp.wind.speed + " m/s");

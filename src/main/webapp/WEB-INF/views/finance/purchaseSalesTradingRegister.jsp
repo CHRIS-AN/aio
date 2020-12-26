@@ -3,20 +3,19 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
-    <jsp:include page="../layout/header.jsp"/>
+    <title>전표 등록</title>
+    <link href="/node_modules/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/node_modules/gentelella/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="/node_modules/gentelella/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="/node_modules/gentelella/vendors/animate.css/animate.min.css" rel="stylesheet">
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+    <script src="/node_modules/gentelella/vendors/jquery/dist/jquery.min.js"></script>
+    <jsp:include page="../layout/header.jsp" />
+
 </head>
-
-<!--
-    매입전표(-)
-    -상품(화장품) 타 회사 화장품을 발주를하여, 제품을 매입
-
-    매출전표(+)
-    -외상매입금 (타 지점쪽에서 외상한 걸 회수)
-    -지급어음 (타 지점쪽에서 어음을 회수)
-    -미지급금 (다른 곳에서 미지급됐던 매출을 회수)
-    -선수수익 (타 지점에서 미리 금액을 지불하고, 원할 때 재고를 받음)
-
--->
 <body class="nav-md">
 <div class="container body">
     <div class="main_container">
@@ -25,7 +24,9 @@
         <!-- /sidebar -->
 
         <!-- top-nav -->
-        <jsp:include page="../layout/top-nav.jsp"/>
+        <jsp:include page="../layout/top-nav.jsp">
+            <jsp:param name="empl" value="${empl}"/>
+        </jsp:include>
         <!-- top-nav -->
         <div class="right_col" role="main">
             <div class="col-md-3"></div>
@@ -55,10 +56,10 @@
                                         <select name="tradingType" class="form-control has-feedback-left"
                                                 id="tradingType" onchange="tradingTypeKindChange(this)">
                                             <option disabled selected>전표 타입</option>
-                                            <option value="a">지출 결과서</option>
-                                            <option value="b">입금 보고서</option>
-                                            <option value="c">매출 거래</option>
-                                            <option value="d">매입 거래</option>
+                                            <option value="지출 결과서">지출 결과서</option>
+                                            <option value="입금 보고서">입금 보고서</option>
+                                            <option value="매출 거래">매출 거래</option>
+                                            <option value="매입 거래">매입 거래</option>
 
                                         </select>
                                     </div>
@@ -173,10 +174,12 @@
             </div>
             <div class="col-lg-3"></div>
         </div>
+        <!-- footer  -->
+        <jsp:include page="../layout/footer.jsp" />
+        <!-- /footer  -->
     </div>
 </div>
 <!-- script -->
-<jsp:include page="../layout/script.jsp"/>
 <script>
     function registerClick() {
         alert("확인하시겠습니까?")
@@ -199,10 +202,10 @@
         var purchaseSlip = ["계정과목을 선택해주세요.", "상품(화장품)"];
         var target = document.getElementById("slipCode");
 
-        if(e.value == "a") var type = expenditure;
-        else if(e.value == "b") var type = deposit;
-        else if(e.value == "c") var type = salesSlip;
-        else if(e.value == "d") var type = purchaseSlip;
+        if(e.value == "지출 결과서") var type = expenditure;
+        else if(e.value == "입금 보고서") var type = deposit;
+        else if(e.value == "매출 거래") var type = salesSlip;
+        else if(e.value == "매입 거래") var type = purchaseSlip;
 
         target.options.length = 0;
 
@@ -214,6 +217,9 @@
         }
     }
 </script>
+<!-- script -->
+<jsp:include page="../layout/script.jsp" />
+<!-- /script -->
 
 </body>
 </html>
