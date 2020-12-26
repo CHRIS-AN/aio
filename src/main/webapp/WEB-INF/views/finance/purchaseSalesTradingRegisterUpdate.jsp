@@ -56,10 +56,10 @@
 
                         <div class="form-group">
                             <i class="fa fas fa-tasks"></i>
-                            <input name="slip_code" type="text" class="form-control" id="slipCode"
-                                   placeholder="계정 코드" value="${slip.slip_code}">
+                            <input name="slipCode" type="text" class="form-control" id="slipCode"
+                                   placeholder="계정 코드" value="${slip.slipCode}">
                             <small class="form-text text-danger">
-                                ${valid_slip_code}
+                                ${valid_slipCode}
                             </small>
                         </div>
 
@@ -107,7 +107,6 @@
                                 <option>국민은행 2552125-211221</option>
                             </select>
                         </div>
-
 
                         <button type="submit" class="btn btn-outline-info mt-5" style="" onclick="registerClick()">전표 수정</button>
                     </div>

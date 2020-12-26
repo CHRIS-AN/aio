@@ -13,7 +13,4 @@ public interface SlipRepositoryExtention {
     Page<Slip> findByKeywordAndPayStatementType(String keyword, Pageable pageable);
 
     Page<Slip> findByKeywordAndPayStatementType(Pageable pageable);
-
-    Page<Slip> findByKeywordAndPayStatementTypeStartDateAfter(
-            String keyword, Pageable pageable, LocalDateTime now, LocalDateTime minusMonths);
 }

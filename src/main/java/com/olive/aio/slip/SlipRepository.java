@@ -16,7 +16,7 @@ public interface SlipRepository extends JpaRepository<Slip, Long>, SlipRepositor
     Slip findBySlipId(String SlipId);
 
     List<Slip> findByPayStatementntType(String payStatementntType);
-    String jpql = "SELECT add_months(sysdate, -6) FROM dual";
 
-    Page<Slip> findByPayStatementntTypeAndSlipDateBetweenAndSlipWriteContaining(String type, String startDate, String minusMonths, String keyword, Pageable pageable );
+    Page<Slip> findByPayStatementntTypeAndSlipDateBetweenAndSlipWriteContaining(
+            String type, String startDate, String minusMonths, String keyword, Pageable pageable );
 }

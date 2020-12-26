@@ -48,7 +48,7 @@
                         <div class="form-group mt-2">
                             <i class="fa fas fa-tasks"></i>
                             <label>계정 과목</label><br>
-                            : ${slip.slip_code}
+                            : ${slip.slipCode}
                         </div>
 
                         <div class="form-group mt-2">
@@ -114,23 +114,6 @@
                 </div>
             </span>
 
-
-
-
-
-<%--            <span class="col-12 text-center">--%>
-<%--                <form id="delete-form" action="/finance/outstandingAuthorizationDetailView/delete" method="post">--%>
-<%--                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
-<%--                     <span class="row form-group">--%>
-<%--                        <div class="col-3"></div>--%>
-<%--                        <div class="col-6" style="">--%>
-<%--                            <button type="submit">delete</button>--%>
-<%--                            <input type="hidden" value="${slip.slipId}" name="slipId">--%>
-<%--                        </div>--%>
-<%--                        <div class="col-3"></div>--%>
-<%--                     </span>--%>
-<%--                </form>--%>
-<%--             </span>--%>
         </div>
     </c:forEach>
 </div>
