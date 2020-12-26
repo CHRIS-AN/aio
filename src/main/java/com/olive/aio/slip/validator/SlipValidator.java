@@ -1,7 +1,6 @@
 package com.olive.aio.slip.validator;
 
 
-import com.olive.aio.employee.form.EmplForm;
 import com.olive.aio.slip.form.SlipForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

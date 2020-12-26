@@ -78,9 +78,6 @@ public class EmplService implements UserDetailsService {
                 case "영업":
                     role = "ROLE_SALES";
                     break;
-                case "회계":
-                    role = "ROLE_FINANCE";
-                    break;
                 case "물류":
                     role = "ROLE_LOGISTICS";
                     break;

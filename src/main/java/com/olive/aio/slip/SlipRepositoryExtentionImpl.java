@@ -25,8 +25,6 @@ public class SlipRepositoryExtentionImpl extends QuerydslRepositorySupport imple
                .and((slip.slipWrite.containsIgnoreCase(keyword))
         .or(slip.corp.containsIgnoreCase(keyword))));
 
-
-        System.out.println("쿼리문 : " + slipJPQLQuery);
         JPQLQuery<Slip> pageableQuery = getQuerydsl().applyPagination(pageable, slipJPQLQuery);
         QueryResults<Slip> slipQueryResults = pageableQuery.fetchResults();
         return new PageImpl<>(slipQueryResults.getResults(), pageable, slipQueryResults.getTotal());
