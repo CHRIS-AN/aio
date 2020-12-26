@@ -44,12 +44,10 @@
                     </li>
                     <li><a><i class="fa fa-clone"></i> 회계관리 <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="#">지출결의서</a></li>
-                            <li><a href="#">입금보고서</a></li>
-                            <li><a href="/finance/purchaseSalesTradingRegister">매출/매입거래</a></li>
+                            <li><a href="/finance/purchaseSalesTradingRegister">전표등록</a></li>
                             <li><a href="/finance/outstandingAuthorization">결제승인대기</a></li>
                             <li><a href="/finance/statementManagement/list">전표관리</a></li>
-                            <li><a href="#">손익계산서</a></li>
+                            <li><a href="/finance/incomeStatement">손익계산서</a></li>
                         </ul>
                     </li>
                 </ul>

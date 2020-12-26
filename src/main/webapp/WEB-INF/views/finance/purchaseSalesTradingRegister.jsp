@@ -5,6 +5,18 @@
 <head>
     <jsp:include page="../layout/header.jsp"/>
 </head>
+
+<!--
+    매입전표(-)
+    -상품(화장품) 타 회사 화장품을 발주를하여, 제품을 매입
+
+    매출전표(+)
+    -외상매입금 (타 지점쪽에서 외상한 걸 회수)
+    -지급어음 (타 지점쪽에서 어음을 회수)
+    -미지급금 (다른 곳에서 미지급됐던 매출을 회수)
+    -선수수익 (타 지점에서 미리 금액을 지불하고, 원할 때 재고를 받음)
+
+-->
 <body class="nav-md">
 <div class="container body">
     <div class="main_container">
@@ -22,7 +34,7 @@
                 <div class="x_panel">
                     <div class="x_title cus-title">
 
-                        <h2><i class="fa far fa-edit"></i> 매출/매입 거래서</h2>
+                        <h2><i class="fa far fa-edit"></i> 전표 등록</h2>
 
                         <ul class="nav navbar-right panel_toolbox">
                             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -40,10 +52,14 @@
                                 <div class="row form-group">
                                     <div class="form-group col-md-4">
                                         <span class="fa fas fa-archive form-control-feedback left"></span>
-                                        <select name="tradingType" class="form-control has-feedback-left" id="trading">
+                                        <select name="tradingType" class="form-control has-feedback-left"
+                                                id="tradingType" onchange="tradingTypeKindChange(this)">
                                             <option disabled selected>전표 타입</option>
-                                            <option>매출 거래</option>
-                                            <option>매입 거래</option>
+                                            <option value="a">지출 결과서</option>
+                                            <option value="b">입금 보고서</option>
+                                            <option value="c">매출 거래</option>
+                                            <option value="d">매입 거래</option>
+
                                         </select>
                                     </div>
                                     <div class="col-md-2"></div>
@@ -73,18 +89,12 @@
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <span class="fa fas fa-tasks form-control-feedback left"></span>
-                                        <select name="slip_code" class="form-control has-feedback-left" id="code">
-                                            <option disabled selected>계정 과목</option>
-                                            <option>상품 (701)</option>
-                                            <option>외상매입금 (801)</option>
-                                            <option>지급어음 (802)</option>
-                                            <option>미지급금 (803)</option>
-                                            <option>예수금 (804)</option>
-                                            <option>선수수익 (805)</option>
+                                        <select name="slipCode" class="form-control has-feedback-left"
+                                                id="slipCode">
+                                            <option disabled selected>선택해주세요. (계정 과목)</option>
                                         </select>
-
                                         <small class="form-text text-danger">
-                                            ${valid_slip_code}
+                                            ${valid_slipCode}
                                         </small>
                                     </div>
                                 </div>
@@ -106,7 +116,7 @@
                                         <i class="fa fas fa-dollar form-control-feedback left"></i>
                                         <input name="slip_account" type="text" class="form-control has-feedback-left"
                                                id="money" onkeyup="numberWithCommas(this.value)"
-                                               placeholder="거래 금액" value="${slip.slip_account}">
+                                               placeholder="거래 금액" value="${slip.slip.account}">
                                         <small class="form-text text-danger">
                                             ${valid_slip_account}
                                         </small>
@@ -142,9 +152,9 @@
                                         <select name="paymentType" class="form-control" id="paymentType">
                                             <option disabled selected>결제 수단</option>
                                             <option>현금</option>
-                                            <option>신한은행 213123-123-123213</option>
-                                            <option>하나은행 86391-11-1123321</option>
-                                            <option>국민은행 2552125-211221</option>
+                                            <option>신한은행 23123-144-993213 안정민</option>
+                                            <option>하나은행 86391-11-7428321 안정민</option>
+                                            <option>국민은행 2552125-9231111 안정민</option>
                                         </select>
                                     </div>
                                 </div>
@@ -178,8 +188,30 @@
             y = parseInt(x)/10;
         }
         $("#money").val(x.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-        $("#moneyVAT").val((""+y).replace(/\B(?=(\d{3})+(?!\d))/g, ",")); // NaN 뜸 !! , 을인식을 하니 수정해야함.
+        $("#moneyVAT").val((""+y).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+    }
 
+    function tradingTypeKindChange(e) {
+        var expenditure = ["계정과목을 선택해주세요.", "소모품비", "회의비", "복리후생비", "여비교통비", "접대비", "통신비", "인쇄비",
+                    "교육훈련비", "원재료비", "급여", "잡금", "기부금", "잡손실", "법인세"];
+        var deposit = ["계정과목을 선택해주세요.", "이자수익", "관세환급금", "임대료", "잡이익", "국고보조금"];
+        var salesSlip = ["계정과목을 선택해주세요.", "외상매입금", "지급어음", "미지급금", "선수수익"];
+        var purchaseSlip = ["계정과목을 선택해주세요.", "상품(화장품)"];
+        var target = document.getElementById("slipCode");
+
+        if(e.value == "a") var type = expenditure;
+        else if(e.value == "b") var type = deposit;
+        else if(e.value == "c") var type = salesSlip;
+        else if(e.value == "d") var type = purchaseSlip;
+
+        target.options.length = 0;
+
+        for (typeChoice in type) {
+            var opt = document.createElement("option");
+            opt.value = type[typeChoice];
+            opt.innerHTML = type[typeChoice];
+            target.appendChild(opt);
+        }
     }
 </script>
 

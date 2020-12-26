@@ -29,7 +29,7 @@ public class Slip {
     private String slipWrite; // 전표 작성자
 
     @NotBlank(message="계정코드를 선택해주세요.")
-    private String slip_code; // 계정코드
+    private String slipCode; // 계정코드
 
     @NotBlank(message="거래처를 선택해주세요.")
     private String corp; // 거래처

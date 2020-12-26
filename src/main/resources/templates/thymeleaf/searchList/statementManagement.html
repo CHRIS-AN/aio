@@ -22,7 +22,7 @@
                 <div class="col-6"></div>
                 <h2><i class="fa fas fa-search col-1 mt-5"></i></h2>
                 <span class="col-4 mt-5">
-                    <form th:action="@{/finance/search/slip}" method="get">
+                    <form th:action="@{/finance/search/slipmanagement}" method="get">
                         <input class="form-control" name="keyword" type="search" placeholder="작성자명으로 검색해주세요." aria-label="Search" />
                     </form>
                 </span>
@@ -57,6 +57,7 @@
                         <th style="text-align: center">거래처명</th>
                         <th style="text-align: center">적요</th>
                         <th style="text-align: center">작성자명</th>
+                        <th style="text-align: center">Excel</th>
                     </tr>
                     </thead>
 
@@ -65,11 +66,14 @@
                             <td th:text="${slip.slipId}"></td>
                             <td th:text="${slip.slipDate}"></td>
                             <td th:text="${slip.tradingType}"></td>
-                            <td th:text="${slip.slip_code}"></td>
+                            <td th:text="${slip.slipCode}"></td>
                             <td th:text="${slip.slip_account}"></td>
                             <td class="context" th:text="${slip.corp}"></td>
                             <td th:text="${slip.slip_summary}"></td>
                             <td class="context" th:text="${slip.slipWrite}"></td>
+                            <td>
+                                 <a th:href="@{/finance/downloadExcel(slipId=${slip.slipId})}">download</a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -132,8 +136,6 @@
     function selectMonth() {
         var monthSelect = document.getElementById("months");
         var months = monthSelect.options[document.getElementById("months").selectedIndex].value;
-        console.log(monthSelect)
-        console.log(months)
         location.href = "/finance/statementManagement/list?months=" + months;
     }
 </script>

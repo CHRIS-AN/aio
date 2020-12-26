@@ -41,17 +41,5 @@ public class SlipRepositoryExtentionImpl extends QuerydslRepositorySupport imple
         return new PageImpl<>(slipQueryResults.getResults(), pageable, slipQueryResults.getTotal());
     }
 
-    @Override
-    public Page<Slip> findByKeywordAndPayStatementTypeStartDateAfter(
-            String keyword, Pageable pageable, LocalDateTime now, LocalDateTime minusMonths) {
-        QSlip slip = QSlip.slip;
-        JPQLQuery<Slip> slipJPQLQuery = from(slip).where((slip.payStatementntType.containsIgnoreCase("승인")
-                .and((slip.slipWrite.containsIgnoreCase(keyword))
-                        .or(slip.corp.containsIgnoreCase(keyword)))
-                ));
-
-        return null;
-    }
-
 
 }
