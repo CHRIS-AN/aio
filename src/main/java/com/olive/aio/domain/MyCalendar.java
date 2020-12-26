@@ -1,5 +1,6 @@
 package com.olive.aio.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -16,6 +17,7 @@ public class MyCalendar {
     @Id @GeneratedValue
     private Long Id;
 
+    @JsonBackReference
     @ManyToOne
     private Empl empl;
 

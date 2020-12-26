@@ -6,6 +6,7 @@ import com.olive.aio.employee.EmplRepository;
 import com.olive.aio.employee.form.EmplUpdateForm;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +23,7 @@ public class MyPageService {
     private final EmplRepository emplRepository;
     private final ModelMapper modelMapper;
     private final MyCalendarRepository myCalendarRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public void updateMyInfo(Empl empl, EmplUpdateForm myInfoForm) {
         modelMapper.map(myInfoForm, empl);
@@ -40,5 +42,10 @@ public class MyPageService {
         });
 
         return jsonList;
+    }
+
+    public void newPw(Empl empl, String newPw) {
+        empl.setPassword(passwordEncoder.encode(newPw));
+        emplRepository.save(empl);
     }
 }

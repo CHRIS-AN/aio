@@ -6,8 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!--    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css"/>-->
-<!--    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>-->
     <!-- Bootstrap -->
     <link href="/node_modules/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -17,6 +15,7 @@
     <script src="/node_modules/gentelella/vendors/jquery/dist/jquery.min.js"></script>
 
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/css/search.css" rel="stylesheet">
     <title>AIO</title>
 </head>
 
@@ -26,85 +25,217 @@
         <div th:replace="thymeleaf/fragments.html :: side-bar"></div>
 
         <div th:replace="thymeleaf/fragments.html :: top-nav"></div>
-
         <div class="right_col" role="main">
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="x_panel">
-                        <form id="frm" action="/readCorwork" method="get">
-                            <div class="col-md-3">
-                                <label>부서명 </label>
-                                <select class="custom-select-sm" name="dept">
-                                    <option value="인사" th:selected="${dept == '인사'}">인사</option>
-                                    <option value="제품" th:selected="${dept == '제품'}">제품</option>
-                                    <option value="영업" th:selected="${dept == '영업'}">영업</option>
-                                    <option value="물류" th:selected="${dept == '물류'}">물류</option>
-                                    <option value="회계" th:selected="${dept == '회계'}">회계</option>
-                                </select>
-                            </div>
-                            <div class="col-md-5"></div>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control col-md-10" th:value="${keyword}" name="keyword" />
-                                <button type="submit" class="btn btn-default"><h3><i class="fa fa-search"></i></h3></button>
-                            </div>
-                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                        </form>
+            <div class="col-10 m-auto">
+                <div class="row mt-lg-5 ml-3">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <form id="frm" action="/searchCorwork" method="get">
+                                <div class="col-md-4 m-3">
+                                    <select class="form-control col-md-4 select-form p-2" name="dept">
+                                        <option value="">부서명</option>
+                                        <option value="인사" th:selected="${dept == '인사'}">인사</option>
+                                        <option value="제품" th:selected="${dept == '제품'}">제품</option>
+                                        <option value="영업" th:selected="${dept == '영업'}">영업</option>
+                                        <option value="물류" th:selected="${dept == '물류'}">물류</option>
+                                        <option value="회계" th:selected="${dept == '회계'}">회계</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 col-sm-3 m-3 float-right">
+                                    <input type="text" class="form-control col-md-9 text-form p-2"
+                                           th:value="${keyword}" name="keyword" placeholder="사원이름으로 검색"/>
+
+                                    <button type="submit" class="btn btn-default"><h4><i class="fa fa-search"></i></h4>
+                                    </button>
+                                </div>
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="x_panel">
-                        <div class="x_title">
-
-                        </div>
-                        <div class="x_content">
-                            <div class="col-md-3" th:each= "empl : ${emplList}">
-                                <div class="card m-3" style="width: 350px">
-                                    <img th:src="${empl.photo}" class="card-img-top" alt="profileImage">
-                                    <div class="card-body">
-                                        <h4 class="card-title" th:text="${empl.name}">name</h4>
-                                        <p class="card-text" th:text="${empl.dept}">dept</p>
-                                        <a href="#" class="btn btn-primary stretched-link">Details</a>
+                <div class="row mt-3">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_content m-2">
+                            <div class="col-md-3" th:each="item : ${emplList}">
+                                <div class="card m-3 " style="width: 250px">
+                                    <div class="card-header">
+                                        <span style="color: #372C81" th:text="${item.emplId}"></span>
+                                    </div>
+                                    <div class="card-body ">
+                                        <h3 class="card-title d-inline-block" th:text="${item.name}">name</h3>
+                                        <p class="card-text" th:text="${item.dept}">dept</p>
+                                        <a th:attr="onclick=|showDetails('${item.emplId}', '${item.name}', '${item.address}', '${item.phone}',
+                                                                            '${item.dept}', '${item.photo}', '${item.email}', '${item.work_state}', '${item.attendance}'
+                                                                             , '${item.emplRegdate}', '${item.emplResigdate}')|"
+                                           class="btn btn-primary emplBox stretched-link">Details</a>
+                                        <a th:if="${#strings.equals(item.attendance, '출근')}" th:text="${item.attendance}" class="btn btn-danger"></a>
+                                        <a th:if="${#strings.equals(item.attendance, '퇴근')}" th:text="${item.attendance}" class="btn btn-dark"></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row justify-content-center mt-5">
-                        <div class="col-sm-10">
-                            <nav>
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item" th:classappend="${!emplList.hasPrevious()}? disabled">
-                                        <a th:href="@{'/searchCorwork?keyword=' + ${keyword} + '&page=' + ${emplList.getNumber() - 1}}"
-                                           class="page-link" tabindex="-1" aria-disabled="true">
-                                            Previous
-                                        </a>
-                                    </li>
-                                    <li class="page-item" th:classappend="${i == emplList.getNumber()}? active"
-                                        th:each="i: ${#numbers.sequence(0, emplList.getTotalPages() - 1)}">
-                                        <a th:href="@{'/readCorwork?keyword=' + ${keyword} + '&page=' + ${i}}"
-                                           class="page-link" href="#" th:text="${i + 1}">1</a>
-                                    </li>
-                                    <li class="page-item" th:classappend="${!emplList.hasNext()}? disabled">
-                                        <a th:href="@{'/readCorwork?keyword=' + ${keyword} + '&page=' + ${emplList.getNumber() + 1}}"
-                                           class="page-link">
-                                            Next
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
+                        <div class="row justify-content-center mt-5">
+                            <div class="col-sm-10">
+                                <nav>
+                                    <ul class="pagination justify-content-center">
+                                        <li class="page-item" th:classappend="${!emplList.hasPrevious()}? disabled">
+                                            <a th:href="@{'/searchCorwork?dept=' + ${dept} + '&keyword=' + ${keyword} + '&page=' + ${emplList.getNumber() - 1}}"
+                                               class="page-link" tabindex="-1" aria-disabled="true">
+                                                Previous
+                                            </a>
+                                        </li>
+                                        <li class="page-item" th:classappend="${i == emplList.getNumber()}? active"
+                                            th:each="i: ${#numbers.sequence(0, emplList.getTotalPages() - 1)}">
+                                            <a th:href="@{'/searchCorwork?dept=' + ${dept} + '&keyword=' + ${keyword} + '&page=' + ${i}}"
+                                               class="page-link" href="#" th:text="${i + 1}">1</a>
+                                        </li>
+                                        <li class="page-item" th:classappend="${!emplList.hasNext()}? disabled">
+                                            <a th:href="@{'/searchCorwork?dept=' + ${dept} + '&keyword=' + ${keyword} + '&page=' + ${emplList.getNumber() + 1}}"
+                                               class="page-link">
+                                                Next
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal" id="modal">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h2 class="modal-title">사원 정보</h2>
+                            <button type="button" id="close" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <div class="col-md-4">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <img id="photo" src="" width="200px" height="auto" />
+                                    </div>
+                                    <div class="row mt-lg-4 my-2">
+                                        <h2 id="name"></h2>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <span id="dept"></span>
+                                    </div>
+                                    <div id="gowork" class="row mt-2">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8 mt-lg-3">
+                                <div class="row my-lg-2 info-box">
+                                    <label class="col-md-4">사원번호</label>
+                                    <span class="col-md-8" id="emplId"></span>
+                                </div>
+                                <div class="row my-lg-2 info-box">
+                                    <label class="col-md-4">연락처</label>
+                                    <span class="col-md-8" id="phone"></span>
+                                </div>
+                                <div class="row my-lg-2 info-box">
+                                    <label class="col-md-4">Email</label>
+                                    <span class="col-md-8" id="email"></span>
+                                </div>
+                                <div class="row my-lg-2 info-box">
+                                    <label class="col-md-4">주소</label>
+                                    <span class="col-md-8" id="address"></span>
+                                </div>
+                                <div class="row my-lg-2 info-box">
+                                    <label class="col-md-4">입사일자</label>
+                                    <span class="col-md-8" id="regdate"></span>
+                                </div>
+                                <div class="row my-lg-2 info-box">
+                                    <label class="col-md-4">재직상태</label>
+                                    <span class="col-md-8" id="workState"></span>
+                                </div>
+                                <div class="row my-lg-2 info-box">
+                                    <label class="col-md-4">퇴사일자</label>
+                                    <span class="col-md-8" id="resigdate"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
+
+
         <footer th:replace="thymeleaf/fragments.html :: footer"></footer>
     </div>
 </div>
+<script>
+    // <a th:attr="onclick=|showDetails('${item.emplId}', '${item.name}', '${item.address}', '${item.phone}',
+    //'${item.dept}', '${item.photo}', '${item.email}', '${item.work_state}', '${item.attendance}' )|"
+    function showDetails(emplId, name, address, phone, dept, photo, email, workState, attendance, regDate, resigDate) {
+
+        if(resigDate == null) {
+            resigDate = "";
+        }
+
+        let $modal = $('#modal');
+        let $close = $("#close");
+
+
+        // 선언
+       let $photo = $("#photo");
+        let $name = $("#name");
+        let $dept = $("#dept");
+        let $emplId = $("#emplId");
+        let $phone = $("#phone");
+        let $email = $("#email");
+        let $address = $("#address");
+        let $regdate = $("#regdate");
+        let $workState = $("#workState");
+        let $resigdate = $("#resigdate");
+        let $gowork = $("#gowork");
+        let html = "";
+
+        // 데이터 넣기
+        if(photo == null) {
+            $photo.attr("src", "/images/default-image.png");
+        } else {
+            $photo.attr("src", photo);
+        }
+
+        $name.html(name)
+        $dept.html(dept)
+        $emplId.html(emplId)
+        $phone.html(phone)
+        $email.html(email)
+        $address.html(address)
+        $regdate.html(regDate)
+        $workState.html(workState)
+        $resigdate.html(resigDate)
+
+        if(attendance === "출근") {
+            html += "<a class='btn btn-danger'>" + attendance + "</a>";
+        } else if (attendance === "퇴근") {
+            html += "<a class='btn btn-dark'>" + attendance + "</a>";
+        }
+
+        $gowork.html(html);
+
+
+        $close.click(function () {
+            $modal.hide();
+        });
+
+        $modal.show();
+
+    }
+</script>
 <script src="/js/bootstrap.bundle.min.js"></script>
 <!-- Custom scripts for all pages-->
 <script src="/js/sb-admin-2.min.js"></script>

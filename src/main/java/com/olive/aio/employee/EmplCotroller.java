@@ -37,6 +37,9 @@ public class EmplCotroller {
 
             return EMPL_VIEW_PREFIX + "manage";
         }
+
+        emplForm.setEmplResigdate("");
+
         emplService.saveEmpl(emplForm);
         return "redirect:/hr";
     }

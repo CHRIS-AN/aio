@@ -3039,25 +3039,8 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     margin-left: 0
 }
 
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 1000;
-    display: none;
-    float: left;
-    min-width: 10rem;
-    padding: .5rem 0;
-    margin: .125rem 0 0;
-    font-size: .85rem;
-    color: #858796;
-    text-align: left;
-    list-style: none;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #e3e6f0;
-    border-radius: .35rem
-}
+/*
+*/
 
 .dropdown-menu-left {
     right: auto;
