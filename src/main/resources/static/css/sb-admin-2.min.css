@@ -519,6 +519,10 @@ pre code {
     margin-left: auto
 }
 
+/* === [ 입고관리 ] === */
+#textIndex h3{ color: red;!important;
+font-size: 2em; }
+
 /*@media (min-width: 576px) {*/
 /*    .container, .container-sm {*/
 /*        max-width: 540px*/
