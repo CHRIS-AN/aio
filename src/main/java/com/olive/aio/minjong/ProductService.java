@@ -11,7 +11,7 @@ public interface ProductService {
 
     List<Product> productList(Product product);
 
-    void insertProduct(Product product, Long corp_id);
+    void insertProduct(Product product);        //, Long corp_id
 
     Product getProduct(Product product);
 

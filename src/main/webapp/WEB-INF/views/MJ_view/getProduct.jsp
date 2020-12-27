@@ -53,7 +53,7 @@
                     </tr>
                     <tr>
                         <td>담당자</td>
-                        <td><input type="text" name="empl" value="${product.empl}" disabled/></td>
+                        <td><input type="text" name="empl" value="${product.empl.name}" disabled/></td>
                     </tr>
                     <tr>
                         <td>단위</td>

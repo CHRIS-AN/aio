@@ -1,6 +1,5 @@
 package com.olive.aio.minjong;
 
-import com.olive.aio.corp.Corp;
 import com.olive.aio.domain.Empl;
 import com.olive.aio.employee.CurrentEmpl;
 import lombok.RequiredArgsConstructor;
@@ -42,14 +41,14 @@ public class ProductController {
 
     @GetMapping("/insertProduct")
     public String insertProductView(@CurrentEmpl Empl empl, Product product, Model model){
-        List<Corp> corpsList = productService.corpsList();      //corp 정보 가져오기
+//        List<Corp> corpsList = productService.corpsList();      //corp 정보 가져오기
         model.addAttribute("empl",empl);
-        model.addAttribute("corpsList", corpsList);
+//        model.addAttribute("corpsList", corpsList);
         return "MJ_view/insertProduct";
     }
 
     @PostMapping("/insertProduct")
-    public String insertProduct(Long corp_id, @CurrentEmpl Empl empl, @Valid Product product, Errors errors, Model model) {
+    public String insertProduct(@CurrentEmpl Empl empl, @Valid Product product, Errors errors, Model model) {       //Long corp_id
         if(errors.hasErrors()) {
             //제품 등록 실패시, 입력 데이터를 유지
             model.addAttribute("product", product);
@@ -68,7 +67,7 @@ public class ProductController {
 //            return "/insertProduct";
 //        }
         product.setEmpl(empl);
-        productService.insertProduct(product, corp_id);
+        productService.insertProduct(product);      //, corp_id
         return "redirect:productList";
     }
 

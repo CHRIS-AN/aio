@@ -26,9 +26,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
-    public void insertProduct(Product product, Long corp_id) {
-       Corp corp = corpRepo.findById(corp_id).get();
-       product.setCorp(corp);
+    public void insertProduct(Product product) {        //, Long corp_id
+//       Corp corp = corpRepo.findById(corp_id).get();
+//       product.setCorp(corp);
        productRepo.save(product);
     }
 
