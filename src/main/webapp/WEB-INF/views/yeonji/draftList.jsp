@@ -55,89 +55,91 @@
                         </div>
                     </div>
                     <div class="card-body">
-                    <form id="corpSelectForm">
-                        <%--     거래처 등록 row    --%>
-                        <div class="row p-4 bg-gray-200 m-2">
-                            <div class="col-md-3">
-                                거래처
-                            </div>
-                            <div class="col-md-7">
-                                <span> 거래처를 등록해주세요.</span>
-                                <input type="hidden" value="" />
-                            </div>
-                            <div class="col-md-2">
-                                <button type="button" class="btn btn-primary" >
-                                    거래처 검색
-                                </button>
-                            </div>
-                        </div>
-                        <%--     납기일 row    --%>
-                        <div class="row p-3">
-                            <div class="col-md-11">
-                                <div style="float:left" class="p-1">
-                                    <label>납기일:</label>
-                                    <input type="date" name="orders_regdate"/>
+                        <form id="corpSelectForm">
+                            <%--     거래처 등록 row    --%>
+                            <div class="row p-4 bg-gray-200 m-2">
+                                <div class="col-md-3">
+                                    거래처
                                 </div>
-                            </div>
-                            <div class="col-md-1">
-                                <div  style="float: right" class="p-1">
-                                    <button type="button" name="registerModalBtn" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#registerModal">+
+                                <div class="col-md-7">
+                                    <span> 거래처를 등록해주세요.</span>
+                                    <input type="hidden" value="" />
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-primary" >
+                                        거래처 검색
                                     </button>
                                 </div>
                             </div>
-                        </div>
-                        <%--     발주물품 테이블 row    --%>
-                        <div class="row">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>상품명</th>
-                                    <th>단위</th>
-                                    <th>가격</th>
-                                    <th>수량</th>
-                                    <th>합계</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:set var = "totcnt" value = "0" />
-                                <c:set var = "totprice" value = "0" />
-                                <c:forEach var="d" items="${draft}">
-                                    <tr id="tr${d.draft_seq}" onclick="update()" data-toggle="modal" data-target="#updateModal"
-                                        data-draftseq='${d.draft_seq}' data-draftcnt='${d.draft_cnt}' data-draftprodprice='${d.draft_prod_price}' >
-                                        <td>${d.draft_seq}</td>
-                                        <td>어떤 물건이냐?</td>
-                                        <td>단위는?</td>
-                                        <td>가격은?</td>
-                                        <td>${d.draft_cnt}</td>
-                                        <td>${d.draft_prod_price}</td>
-                                        <c:set var= "totcnt" value="${totcnt + d.draft_cnt}"/>
-                                        <c:set var= "totprice" value="${totprice + d.draft_prod_price}"/>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th>총수량:<c:out value="${totcnt}"/> 개</th>
-                                        <th>총합계:<c:out value="${totprice}"/> 원</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                        </div>
-                        <div class="row text-center">
-                            <div class="col-md-12">
-                                <input type="submit" class="btn bg-gradient-primary" value="발주요청">
-                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                            <%--     납기일 row    --%>
+                            <div class="row p-3">
+                                <div class="col-md-11">
+                                    <div style="float:left" class="p-1">
+                                        <label>납기일:</label>
+                                        <input type="date" name="orders_regdate"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div  style="float: right" class="p-1">
+                                        <button type="button" name="registerModalBtn" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#registerModal">+
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                            <%--     발주물품 테이블 row    --%>
+                            <div class="row">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>상품명</th>
+                                            <th>단위</th>
+                                            <th>가격</th>
+                                            <th>수량</th>
+                                            <th>합계</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <c:set var = "totcnt" value = "0" />
+                                        <c:set var = "totprice" value = "0" />
+                                        <c:forEach var="d" items="${draft}">
+                                            <tr id="tr${d.draft_seq}" onclick="update()" data-toggle="modal" data-target="#updateModal"
+                                                data-draftseq='${d.draft_seq}' data-prodname='${d.product.prodName}' data-prodbundle='${d.product.prod_bundle}'
+                                                data-sellprice='${d.product.sell_price}' data-draftcnt='${d.draft_cnt}' data-draftprodprice='${d.draft_prod_price}' >
+                                                <td>${d.draft_seq}</td>
+                                                <td>${d.product.prodName}</td>
+                                                <td>${d.product.prod_bundle}</td>
+                                                <td>${d.product.sell_price}</td>
+                                                <td>${d.draft_cnt}</td>
+                                                <td>${d.draft_prod_price}</td>
+                                                <c:set var= "totcnt" value="${totcnt + d.draft_cnt}"/>
+                                                <c:set var= "totprice" value="${totprice + d.draft_prod_price}"/>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th>총수량:<c:out value="${totcnt}"/> 개</th>
+                                            <th>총합계:<c:out value="${totprice}"/> 원</th>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col-md-12">
+                                    <%--                                <input type="submit" class="btn bg-gradient-primary" value="발주요청">--%>
+                                    <button type="submit"class="btn btn-primary">발주요청</button>
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -163,17 +165,17 @@
                                 </div>
                                 <div class="x_content">
                                     <form action="draftInsert" method="post" class="form needs-validation">
-
+                                        <input type="hidden" id="prod_id" name="prod_id">
                                         <div class="row">
                                             <div class="form-group has-feedback col-md-3 com-sm-3">
                                                 <label>발주 물품</label>
                                             </div>
                                             <div class="form-group has-feedback col-md-6 com-sm-6">
-                                                <span name="goods" class="goods" placeholder="물품을 등록해주세요">스킨</span>
+                                                <span name="goods" id="goods" class="goods" >물품을 등록해주세요</span>
                                                 <span>${valid_goods}</span>
                                             </div>
                                             <div class="form-group col-md-3 com-sm-3">
-                                                <button type="button" class="btn btn-primary goodsSearch" >
+                                                <button type="button" class="btn btn-primary goodsSearch" onclick="openWin()">
                                                     물품 검색
                                                 </button>
                                             </div>
@@ -184,7 +186,7 @@
                                                 <label>단위</label>
                                             </div>
                                             <div class="form-group has-feedback col-md-9 com-sm-9">
-                                                <span name="goodsunit" class="goodsunit" placeholder="정보 없음" >5</span>
+                                                <span name="goodsunit" id="goodsunit" class="goodsunit" >정보 없음</span>
                                                 <span>${valid_goodsunit}</span>
                                             </div>
                                         </div>
@@ -194,7 +196,7 @@
                                                 <label>가격</label>
                                             </div>
                                             <div class="form-group has-feedback col-md-9 com-sm-9">
-                                                <span name="goodsprice" class="goodsprice" placeholder="정보 없음">10</span>
+                                                <span name="goodsprice" id="goodsprice" class="goodsprice" >정보 없음</span>
                                                 <span>${valid_goodsprice}</span>
                                             </div>
                                         </div>
@@ -214,14 +216,14 @@
                                                 <label>합계</label>
                                             </div>
                                             <div class="form-group has-feedback col-md-9 com-sm-9">
-                                                <span class="goodssum" placeholder="0"></span>
+                                                <span class="goodssum" >0</span>
                                                 <input type="hidden" name="draft_prod_price" value="" class="form-control goodssum" id="amount" >
                                                 <span>${valid_amount}</span>
                                             </div>
                                         </div>
 
                                         <div class="form-group text-center has-feedback col-md-12 com-sm-12">
-                                            <input type="submit" id="newGoodsBtn" class="btn btn-default" value="등록"/>
+                                            <button type="submit"class="btn btn-primary">등록</button>
                                         </div>
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                     </form>
@@ -257,6 +259,10 @@
                 $("span.goodssum").html(sum);
                 $("input.goodssum").val(sum);
             });
+
+            function openWin(){
+                window.open("./productImport", "물품 목록", "width=1000, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes, left=400, top=100" );
+            }
         </script>
 
 
@@ -282,11 +288,13 @@
                                                 <label>발주 물품</label>
                                             </div>
                                             <div class="form-group has-feedback col-md-6 com-sm-6">
-                                                <span name="goods" class="goods" placeholder="물품을 등록해주세요">스킨</span>
+                                                <span name="goods" class="goods" id="goodsup">물품을 등록해주세요</span>
                                                 <span>${valid_goods}</span>
                                             </div>
                                             <div class="form-group col-md-3 com-sm-3">
-                                                <button class="goodsSearch">물품 검색</button>
+                                                <button class="btn btn-primary goodsSearch" onclick="openWin()">
+                                                    물품 검색
+                                                </button>
                                             </div>
                                         </div>
 
@@ -295,7 +303,7 @@
                                                 <label>단위</label>
                                             </div>
                                             <div class="form-group has-feedback col-md-9 com-sm-9">
-                                                <span name="goodsunit" class="goodsunit" placeholder="정보 없음" >5</span>
+                                                <span name="goodsunit" class="goodsunit" id="goodsunitup">정보 없음</span>
                                                 <span>${valid_goodsunit}</span>
                                             </div>
                                         </div>
@@ -305,7 +313,7 @@
                                                 <label>가격</label>
                                             </div>
                                             <div class="form-group has-feedback col-md-9 com-sm-9">
-                                                <span name="goodsprice" class="goodsprice2" placeholder="정보 없음">1000</span>
+                                                <span name="goodsprice" class="goodsprice2" id="goodspriceup">정보 없음</span>
                                                 <span>${valid_goodsprice}</span>
                                             </div>
                                         </div>
@@ -332,9 +340,9 @@
                                         </div>
 
                                         <div class="form-group text-center has-feedback col-md-12 com-sm-12">
-                                            <input type="button" id="deleteBtn" class="btn btn-default" value="삭제" data-toggle="modal"
-                                                   data-target="#deleteModal" onclick="draftDelete()"/>
-                                            <input type="submit" id="updateBtn" class="btn btn-default" value="수정"/>
+                                            <button type="button"class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#deleteModal" onclick="draftDelete()">삭제</button>
+                                            <button type="submit"class="btn btn-primary">수정</button>
                                         </div>
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                     </form>
@@ -350,10 +358,16 @@
             function update() {
                 $('#updateModal').on('show.bs.modal', function (event) {
                     var draftseq = $(event.relatedTarget).data('draftseq');
+                    var prodName = $(event.relatedTarget).data('prodname');
+                    var prodbundle = $(event.relatedTarget).data('prodbundle');
+                    var sellprice = $(event.relatedTarget).data('sellprice');
                     var draftcnt = $(event.relatedTarget).data('draftcnt');
                     var draftprodprice = $(event.relatedTarget).data('draftprodprice');
 
                     $(this).find("#draftseq").val(draftseq);
+                    $(this).find("#goodsup").text(prodName);
+                    $(this).find("#goodsunitup").text(prodbundle);
+                    $(this).find("#goodspriceup").text(sellprice);
                     $(this).find("#draftcnt").val(draftcnt);
                     $(this).find("#goodssum_1").text(draftprodprice);
                     $(this).find("#goodssum_2").val(draftprodprice);
@@ -396,7 +410,7 @@
                             <input type="hidden" id="deleteDraftId" name="draft_seq" value="">
                             <div class="modal-footer">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                                <input type="submit" class="btn btn-primary" value="확인" />
+                                <button type="submit"class="btn btn-primary">확인</button>
                             </div>
                         </form>
                     </div>
@@ -413,9 +427,9 @@
             }
         </script>
 
-<!-- script -->
+        <!-- script -->
 
-<jsp:include page="../layout/script.jsp" />
-<!-- /script -->
+        <jsp:include page="../layout/script.jsp" />
+        <!-- /script -->
 </body>
 </html>

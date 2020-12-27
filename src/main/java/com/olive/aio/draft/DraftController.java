@@ -1,5 +1,7 @@
 package com.olive.aio.draft;
 
+import com.olive.aio.minjong.Product;
+import com.olive.aio.minjong.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class DraftController {
     @Autowired
     private DraftService draftService;
 
+    @Autowired
+    private ProductService productService;
+
     // 발주물품 목록
     @GetMapping("draftList")
     public String DraftList(Model model, Draft draft){
@@ -30,8 +35,8 @@ public class DraftController {
 
     // 발주물품 등록
     @PostMapping("draftInsert")
-    public String draftInsert(Draft draft){
-        draftService.insertDraft(draft);
+    public String draftInsert(Draft draft, Long prod_id){
+        draftService.insertDraft(draft, prod_id);
         return "redirect:draftList";
     }
 
@@ -50,6 +55,14 @@ public class DraftController {
     public String draftDelete(Draft draft){
         draftService.deleteDraft(draft);
         return "redirect:draftList";
+    }
+
+    // 발주물품 검색
+    @GetMapping("productImport")
+    public String productList(Model model, Product product){
+        List<Product> productImport = productService.productList(product);
+        model.addAttribute("productImport", productImport);
+        return "yeonji/productImport";
     }
 
 }

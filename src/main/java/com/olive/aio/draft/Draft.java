@@ -1,10 +1,12 @@
 package com.olive.aio.draft;
 
+import com.olive.aio.minjong.Product;
 import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Data
 @Entity
@@ -25,5 +27,8 @@ public class Draft {
     //    @NotBlank
 //    @Pattern(regexp = "^[0-9]{1,50}$")
     private int draft_prod_price; //물품가격
+
+    @ManyToOne
+    Product product;
 
 }
