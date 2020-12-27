@@ -28,7 +28,7 @@
         .body::before {
             background-image: url("/images/login_wolf2.jpg");
             background-repeat: no-repeat;
-            background-size: fill;
+            background-size: cover;
             content: '';
             position: fixed;
             top: 0;

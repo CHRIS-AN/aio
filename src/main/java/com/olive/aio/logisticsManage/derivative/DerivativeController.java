@@ -1,42 +1,51 @@
 package com.olive.aio.logisticsManage.derivative;
 
+
+import com.olive.aio.domain.Testderivative;
+import com.olive.aio.domain.test.Testorders;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/logistics")
 public class DerivativeController {
 
+    private final DerivativeService derivativeService;
+    private final DerivativeRepository derivativeRepository;
+
     @GetMapping("/derivative")
-    public String derivList(Model mode){
-
-
+    public String derivWaitList(){
         return "logistic_manage/deriv_main";
     }
 
-//    @GetMapping("/come")
-//    public String test11(Model model){
-//        return "/logistic_manage/test1";
-//    }
+    @PostMapping("/deirvRegist")
+    public String derivWaitInsert(@RequestParam(value = "derivregdate")@DateTimeFormat(pattern="yyyy-MM-dd") Date derivregdate,
+                                  @RequestParam(value = "ordersid")  Integer ordersid){
+        System.out.println("이건 발주번호" + ordersid + ", 발주날짜 " + derivregdate);
+        Testorders ordersId = derivativeService.findByOrdersId(ordersid);
 
-//    @GetMapping("/derivative")
-//    public String derivList(Model model,
-//                            @PageableDefault(size = 15, sort = "derivid",
-//                                    direction = Sort.Direction.DESC)Pageable pageable){
-//
-//        String state = "입고대기";
-//        Page<Derivative> derivList = derivativeRepository.findAllByDerivstate(state, pageable);
-//
-//
-//        return "/logistic_manage/deriv_main";
-//    }
+        String state = "검수요청";
 
+        Testderivative deirvRegist = new Testderivative();
+        deirvRegist.setDerivregdate(derivregdate);
+        deirvRegist.setDerivstate(state);
+        deirvRegist.setOrdersid(ordersId);
 
+        derivativeRepository.save(deirvRegist);
+
+        return "logistic_manage/deriv_main";
+    }
 
 }
