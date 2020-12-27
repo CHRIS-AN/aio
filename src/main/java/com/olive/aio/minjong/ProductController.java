@@ -1,8 +1,11 @@
 package com.olive.aio.minjong;
 
+import com.olive.aio.corp.Corp;
+import com.olive.aio.corp.CorpService;
 import com.olive.aio.domain.Empl;
 import com.olive.aio.employee.CurrentEmpl;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +20,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("MJ_view")
@@ -32,6 +36,10 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private CorpService corpService;
+
+
     @RequestMapping("/productList")
     public String productList(Model model, Product product){
         List<Product> productsList = productService.productList(product);
@@ -41,15 +49,16 @@ public class ProductController {
 
     @GetMapping("/insertProduct")
     public String insertProductView(@CurrentEmpl Empl empl, Product product, Model model){
-//        List<Corp> corpsList = productService.corpsList();      //corp 정보 가져오기
         model.addAttribute("empl",empl);
-//        model.addAttribute("corpsList", corpsList);
+
         return "MJ_view/insertProduct";
     }
 
     @PostMapping("/insertProduct")
-    public String insertProduct(@CurrentEmpl Empl empl, @Valid Product product, Errors errors, Model model) {       //Long corp_id
+    public String insertProduct(Long corp_id, @CurrentEmpl Empl empl, @Valid Product product, Errors errors, Model model) {       //Long corp_id
+
         if(errors.hasErrors()) {
+
             //제품 등록 실패시, 입력 데이터를 유지
             model.addAttribute("product", product);
 
@@ -58,6 +67,7 @@ public class ProductController {
             for (String key : validatorResult.keySet()){
                 model.addAttribute(key, validatorResult.get(key));
             }
+
             return "MJ_view/insertProduct";
 
         }
@@ -66,8 +76,12 @@ public class ProductController {
 //        if(errors.hasErrors()){
 //            return "/insertProduct";
 //        }
+
+
         product.setEmpl(empl);
-        productService.insertProduct(product);      //, corp_id
+        productService.insertProduct(product, corp_id);
+
+
         return "redirect:productList";
     }
 
@@ -77,8 +91,16 @@ public class ProductController {
         return "MJ_view/getProduct";
     }
 
+    @GetMapping("/updateProduct")
+    public String updateProduct(@CurrentEmpl Empl empl, Product product, Model model){
+        model.addAttribute("empl",empl);
+        model.addAttribute("product", productService.getProduct(product));
+        return "MJ_view/updateProduct";
+    }
+
     @PostMapping("/updateProduct")
-    public String updateProduct(@Valid Product product, Errors errors, Model model){
+    public String updateProduct(Long corp_id, String emplId, @Valid Product product, Errors errors, Model model){
+
 
         if(errors.hasErrors()) {
             //제품 등록 실패시, 입력 데이터를 유지
@@ -89,12 +111,14 @@ public class ProductController {
             for (String key : validatorResult.keySet()){
                 model.addAttribute(key, validatorResult.get(key));
             }
-            return "MJ_view/getProduct";
+            log.info("error");
+            return "MJ_view/updateProduct";
 
         }
 
-        productService.updateProduct(product);
-        return "forward:productList";
+        productService.updateProduct(product, corp_id, emplId);
+        log.info("5");
+        return "redirect:productList";
     }
 
     @GetMapping("/deleteProduct")
@@ -103,4 +127,13 @@ public class ProductController {
         return "forward:productList";
     }
 
+    @GetMapping("/searchCorp")
+    public String searchCorp(Model model, Corp corp){
+
+        List<Corp> corpsList = corpService.findAll(corp);
+        model.addAttribute("corpsList", corpsList);
+
+
+        return "MJ_view/searchCorp";
+    }
 }

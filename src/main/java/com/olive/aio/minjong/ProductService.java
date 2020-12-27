@@ -11,11 +11,11 @@ public interface ProductService {
 
     List<Product> productList(Product product);
 
-    void insertProduct(Product product);        //, Long corp_id
+    void insertProduct(Product product, Long corp_id);
 
     Product getProduct(Product product);
 
-    void updateProduct(Product product);
+    void updateProduct(Product product, Long corp_id, String emplId);
 
     void deleteProduct(Product product);
 

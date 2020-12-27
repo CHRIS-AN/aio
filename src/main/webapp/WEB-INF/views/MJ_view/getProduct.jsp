@@ -39,17 +39,16 @@
         <div class="right_col" role="main">
             <h1 style="text-align: center">제품 상세</h1>
             <hr>
-            <form action="updateProduct" method="post">
                 <input name="prod_id" type="hidden" value="${product.prod_id}">
                 <table class="table table-bordered" style="width: 50%; margin: auto;">
                     <tr>
                         <td>제품명</td>
-                        <td><input type="text" name="prodName" value="${product.prodName}"/>${valid_prodName}</td>
+                        <td><input type="text" name="prodName" value="${product.prodName}" disabled/>${valid_prodName}</td>
                         <form:errors path="prodName"/>
                     </tr>
                     <tr>
                         <td>거래처</td>
-
+                        <td><input type="text" name="empl" value="${product.corp.corp_name}" disabled/></td>
                     </tr>
                     <tr>
                         <td>담당자</td>
@@ -57,42 +56,40 @@
                     </tr>
                     <tr>
                         <td>단위</td>
-                        <td><input type="text" name="prod_bundle" value="${product.prod_bundle}"/>${valid_prod_bundle}
+                        <td><input type="text" name="prod_bundle" value="${product.prod_bundle}" disabled/>${valid_prod_bundle}
                         </td>
                     </tr>
                     <tr>
                         <td>판매가</td>
-                        <td><input type="text" name="sell_price" value="${product.sell_price}"/>${valid_sell_price}</td>
+                        <td><input type="text" name="sell_price" value="${product.sell_price}" disabled/>${valid_sell_price}</td>
                     </tr>
                     <tr>
                         <td>구매가</td>
-                        <td><input type="text" name="buy_price" value="${product.buy_price}"/>${valid_buy_price}</td>
+                        <td><input type="text" name="buy_price" value="${product.buy_price}" disabled/>${valid_buy_price}</td>
                     </tr>
                     <tr>
                         <td>카테고리</td>
-                        <td><input type="text" name="prod_catag" value="${product.prod_catag}"/>${valid_prod_catag}</td>
+                        <td><input type="text" name="prod_catag" value="${product.prod_catag}" disabled/>${valid_prod_catag}</td>
                     </tr>
                     <tr>
                         <td>제품설명</td>
                         <td><textarea name="prod_explain" cols="40"
-                                      rows="10">${product.prod_explain}</textarea></td>
+                                      rows="10" disabled>${product.prod_explain}</textarea></td>
                     </tr>
                     <tr>
                         <td>제품사진</td>
                         <td>
                             <img src="${product.prod_image}" id="profile-image" class="col-md-3 img img-responsive">
-                            <input type="file" class="form-control" id="image-input-file">
                             <input type="hidden" value="${product.prod_image}"  id="photo" name="prod_image">
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2" align="center">
-                            <input class="btn btn-primary" type="submit" value="수정하기"/>
+                            <input class="btn btn-primary" type="button" onclick="location.href='updateProduct?prod_id=${product.prod_id}'" value="수정하기"/>
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         </td>
                     </tr>
                 </table>
-            </form>
             <hr>
             <a class="btn btn-primary" href="deleteProduct?prod_id=${product.prod_id}">글 삭제</a>&nbsp;&nbsp;&nbsp;&nbsp;
             <a class="btn btn-primary" href="productList">리스트</a>&nbsp;&nbsp;&nbsp;&nbsp;

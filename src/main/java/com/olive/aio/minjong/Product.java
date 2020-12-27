@@ -1,6 +1,7 @@
 package com.olive.aio.minjong;
 
 
+import com.olive.aio.corp.Corp;
 import com.olive.aio.domain.Empl;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -58,7 +59,7 @@ public class Product {
     @ManyToOne
     Empl empl;
 
-//    @ManyToOne
-//    Corp corp;
+    @ManyToOne
+    Corp corp;
 
 }
