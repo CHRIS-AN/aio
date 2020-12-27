@@ -48,6 +48,14 @@
                         <form:errors path="prodName"/>
                     </tr>
                     <tr>
+                        <td>거래처</td>
+
+                    </tr>
+                    <tr>
+                        <td>담당자</td>
+                        <td><input type="text" name="empl" value="${product.empl}" disabled/></td>
+                    </tr>
+                    <tr>
                         <td>단위</td>
                         <td><input type="text" name="prod_bundle" value="${product.prod_bundle}"/>${valid_prod_bundle}
                         </td>
@@ -71,16 +79,16 @@
                     </tr>
                     <tr>
                         <td>제품사진</td>
-                        <td><img src="${product.prod_image}" id="profile-image" class="col-md-3 img img-responsive">
+                        <td>
+                            <img src="${product.prod_image}" id="profile-image" class="col-md-3 img img-responsive">
                             <input type="file" class="form-control" id="image-input-file">
-                            <input type="hidden" id="photo" name="prod_image">
+                            <input type="hidden" value="${product.prod_image}"  id="photo" name="prod_image">
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2" align="center">
                             <input class="btn btn-primary" type="submit" value="수정하기"/>
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
                         </td>
                     </tr>
                 </table>

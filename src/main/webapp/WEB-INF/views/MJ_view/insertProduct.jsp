@@ -37,13 +37,27 @@
 
         <!-- content -->
         <div class="right_col" role="main">
-            <h1 style="text-align: center">제품 목록</h1>
-            <form action="insertProduct" method="post" enctype="multipart/form-data">
+            <h1 style="text-align: center">제품 등록</h1>
+            <form action="insertProduct" method="post">
                 <table class="table table-bordered" style="width: 50%; margin: auto;">
                     <tr>
                         <td>제품명</td>
                         <td><input type="text" name="prodName"/>${valid_prodName}</td>
                         <form:errors path="prodName"/>
+                    </tr>
+                    <tr>
+                        <td>담당자</td>
+                        <td><input type="text" value="${empl.name}" name="name" disabled/></td>
+                    </tr>
+                    <tr>
+                        <td>거래처</td>
+                        <td>
+                            <select>
+                                <c:forEach var="vo" items="${corpsList}">
+                                    <option>${vo.corp_name}</option>
+                                </c:forEach>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <td>단위</td>
@@ -70,8 +84,7 @@
                         <td>
                             <input type="file" class="form-control" id="image-input-file">
                             <input type="hidden" id="photo" name="prod_image">
-                            <img src="${prod.prod_image}" id="profile-image" class="col-md-3 img img-responsive">
-
+                            <img id="profile-image" class="col-md-3 img img-responsive">
                         </td>
 
                     </tr>

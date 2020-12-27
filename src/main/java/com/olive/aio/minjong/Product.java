@@ -1,6 +1,8 @@
 package com.olive.aio.minjong;
 
 
+import com.olive.aio.corp.Corp;
+import com.olive.aio.domain.Empl;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +23,7 @@ public class Product {
     @GeneratedValue
     private long prod_id;
 
-    @NotNull(message = "222유효한 값을 넣어주세요.")
+    @NotNull(message = "유효한 값을 넣어주세요.")
     @Pattern(regexp = "^[ㄱ-ㅎ가-힣-a-zA-Z0-9_:,.' ']{1,100}$", message = "유효한 값을 넣어주세요.")
     private String prodName;
 
@@ -53,5 +55,11 @@ public class Product {
 
     @Lob
     private String prod_image;
+
+    @ManyToOne
+    Empl empl;
+
+    @ManyToOne
+    Corp corp;
 
 }
