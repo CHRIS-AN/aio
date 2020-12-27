@@ -50,4 +50,8 @@ public class Product {
 
     @Lob
     private String prod_explain;
+
+    @Lob
+    private String prod_image;
+
 }
