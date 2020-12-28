@@ -11,9 +11,9 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
-@Table(name = "TESTDERIVATIVE_TABLE")
+@Table(name = "DERIVATIVE_TABLE")
 @Data
-public class Testderivative {
+public class Derivative {
 
     @Id @Column(name = "deriv_id")
     @GeneratedValue

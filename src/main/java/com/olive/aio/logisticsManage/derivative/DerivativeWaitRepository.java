@@ -12,7 +12,8 @@ public interface DerivativeWaitRepository extends JpaRepository<Testorders, Inte
 
     // 결제완료 발주리스트 조회
     List<Testorders> findAllByTestordersstate(String state);
-    Testorders findByTestordersid(Integer odersiid);
+
+    Testorders findByTestordersid(Integer ordersid);
 
 }
 

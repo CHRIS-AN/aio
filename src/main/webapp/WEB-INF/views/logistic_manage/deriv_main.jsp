@@ -63,8 +63,9 @@
         #derivWaitTable{ font-size: 1.35em; }
         #derivWaitTable tr{ height: 25px; }
 
-        .btn_aio {background-color: #6a5acd; color: #f5f5f5; width: 65px; height: 35px; font-size: 1em; font-weight: bold;}
+        .btn_aio {background-color: #6a5acd; color: #f5f5f5; width: 65px; height: 35px; font-size: 0.9em; font-weight: bold;}
 
+        .dataTable td[id^=tr_title]:hover {color: #6a5acd; cursor: pointer;}
     </style>
 </head>
 <body class="nav-md">
@@ -104,10 +105,10 @@
                                     <a id="derivWaitTab" class="nav-link aio_maincolor active" data-toggle="tab" href="#derivWait">입고대기</a>
                                 </li>
                                 <li class="nav-item col-sm-4" style="margin: 0; padding: 0;">
-                                    <a id="derivChkTab" class="nav-link aio_maincolor" data-toggle="tab" href="#derivChk">검수대기</a>
+                                    <a id="derivChkTab" class="nav-link aio_maincolor" data-toggle="tab" href="#derivChk" onclick="addId('derivChk'); this.onclick=null;">검수요청</a>
                                 </li>
                                 <li class="nav-item col-sm-4" style="margin: 0; padding: 0;">
-                                    <a id="derivOkTab" class="nav-link aio_maincolor" data-toggle="tab" href="#derivOk">입고완료</a>
+                                    <a id="derivOkTab" class="nav-link aio_maincolor" data-toggle="tab" href="#derivOk" onclick="addId('derivOk'); this.onclick=null;">입고완료</a>
                                 </li>
                             </ul>
                         </div>
@@ -115,17 +116,126 @@
                         <!-- content -->
                         <div class="tab-content">
                             <div id="derivWait" class="table-responsive tab-pane active">
-
+                                <table id='dataTable'  class='table table-bordered derivWaitT' width='100%' cellpadding='0'>
+                                    <thead>
+                                    <tr>
+                                        <th>발주번호</th>
+                                        <th>발주품목</th>
+                                        <th>회사명</th>
+                                        <th>총수량</th>
+                                    </tr>
+                                    </thead>
+                                    <tfoot>
+                                    <tr>
+                                        <th>발주번호</th>
+                                        <th>발주품목</th>
+                                        <th>회사명</th>
+                                        <th>총수량</th>
+                                    </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    <c:forEach var="waitList" items="${derivWaitList}">
+                                        <tr id='tr ${waitList.testordersid}'>
+                                            <td>${waitList.testordersid}</td>
+                                            <td id="tr_title${waitList.testordersid}" onclick="regist_deriv()"
+                                                data-toggle="modal" data-target="#modal_1"
+                                                data-odersid="${waitList.testordersid}"
+                                                data-prodtitle='${waitList.testtitle}'
+                                                data-corpname='${waitList.crop}'
+                                                data-totcnt='${waitList.testorderscnt}'>
+                                                    ${waitList.testtitle}</td>
+                                            <td>${waitList.crop}</td>
+                                            <td>${waitList.testorderscnt}</td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
                             </div>
                             <!-- derivWait END -->
 
-                            <div id="derivChk" class="table-responsive tab-pane"></div>
+                            <div id="derivChk" class="table-responsive tab-pane">
+                                <table class='table table-bordered derivChkT' width='100%' cellpadding='0'>
+                                    <thead>
+                                        <tr>
+                                            <th>입고번호</th>
+                                            <th>입고일</th>
+                                            <th>입고품목</th>
+                                            <th>회사명</th>
+                                            <th>총수량</th>
+                                        </tr>
+                                        </thead>
+                                        <tfoot>
+                                        <tr>
+                                            <th>입고번호</th>
+                                            <th>입고일</th>
+                                            <th>입고품목</th>
+                                            <th>회사명</th>
+                                            <th>총수량</th>
+                                        </tr>
+                                        </tfoot>
+                                    <!-- 여기야 연섭아!!! ㅠㅠㅠㅠ-->
+                                        <tbody>
+                                            <c:forEach var="chkList" items="${derivChkList}">
+                                                <tr id='tr${chkList.derivid}'>
+                                                    <td>${chkList.derivid}</td>
+                                                    <td>${chkList.derivregdate}</td>
+                                                    <td id='tr_title${chkList.derivid}' onclick='confirm_deriv()'
+                                                        data-toggle='modal' data-target='#modal_2'
+                                                        data-derivid='${chkList.derivid}'
+                                                        data-derivregdate='${chkList.derivregdate}'
+                                                        data-prodtitle='${chkList.ordersid.prodtitle}'
+                                                        data-corpname='${chkList.ordersid.crop}'
+                                                        data-totcnt='${chkList.ordersid.testorderscnt}'>
+                                                            ${chkList.ordersid.testtitle}</td>
+                                                    <td>${chkList.ordersid.crop}</td>
+                                                    <td>${chkList.ordersid.testorderscnt}</td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                </table>
+                            </div>
                             <!-- derivChk END -->
 
-                            <div id="derivOk" class="table-responsive tab-pane"></div>
+                            <div id="derivOk" class="table-responsive tab-pane">
+                                <table class='table table-bordered derivOkT' width='100%' cellpadding='0'>
+                                    <thead>
+                                    <tr>
+                                        <th>발주번호</th>
+                                        <th>발주품목</th>
+                                        <th>회사명</th>
+                                        <th>총수량</th>
+                                    </tr>
+                                    </thead>
+                                    <tfoot>
+                                    <tr>
+                                        <th>발주번호</th>
+                                        <th>발주품목</th>
+                                        <th>회사명</th>
+                                        <th>총수량</th>
+                                    </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    <c:forEach var="waitList" items="${derivWaitList}">
+                                        <tr id='tr ${waitList.testordersid}'>
+                                            <td>${waitList.testordersid}</td>
+                                            <td id="tr_title${waitList.testordersid}" onclick="regist_deriv()"
+                                                data-toggle="modal" data-target="#modal_1"
+                                                data-odersid="${waitList.testordersid}"
+                                                data-prodtitle='${waitList.testtitle}'
+                                                data-corpname='${waitList.crop}'
+                                                data-totcnt='${waitList.testorderscnt}'>
+                                                    ${waitList.testtitle}</td>
+                                            <td>${waitList.crop}</td>
+                                            <td>${waitList.testorderscnt}</td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
                             <!-- derivOk -->
 
                         </div>
+
                         <!-- tab content END -->
                     </div>
 
@@ -154,39 +264,123 @@
                     <form name="deirvRegist" action="deirvRegist" onsubmit="return registChkSubmit()" method="post">
                         <input type="hidden" id="ordersid" name="ordersid">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                    <table class="table table-bordered ">
-                        <tr>
-                            <th>발주번호</th>
-                            <td><span id="modal1_1"></span></td>
-                        </tr>
-                        <tr>
-                            <th>회사명</th>
-                            <td><span id="modal1_3"></span></td>
-                        </tr>
-                        <tr>
-                            <th>입고품목</th>
-                            <td><span id="modal1_2"></span></td>
-                        </tr>
-                        <tr>
-                            <th>총수량</th>
-                            <td><span id="modal1_4"></span></td>
-                        </tr>
-                        <tr>
-                            <th>입고일</th>
-                            <td><input type="date" id="derivregdate" class="short-input" name="derivregdate" placeholder="yyyy-mm-dd"/></td>
-                        </tr>
-                    </table>
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <input type="button" id="registCancle" class="btn btn_aio" data-dismiss="modal" value="취소">
-                        <input type="submit" id="registsubmit" class="btn btn_aio" value="등록">
-                    </div>
+                        <table class="table table-bordered ">
+                            <tr>
+                                <th>발주번호</th>
+                                <td><span id="modal1_1"></span></td>
+                            </tr>
+                            <tr>
+                                <th>회사명</th>
+                                <td><span id="modal1_3"></span></td>
+                            </tr>
+                            <tr>
+                                <th>입고품목</th>
+                                <td><span id="modal1_2"></span></td>
+                            </tr>
+                            <tr>
+                                <th>총수량</th>
+                                <td><span id="modal1_4"></span></td>
+                            </tr>
+                            <tr>
+                                <th>입고일</th>
+                                <td><input type="date" id="derivregdate" class="short-input" name="derivregdate" placeholder="yyyy-mm-dd"/></td>
+                            </tr>
+                        </table>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <input type="button" id="registCancle" class="btn btn_aio" data-dismiss="modal" value="취소">
+                            <input type="submit" id="registsubmit" class="btn btn_aio" value="등록">
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    <%--    <script>--%>
+    <%--        function regist_deriv() {--%>
+    <%--            $('#modal_1').on('show.bs.modal', function (event) {--%>
+    <%--                var odersid = $(event.relatedTarget).data('odersid');--%>
+    <%--                var prodtitle = $(event.relatedTarget).data('prodtitle');--%>
+    <%--                var corpname = $(event.relatedTarget).data('corpname');--%>
+    <%--                var totcnt = $(event.relatedTarget).data('totcnt');--%>
+    <%--                $(this).find("#modal1_1").text(odersid);--%>
+    <%--                $(this).find("#modal1_2").text(prodtitle);--%>
+    <%--                $(this).find("#modal1_3").text(corpname);--%>
+    <%--                $(this).find("#modal1_4").text(totcnt);--%>
+    <%--                $(this).find("#modal1_4").text(totcnt);--%>
+    <%--                $(this).find("#ordersid").val(odersid);--%>
+    <%--            })--%>
+    <%--        }--%>
+    <%--    </script>--%>
     <!-- modal_1 END -->
+
+    <%--  modal_2  --%>
+    <div class="modal" id="modal_2">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h3 class="modal-title font-weight-bold" style="color: #372c81;">검수요청 등록</h3>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form name="deirvConfirm" action="deirvConfirm" onsubmit="return confirmSubmit()" method="post">
+                        <input type="hidden" id="derivid" name="derivid">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                        <table class="table table-bordered ">
+                            <tr>
+                                <th>발주번호</th>
+                                <td><span id="modal2_1"></span></td>
+                            </tr>
+                            <tr>
+                                <th>회사명</th>
+                                <td><span id="modal2_3"></span></td>
+                            </tr>
+                            <tr>
+                                <th>입고품목</th>
+                                <td><span id="modal2_2"></span></td>
+                            </tr>
+                            <tr>
+                                <th>총수량</th>
+                                <td><span id="modal2_4"></span></td>
+                            </tr>
+                            <tr>
+                                <th>입고확정일</th>
+                                <td><input type="date" id="derivOkConfirmDate" class="short-input" name="derivOkConfirmDate" placeholder="yyyy-mm-dd"/></td>
+                            </tr>
+                        </table>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <input type="button" id="confirmCancle" class="btn btn_aio" data-dismiss="modal" value="취소">
+                            <input type="submit" id="confirmSubmit" class="btn btn_aio" value="등록">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%--    <script>--%>
+    <%--        function confirm_deriv() {--%>
+    <%--            $('#modal_2').on('show.bs.modal', function (event) {--%>
+    <%--                var derivid = $(event.relatedTarget).data('derivid');--%>
+    <%--                var derivregdate = $(event.relatedTarget).data('derivregdate');--%>
+    <%--                var prodtitle = $(event.relatedTarget).data('prodtitle');--%>
+    <%--                var corpname = $(event.relatedTarget).data('corpname');--%>
+    <%--                var totcnt = $(event.relatedTarget).data('totcnt');--%>
+    <%--                $(this).find('#modal_2').text(derivid);--%>
+    <%--                $(this).find('#modal_2').text(derivregdate);--%>
+    <%--                $(this).find('#modal_2').text(prodtitle);--%>
+    <%--                $(this).find('#modal_2').text(corpname);--%>
+    <%--                $(this).find('#modal_2').text(totcnt);--%>
+    <%--                $(this).find('#derivid').val(derivid);--%>
+    <%--            })--%>
+    <%--        }--%>
+    <%--</script>--%>
+    <!-- modal_2 END -->
+
 </div>
 <!-- 모달까지 감싸는 -->
 
@@ -198,6 +392,7 @@
 <!-- 입고관리 js -->
 <script src="/js/derivative.js"></script>
 
+
 <!-- autocomplete from jQuery Ui -->
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -206,7 +401,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+<div id="tableScript">
 <!-- Bootstrap core JavaScript-->
 <script src="/js/bootstrap.bundle.min.js"></script>
 
@@ -222,6 +417,7 @@
 
 <!-- Page level custom scripts / 검색&페이징 등 -->
 <script src="/js/datatables-demo.js"></script>
+</div>
 
 <!-- Bootstrap -->
 <script src="/node_modules/gentelella/vendors/bootstrap/dist/js/bootstrap.min.js"></script>

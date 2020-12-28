@@ -1,11 +1,9 @@
 package com.olive.aio.logisticsManage.derivative;
 
-import com.olive.aio.domain.Testderivative;
+import com.olive.aio.domain.Derivative;
 import com.olive.aio.domain.test.Testorders;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,11 +19,19 @@ public class DerivativeService {
         return derivativeWaitRepository.findAllByTestordersstate(state);
     }
 
-    public Testorders findByOrdersId(Integer odersid){
-        return derivativeWaitRepository.findByTestordersid(odersid);
+    public List<Derivative> findByDerivstateA(String state){
+        return  derivativeRepository.findByDerivstateOrderByDerividAsc(state);
     }
 
-    public List<Testderivative> findByDerivstate(String state){
-        return  derivativeRepository.findByDerivstate(state);
+    public List<Derivative> findByDerivstateD(String state){
+        return  derivativeRepository.findByDerivstateOrderByDerividDesc(state);
+    }
+
+    public void saveDerivChk(Derivative derivative) { derivativeRepository.save(derivative); }
+
+    public void updateOdersState(Integer ordersid, String state) {
+        Testorders select = derivativeWaitRepository.findByTestordersid(ordersid);
+        select.setTestordersstate(state);
+        derivativeWaitRepository.save(select);
     }
 }

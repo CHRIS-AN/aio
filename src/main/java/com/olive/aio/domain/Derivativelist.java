@@ -12,10 +12,10 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
-public class Testderivativelist implements Serializable {
+public class Derivativelist implements Serializable {
 
     @OneToOne @Id
-    private Testderivative derivid;
+    private Derivative derivid;
 
     @NotNull @Column(name = "deriv_ok_confirmcnt")
     private Integer derivokconfirmcnt;

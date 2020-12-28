@@ -1,19 +1,18 @@
 package com.olive.aio.logisticsManage.derivative;
 
 
-import com.olive.aio.domain.Testderivative;
+import com.olive.aio.domain.Derivative;
 import com.olive.aio.domain.test.Testorders;
+import com.olive.aio.logisticsManage.derivative.form.TestderivInsertForm;
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 
 
 @Controller
@@ -22,29 +21,44 @@ import java.util.Date;
 public class DerivativeController {
 
     private final DerivativeService derivativeService;
-    private final DerivativeRepository derivativeRepository;
+
 
     @GetMapping("/derivative")
-    public String derivWaitList(){
+    public String derivWaitList(Model model){
+
+        String derivWait = "결제완료";
+        List<Testorders> derivWaitList = derivativeService.findByOdersState(derivWait);
+
+        String derivChk = "검수요청";
+        List<Derivative> derivChkList = derivativeService.findByDerivstateA(derivChk);
+
+        String derivOk = "입고완료";
+        List<Derivative> derivOkList = derivativeService.findByDerivstateD(derivOk);
+
+        model.addAttribute("derivWaitList", derivWaitList);
+        model.addAttribute("derivChkList", derivChkList);
+        model.addAttribute("derivOkList", derivOkList);
+
+//        model.addAttribute(new TestderivInsertForm());
+
         return "logistic_manage/deriv_main";
     }
 
     @PostMapping("/deirvRegist")
-    public String derivWaitInsert(@RequestParam(value = "derivregdate")@DateTimeFormat(pattern="yyyy-MM-dd") Date derivregdate,
-                                  @RequestParam(value = "ordersid")  Integer ordersid){
-        System.out.println("이건 발주번호" + ordersid + ", 발주날짜 " + derivregdate);
-        Testorders ordersId = derivativeService.findByOrdersId(ordersid);
+    public String derivWaitInsert(Derivative derivative){
 
         String state = "검수요청";
+        derivative.setDerivstate(state);
 
-        Testderivative deirvRegist = new Testderivative();
-        deirvRegist.setDerivregdate(derivregdate);
-        deirvRegist.setDerivstate(state);
-        deirvRegist.setOrdersid(ordersId);
+        derivativeService.saveDerivChk(derivative);
 
-        derivativeRepository.save(deirvRegist);
+        Integer odersid = derivative.getOrdersid().getTestordersid();
+        System.out.println(odersid);
+
+        derivativeService.updateOdersState(odersid, state);
 
         return "logistic_manage/deriv_main";
     }
+
 
 }
