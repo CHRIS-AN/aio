@@ -4,13 +4,16 @@
 <meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
 <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}"/>
 <!-- head -->
-<jsp:include page="../../layout/header.jsp" />
+<jsp:include page="../../layout/header.jsp"/>
 <!-- Datatables -->
 <link href="/node_modules/gentelella/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
 <link href="/node_modules/gentelella/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-<link href="/node_modules/gentelella/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-<link href="/node_modules/gentelella/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-<link href="/node_modules/gentelella/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+<link href="/node_modules/gentelella/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css"
+      rel="stylesheet">
+<link href="/node_modules/gentelella/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css"
+      rel="stylesheet">
+<link href="/node_modules/gentelella/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css"
+      rel="stylesheet">
 <link href="/css/manage.css" rel="stylesheet">
 </head>
 <!-- head -->
@@ -19,11 +22,11 @@
     <div class="main_container">
 
         <!-- sidebar -->
-        <jsp:include page="../../layout/side-bar.jsp" />
+        <jsp:include page="../../layout/side-bar.jsp"/>
         <!-- /sidebar -->
 
         <!-- top-nav -->
-        <jsp:include page="../../layout/top-nav.jsp" />
+        <jsp:include page="../../layout/top-nav.jsp"/>
         <!-- top-nav -->
 
 
@@ -56,7 +59,7 @@
                                 </select>
                             </div>
                             <div class="text-right col-md-10">
-                                <input type="text" id="keyword" />
+                                <input type="text" id="keyword"/>
                                 <button type="button" id="searchBtn">검색</button>
                             </div>
                         </div>
@@ -79,7 +82,7 @@
             </div>
         </div>
         <!-- footer  -->
-        <jsp:include page="../../layout/footer.jsp" />
+        <jsp:include page="../../layout/footer.jsp"/>
         <!-- /footer  -->
 
         <div id="resigDialog">
@@ -113,69 +116,83 @@
                                 <div class="row">
                                     <div class="form-group has-feedback col-md-6 com-sm-6">
                                         <label>사원번호</label>
-                                        <input type="text" name="emplId" value="${emplForm.emplId}" class="form-control" id="empl-id" placeholder="사원번호"/>
+                                        <input type="text" name="emplId" value="${emplForm.emplId}" class="form-control"
+                                               id="empl-id" placeholder="사원번호"/>
                                         <span>${valid_emplId}</span>
                                     </div>
                                     <div class="form-group has-feedback col-md-6 com-sm-6">
                                         <label>성명</label>
-                                        <input type="text" name="name" value="${emplForm.name}" class="form-control" id="name" placeholder="사원이름">
+                                        <input type="text" name="name" value="${emplForm.name}" class="form-control"
+                                               id="name" placeholder="사원이름">
                                         <span>${valid_name}</span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group has-feedback col-md-6 com-sm-6">
                                         <label>주민등록 번호</label>
-                                        <input type="text" name="jumin" value="${emplForm.jumin}" class="form-control" id="jumin" placeholder="900000-1111111">
+                                        <input type="text" name="jumin" value="${emplForm.jumin}" class="form-control"
+                                               id="jumin" placeholder="900000-1111111">
                                         <span>${valid_jumin}</span>
                                     </div>
                                     <div class="form-group has-feedback col-md-6 com-sm-6">
                                         <label>입사일자</label>
-                                        <input class="date-picker form-control"  name="emplRegdate" value="${emplForm.emplRegdate}" placeholder="yyyy-mm-dd" type="date" required="required"
-                                               onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'"
+                                        <input class="date-picker form-control" name="emplRegdate"
+                                               value="${emplForm.emplRegdate}" placeholder="yyyy-mm-dd" type="date"
+                                               required="required"
+                                               onfocus="this.type='date'" onmouseover="this.type='date'"
+                                               onclick="this.type='date'" onblur="this.type='text'"
                                                onmouseout="timeFunctionLong(this)">
                                     </div>
                                 </div>
                                 <div class="row">
-                                <div class="form-group has-feedback col-md-6 com-sm-6">
-                                    <label>부서명</label>
-                                    <select name="dept" class="form-control">
-                                        <option value="인사" ${emplForm.dept == '인사'? 'selected' : ''}>인사</option>
-                                        <option value="제품" ${emplForm.dept == "제품"? 'selected' : ''}>제품</option>
-                                        <option value="영업" ${emplForm.dept == "영업"? 'selected' : ''}>영업</option>
-                                        <option value="물류" ${emplForm.dept == "물류"? 'selected' : ''}>물류</option>
-                                        <option value="회계" ${emplForm.dept == "회계"? 'selected' : ''}>회계</option>
-                                    </select>
-                                </div>
-                                <div class="form-group has-feedback col-md-6 com-sm-6">
-                                    <label>퇴사일자</label>
-                                    <input class="date-picker form-control" name="emplResigdate" placeholder="yyyy-mm-dd" type="date" required="required"
-                                           onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'"
-                                           onmouseout="timeFunctionLong(this)" disabled>
-                                </div>
+                                    <div class="form-group has-feedback col-md-6 com-sm-6">
+                                        <label>부서명</label>
+                                        <select name="dept" class="form-control">
+                                            <option value="인사" ${emplForm.dept == '인사'? 'selected' : ''}>인사</option>
+                                            <option value="제품" ${emplForm.dept == "제품"? 'selected' : ''}>제품</option>
+                                            <option value="영업" ${emplForm.dept == "영업"? 'selected' : ''}>영업</option>
+                                            <option value="물류" ${emplForm.dept == "물류"? 'selected' : ''}>물류</option>
+                                            <option value="회계" ${emplForm.dept == "회계"? 'selected' : ''}>회계</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group has-feedback col-md-6 com-sm-6">
+                                        <label>퇴사일자</label>
+                                        <input class="date-picker form-control" name="emplResigdate"
+                                               placeholder="yyyy-mm-dd" type="date" required="required"
+                                               onfocus="this.type='date'" onmouseover="this.type='date'"
+                                               onclick="this.type='date'" onblur="this.type='text'"
+                                               onmouseout="timeFunctionLong(this)" disabled>
+                                    </div>
                                 </div>
                                 <div class="row">
-                                <div class="form-group has-feedback col-md-6 com-sm-6">
-                                    <label>연락처</label>
-                                    <input type="text" name="phone" value="${emplForm.phone}" class="form-control" id="phone" placeholder="핸드폰 번호">
-                                    <span>${valid_phone}</span>
-                                </div>
-                                <div class="form-group has-feedback col-md-6 com-sm-6">
-                                    <label>Email</label>
-                                    <input type="text" name="email" value="${emplForm.email}" class="form-control" id="email" placeholder="Email">
-                                    <span>${valid_email}</span>
-                                </div>
+                                    <div class="form-group has-feedback col-md-6 com-sm-6">
+                                        <label>연락처</label>
+                                        <input type="text" name="phone" value="${emplForm.phone}" class="form-control"
+                                               id="phone" placeholder="핸드폰 번호">
+                                        <span>${valid_phone}</span>
+                                    </div>
+                                    <div class="form-group has-feedback col-md-6 com-sm-6">
+                                        <label>Email</label>
+                                        <input type="text" name="email" value="${emplForm.email}" class="form-control"
+                                               id="email" placeholder="Email">
+                                        <span>${valid_email}</span>
+                                    </div>
                                 </div>
                                 <div class="form-group has-feedback col-md-12 com-sm-12">
                                     <label class="col-md-12">주소</label>
                                     <div class="col-md-5 col-sm-5">
-                                        <input type="text" name="post_num" value="${emplForm.post_num}" class="form-control" id="postnum" placeholder="우편번호" readonly>
+                                        <input type="text" name="post_num" value="${emplForm.post_num}"
+                                               class="form-control" id="postnum" placeholder="우편번호" readonly>
                                         <span>${valid_post_num}</span>
                                     </div>
-                                    <button type="button" id="postnumBtn" onclick="showjusoPopup('등록')" class="btn btn-default">검색</button>
+                                    <button type="button" id="postnumBtn" onclick="showjusoPopup('등록')"
+                                            class="btn btn-default">검색
+                                    </button>
                                 </div>
                                 <div class="form-group has-feedback col-md-12 com-sm-12">
                                     <div class="col-md-12">
-                                        <input type="text" name="address" value="${emplForm.address}" class="form-control" id="address" placeholder="주소">
+                                        <input type="text" name="address" value="${emplForm.address}"
+                                               class="form-control" id="address" placeholder="주소">
                                         <span>${valid_address}</span>
                                     </div>
                                 </div>
@@ -261,7 +278,7 @@
     </div>
 </div>
 <script>
-    if(${not empty error}) {
+    if (${not empty error}) {
         $("#resigDialog").show();
     }
 
@@ -287,48 +304,49 @@
             })
         }, false)
     }())
-var type = ""
-function showjusoPopup(type1){
-    type = type1;
-    new daum.Postcode({
-        oncomplete: function(data) {
-            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+    var type = ""
 
-            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+    function showjusoPopup(type1) {
+        type = type1;
+        new daum.Postcode({
+            oncomplete: function (data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+                // 예제를 참고하여 다양한 활용법을 확인해 보세요.
 
-            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                addr = data.roadAddress;
-            } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                addr = data.jibunAddress;
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+
+
+                if (type == "등록") {
+                    $("#postnum").val(data.zonecode);
+                    $("#address").val(addr);
+                    $("#address").focus();
+                    // var extraAddr = ''; // 참고항목 변수
+                } else if (type == "수정") {
+                    $("#pdtnum").val(data.zonecode);
+                    $("#updateAddr").val(addr);
+                    $("#updateAddr").focus();
+                }
+                // 커서를 상세주소 필드로 이동한다.
+
             }
-
-            // 우편번호와 주소 정보를 해당 필드에 넣는다.
-
-
-            if(type == "등록"){
-                $("#postnum").val(data.zonecode);
-                $("#address").val(addr);
-                $("#address").focus();
-                // var extraAddr = ''; // 참고항목 변수
-            } else if(type == "수정") {
-                $("#pdtnum").val(data.zonecode);
-                $("#updateAddr").val(addr);
-                $("#updateAddr").focus();
-            }
-            // 커서를 상세주소 필드로 이동한다.
-
-        }
-    }).open({autoClose:true});
-}
+        }).open({autoClose: true});
+    }
 </script>
 <script src="/js/manage.js"></script>
 <!-- script -->
-<jsp:include page="../../layout/script.jsp" />
+<jsp:include page="../../layout/script.jsp"/>
 <!-- Datatables -->
 <script src="/node_modules/gentelella/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="/node_modules/gentelella/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>

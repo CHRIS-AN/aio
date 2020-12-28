@@ -92,9 +92,9 @@
                                 </tfoot>
                                 <tbody>
                                 <c:forEach var="vo" items="${productList}">
-                                    <tr>
+                                    <tr onclick="location.href='getProduct?prod_id=${vo.prod_id}'" style="cursor:hand">
                                         <td>${vo.prod_id}</td>
-                                        <td align="left"><a href="getProduct?prod_id=${vo.prod_id}">${vo.prodName}</a>
+                                        <td align="left">${vo.prodName}
                                         </td>
                                         <td>${vo.prod_bundle}</td>
                                         <td>${vo.prod_catag}</td>
@@ -106,10 +106,12 @@
                     </div>
                 </div>
             </div>
+
         </div>
+        <jsp:include page="../layout/footer.jsp"/>
     </div>
     <!-- footer  -->
-    <jsp:include page="../layout/footer.jsp"/>
+
     <!-- /footer  -->
 </div>
 
