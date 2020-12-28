@@ -55,18 +55,18 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form id="corpSelectForm">
+                        <form id="corpSelectForm" action="ordersInsert" method="post">
                             <%--     거래처 등록 row    --%>
                             <div class="row p-4 bg-gray-200 m-2">
                                 <div class="col-md-3">
-                                    거래처
+                                    <label>거래처</label>
                                 </div>
                                 <div class="col-md-7">
-                                    <span> 거래처를 등록해주세요.</span>
-                                    <input type="hidden" value="" />
+                                    <span id="corpname"> 거래처를 등록해주세요.</span>
+                                    <input type="hidden" name="corp_id" id="corp_id" />
                                 </div>
                                 <div class="col-md-2">
-                                    <button type="button" class="btn btn-primary" >
+                                    <button type="button" class="btn btn-primary" onclick="openWinCorp()">
                                         거래처 검색
                                     </button>
                                 </div>
@@ -82,8 +82,7 @@
                                 <div class="col-md-1">
                                     <div  style="float: right" class="p-1">
                                         <button type="button" name="registerModalBtn" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#registerModal">+
-                                        </button>
+                                                data-target="#registerModal">+</button>
                                     </div>
                                 </div>
                             </div>
@@ -165,13 +164,13 @@
                                 </div>
                                 <div class="x_content">
                                     <form action="draftInsert" method="post" class="form needs-validation">
-                                        <input type="hidden" id="prod_id" name="prod_id">
                                         <div class="row">
                                             <div class="form-group has-feedback col-md-3 com-sm-3">
                                                 <label>발주 물품</label>
                                             </div>
                                             <div class="form-group has-feedback col-md-6 com-sm-6">
                                                 <span name="goods" id="goods" class="goods" >물품을 등록해주세요</span>
+                                                <input type="hidden" id="prod_id" name="prod_id">
                                                 <span>${valid_goods}</span>
                                             </div>
                                             <div class="form-group col-md-3 com-sm-3">
@@ -262,6 +261,10 @@
 
             function openWin(){
                 window.open("./productSearch", "물품 목록", "width=1000, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes, left=400, top=100" );
+            }
+
+            function openWinCorp(){
+                window.open("./corpSearch", "물품 목록", "width=1000, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes, left=400, top=100" );
             }
         </script>
 

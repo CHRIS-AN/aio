@@ -1,18 +1,11 @@
 package com.olive.aio.orders;
 
+import com.olive.aio.corp.Corp;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.Future;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Data //@ToString, @EqualsAndHashCode : equals()와 hashCode() 자동생성, @Getter, @Setter, @RequiredArgsConstructor
@@ -29,18 +22,21 @@ public class Orders implements Serializable {
     @GeneratedValue //id가 선언된 필드에 기본 키 값을 자동으로 할당 (Default : AUTO)
     private Long orders_id; //발주번호
 
-    @NotBlank //null과 "", " " 허용안함
+//    @NotBlank //null과 "", " " 허용안함
     private int orders_cnt; //총수량
 
-    @NotNull //null 허용안함
+//    @NotNull //null 허용안함
 //    @Temporal(TemporalType.DATE) // 년-월-일 의 Date 타입
-    @Future
+//    @Future
     private String orders_regdate; //납기일자
 
-    @NotEmpty //null과 "" 허용안함
+//    @NotEmpty //null과 "" 허용안함
     private String orders_state; //상태
 
-    @NotBlank
+//    @NotBlank
     private int orders_totsum; //총금액
+
+    @ManyToOne
+    Corp corp;
 
 }

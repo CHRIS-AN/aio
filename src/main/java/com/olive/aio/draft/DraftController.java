@@ -1,5 +1,7 @@
 package com.olive.aio.draft;
 
+import com.olive.aio.corp.Corp;
+import com.olive.aio.corp.CorpService;
 import com.olive.aio.minjong.Product;
 import com.olive.aio.minjong.ProductService;
 import lombok.AllArgsConstructor;
@@ -25,6 +27,9 @@ public class DraftController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private CorpService corpService;
+
     // 발주물품 목록
     @GetMapping("draftList")
     public String DraftList(Model model, Draft draft){
@@ -43,10 +48,7 @@ public class DraftController {
     // 발주물품 수정
     @PostMapping("draftUpdate")
     public String draftUpdate(Draft draft, Long prod_id) {
-        log.info("수정컨트롤러 들어옴");
         draftService.updateDraft(draft, prod_id);
-
-        log.info("수정컨트롤러 나간다!");
         return "redirect:draftList";
     }
 
@@ -63,6 +65,14 @@ public class DraftController {
         List<Product> productImport = productService.productList(product);
         model.addAttribute("productImport", productImport);
         return "yeonji/productSearch";
+    }
+
+    // 거래처 검색
+    @GetMapping("corpSearch")
+    public String corpSearch(Model model, Corp corp){
+        List<Corp> corpsList = corpService.findAll(corp);
+        model.addAttribute("corpsList", corpsList);
+        return "yeonji/corpSearch";
     }
 
 }

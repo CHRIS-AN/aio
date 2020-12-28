@@ -10,8 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
-    <title>물품 검색</title>
-
+    <title>AIO</title>
     <!-- 부트스트랩 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <!-- Custom styles for this page -->
@@ -21,13 +20,10 @@
     <!-- Font Awesome -->
     <link href="/node_modules/gentelella/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- Custom Theme Style -->
-
     <link href="/node_modules/gentelella/build/css/custom.css" rel="stylesheet">
     <script src="/node_modules/gentelella/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Custom styles for this template -->
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
-
-
 </head>
 <body class="nav-md">
 
@@ -47,7 +43,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable example-table-1" width="100%" cellspacing="0">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
                                     <th>#</th>

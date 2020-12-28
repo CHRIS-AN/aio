@@ -8,11 +8,12 @@ public interface DraftService {
     List<Draft> findAll(Draft draft);
 
     //발주품목 등록
-    void insertDraft(Draft draft, Long prod_id);;
+    void insertDraft(Draft draft, Long prod_id);
 
     //발주품목 수정
     void updateDraft(Draft draft, Long prod_id);
 
     //발주품목 삭제
     void deleteDraft(Draft draft);
+
 }

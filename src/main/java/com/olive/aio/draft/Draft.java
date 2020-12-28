@@ -1,5 +1,6 @@
 package com.olive.aio.draft;
 
+import com.olive.aio.corp.Corp;
 import com.olive.aio.minjong.Product;
 import lombok.*;
 
@@ -30,5 +31,8 @@ public class Draft {
 
     @ManyToOne
     Product product;
+
+    @ManyToOne
+    Corp corp;
 
 }

@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
-    <title>AIO</title>
+    <title>발주서</title>
     <!-- 부트스트랩 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <!-- Custom styles for this page -->
@@ -25,66 +25,32 @@
     <!-- Custom styles for this template -->
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
 </head>
-<body class="nav-md">
+<div class="nav-md">
 
-<div class="container body">
-    <div class="main_container">
+    <div class="container body">
+        <div class="main_container">
 
-        <div class="right_col" role="main">
+            <div class="right_col" role="main">
 
-            <div class="">
+                <div class="">
 
-                <!-- DataTales Example -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <div style="float:left">
-                            <h3 class="m-0 font-weight-bold text-primary">거래처 검색</h3>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="x_panel">
+                                <div class="x_title cus-title">
+                                    <h2> 발주서 </h2>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    
+
+
+
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>거래처코드</th>
-                                    <th>거래처명</th>
-                                    <th>사업자등록번호</th>
-                                </tr>
-                                </thead>
-                                <tfoot>
-                                <tr>
-                                    <th>#</th>
-                                    <th>거래처코드</th>
-                                    <th>거래처명</th>
-                                    <th>사업자등록번호</th>
-                                </tr>
-                                </tfoot>
-                                <tbody>
-                                <c:forEach var="p" items="${corpsList}">
-                                    <tr>
-                                        <td><input type="radio" name="corp"></td>
-                                        <td>${p.corp_id}</td>
-                                        <td>${p.corp_name}</td>
-                                        <td>${p.corp_num}</td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                                <c:forEach var="o" items="${orders}">
-                                    <tr>
-                                        <td>${o.orders_id}</td>
-                                        <td>${o.corp.corp_name}</td>
-                                        <td>누구냐</td>
-                                        <td>${o.orders_regdate}</td>
-                                        <td>${o.orders_cnt}</td>
-                                        <td>${o.orders_totsum}</td>
-                                        <td>${o.orders_state}</td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+
                 </div>
 
             </div>
@@ -94,9 +60,8 @@
         <!-- footer  -->
         <jsp:include page="../layout/footer.jsp" />
         <!-- /footer  -->
-
     </div> <!-- End container -->
-
+</div>
     <!-- autocomplete from jQuery Ui -->
 
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -127,3 +92,4 @@
 
 </body>
 </html>
+
