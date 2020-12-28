@@ -31,10 +31,12 @@ public class DraftServiceImpl implements DraftService {
     }
 
     @Override
-    public void updateDraft(Draft draft) {
+    public void updateDraft(Draft draft, Long prod_id) {
         Draft beforeDraft = draftRepository.findById(draft.getDraft_seq()).get();
+        Product product = productRepository.findById(prod_id).get();
         beforeDraft.setDraft_cnt(draft.getDraft_cnt());
         beforeDraft.setDraft_prod_price(draft.getDraft_prod_price());
+        beforeDraft.setProduct(product);
         draftRepository.save(beforeDraft);
     }
 

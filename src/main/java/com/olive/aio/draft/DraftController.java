@@ -42,9 +42,9 @@ public class DraftController {
 
     // 발주물품 수정
     @PostMapping("draftUpdate")
-    public String draftUpdate(Draft draft) {
+    public String draftUpdate(Draft draft, Long prod_id) {
         log.info("수정컨트롤러 들어옴");
-        draftService.updateDraft(draft);
+        draftService.updateDraft(draft, prod_id);
 
         log.info("수정컨트롤러 나간다!");
         return "redirect:draftList";
@@ -58,11 +58,11 @@ public class DraftController {
     }
 
     // 발주물품 검색
-    @GetMapping("productImport")
+    @GetMapping("productSearch")
     public String productList(Model model, Product product){
         List<Product> productImport = productService.productList(product);
         model.addAttribute("productImport", productImport);
-        return "yeonji/productImport";
+        return "yeonji/productSearch";
     }
 
 }

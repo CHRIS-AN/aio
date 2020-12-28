@@ -261,7 +261,7 @@
             });
 
             function openWin(){
-                window.open("./productImport", "물품 목록", "width=1000, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes, left=400, top=100" );
+                window.open("./productSearch", "물품 목록", "width=1000, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes, left=400, top=100" );
             }
         </script>
 
@@ -289,10 +289,11 @@
                                             </div>
                                             <div class="form-group has-feedback col-md-6 com-sm-6">
                                                 <span name="goods" class="goods" id="goodsup">물품을 등록해주세요</span>
+                                                <input type="hidden" id="prod_idup" name="prod_id">
                                                 <span>${valid_goods}</span>
                                             </div>
                                             <div class="form-group col-md-3 com-sm-3">
-                                                <button class="btn btn-primary goodsSearch" onclick="openWin()">
+                                                <button type="button" class="btn btn-primary goodsSearch" onclick="openWin()">
                                                     물품 검색
                                                 </button>
                                             </div>

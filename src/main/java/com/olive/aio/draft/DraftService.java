@@ -11,7 +11,7 @@ public interface DraftService {
     void insertDraft(Draft draft, Long prod_id);;
 
     //발주품목 수정
-    void updateDraft(Draft draft);
+    void updateDraft(Draft draft, Long prod_id);
 
     //발주품목 삭제
     void deleteDraft(Draft draft);

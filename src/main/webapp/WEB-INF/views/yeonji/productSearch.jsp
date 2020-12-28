@@ -127,6 +127,11 @@
                 opener.document.getElementById("goodsunit").innerText = prod_bundle;
                 opener.document.getElementById("goodsprice").innerText = sell_price;
 
+                opener.document.getElementById("prod_idup").value = prod_id;
+                opener.document.getElementById("goodsup").innerText = prodName;
+                opener.document.getElementById("goodsunitup").innerText = prod_bundle;
+                opener.document.getElementById("goodspriceup").innerText = sell_price;
+
                 window.close();
             }
 
