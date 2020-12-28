@@ -51,26 +51,32 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>거래처코드</th>
-                                    <th>거래처명</th>
-                                    <th>사업자등록번호</th>
+                                    <th>제품코드</th>
+                                    <th>제품명</th>
+                                    <th>단위</th>
+                                    <th>판매가</th>
+                                    <th>카테고리</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
                                     <th>#</th>
-                                    <th>거래처코드</th>
-                                    <th>거래처명</th>
-                                    <th>사업자등록번호</th>
+                                    <th>제품코드</th>
+                                    <th>제품명</th>
+                                    <th>단위</th>
+                                    <th>판매가</th>
+                                    <th>카테고리</th>
                                 </tr>
                                 </tfoot>
                                 <tbody>
-                                <c:forEach var="p" items="${corpsList}">
+                                <c:forEach var="p" items="${productImport}">
                                     <tr>
-                                        <td><input type="radio" name="corp"></td>
-                                        <td>${p.corp_id}</td>
-                                        <td>${p.corp_name}</td>
-                                        <td>${p.corp_num}</td>
+                                        <td><input type="radio" name="prod"></td>
+                                        <td>${p.prod_id}</td>
+                                        <td>${p.prodName}</td>
+                                        <td>${p.prod_bundle}</td>
+                                        <td>${p.sell_price}</td>
+                                        <td>${p.prod_catag}</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -90,24 +96,45 @@
         </div>
 
         <script>
-            var corp_id;
-            var corp_name;
+            var prod_id;
+            var prodName;
+            var prod_bundle;
+            var sell_price;
             var td;
-            $("input:radio[name='corp']").click(function() {
+
+            $("input:radio[name='prod']").click(function() {
+                var str = ""
+                var tdArr = new Array();	// 배열 선언
                 var checkBtn = $(this);
+
                 // checkBtn.parent() : checkBtn의 부모는 <td>이다.
                 // checkBtn.parent().parent() : <td>의 부모이므로 <tr>이다.
                 var tr = checkBtn.parent().parent();
                 td = tr.children();
+
                 console.log("클릭한 Row의 모든 데이터 : "+tr.text());
+
             })
+
             function chkSelect(){
-                var corp_id = td.eq(1).text();
-                var corp_name = td.eq(2).text();
-                opener.document.getElementById("corp_id").value = corp_id;
-                opener.document.getElementById("corps").innerText = corp_name;
+                var prod_id = td.eq(1).text();
+                var prodName = td.eq(2).text();
+                var prod_bundle = td.eq(3).text();
+                var sell_price = td.eq(4).text();
+
+                opener.document.getElementById("prod_id").value = prod_id;
+                opener.document.getElementById("goods").innerText = prodName;
+                opener.document.getElementById("goodsunit").innerText = prod_bundle;
+                opener.document.getElementById("goodsprice").innerText = sell_price;
+
+                opener.document.getElementById("prod_idup").value = prod_id;
+                opener.document.getElementById("goodsup").innerText = prodName;
+                opener.document.getElementById("goodsunitup").innerText = prod_bundle;
+                opener.document.getElementById("goodspriceup").innerText = sell_price;
+
                 window.close();
             }
+
         </script>
 
         <!-- footer  -->
@@ -145,3 +172,4 @@
 
 </body>
 </html>
+

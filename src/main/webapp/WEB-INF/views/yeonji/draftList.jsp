@@ -59,19 +59,18 @@
                             <%--     거래처 등록 row    --%>
                             <div class="row p-4 bg-gray-200 m-2">
                                 <div class="col-md-3">
-                                    <label>거래처</label>
+                                    거래처
                                 </div>
                                 <div class="col-md-7">
-                                    <span id="corpid"> 거래처를 등록해주세요.</span>
+                                    <span> 거래처를 등록해주세요.</span>
                                     <input type="hidden" value="" />
                                 </div>
                                 <div class="col-md-2">
-                                    <button type="button" class="btn btn-primary" onclick="openWinCorp()">
+                                    <button type="button" class="btn btn-primary" >
                                         거래처 검색
                                     </button>
                                 </div>
                             </div>
-
                             <%--     납기일 row    --%>
                             <div class="row p-3">
                                 <div class="col-md-11">
@@ -176,7 +175,7 @@
                                                 <span>${valid_goods}</span>
                                             </div>
                                             <div class="form-group col-md-3 com-sm-3">
-                                                <button type="button" class="btn btn-primary goodsSearch" onclick="openWinProd()">
+                                                <button type="button" class="btn btn-primary goodsSearch" onclick="openWin()">
                                                     물품 검색
                                                 </button>
                                             </div>
@@ -261,12 +260,8 @@
                 $("input.goodssum").val(sum);
             });
 
-            function openWinProd(){
+            function openWin(){
                 window.open("./productSearch", "물품 목록", "width=1000, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes, left=400, top=100" );
-            }
-
-            function openWinCorp(){
-                window.open("./corpSearch", "물품 목록", "width=1000, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes, left=400, top=100" );
             }
         </script>
 
