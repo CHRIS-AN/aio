@@ -16,7 +16,6 @@
                         <ul class="nav child_menu">
                             <li><a href="/mypage">인사 정보</a></li>
                             <li><a href="/mypage/myCalendar">내 근태관리</a></li>
-                            <li><a href="#">스케쥴 관리</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-edit"></i> 인사관리 <span class="fa fa-chevron-down"></span></a>
@@ -37,19 +36,17 @@
                     </li>
                     <li><a><i class="fa fa-bar-chart-o"></i> 물류관리 <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="#">입고관리</a></li>
+                            <li><a href="/logistics/derivative">입고관리</a></li>
                             <li><a href="#">출고관리</a></li>
                             <li><a href="#">재고관리</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-clone"></i> 회계관리 <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="#">지출결의서</a></li>
-                            <li><a href="#">입금보고서</a></li>
-                            <li><a href="/finance/purchaseSalesTradingRegister">매출/매입거래</a></li>
+                            <li><a href="/finance/purchaseSalesTradingRegister">전표등록</a></li>
                             <li><a href="/finance/outstandingAuthorization">결제승인대기</a></li>
                             <li><a href="/finance/statementManagement/list">전표관리</a></li>
-                            <li><a href="#">손익계산서</a></li>
+                            <li><a href="/finance/incomeStatement">손익계산서</a></li>
                         </ul>
                     </li>
                 </ul>

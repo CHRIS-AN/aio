@@ -24,6 +24,18 @@
     .mg-3 {
         margin: 0.5em;
     }
+    #changePWDialog {
+        position: fixed;
+        z-index: 9999999;
+        width: 500px;
+        display: none;
+        border: 1px solid #372c81;
+        top: 40%;
+        left: 40%;
+    }
+    .fa-close {
+        color: #777777;
+    }
 
 </style>
 </head>
@@ -62,8 +74,9 @@
                                         <div class="profile_img">
                                             <div id="crop-avatar">
                                                 <!-- Current avatar -->
-                                                <img class="img-responsive avatar-view" th:src="${empl.photo}"
-                                                    width="200px" height="300px"/>
+<!--                                                <img th:if="${#strings.isEmpty(empl?.photo)}" src="/images/default-image.png" width="200px" alt="">-->
+                                                <img th:if="${!#strings.isEmpty(empl?.photo)}" class="img-responsive avatar-view" th:src="${empl.photo}"
+                                                    width="200px" height="auto"/>
                                             </div>
                                         </div>
                                     </div>
@@ -112,6 +125,7 @@
                                     </div>
                                 </div>
                                 <div class="row mg-3 text-right">
+                                    <a th:attr="onclick=|chkPw()|" class="btn btn-default">비밀번호 수정</a>
                                     <a th:href="@{/mypage/update}" class="btn btn-default">수정</a>
                                 </div>
 
@@ -125,12 +139,77 @@
             </div>
 
         </div>
+        <div id="changePWDialog">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title cus-title">
+                            <h2>비밀번호 변경</h2>
+                            <ul class="nav navbar-right">
+                                <li><a id="close" class="btn "><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
 
+                        <div id="changePWContent" class="x_content">
+                            <form id="frm" method="post" action="/cp">
+                                <div class="form-group mb-lg-5">
+                                    <label class="">현재 비밀번호</label>
+                                    <input class="col-md-7 form-control" type="password" name="originPw" />
+                                    <div th:if="${falid != null}" th:text="${faild}" class="alert-danger"></div>
+                                </div>
+                                <div class="form-group mb-lg-5">
+                                    <label class="">새 비밀번호</label>
+                                    <input class="col-md-7 form-control" pattern="^[a-zA-Z0-9]{8,20}$" oninvalid="invalidMsg(this);" type="password" id="newPw" name="newPw" />
+                                </div>
+                                <div class="form-group mb-lg-5">
+                                    <label class="">비밀번호 확인</label>
+                                    <input class="col-md-7 form-control" onkeyup="chkNewPw()" type="password" id="chkPwInput" />
+                                </div>
+                                <div class="alert-danger" id="noMatchPw"></div>
+                                <div class="form-group">
+                                    <button class="btn btn-default" type="submit">확인</button>
+                                </div>
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <footer th:replace="thymeleaf/fragments.html :: footer"></footer>
 
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $("#close").click(function (){
+            $("#changePWDialog").hide();
+        });
+    });
+    function chkNewPw() {
+        let newPw = $("#newPw").val();
+        let pw2 = $("#chkPwInput").val();
+        if (newPw == pw2) {
+            $("#noMatchPw").html("");
+        } else {
+            $("#noMatchPw").html("새 비밀번호와 일치하지 않습니다.");
+        }
+    }
+    function invalidMsg(textbox) {
+        if(textbox.validity.patternMismatch){
+            textbox.setCustomValidity('영문자 숫자 조합 8~20자 사이를 입력해주세요.');
+        }
+        else {
+            textbox.setCustomValidity('');
+        }
+    }
 
+    function chkPw() {
+        $("#changePWDialog").show();
+    }
+</script>
 
 
 

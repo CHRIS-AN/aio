@@ -84,7 +84,6 @@ public class EmplService implements UserDetailsService {
                 case "회계":
                     role = "ROLE_FINANCE";
                     break;
-
                 //TODO 각 부서마다 권한을 정해주세요.
                 // 제품 영업 물류 회계
             }

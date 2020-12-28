@@ -1,0 +1,27 @@
+.cus-label {
+    font-size: 1.5em;
+
+}
+
+.select-form {
+    font-size: 1em;
+}
+
+.text-form {
+    font-size: 1em;
+}
+
+.emplBox {
+    box-shadow: 1px 1px 3px #000000;
+}
+.info-box {
+    font-size: 15px;
+}
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 700px;
+        margin: 1.75rem auto;
+        margin-left: 35%;
+    }
+}

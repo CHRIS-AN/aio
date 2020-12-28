@@ -25,8 +25,6 @@ public class SlipRepositoryExtentionImpl extends QuerydslRepositorySupport imple
                .and((slip.slipWrite.containsIgnoreCase(keyword))
         .or(slip.corp.containsIgnoreCase(keyword))));
 
-
-        System.out.println("쿼리문 : " + slipJPQLQuery);
         JPQLQuery<Slip> pageableQuery = getQuerydsl().applyPagination(pageable, slipJPQLQuery);
         QueryResults<Slip> slipQueryResults = pageableQuery.fetchResults();
         return new PageImpl<>(slipQueryResults.getResults(), pageable, slipQueryResults.getTotal());
@@ -39,18 +37,6 @@ public class SlipRepositoryExtentionImpl extends QuerydslRepositorySupport imple
         JPQLQuery<Slip> pageableQuery = getQuerydsl().applyPagination(pageable, slipJPQLQuery);
         QueryResults<Slip> slipQueryResults = pageableQuery.fetchResults();
         return new PageImpl<>(slipQueryResults.getResults(), pageable, slipQueryResults.getTotal());
-    }
-
-    @Override
-    public Page<Slip> findByKeywordAndPayStatementTypeStartDateAfter(
-            String keyword, Pageable pageable, LocalDateTime now, LocalDateTime minusMonths) {
-        QSlip slip = QSlip.slip;
-        JPQLQuery<Slip> slipJPQLQuery = from(slip).where((slip.payStatementntType.containsIgnoreCase("승인")
-                .and((slip.slipWrite.containsIgnoreCase(keyword))
-                        .or(slip.corp.containsIgnoreCase(keyword)))
-                ));
-
-        return null;
     }
 
 
