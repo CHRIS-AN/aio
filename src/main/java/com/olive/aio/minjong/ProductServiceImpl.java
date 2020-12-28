@@ -46,11 +46,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
-    public void updateProduct(Product product, Long corp_id, String emplId) {
+    public void updateProduct(Product product, Long corp_id, Empl empl) {
         log.info("1");
         Product beforeProduct = productRepo.findById(product.getProd_id()).get();
         Corp beforeCorp = corpRepo.findById(corp_id).get();
-        Empl beforeEmpl = emplRepo.findByEmplId(emplId);        //여기서 값을 못받음
+        Empl beforeEmpl = emplRepo.findByEmplId(empl.getEmplId());      
         log.info(String.valueOf(beforeEmpl));
 
 

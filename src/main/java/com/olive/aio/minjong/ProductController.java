@@ -99,7 +99,7 @@ public class ProductController {
     }
 
     @PostMapping("/updateProduct")
-    public String updateProduct(Long corp_id, String emplId, @Valid Product product, Errors errors, Model model){
+    public String updateProduct(Long corp_id, @CurrentEmpl Empl empl, @Valid Product product, Errors errors, Model model){
 
 
         if(errors.hasErrors()) {
@@ -116,7 +116,7 @@ public class ProductController {
 
         }
 
-        productService.updateProduct(product, corp_id, emplId);
+        productService.updateProduct(product, corp_id, empl);
         log.info("5");
         return "redirect:productList";
     }
