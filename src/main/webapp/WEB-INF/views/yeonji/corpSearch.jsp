@@ -10,7 +10,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
-    <title>AIO</title>
+    <title>거래처 검색</title>
+
     <!-- 부트스트랩 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <!-- Custom styles for this page -->
@@ -20,10 +21,13 @@
     <!-- Font Awesome -->
     <link href="/node_modules/gentelella/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- Custom Theme Style -->
+
     <link href="/node_modules/gentelella/build/css/custom.css" rel="stylesheet">
     <script src="/node_modules/gentelella/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Custom styles for this template -->
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+
+
 </head>
 <body class="nav-md">
 
@@ -70,19 +74,13 @@
                                     </tr>
                                 </c:forEach>
                                 </tbody>
-                                <c:forEach var="o" items="${orders}">
-                                    <tr>
-                                        <td>${o.orders_id}</td>
-                                        <td>${o.corp.corp_name}</td>
-                                        <td>누구냐</td>
-                                        <td>${o.orders_regdate}</td>
-                                        <td>${o.orders_cnt}</td>
-                                        <td>${o.orders_totsum}</td>
-                                        <td>${o.orders_state}</td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
                             </table>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-md-12">
+                                <button type="button"class="btn btn-primary" onclick="chkSelect()">선택</button>
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -91,10 +89,39 @@
             <!-- /.container-fluid -->
         </div>
 
+        <script>
+            var corp_id;
+            var corp_name;
+            var corp_num;
+            var td;
+
+            $("input:radio[name='corp']").click(function() {
+                var checkBtn = $(this);
+
+                // checkBtn.parent() : checkBtn의 부모는 <td>이다.
+                // checkBtn.parent().parent() : <td>의 부모이므로 <tr>이다.
+                var tr = checkBtn.parent().parent();
+                td = tr.children();
+
+                console.log("클릭한 Row의 모든 데이터 : "+tr.text());
+
+            })
+
+            function chkSelect(){
+                var corp_id = td.eq(1).text();
+                var corp_name = td.eq(2).text();
+
+                opener.document.getElementById("corp_id").value = corp_id;
+                opener.document.getElementById("corpname").innerText = corp_name;
+
+                window.close();
+            }
+
+        </script>
+
         <!-- footer  -->
         <jsp:include page="../layout/footer.jsp" />
         <!-- /footer  -->
-
     </div> <!-- End container -->
 
     <!-- autocomplete from jQuery Ui -->

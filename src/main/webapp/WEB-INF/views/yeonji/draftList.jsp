@@ -76,7 +76,7 @@
                                 <div class="col-md-11">
                                     <div style="float:left" class="p-1">
                                         <label>납기일:</label>
-                                        <input type="date" name="orders_regdate"/>
+                                        <input type="date" name="orders_regdate" id="orders_regdate"/>
                                     </div>
                                 </div>
                                 <div class="col-md-1">
@@ -124,17 +124,17 @@
                                             <th></th>
                                             <th></th>
                                             <th></th>
-                                            <th>총수량:<c:out value="${totcnt}"/> 개</th>
-                                            <th>총합계:<c:out value="${totprice}"/> 원</th>
+                                            <th>총수량:<c:out value="${totcnt}"/> 개 <input type="hidden" name="orders_cnt" id="orders_cnt" value="${totcnt}"></th>
+                                            <th>총합계:<c:out value="${totprice}"/> 원<input type="hidden" name="orders_totsum" id="orders_totsum" value="${totprice}"></th>
                                         </tr>
                                         </tfoot>
                                     </table>
                                 </div>
                             </div>
                             <div class="row text-center">
+                                    <input type="hidden" name="orders_state" id="orders_state" value="결제 대기">
                                 <div class="col-md-12">
-                                    <%--                                <input type="submit" class="btn bg-gradient-primary" value="발주요청">--%>
-                                    <button type="submit"class="btn btn-primary">발주요청</button>
+                                    <button type="submit"class="btn btn-primary" onclick="a()">발주요청</button>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                 </div>
                             </div>
@@ -143,6 +143,7 @@
                 </div>
             </div>
         </div>
+
         <!-- footer  -->
         <jsp:include page="../layout/footer.jsp" />
         <!-- /footer  -->
@@ -205,7 +206,7 @@
                                                 <label>수량</label>
                                             </div>
                                             <div class="form-group has-feedback col-md-9 com-sm-9">
-                                                <input type="text" name="draft_cnt" value="" class="form-control goodsnumber numkeyup" placeholder="수량을 입력해주세요">
+                                                <input type="text" name="draft_cnt" value="" class="form-control goodsnumber numkeyup" placeholder="수량을 입력해주세요" required>
                                                 <span>${valid_goodsnumber}</span>
                                             </div>
                                         </div>
@@ -327,7 +328,7 @@
                                                 <label>수량</label>
                                             </div>
                                             <div class="form-group has-feedback col-md-9 com-sm-9">
-                                                <input type="text" name="draft_cnt" id="draftcnt" class="form-control goodsnumber2 numkeyup2" placeholder="수량을 입력해주세요">
+                                                <input type="text" name="draft_cnt" id="draftcnt" class="form-control goodsnumber2 numkeyup2" placeholder="수량을 입력해주세요" required>
                                                 <span>${valid_goodsnumber}</span>
                                             </div>
                                         </div>
