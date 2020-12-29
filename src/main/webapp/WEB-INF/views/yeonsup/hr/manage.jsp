@@ -4,13 +4,16 @@
 <meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
 <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}"/>
 <!-- head -->
-<jsp:include page="../../layout/header.jsp" />
+<jsp:include page="../../layout/header.jsp"/>
 <!-- Datatables -->
 <link href="/node_modules/gentelella/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
 <link href="/node_modules/gentelella/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-<link href="/node_modules/gentelella/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-<link href="/node_modules/gentelella/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-<link href="/node_modules/gentelella/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+<link href="/node_modules/gentelella/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css"
+      rel="stylesheet">
+<link href="/node_modules/gentelella/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css"
+      rel="stylesheet">
+<link href="/node_modules/gentelella/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css"
+      rel="stylesheet">
 <link href="/css/manage.css" rel="stylesheet">
 </head>
 <!-- head -->
@@ -19,11 +22,11 @@
     <div class="main_container">
 
         <!-- sidebar -->
-        <jsp:include page="../../layout/side-bar.jsp" />
+        <jsp:include page="../../layout/side-bar.jsp"/>
         <!-- /sidebar -->
 
         <!-- top-nav -->
-        <jsp:include page="../../layout/top-nav.jsp" />
+        <jsp:include page="../../layout/top-nav.jsp"/>
         <!-- top-nav -->
 
 
@@ -56,7 +59,7 @@
                                 </select>
                             </div>
                             <div class="text-right col-md-10">
-                                <input type="text" id="keyword" />
+                                <input type="text" id="keyword"/>
                                 <button type="button" id="searchBtn">검색</button>
                             </div>
                         </div>
@@ -79,7 +82,7 @@
             </div>
         </div>
         <!-- footer  -->
-        <jsp:include page="../../layout/footer.jsp" />
+        <jsp:include page="../../layout/footer.jsp"/>
         <!-- /footer  -->
 
         <div id="resigDialog">
@@ -113,7 +116,8 @@
                                 <div class="row">
                                     <div class="form-group has-feedback col-md-6 com-sm-6">
                                         <label>사원번호</label>
-                                        <input type="text" name="emplId" value="${emplForm.emplId}" class="form-control" id="empl-id" placeholder="사원번호"/>
+                                        <input type="text" name="emplId" value="${emplForm.emplId}" class="form-control"
+                                               id="empl-id" placeholder="사원번호"/>
                                         <span>${valid_emplId}</span>
                                     </div>
                                     <div class="form-group has-feedback col-md-6 com-sm-6">
@@ -130,28 +134,33 @@
                                     </div>
                                     <div class="form-group has-feedback col-md-6 com-sm-6">
                                         <label>입사일자</label>
-                                        <input class="date-picker form-control"  name="emplRegdate" value="${emplForm.emplRegdate}" placeholder="yyyy-mm-dd" type="date" required="required"
-                                               onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'"
+                                        <input class="date-picker form-control" name="emplRegdate"
+                                               value="${emplForm.emplRegdate}" placeholder="yyyy-mm-dd" type="date"
+                                               required="required"
+                                               onfocus="this.type='date'" onmouseover="this.type='date'"
+                                               onclick="this.type='date'" onblur="this.type='text'"
                                                onmouseout="timeFunctionLong(this)">
                                     </div>
                                 </div>
                                 <div class="row">
-                                <div class="form-group has-feedback col-md-6 com-sm-6">
-                                    <label>부서명</label>
-                                    <select name="dept" class="form-control">
-                                        <option value="인사" ${emplForm.dept == '인사'? 'selected' : ''}>인사</option>
-                                        <option value="제품" ${emplForm.dept == "제품"? 'selected' : ''}>제품</option>
-                                        <option value="영업" ${emplForm.dept == "영업"? 'selected' : ''}>영업</option>
-                                        <option value="물류" ${emplForm.dept == "물류"? 'selected' : ''}>물류</option>
-                                        <option value="회계" ${emplForm.dept == "회계"? 'selected' : ''}>회계</option>
-                                    </select>
-                                </div>
-                                <div class="form-group has-feedback col-md-6 com-sm-6">
-                                    <label>퇴사일자</label>
-                                    <input class="date-picker form-control" name="emplResigdate" placeholder="yyyy-mm-dd" type="date" required="required"
-                                           onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'"
-                                           onmouseout="timeFunctionLong(this)" disabled>
-                                </div>
+                                    <div class="form-group has-feedback col-md-6 com-sm-6">
+                                        <label>부서명</label>
+                                        <select name="dept" class="form-control">
+                                            <option value="인사" ${emplForm.dept == '인사'? 'selected' : ''}>인사</option>
+                                            <option value="제품" ${emplForm.dept == "제품"? 'selected' : ''}>제품</option>
+                                            <option value="영업" ${emplForm.dept == "영업"? 'selected' : ''}>영업</option>
+                                            <option value="물류" ${emplForm.dept == "물류"? 'selected' : ''}>물류</option>
+                                            <option value="회계" ${emplForm.dept == "회계"? 'selected' : ''}>회계</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group has-feedback col-md-6 com-sm-6">
+                                        <label>퇴사일자</label>
+                                        <input class="date-picker form-control" name="emplResigdate"
+                                               placeholder="yyyy-mm-dd" type="date" required="required"
+                                               onfocus="this.type='date'" onmouseover="this.type='date'"
+                                               onclick="this.type='date'" onblur="this.type='text'"
+                                               onmouseout="timeFunctionLong(this)" disabled>
+                                    </div>
                                 </div>
                                 <div class="row">
                                 <div class="form-group has-feedback col-md-6 com-sm-6">
@@ -168,14 +177,18 @@
                                 <div class="form-group has-feedback col-md-12 com-sm-12">
                                     <label class="col-md-12">주소</label>
                                     <div class="col-md-5 col-sm-5">
-                                        <input type="text" name="post_num" value="${emplForm.post_num}" class="form-control" id="postnum" placeholder="우편번호" readonly>
+                                        <input type="text" name="post_num" value="${emplForm.post_num}"
+                                               class="form-control" id="postnum" placeholder="우편번호" readonly>
                                         <span>${valid_post_num}</span>
                                     </div>
-                                    <button type="button" id="postnumBtn" onclick="showjusoPopup('등록')" class="btn btn-default">검색</button>
+                                    <button type="button" id="postnumBtn" onclick="showjusoPopup('등록')"
+                                            class="btn btn-default">검색
+                                    </button>
                                 </div>
                                 <div class="form-group has-feedback col-md-12 com-sm-12">
                                     <div class="col-md-12">
-                                        <input type="text" name="address" value="${emplForm.address}" class="form-control" id="address" placeholder="주소">
+                                        <input type="text" name="address" value="${emplForm.address}"
+                                               class="form-control" id="address" placeholder="주소">
                                         <span>${valid_address}</span>
                                     </div>
                                 </div>
@@ -282,7 +295,7 @@
     </div>
 </div>
 <script>
-    if(${not empty error}) {
+    if (${not empty error}) {
         $("#resigDialog").show();
     }
 
@@ -330,13 +343,13 @@ function showjusoPopup(type1){
                 $("#updateAddr").focus();
             }
 
-        }
-    }).open({autoClose:true});
-}
+
+        }).open({autoClose: true});
+    }
 </script>
 <script src="/js/manage.js"></script>
 <!-- script -->
-<jsp:include page="../../layout/script.jsp" />
+<jsp:include page="../../layout/script.jsp"/>
 <!-- Datatables -->
 <script src="/node_modules/gentelella/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="/node_modules/gentelella/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>

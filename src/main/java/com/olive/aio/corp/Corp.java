@@ -40,4 +40,6 @@ public class Corp {
 //    @Pattern(regexp = "^[1-9]{10,30}", message = "유효한 값을 작성해주세요.")
     private String corp_num; //사업자 등록번호
 
+
+
 }
