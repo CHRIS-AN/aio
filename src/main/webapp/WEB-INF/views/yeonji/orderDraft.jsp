@@ -35,19 +35,152 @@
                 <div class="">
 
                     <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="x_panel">
-                                <div class="x_title cus-title">
-                                    <h2> 발주서 </h2>
-                                    <div class="clearfix"></div>
+                        <div class="modal-header">
+                            <h4 class="modal-title">발주서</h4>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <div class="col-sm-12">
+                                <div class="text-center">
+                                    <h1>발주서</h1>
                                 </div>
-                                <div class="x_content">
-
-
-
-
+                                <div class="row">
+                                    <table class="table table-bordered" width="80%" cellspacing="0">
+                                        <tr>
+                                            <td>발주번호</td>
+                                            <td colspan="2"></td>
+                                            <td>납기일</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="2">발주처</td>
+                                            <td>회사명</td>
+                                            <td></td>
+                                            <td>전화</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>대표자</td>
+                                            <td></td>
+                                            <td>주소</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="2">수주처</td>
+                                            <td>회사명</td>
+                                            <td></td>
+                                            <td>전화</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>담당자</td>
+                                            <td></td>
+                                            <td>주소</td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                    <table class="table table-bordered" width="80%" cellspacing="0">
+                                        <tr>
+                                            <td>No.</td>
+                                            <td colspan="2">품명</td>
+                                            <td>단위</td>
+                                            <td>단가</td>
+                                            <td>수량</td>
+                                            <td>금액</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td colspan="2"></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td colspan="2"></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td colspan="2"></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td colspan="2"></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td colspan="2"></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>6</td>
+                                            <td colspan="2"></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>7</td>
+                                            <td colspan="2"></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>8</td>
+                                            <td colspan="2"></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>9</td>
+                                            <td colspan="2"></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>10</td>
+                                            <td colspan="2"></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4">합계</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>총합계</td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
+                        </div>
+                        <div>
+
                         </div>
                     </div>
 

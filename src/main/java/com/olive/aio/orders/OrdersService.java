@@ -9,4 +9,7 @@ public interface OrdersService {
 
     //발주서 등록
     void insertOrders(Orders orders, Long corp_id);
+
+    //발주 삭제
+    void deleteById(Orders orders);
 }

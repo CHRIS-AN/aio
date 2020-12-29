@@ -29,4 +29,9 @@ public class OrdersServiceImpl implements OrdersService {
         orders.setCorp(corp);
         ordersRepository.save(orders);
     }
+
+    @Override
+    public void deleteById(Orders orders) {
+        ordersRepository.deleteById(orders.getOrders_id());
+    }
 }

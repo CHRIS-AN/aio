@@ -1,6 +1,9 @@
 package com.olive.aio.orders;
 
+import com.olive.aio.corp.Corp;
 import com.olive.aio.corp.CorpService;
+import com.olive.aio.domain.Empl;
+import com.olive.aio.employee.CurrentEmpl;
 import com.olive.aio.minjong.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +41,8 @@ public class OrdersController {
 
     // 발주서 등록
     @PostMapping("ordersInsert")
-    public String ordersInsert(Orders orders, Long corp_id){
+    public String ordersInsert(Orders orders, @CurrentEmpl Empl empl, Long corp_id){
+        orders.setEmpl(empl);
         ordersService.insertOrders(orders, corp_id);
         return "redirect:ordersList";
     }
@@ -47,6 +51,13 @@ public class OrdersController {
     @GetMapping("orderDraft")
     public String orderDraft(){
         return "yeonji/orderDraft";
+    }
+
+    // 발주 삭제
+    @PostMapping("ordersDelete")
+    public String ordersDelete(Orders orders){
+        ordersService.deleteById(orders);
+        return "redirect:ordersList";
     }
 
 }

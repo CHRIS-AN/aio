@@ -89,12 +89,13 @@
                                 <tr id="tr${c.corp_id}" onclick="detail()" data-toggle="modal" data-target="#modal_2"
                                     data-corpid="${c.corp_id}" data-corpname='${c.corp_name}'
                                     data-corpnum='${c.corp_num}' data-corpceo='${c.corp_ceo}'
-                                    data-corpcall='${c.corp_call}' data-corpaddress='${c.corp_address}'>
+                                    data-corpcall='${c.corp_call}' data-corpaddress='${c.corp_address}'
+                                    data-emplname='${c.empl.name}'>
                                     <td>${c.corp_id}</td>
                                     <td>${c.corp_name}</td>
                                     <td>${c.corp_ceo}</td>
                                     <td>${c.corp_call}</td>
-                                    <td>누구냐넌</td>
+                                    <td>${c.empl.name}</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -204,7 +205,7 @@
                             </tr>
                             <tr>
                                 <th>담당자</th>
-                                <th>누구냐넌</th>
+                                <th><span id="modal2_7"></span></th>
                             </tr>
                             <tr>
                                 <th>발주 품목</th>
@@ -234,12 +235,14 @@
                     var corpceo = $(event.relatedTarget).data('corpceo');
                     var corpcall = $(event.relatedTarget).data('corpcall');
                     var corpaddress = $(event.relatedTarget).data('corpaddress');
+                    var emplname = $(event.relatedTarget).data('emplname');
                     $(this).find("#modal2_1").text(corpname);
                     $(this).find("#modal2_2").text(corpid);
                     $(this).find("#modal2_3").text(corpnum);
                     $(this).find("#modal2_4").text(corpceo);
                     $(this).find("#modal2_5").text(corpcall);
                     $(this).find("#modal2_6").text(corpaddress);
+                    $(this).find("#modal2_7").text(emplname);
                 });
             }
         </script>
@@ -280,14 +283,6 @@
                                 <tr>
                                     <th>주소</th>
                                     <th><input type="text" id="modal3_6" name="corp_address" value=""/></th>
-                                </tr>
-                                <tr>
-                                    <th>담당자</th>
-                                    <th>누구냐넌</th>
-                                </tr>
-                                <tr>
-                                    <th>발주 품목</th>
-                                    <th>할수잇냐</th>
                                 </tr>
                             </table>
                             <div class="modal-footer">

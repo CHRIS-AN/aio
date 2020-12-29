@@ -53,6 +53,9 @@
                         <div style="float:left">
                             <h3 class="m-0 font-weight-bold text-primary">발주서 작성</h3>
                         </div>
+                        <div style="float: right">
+                            <button type="button" class="btn btn-primary" onclick="location.href='ordersList'">뒤로가기</button>
+                        </div>
                     </div>
                     <div class="card-body">
                         <form id="corpSelectForm" action="ordersInsert" method="post">
@@ -134,7 +137,7 @@
                             <div class="row text-center">
                                     <input type="hidden" name="orders_state" id="orders_state" value="결제 대기">
                                 <div class="col-md-12">
-                                    <button type="submit"class="btn btn-primary" onclick="a()">발주요청</button>
+                                    <button type="submit"class="btn btn-primary" >발주요청</button>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                 </div>
                             </div>

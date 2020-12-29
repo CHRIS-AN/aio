@@ -81,10 +81,13 @@
                                 </tfoot>
                                 <tbody>
                                 <c:forEach var="o" items="${orders}">
-                                    <tr>
+                                    <tr  id="tr${o.orders_id}"  data-toggle="modal" data-target="#detailModal"
+                                        onclick="detail('${o.orders_id}','${o.corp.corp_name}','${o.empl.name}','${o.orders_regdate}',
+                                                '${o.orders_cnt}','${o.orders_totsum}','${o.corp.corp_ceo}','${o.corp.corp_call}',
+                                                '${o.corp.corp_address}')">
                                         <td>${o.orders_id}</td>
                                         <td>${o.corp.corp_name}</td>
-                                        <td>누구냐</td>
+                                        <td>${o.empl.name}</td>
                                         <td>${o.orders_regdate}</td>
                                         <td>${o.orders_cnt}</td>
                                         <td>${o.orders_totsum}</td>
@@ -107,59 +110,249 @@
 
 
         <%--  모달 1 : 발주 상세보기  --%>
-        <div class="modal" id="modal_1">
+        <div class="modal" id="detailModal">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">거래처 등록</h4>
+                        <div class="col-sm-12">
+                            <div style="float:left">
+                                <h4 class="modal-title">발주서</h4>
+                            </div>
+                            <div style="float: right">
+                                <button type="button" class="btn btn-primary" onclick="print()">인쇄</button>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div id="modalbody" class="modal-body">
+                        <div class="col-sm-12">
+                            <div class="text-center">
+                                <h1>발주서</h1>
+                                <p></p>
+                                <p></p>
+                            </div>
+                            <div class="row">
+                                <table class="table table-bordered" width="80%" cellspacing="0" style="text-align: center">
+                                    <tr>
+                                        <td>발주번호</td>
+                                        <td colspan="2"><span id="orders_id"></span></td>
+                                        <td>납기일</td>
+                                        <td><span id="orders_regdate"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2">발주처</td>
+                                        <td>회사명</td>
+                                        <td><span id="corp_name"></span></td>
+                                        <td>전화</td>
+                                        <td><span id="corp_call"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>대표자</td>
+                                        <td><span id="corp_ceo"></span></td>
+                                        <td>주소</td>
+                                        <td><span id="corp_address"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2">수주처</td>
+                                        <td>회사명</td>
+                                        <td>AIO</td>
+                                        <td>전화</td>
+                                        <td>1588-1004</td>
+                                    </tr>
+                                    <tr>
+                                        <td>담당자</td>
+                                        <td><span id="empl_name"></span></td>
+                                        <td>주소</td>
+                                        <td>서울특별시 강남구 테헤란로 146</td>
+                                    </tr>
+                                </table>
+                                <table class="table table-bordered" width="80%" cellspacing="0" style="text-align: center">
+                                    <tr>
+                                        <td>No.</td>
+                                        <td colspan="2">품명</td>
+                                        <td>단위</td>
+                                        <td>단가</td>
+                                        <td>수량</td>
+                                        <td>금액</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td colspan="2"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td colspan="2"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td colspan="2"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td colspan="2"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td colspan="2"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td colspan="2"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td colspan="2"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td colspan="2"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>9</td>
+                                        <td colspan="2"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>10</td>
+                                        <td colspan="2"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">합계</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><span id="orders_totsum"></span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="form-group text-center has-feedback col-md-12 com-sm-12">
+                        <input type="button" class="btn btn-primary" value="삭제">
+                        <input type="button" class="btn btn-primary" value="수정">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    </div>
+                    <p></p>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function detail(orders_id,corp_name,empl_name,orders_regdate,orders_cnt,orders_totsum,corp_ceo,corp_call,corp_address){
+                $('#detailModal').on('show.bs.modal', function (event) {
+                    $(this).find("#orders_id").text(orders_id);
+                    $(this).find("#corp_name").text(corp_name);
+                    $(this).find("#empl_name").text(empl_name);
+                    $(this).find("#orders_regdate").text(orders_regdate);
+                    $(this).find("#orders_cnt").text(orders_cnt);
+                    $(this).find("#orders_totsum").text(orders_totsum);
+                    $(this).find("#corp_ceo").text(corp_ceo);
+                    $(this).find("#corp_call").text(corp_call);
+                    $(this).find("#corp_address").text(corp_address);
+                });
+            }
+
+            function print(){
+                var inbody = document.body.innerHTML; // 이전 body 영역 저장
+
+                window.onbeforeprint = function(){ // 프린트 화면 호출 전 발생하는 이벤트
+
+                    document.body.innerHTML = document.getElementById('modalbody').innerHTML; // 원하는 영역 지정
+
+                }
+
+                window.onafterprint = function(){ // 프린트 출력 후 발생하는 이벤트
+
+                    document.body.innerHTML = inbody; // 이전 body 영역으로 복구
+
+                }
+
+                // window.print();
+
+
+
+            }
+        </script>
+
+        <%--  모달 4 : 발주 물품 삭제  --%>
+        <div class="modal" id="deleteModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">발주 삭제</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
 
                     <!-- Modal body -->
                     <div class="modal-body">
-
-                        <form action="corpInsert" method="post">
-                            <table class="table table-bordered">
-                                <tr>
-                                    <th>상호</th>
-                                    <th><input type="text" name="corp_name" placeholder="내용을 입력해주세요" value="" autofocus>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th>사업자 등록번호</th>
-                                    <th><input type="text" name="corp_num" placeholder="ex)000-00-00000" value=""
-                                               autofocus></th>
-                                </tr>
-                                <tr>
-                                    <th>대표자</th>
-                                    <th><input type="text" name="corp_ceo" placeholder="내용을 입력해주세요" value="" autofocus>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th>연락처</th>
-                                    <th><input type="text" name="corp_call" placeholder="연락처를 입력해주세요" value=""
-                                               autofocus></th>
-                                </tr>
-                                <tr>
-                                    <th>주소</th>
-                                    <th><input type="text" name="corp_address" placeholder="도로명 주소" value=""
-                                               autofocus><input type="button" value="주소 검색"></th>
-                                    <%--                <th><input type="text" name="corp_address" placeholder="상세정보" autofocus></th>--%>
-                                </tr>
-                            </table>
-                            <!-- Modal footer -->
+                        <form action="ordersDelete" method="post">
+                            정말 삭제하시겠습니까?
+                            <input type="hidden" id="deleteOrdersId" name="orders_id" value="">
                             <div class="modal-footer">
-                                <input type="submit" class="btn btn-primary" value="등록">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                <button type="submit"class="btn btn-primary">확인</button>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
         </div>
+        <script>
+            //삭제하기
+            function draftDelete() {
+                $('#deleteModal').on('show.bs.modal', function (event) {
+                    var draftseq = $('#draftseq').val();
+                    $(this).find("#deleteDraftId").val(draftseq);
+                });
+            }
+        </script>
 
     </div> <!-- End container -->
 

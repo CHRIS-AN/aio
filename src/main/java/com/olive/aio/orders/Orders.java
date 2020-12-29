@@ -1,6 +1,7 @@
 package com.olive.aio.orders;
 
 import com.olive.aio.corp.Corp;
+import com.olive.aio.domain.Empl;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,5 +39,8 @@ public class Orders implements Serializable {
 
     @ManyToOne
     Corp corp;
+
+    @ManyToOne
+    Empl empl;
 
 }
