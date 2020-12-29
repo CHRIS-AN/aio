@@ -73,8 +73,6 @@
                                     <div class="col-md-3 col-sm-3 col-xs-12">
                                         <div class="profile_img">
                                             <div id="crop-avatar">
-                                                <!-- Current avatar -->
-<!--                                                <img th:if="${#strings.isEmpty(empl?.photo)}" src="/images/default-image.png" width="200px" alt="">-->
                                                 <img th:if="${!#strings.isEmpty(empl?.photo)}" class="img-responsive avatar-view" th:src="${empl.photo}"
                                                     width="200px" height="auto"/>
                                             </div>
@@ -157,11 +155,11 @@
                                 <div class="form-group mb-lg-5">
                                     <label class="">현재 비밀번호</label>
                                     <input class="col-md-7 form-control" type="password" name="originPw" />
-                                    <div th:if="${falid != null}" th:text="${faild}" class="alert-danger"></div>
+                                    <div th:if="${failed != null}" th:text="${failed}" class="alert-danger"></div>
                                 </div>
                                 <div class="form-group mb-lg-5">
                                     <label class="">새 비밀번호</label>
-                                    <input class="col-md-7 form-control" pattern="^[a-zA-Z0-9]{8,20}$" oninvalid="invalidMsg(this);" type="password" id="newPw" name="newPw" />
+                                    <input class="col-md-7 form-control" pattern="^[a-zA-Z0-9]{8,20}$" oninvalid="invalidMsg('영문자 혹은 숫자 8~20자를 입력해주세요.');" type="password" id="newPw" name="newPw" />
                                 </div>
                                 <div class="form-group mb-lg-5">
                                     <label class="">비밀번호 확인</label>
@@ -182,12 +180,30 @@
 
     </div>
 </div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var failed = /*[[${failed}]];*/ null;
+    if(failed != null) {
+        $("#changePWDialog").show();
+    }
+    /*]]>*/
+</script>
 <script>
     $(document).ready(function () {
         $("#close").click(function (){
             $("#changePWDialog").hide();
         });
     });
+
+    function invalidMsg(textbox) {
+        if(textbox.validity.patternMismatch){
+            textbox.setCustomValidity(textbox);
+        }
+        else {
+            textbox.setCustomValidity('');
+        }
+    }
+
     function chkNewPw() {
         let newPw = $("#newPw").val();
         let pw2 = $("#chkPwInput").val();
@@ -195,14 +211,6 @@
             $("#noMatchPw").html("");
         } else {
             $("#noMatchPw").html("새 비밀번호와 일치하지 않습니다.");
-        }
-    }
-    function invalidMsg(textbox) {
-        if(textbox.validity.patternMismatch){
-            textbox.setCustomValidity('영문자 숫자 조합 8~20자 사이를 입력해주세요.');
-        }
-        else {
-            textbox.setCustomValidity('');
         }
     }
 

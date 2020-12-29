@@ -99,7 +99,9 @@ public class MyPageController {
 
     @PostMapping("/cp")
     public String changePW(@CurrentEmpl Empl empl, Model model, String originPw ,String newPw) {
-        if(!passwordEncoder.matches(passwordEncoder.encode(originPw), empl.getPassword())) {
+        log.info("originPw {}", originPw);
+        log.info("newPw {}", newPw);
+        if(!emplService.checkPassword(empl, originPw)) {
             model.addAttribute(empl);
             model.addAttribute("failed", "비밀번호가 맞지 않습니다.");
             return "thymeleaf/yeonsup/mypage";
@@ -110,6 +112,4 @@ public class MyPageController {
 
         return "yeonsup/good";
     }
-
-
 }

@@ -78,7 +78,7 @@ public class EmplRestController {
         Map<String, String> jsonMap = new HashMap<>();
         log.info(password);
         log.info(emplId);
-        if(emplService.checkPassword(empl, password)) {
+        if(!emplService.checkPassword(empl, password)) {
             jsonMap.put("state", "fail");
             return jsonMap;
         }
