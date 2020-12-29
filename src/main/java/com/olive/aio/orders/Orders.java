@@ -1,13 +1,18 @@
 package com.olive.aio.orders;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.olive.aio.corp.Corp;
 import com.olive.aio.domain.Empl;
+import com.olive.aio.draft.Draft;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data //@ToString, @EqualsAndHashCode : equals()와 hashCode() 자동생성, @Getter, @Setter, @RequiredArgsConstructor
 @NoArgsConstructor //Paramete가 없는 생성자 생성
@@ -38,9 +43,20 @@ public class Orders implements Serializable {
     private int orders_totsum; //총금액
 
     @ManyToOne
+    @JsonBackReference
     Corp corp;
 
     @ManyToOne
+    @JsonBackReference
     Empl empl;
+
+    @OneToMany(mappedBy = "orders", fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private Set<Draft> draft = new HashSet<>();
+
+    public void addDraft(Draft draft) {
+        this.draft.add(draft);
+        draft.setOrders(this);
+    }
 
 }

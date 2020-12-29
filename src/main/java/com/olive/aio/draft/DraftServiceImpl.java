@@ -44,4 +44,8 @@ public class DraftServiceImpl implements DraftService {
     public void deleteDraft(Draft draft) {
         draftRepository.deleteById(draft.getDraft_seq());
     }
+
+    public List<Draft> findByOrders(Long orders_id){
+        return draftRepository.findByOrders(orders_id);
+    }
 }

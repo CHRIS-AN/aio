@@ -51,7 +51,7 @@
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <div style="float:left">
-                            <h3 class="m-0 font-weight-bold text-primary">발주서 작성</h3>
+                            <h3 class="m-0 font-weight-bold text-primary">발주서 수정</h3>
                         </div>
                         <div style="float: right">
                             <button type="button" class="btn btn-primary" onclick="location.href='ordersList'">뒤로가기</button>
@@ -65,8 +65,8 @@
                                     <label>거래처</label>
                                 </div>
                                 <div class="col-md-7">
-                                    <span id="corpname"> 거래처를 등록해주세요.</span>
-                                    <input type="hidden" name="corp_id" id="corp_id" />
+                                    <span id="corpname"> ${orders.corp.corp_name} </span>
+                                    <input type="hidden" name="corp_id" id="corp_id" value="${orders.corp.corp_name}"/>
                                 </div>
                                 <div class="col-md-2">
                                     <button type="button" class="btn btn-primary" onclick="openWinCorp()">
@@ -79,7 +79,7 @@
                                 <div class="col-md-11">
                                     <div style="float:left" class="p-1">
                                         <label>납기일:</label>
-                                        <input type="date" name="orders_regdate" id="orders_regdate"/>
+                                        <input type="date" name="orders_regdate" id="orders_regdate" value="${orders.orders_regdate}"/>
                                     </div>
                                 </div>
                                 <div class="col-md-1">
@@ -110,7 +110,7 @@
                                             <tr id="tr${d.draft_seq}" onclick="update()" data-toggle="modal" data-target="#updateModal"
                                                 data-draftseq='${d.draft_seq}' data-prodname='${d.product.prodName}' data-prodbundle='${d.product.prod_bundle}'
                                                 data-sellprice='${d.product.sell_price}' data-draftcnt='${d.draft_cnt}' data-draftprodprice='${d.draft_prod_price}' >
-                                                <td>${d.draft_seq}<input type="hidden" name="drafts[0].draft_seq" value="${d.draft_seq}"></td>
+                                                <td>${d.draft_seq}</td>
                                                 <td>${d.product.prodName}</td>
                                                 <td>${d.product.prod_bundle}</td>
                                                 <td>${d.product.sell_price}</td>
@@ -137,7 +137,7 @@
                             <div class="row text-center">
                                     <input type="hidden" name="orders_state" id="orders_state" value="결제 대기">
                                 <div class="col-md-12">
-                                    <button type="submit"class="btn btn-primary" >발주요청</button>
+                                    <button type="submit"class="btn btn-primary" >발주요청수정</button>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                 </div>
                             </div>

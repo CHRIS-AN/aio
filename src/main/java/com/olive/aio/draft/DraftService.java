@@ -16,4 +16,7 @@ public interface DraftService {
     //발주품목 삭제
     void deleteDraft(Draft draft);
 
+    //발주품목 리스트 뽑기
+    List<Draft> findByOrders(Long orders_id);
+
 }

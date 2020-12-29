@@ -121,7 +121,7 @@
                                 <h4 class="modal-title">발주서</h4>
                             </div>
                             <div style="float: right">
-                                <button type="button" class="btn btn-primary" onclick="print()">인쇄</button>
+                                <button type="button" class="btn btn-primary" onclick="print(document.getElementById('modalbody').innerHTML)">인쇄</button>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                         </div>
@@ -129,6 +129,7 @@
 
                     <!-- Modal body -->
                     <div id="modalbody" class="modal-body">
+                        <div id="printArea">
                         <div class="col-sm-12">
                             <div class="text-center">
                                 <h1>발주서</h1>
@@ -179,86 +180,16 @@
                                         <td>수량</td>
                                         <td>금액</td>
                                     </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td colspan="2"></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td colspan="2"></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td colspan="2"></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td colspan="2"></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td colspan="2"></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td colspan="2"></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>7</td>
-                                        <td colspan="2"></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>8</td>
-                                        <td colspan="2"></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>9</td>
-                                        <td colspan="2"></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>10</td>
-                                        <td colspan="2"></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
+                                    <c:forEach var="d" items="${draft}">
+                                        <tr>
+                                            <td>${d.draft_seq}</td>
+                                            <td colspan="2">${d.product.prodName}</td>
+                                            <td>${d.product.prod_bundle}</td>
+                                            <td>${d.product.buy_price}</td>
+                                            <td>${d.orders.orders_cnt}</td>
+                                            <td>${d.orders.orders_totsum}</td>
+                                        </tr>
+                                    </c:forEach>
                                     <tr>
                                         <td colspan="4">합계</td>
                                         <td></td>
@@ -269,11 +200,12 @@
                             </div>
                         </div>
                     </div>
-
+                    </div>
                     <!-- Modal footer -->
                     <div class="form-group text-center has-feedback col-md-12 com-sm-12">
-                        <input type="button" class="btn btn-primary" value="삭제">
-                        <input type="button" class="btn btn-primary" value="수정">
+                        <input type="button" class="btn btn-primary" value="삭제" id="ordersDelete"  data-toggle="modal"
+                               data-target="#deleteModal" onclick="ordersDelete()">
+                        <input type="button" class="btn btn-primary" value="수정" onclick="updateorders()">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     </div>
                     <p></p>
@@ -283,7 +215,9 @@
         </div>
 
         <script>
+            var updatelink;
             function detail(orders_id,corp_name,empl_name,orders_regdate,orders_cnt,orders_totsum,corp_ceo,corp_call,corp_address){
+                updatelink = orders_id;
                 $('#detailModal').on('show.bs.modal', function (event) {
                     $(this).find("#orders_id").text(orders_id);
                     $(this).find("#corp_name").text(corp_name);
@@ -297,25 +231,32 @@
                 });
             }
 
-            function print(){
-                var inbody = document.body.innerHTML; // 이전 body 영역 저장
+            function updateorders(){
+                location.href = "ordersUpdate?orders_id="+updatelink;
 
-                window.onbeforeprint = function(){ // 프린트 화면 호출 전 발생하는 이벤트
+            }
 
-                    document.body.innerHTML = document.getElementById('modalbody').innerHTML; // 원하는 영역 지정
+            function print(printArea){
+                var win;
+                win = window.open();
+                self.focus();
+                win.document.open();
 
-                }
+                win.document.write('<html lang="ko"><head>');
+                win.document.write('<meta charset="utf-8">');
+                win.document.write('<title>발주서 인쇄</title>');
+                win.document.write('<link href="/node_modules/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">\n');
+                win.document.write('<link href="/css/sb-admin-2.min.css" rel="stylesheet"></head>');
+                win.document.write('<body class="nav-md modal-open" cz-shortcut-listen="true">');
+                win.document.write(printArea);
+                win.document.write('</body></html>');
 
-                window.onafterprint = function(){ // 프린트 출력 후 발생하는 이벤트
+                win.document.close();
 
-                    document.body.innerHTML = inbody; // 이전 body 영역으로 복구
-
-                }
-
-                // window.print();
-
-
-
+                setTimeout(function (){
+                    win.print();
+                    win.close();
+                },300);
             }
         </script>
 
@@ -346,10 +287,10 @@
         </div>
         <script>
             //삭제하기
-            function draftDelete() {
+            function ordersDelete() {
                 $('#deleteModal').on('show.bs.modal', function (event) {
-                    var draftseq = $('#draftseq').val();
-                    $(this).find("#deleteDraftId").val(draftseq);
+                    var orders_id = $('#orders_id').text();
+                    $(this).find("#deleteOrdersId").val(orders_id);
                 });
             }
         </script>
