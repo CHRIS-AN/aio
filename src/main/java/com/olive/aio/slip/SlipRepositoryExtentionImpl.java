@@ -23,7 +23,19 @@ public class SlipRepositoryExtentionImpl extends QuerydslRepositorySupport imple
         QSlip slip = QSlip.slip;
         JPQLQuery<Slip> slipJPQLQuery = from(slip).where(slip.payStatementntType.containsIgnoreCase("대기")
                .and((slip.slipWrite.containsIgnoreCase(keyword))
-        .or(slip.corp.containsIgnoreCase(keyword))));
+                .or(slip.corp.containsIgnoreCase(keyword))));
+
+        JPQLQuery<Slip> pageableQuery = getQuerydsl().applyPagination(pageable, slipJPQLQuery);
+        QueryResults<Slip> slipQueryResults = pageableQuery.fetchResults();
+        return new PageImpl<>(slipQueryResults.getResults(), pageable, slipQueryResults.getTotal());
+    }
+
+    @Override
+    public Page<Slip> findByKeywordAndPayStatementType(String keyword, Pageable pageable, String type) {
+        QSlip slip = QSlip.slip;
+        JPQLQuery<Slip> slipJPQLQuery = from(slip).where(slip.payStatementntType.containsIgnoreCase(type)
+                .and((slip.slipWrite.containsIgnoreCase(keyword))
+                        .or(slip.corp.containsIgnoreCase(keyword))));
 
         JPQLQuery<Slip> pageableQuery = getQuerydsl().applyPagination(pageable, slipJPQLQuery);
         QueryResults<Slip> slipQueryResults = pageableQuery.fetchResults();
@@ -40,4 +52,16 @@ public class SlipRepositoryExtentionImpl extends QuerydslRepositorySupport imple
     }
 
 
+    // 전표 관리에서 keyword 검색 후, paging
+    @Override
+    public Page<Slip> findByPayStatementTypeAndSlipDateBetweenAndSlipWriteContaining(String type, String startDate, String minusMonths, String keyword, Pageable pageable) {
+        QSlip slip = QSlip.slip;
+        JPQLQuery<Slip> slipJPQLQuery = from(slip).where(slip.payStatementntType.containsIgnoreCase("승인")
+                .and((slip.slipWrite.containsIgnoreCase(keyword))
+                        .or(slip.corp.containsIgnoreCase(keyword))));
+
+        JPQLQuery<Slip> pageableQuery = getQuerydsl().applyPagination(pageable, slipJPQLQuery);
+        QueryResults<Slip> slipQueryResults = pageableQuery.fetchResults();
+        return new PageImpl<>(slipQueryResults.getResults(), pageable, slipQueryResults.getTotal());
+    }
 }
