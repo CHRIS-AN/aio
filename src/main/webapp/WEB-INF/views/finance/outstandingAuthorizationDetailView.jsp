@@ -103,48 +103,56 @@
             </c:forEach>
 
             <c:forEach items="${slipList}" var="slip">
-                <div class="container mt-5">
-                    <span class="row justify-content-center">
 
-                        <div class="col-3"></div>
+                <c:choose>
+                    <c:when test="${empl.name eq slip.slipWrite || empl.dept eq '회계'}">
+                        <div class="container mt-5">
+                            <span class="row justify-content-center">
 
-                        <div class="form-group col-4">
-                            <a href="/finance/outstandingAuthorizationDetailView/${slip.slipId}/edit"
-                               class="btn btn-primary" role="button">전표 수정</a>
+                                <div class="col-3"></div>
+
+                                <div class="form-group col-4">
+                                    <a href="/finance/outstandingAuthorizationDetailView/${slip.slipId}/edit"
+                                       class="btn btn-primary" role="button">전표 수정</a>
+                                </div>
+
+                                <c:choose>
+                                    <c:when test="${title eq '전표 상세보기'}">
+                                        <div class="form-group col-4">
+                                            <form id="deleteOut-form" action="/finance/statementManagementDetailView/delete" method="post">
+                                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                                 <span class="row form-group">
+                                                    <div class="col-6" style="">
+                                                        <button type="submit" class="btn btn-primary" onclick="deleteChk()">전표 삭제</button>
+                                                        <input type="hidden" value="${slip.slipId}" name="slipId">
+                                                    </div>
+                                                    <div class="col-3"></div>
+                                                 </span>
+                                            </form>
+                                        </div>
+                                    </c:when>
+                                    <c:when test="${title eq '승인 대기 전표 상세보기'}">
+                                        <div class="form-group col-4">
+                                            <form id="deleteSlip-form" action="/finance/outstandingAuthorizationDetailView/delete" method="post">
+                                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                                 <span class="row form-group">
+                                                    <div class="col-6" style="">
+                                                        <button type="submit" class="btn btn-primary" onclick="deleteChk()">전표 삭제</button>
+                                                        <input type="hidden" value="${slip.slipId}" name="slipId">
+                                                    </div>
+                                                    <div class="col-3"></div>
+                                                 </span>
+                                            </form>
+                                        </div>
+                                    </c:when>
+                                </c:choose>
+                            </span>
                         </div>
+                    </c:when>
+                    <c:otherwise>
 
-                        <c:choose>
-                            <c:when test="${title eq '전표 상세보기'}">
-                                <div class="form-group col-4">
-                                    <form id="deleteOut-form" action="/finance/statementManagementDetailView/delete" method="post">
-                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                         <span class="row form-group">
-                                            <div class="col-6" style="">
-                                                <button type="submit" class="btn btn-primary" onclick="deleteChk()">전표 삭제</button>
-                                                <input type="hidden" value="${slip.slipId}" name="slipId">
-                                            </div>
-                                            <div class="col-3"></div>
-                                         </span>
-                                    </form>
-                                </div>
-                            </c:when>
-                            <c:when test="${title eq '승인 대기 전표 상세보기'}">
-                                <div class="form-group col-4">
-                                    <form id="deleteSlip-form" action="/finance/outstandingAuthorizationDetailView/delete" method="post">
-                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                         <span class="row form-group">
-                                            <div class="col-6" style="">
-                                                <button type="submit" class="btn btn-primary" onclick="deleteChk()">전표 삭제</button>
-                                                <input type="hidden" value="${slip.slipId}" name="slipId">
-                                            </div>
-                                            <div class="col-3"></div>
-                                         </span>
-                                    </form>
-                                </div>
-                            </c:when>
-                        </c:choose>
-                    </span>
-                </div>
+                    </c:otherwise>
+                </c:choose>
             </c:forEach>
         </div>
         <jsp:include page="../layout/footer.jsp" />

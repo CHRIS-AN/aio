@@ -62,7 +62,7 @@
                             <div class="form-group col-md-5">
                                 <span class="glyphicon glyphicon-user form-control-feedback left"></span>
                                 <input name="slipWrite" type="text" class="form-control has-feedback-left"
-                                       placeholder="작성자"
+                                       placeholder="작성자" readonly
                                        maxlength="20" value="${slip.slipWrite}">
                                 <small class="form-text text-danger">
                                         ${valid_slipWrite}

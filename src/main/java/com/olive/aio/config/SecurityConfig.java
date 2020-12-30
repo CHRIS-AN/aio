@@ -27,7 +27,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .mvcMatchers("/hr", "/hr/**").hasAnyAuthority("ROLE_HR", "ROLE_ALL")
-                .mvcMatchers("/statementManagement/**").hasAnyAuthority("ROLE_FINANCE", "ROLE_ALL")
+                .mvcMatchers("/finance/statementManagement/**").hasAnyAuthority("ROLE_FINANCE", "ROLE_ALL")
+                .mvcMatchers("/finance/incomeStatement/**").hasAnyAuthority("ROLE_FINANCE", "ROLE_ALL")
                 .mvcMatchers("/login").permitAll()
                 .anyRequest().authenticated();
 

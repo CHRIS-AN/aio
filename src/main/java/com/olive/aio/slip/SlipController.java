@@ -48,6 +48,10 @@ public class SlipController {
     @GetMapping(PSTR)
     private String purchaseSalesTradingRegisterForm(@CurrentEmpl Empl empl, Model model, Corp corp) {
         List<Corp> corpList = corpService.findAll(corp);
+
+        System.out.println("empltoString :" + empl.toString());
+        System.out.println("empl_name" + empl.getName());
+
         model.addAttribute(new SlipForm());
         model.addAttribute("empl", empl);
         model.addAttribute("corpList", corpList);
@@ -59,6 +63,8 @@ public class SlipController {
                                                      @Valid Slip slip,
                                                      Errors errors,
                                                      Model model, Corp corp) {
+
+        System.out.println("empltoString submit:" + empl.toString());
         try{
             List<Corp> corpList = corpService.findAll(corp);
             System.out.println(slip.toString());
@@ -197,7 +203,7 @@ public class SlipController {
         return "redirect:/finance" + SM + "/list";
     }
 
-    // 승인대기list Search
+    // 승인대기 list Search
     @GetMapping("/search/slip")
     public String outstandingSearchSlip(@CurrentEmpl Empl empl,
                                         @PageableDefault(size = 5, page = 0, sort = "slipId", direction = Sort.Direction.DESC)

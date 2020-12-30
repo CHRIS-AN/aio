@@ -36,7 +36,6 @@ public class Empl {
 
     private String dept;
 
-
     private String password;
 
     @Lob @Basic(fetch = FetchType.EAGER)

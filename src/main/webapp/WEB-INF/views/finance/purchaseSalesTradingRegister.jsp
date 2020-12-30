@@ -51,7 +51,7 @@
                                   action="/finance/purchaseSalesTradingRegister" method="post">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                 <div class="row form-group">
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-5">
                                         <span class="fa fas fa-archive form-control-feedback left"></span>
                                         <select name="tradingType"  class="form-control has-feedback-left"
                                                 id="tradingType" onchange="tradingTypeKindChange(this)" >
@@ -65,14 +65,15 @@
                                             ${valid_tradingType}
                                         </small>
                                     </div>
+
                                     <div class="col-md-2"></div>
-                                    <div class="form-group col-md-6">
-                                        <span class="glyphicon glyphicon-user form-control-feedback left"></span>
-                                        <input name="slipWrite" type="text" class="form-control has-feedback-left"
-                                               placeholder="작성자"
-                                               maxlength="20" value="${slip.slipWrite}">
+                                    <h4><strong>&nbsp;&nbsp;&nbsp;&nbsp;작성자명 :&nbsp;&nbsp;</strong></h4>
+                                    <div class="form-group col-md-3">
+                                        <span class="fa far fa-retweet form-control-feedback left"></span>
+                                        <input name="slipWrite" type="text" readonly
+                                               class="form-control has-feedback-left" value="${empl.name}">
                                         <small class="form-text text-danger">
-                                            ${valid_slipWrite}
+                                                ${valid_slipWrite}
                                         </small>
                                     </div>
                                 </div>
@@ -92,8 +93,7 @@
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <span class="fa fas fa-tasks form-control-feedback left"></span>
-                                        <select name="slipCode" class="form-control has-feedback-left"
-                                                id="slipCode">
+                                        <select name="slipCode" class="form-control has-feedback-left" id="slipCode">
                                             <option disabled selected>선택해주세요. (계정 과목)</option>
                                         </select>
                                         <small class="form-text text-danger">
@@ -101,7 +101,6 @@
                                         </small>
                                     </div>
                                 </div>
-
 
                                 <div class="form-group">
                                     <div class="form-group col-md-4">
