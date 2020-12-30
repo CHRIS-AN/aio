@@ -6,8 +6,12 @@ import com.olive.aio.employee.EmplRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -51,4 +55,17 @@ public class CorpServiceImpl implements CorpService {
         corpRepository.deleteById(corp.getCorp_id());
     }
 
+
+    @Override
+    public Map<String, String> validateHandling(Errors errors) {
+        //제품등록시, 유효성 체크
+        Map<String, String> validatorResult = new HashMap<>();
+
+        for (FieldError error : errors.getFieldErrors()) {
+            String validKeyName = String.format("valid_%s", error.getField());
+            validatorResult.put(validKeyName, error.getDefaultMessage());
+        }
+
+        return validatorResult;
+    }
 }

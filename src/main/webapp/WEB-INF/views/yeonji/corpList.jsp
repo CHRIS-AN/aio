@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -58,7 +59,7 @@
                     <h3 class="m-0 font-weight-bold text-primary">거래처 조회</h3>
                     </div>
                     <div style="float: right">
-                        <button type="button" name="corpAdd" class="btn btn-primary" data-toggle="modal"
+                        <button type="button" id="corpAdd" name="corpAdd" class="btn btn-primary" data-toggle="modal"
                                 data-target="#modal_1">+
                         </button>
                     </div>
@@ -127,31 +128,30 @@
                     <!-- Modal body -->
                     <div class="modal-body">
 
-                        <form action="corpInsert" method="post">
+                        <form action="corpInsert" method="post" >
                             <table class="table table-bordered">
                                 <tr>
                                     <th>상호</th>
-                                    <th><input type="text" name="corpName" placeholder="내용을 입력해주세요" value="" autofocus>
-                                    </th>
+                                    <th><input type="text" name="corpName" value="${corpError.corpName}" placeholder="내용을 입력해주세요" autofocus />${valid_corpName}</th>
+                                    <form:errors path="corpName"/>
                                 </tr>
                                 <tr>
                                     <th>사업자 등록번호</th>
-                                    <th><input type="text" name="corp_num" placeholder="ex)000-00-00000" value=""
-                                               autofocus></th>
+                                    <th><input type="text" name="corp_num" placeholder="ex)000-00-00000" value="${corpError.corp_num}"
+                                               autofocus />${valid_corp_num}</th>
                                 </tr>
                                 <tr>
                                     <th>대표자</th>
-                                    <th><input type="text" name="corp_ceo" placeholder="내용을 입력해주세요" value="" autofocus>
-                                    </th>
+                                    <th><input type="text" name="corp_ceo" placeholder="내용을 입력해주세요"  value="${corpError.corp_ceo}" autofocus />${valid_corp_ceo}</th>
                                 </tr>
                                 <tr>
                                     <th>연락처</th>
-                                    <th><input type="text" name="corp_call" placeholder="연락처를 입력해주세요" value=""
-                                               autofocus></th>
+                                    <th><input type="text" name="corp_call" placeholder="연락처를 입력해주세요" value="${corpError.corp_call}"
+                                               autofocus />${valid_corp_call}</th>
                                 </tr>
                                 <tr>
                                     <th>주소</th>
-                                    <th><input type="text" name="corp_address" placeholder="도로명 주소" value=""
+                                    <th><input type="text" name="corp_address" placeholder="도로명 주소"
                                                autofocus><input type="button" value="주소 검색"></th>
                                     <%--                <th><input type="text" name="corp_address" placeholder="상세정보" autofocus></th>--%>
                                 </tr>
@@ -264,25 +264,26 @@
                             <table class="table table-bordered">
                                 <tr>
                                     <th>상호(업체코드)</th>
-                                    <th><input type="text" id="modal3_1" name="corpName" value=""/>
-                                        (<span type="text" id="modal3_2_1" value=""></span>
-                                        <input type="hidden" name="corp_id" id="modal3_2_2" value="">)</th>
+                                    <th><input type="text" id="modal3_1" name="corpName" value="${corpError2.corpName}"/>
+                                        <input type="hidden" name="corp_id" id="modal3_2_2" >${valid_corpName}</th>
+                                    <form:errors path="corpName"/>
+
                                 </tr>
                                 <tr>
                                     <th>사업자 등록번호</th>
-                                    <th><input type="text" id="modal3_3" name="corp_num" value=""/></th>
+                                    <th><input type="text" id="modal3_3" name="corp_num" value="${corpError2.corp_num}"/>${valid_corp_num}</th>
                                 </tr>
                                 <tr>
                                     <th>대표자</th>
-                                    <th><input type="text" id="modal3_4" name="corp_ceo" value=""/></th>
+                                    <th><input type="text" id="modal3_4" name="corp_ceo" value="${corpError2.corp_ceo}"/>${valid_corp_ceo}</th>
                                 </tr>
                                 <tr>
                                     <th>연락처</th>
-                                    <th><input type="text" id="modal3_5" name="corp_call" value=""/></th>
+                                    <th><input type="text" id="modal3_5" name="corp_call" value="${corpError2.corp_call}"/>${valid_corp_call}</th>
                                 </tr>
                                 <tr>
                                     <th>주소</th>
-                                    <th><input type="text" id="modal3_6" name="corp_address" value=""/></th>
+                                    <th><input type="text" id="modal3_6" name="corp_address" value="${corpError2.corp_address}"/></th>
                                 </tr>
                             </table>
                             <div class="modal-footer">
@@ -344,6 +345,21 @@
             </div>
         </div>
         <script>
+            //유효성 검사 에러 시 바로 모달 창 띄우기
+            if(${not empty error}){
+                $( document ).ready(function() {
+                    $("#modal_1").modal('show');
+                });
+
+            }
+
+            if(${not empty error2}){
+                $( document ).ready(function() {
+                    $("#modal_3").modal('show');
+                });
+
+            }
+
             //삭제하기
             function corpDelete() {
                 $('#modal_4').on('show.bs.modal', function (event) {
