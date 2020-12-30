@@ -2,8 +2,10 @@ package com.olive.aio.corp;
 
 import com.olive.aio.domain.Empl;
 import com.olive.aio.employee.CurrentEmpl;
+import org.springframework.validation.Errors;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CorpService {
     //거래처 리스트 조회
@@ -17,6 +19,9 @@ public interface CorpService {
 
     //거래처 삭제
     void deleteById(Corp corp);
+
+    Map<String, String> validateHandling(Errors errors);
+
 
 
 }

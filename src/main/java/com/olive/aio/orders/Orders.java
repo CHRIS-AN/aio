@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,18 +30,18 @@ public class Orders implements Serializable {
     @GeneratedValue //id가 선언된 필드에 기본 키 값을 자동으로 할당 (Default : AUTO)
     private Long orders_id; //발주번호
 
-//    @NotBlank //null과 "", " " 허용안함
+    @NotNull //null과 "", " " 허용안함
     private int orders_cnt; //총수량
 
-//    @NotNull //null 허용안함
+    @NotNull //null 허용안함
 //    @Temporal(TemporalType.DATE) // 년-월-일 의 Date 타입
 //    @Future
     private String orders_regdate; //납기일자
 
-//    @NotEmpty //null과 "" 허용안함
+    @NotNull //null과 "" 허용안함
     private String orders_state; //상태
 
-//    @NotBlank
+    @NotNull
     private int orders_totsum; //총금액
 
     @ManyToOne

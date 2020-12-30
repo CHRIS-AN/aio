@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Data
 @Entity
@@ -23,12 +25,11 @@ public class Draft {
     @GeneratedValue
     private Long draft_seq; //물품순서
 
-//    @NotBlank
-//    @Pattern(regexp = "^[0-9]{1,10}$")
+    @Pattern(regexp = "^[0-9]{1,10}$", message = "수량을 입력해주세요.")
     private int draft_cnt; //물품수량
 
-    //    @NotBlank
-//    @Pattern(regexp = "^[0-9]{1,50}$")
+    @NotNull
+    @Pattern(regexp = "^[0-9]{1,50}$")
     private int draft_prod_price; //물품가격
 
     @ManyToOne

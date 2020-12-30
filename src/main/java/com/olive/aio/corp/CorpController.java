@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -41,10 +42,26 @@ public class CorpController {
 
     // 거래처 등록 & submit 후 값 검증
     @PostMapping("corpInsert")
-    public String corpInsertSubmit(@Valid Corp corp, @CurrentEmpl Empl empl, Errors errors) {
-        if(errors.hasErrors()) { //에러가 있다면
-            log.info("에러냐?");
-            return null;
+    public String corpInsertSubmit(@CurrentEmpl Empl empl, @Valid Corp corp, Errors errors, Model model) {
+        if (errors.hasErrors()) {
+            //제품 등록 실패시, 입력 데이터를 유지
+            model.addAttribute("corpError", corp);
+
+            List<Corp> corpList = corpService.findAll(corp);
+            model.addAttribute("corp", corpList);
+
+            //모달 창 바로 뜨게 하기 위한 model
+            model.addAttribute("error","error");
+
+
+            //유효성 통과 못한 필드와 메시지를 핸들링
+            Map<String, String> validatorResult = corpService.validateHandling(errors);
+            for (String key : validatorResult.keySet()) {
+                model.addAttribute(key, validatorResult.get(key));
+            }
+
+            return "yeonji/corpList";
+
         }
         corp.setEmpl(empl);
         corpService.insertCorp(corp);
@@ -54,11 +71,29 @@ public class CorpController {
 
     // 거래처 수정
     @PostMapping("corpUpdate")
-    public String corpUpdate(@Valid Corp corp, @CurrentEmpl Empl empl, Model model, Errors errors) {
+    public String corpUpdate(@CurrentEmpl Empl empl, @Valid Corp corp, Errors errors,  Model model) {
 
-        if(errors.hasErrors()) { //에러가 있다면
-            return null;
+        if (errors.hasErrors()) {
+
+            model.addAttribute("corpError2", corp);
+
+            //제품 등록 실패시, 입력 데이터를 유지
+            List<Corp> corpList = corpService.findAll(corp);
+            model.addAttribute("corp", corpList);
+
+            //모달 창 바로 뜨게 하기 위한 model
+            model.addAttribute("error2","error");
+
+            //유효성 통과 못한 필드와 메시지를 핸들링
+            Map<String, String> validatorResult = corpService.validateHandling(errors);
+            for (String key : validatorResult.keySet()) {
+                model.addAttribute(key, validatorResult.get(key));
+            }
+
+            return "yeonji/corpList";
+
         }
+
         corpService.updateCorp(corp, empl);
         //TODO 거래처 수정 처리
         return "redirect:corpList";

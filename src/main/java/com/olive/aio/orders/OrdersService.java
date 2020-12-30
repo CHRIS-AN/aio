@@ -19,4 +19,6 @@ public interface OrdersService {
     Orders getOrders(Orders orders);
 
     void updateOrders(Orders orders, Long corp_id, Empl empl);
+
+//    Map<String, String> validateHandling(Errors errors);
 }

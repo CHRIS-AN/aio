@@ -11,10 +11,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -46,8 +48,21 @@ public class OrdersController {
 
     // 발주서 등록
     @PostMapping("ordersInsert")
-    public String ordersInsert(Orders orders, @CurrentEmpl Empl empl, Long corp_id, DraftList draftList){
-        log.info("야 insert컨트롤러 들어롬");
+    public String ordersInsert(@Valid Orders orders, Errors errors, Model model, @CurrentEmpl Empl empl, Long corp_id, DraftList draftList){
+
+//        if (errors.hasErrors()) {
+//
+//            //제품 등록 실패시, 입력 데이터를 유지
+//            model.addAttribute("orders", orders);
+//
+//            //유효성 통과 못한 필드와 메시지를 핸들링
+//            Map<String, String> validatorResult = ordersService.validateHandling(errors);
+//            for (String key : validatorResult.keySet()) {
+//                model.addAttribute(key, validatorResult.get(key));
+//            }
+//            return "yeonji/corpList";
+//        }
+
         orders.setEmpl(empl);
         System.out.println("야 draftList.getDrafts() : " + draftList.getDrafts());
         ordersService.insertOrders(orders, corp_id, draftList);
@@ -67,7 +82,7 @@ public class OrdersController {
 
     // 발주 수정 submit
     @PostMapping("ordersUpdate")
-    public String orderUpdate(Orders orders, @CurrentEmpl Empl empl, Long corp_id){
+    public String orderUpdate(@Valid Orders orders, Errors errors, @CurrentEmpl Empl empl, Long corp_id){
 
         ordersService.updateOrders(orders, corp_id, empl);
 
