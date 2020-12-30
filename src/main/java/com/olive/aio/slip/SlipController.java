@@ -83,7 +83,7 @@ public class SlipController {
                 }
                 return FINANCE + PSTR;
             }
-            slip.setCorp(corp.getCorp_name());
+            slip.setCorp(corp.getCorpName());
             slipService.saveSlip(slip);
             model.addAttribute("empl", empl);
             return "redirect:/finance" + OA;
