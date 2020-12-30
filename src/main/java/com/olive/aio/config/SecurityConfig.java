@@ -27,7 +27,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .mvcMatchers("/hr", "/hr/**").hasAnyAuthority("ROLE_HR", "ROLE_ALL")
-                .mvcMatchers("/statementManagement/**").hasAnyAuthority("ROLE_FINANCE", "ROLE_ALL")
+                .mvcMatchers("/finance/statementManagement/**").hasAnyAuthority("ROLE_FINANCE", "ROLE_ALL")
+                .mvcMatchers("/finance/incomeStatement/**").hasAnyAuthority("ROLE_FINANCE", "ROLE_ALL")
                 .mvcMatchers("/login").permitAll()
                 .anyRequest().authenticated();
 
@@ -40,9 +41,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.logout()
                 .logoutSuccessUrl("/login");
 
-        http.rememberMe()
-                .userDetailsService(userDetailsService)
-                .tokenRepository(tokenRepository());
     }
 
     @Bean
@@ -55,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
-                .mvcMatchers("/node_modules/**", "/static/js/**", "/static/css/**", "/static/images/**")
+                .mvcMatchers("/node_modules/**", "/static/js/**", "/static/css/**", "/static/images/**", "/error")
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
 }

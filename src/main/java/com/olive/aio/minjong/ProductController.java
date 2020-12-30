@@ -78,10 +78,8 @@ public class ProductController {
 //            return "/insertProduct";
 //        }
 
-
         product.setEmpl(empl);
         productService.insertProduct(product, corp_id);
-
 
         return "redirect:productList";
     }

@@ -122,16 +122,14 @@
                                     </div>
                                     <div class="form-group has-feedback col-md-6 com-sm-6">
                                         <label>성명</label>
-                                        <input type="text" name="name" value="${emplForm.name}" class="form-control"
-                                               id="name" placeholder="사원이름">
+                                        <input type="text" name="name" pattern="^[ㄱ-ㅎ가-힣]{2,8}$" oninvalid="invalidMsg(this, '한글 3~8자로 입력해주세요.');" value="${emplForm.name}" class="form-control" id="name" placeholder="사원이름">
                                         <span>${valid_name}</span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group has-feedback col-md-6 com-sm-6">
                                         <label>주민등록 번호</label>
-                                        <input type="text" name="jumin" value="${emplForm.jumin}" class="form-control"
-                                               id="jumin" placeholder="900000-1111111">
+                                        <input type="text" name="jumin" pattern="\d{2}([0]\d|[1][0-2])([0][1-9]|[1-2]\d|[3][0-1])[-]*[1-4]\d{6}" oninvalid="invalidMsg(this, '주민번호가 유효하지않습니다. 다시 입력해주세요.');" value="${emplForm.jumin}" class="form-control" id="jumin" placeholder="900000-1111111">
                                         <span>${valid_jumin}</span>
                                     </div>
                                     <div class="form-group has-feedback col-md-6 com-sm-6">
@@ -165,18 +163,16 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="form-group has-feedback col-md-6 com-sm-6">
-                                        <label>연락처</label>
-                                        <input type="text" name="phone" value="${emplForm.phone}" class="form-control"
-                                               id="phone" placeholder="핸드폰 번호">
-                                        <span>${valid_phone}</span>
-                                    </div>
-                                    <div class="form-group has-feedback col-md-6 com-sm-6">
-                                        <label>Email</label>
-                                        <input type="text" name="email" value="${emplForm.email}" class="form-control"
-                                               id="email" placeholder="Email">
-                                        <span>${valid_email}</span>
-                                    </div>
+                                <div class="form-group has-feedback col-md-6 com-sm-6">
+                                    <label>연락처</label>
+                                    <input type="text" name="phone" pattern="^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$" oninvalid="invalidMsg(this, '형식에 맞는 연락처를 입력해주세요.');" value="${emplForm.phone}" class="form-control" id="phone" placeholder="010-0000-0000, 010-000-0000">
+                                    <span>${valid_phone}</span>
+                                </div>
+                                <div class="form-group has-feedback col-md-6 com-sm-6">
+                                    <label>Email</label>
+                                    <input type="text" name="email" pattern="^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$" oninvalid="invalidMsg(this, '유효하지 않은 이메일입니다.');" value="${emplForm.email}" class="form-control" id="email" placeholder="Email">
+                                    <span>${valid_email}</span>
+                                </div>
                                 </div>
                                 <div class="form-group has-feedback col-md-12 com-sm-12">
                                     <label class="col-md-12">주소</label>
@@ -243,9 +239,30 @@
                                 </li>
                             </ul>
                             <div class="clearfix"></div>
-                        </div>
+                        </div
                         <div id="updateContent" class="x_content">
+                            <form id='forms' enctype='multipart/form-data' method='post' class="form needs-validation">
+                                <div class="form-group has-feedback col-md-4 com-sm-4">
+                                    <img src="" id="profile-image2" class="col-md-12 img img-responsive m-auto">
+                                    <div class="col-md-12 filebox my-form">
+                                        <label for='image-input-file2'>이미지 등록</label>
+                                        <input type="file" class="form-control" id="image-input-file2" required>
+                                        <input type="hidden" id="photo2" name="photo" value='" + data[0].photo + "' required>
 
+                                        <button type="button" class="btn btn-default btn-100" onclick="clearImg()">이미지 삭제</button>
+                                        <span id="photo_validate"></span>
+                                    </div>
+                                </div>
+                                <div id="upc-box" class="col-md-8">
+
+                                </div>
+                                <div id="resetPwBtn" class="form-group text-right col-md-12 com-sm-12">
+
+                                </div>
+                                <div class="form-group text-right col-md-12 com-sm-12">
+                                    <button type="button" onclick='updateAjax()' id="updateEmplBtn" class="btn btn-default">등록</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -304,43 +321,29 @@
             })
         }, false)
     }())
-    var type = ""
+var type = ""
+function showjusoPopup(type1){
+    type = type1;
+    new daum.Postcode({
+        oncomplete: function(data) {
 
-    function showjusoPopup(type1) {
-        type = type1;
-        new daum.Postcode({
-            oncomplete: function (data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-                // 예제를 참고하여 다양한 활용법을 확인해 보세요.
-
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-
-                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                    addr = data.roadAddress;
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                    addr = data.jibunAddress;
-                }
-
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-
-
-                if (type == "등록") {
-                    $("#postnum").val(data.zonecode);
-                    $("#address").val(addr);
-                    $("#address").focus();
-                    // var extraAddr = ''; // 참고항목 변수
-                } else if (type == "수정") {
-                    $("#pdtnum").val(data.zonecode);
-                    $("#updateAddr").val(addr);
-                    $("#updateAddr").focus();
-                }
-                // 커서를 상세주소 필드로 이동한다.
-
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                addr = data.roadAddress;
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                addr = data.jibunAddress;
             }
+
+            if(type == "등록"){
+                $("#postnum").val(data.zonecode);
+                $("#address").val(addr);
+                $("#address").focus();
+            } else if(type == "수정") {
+                $("#pdtnum").val(data.zonecode);
+                $("#updateAddr").val(addr);
+                $("#updateAddr").focus();
+            }
+
+
         }).open({autoClose: true});
     }
 </script>

@@ -1,6 +1,7 @@
 package com.olive.aio.corp;
 
 import com.olive.aio.domain.Empl;
+import com.olive.aio.domain.Slip;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

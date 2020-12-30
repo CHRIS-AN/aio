@@ -1,30 +1,41 @@
 package com.olive.aio.domain.test;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.olive.aio.draft.Draft;
+import lombok.*;
+import org.springframework.ui.ModelMapExtensionsKt;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Testorders {
 
     @Id @GeneratedValue
-    Integer testordersid;
+    private Integer testordersid;
 
-    Integer testorderscnt;
+    private Integer testorderscnt;
 
-    Date testordersregdate;
+    private Date testordersregdate;
 
-    String testordersstate;
+    private String testordersstate;
 
-    Integer testorderstotsum;
+    private Integer testorderstotsum;
 
-    String testtitle;
+    private String testtitle;
 
-    String crop;
+    private String crop;
+
+//    @OneToMany(mappedBy = "testordersid", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "testordersid", fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private Set<Draft> draftseq = new HashSet<>();
 
 }

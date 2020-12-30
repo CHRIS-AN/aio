@@ -50,6 +50,27 @@ $(document).ready(function (){
         }
     });
 
+    $("#image-input-file2").change(function (e) {
+        if (e.target.files.length === 1) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                if (e.target.result) {
+                    console.log(e.target.result);
+                    if (!e.target.result.startsWith("data:image")) {
+                        alert("이미지 파일을 선택하세요.");
+                        return;
+                    }
+
+                    $("#photo2").attr("value", e.target.result);
+                    $("#profile-image2").attr("src", e.target.result);
+                }
+            };
+
+            reader.readAsDataURL(e.target.files[0]);
+        }
+    });
+
+
     $("#cnt").change(function (){
        search();
     });
@@ -64,9 +85,18 @@ $(document).ready(function (){
 
 });
 
+function invalidMsg(textbox, message) {
+    if(textbox.validity.patternMismatch){
+        textbox.setCustomValidity(message);
+    }
+    else {
+        textbox.setCustomValidity('');
+    }
+}
+
 function clearImg() {
     $("#photo").val("")
-    $("#profile-image").src("")
+    $("#profile-image").attr("src", "");
 }
 
 function changePage(pageNum) {
@@ -303,8 +333,8 @@ function updateAjax () {
                     clickupdate(data.data, data.errors);
                 } else {
                     $("#updateDialog").hide();
-                    listHumanResource(data.data);
                     alert("수정 완료 되었습니다.");
+                    search();
                 }
             }
         },
@@ -316,27 +346,19 @@ function updateAjax () {
 }
 
 function clickupdate(data, errors) {
-
+    let html = "";
     let select1 = data.dept === "인사" ? "selected" : "";
     let select2 = data.dept === "제품" ? "selected" : "";
     let select3 = data.dept === "영업" ? "selected" : "";
     let select4 = data.dept === "물류" ? "selected" : "";
     let select5 = data.dept === "회계" ? "selected" : "";
 
-    let html = "<form id='forms' enctype='multipart/form-data' method='post' class=\"form needs-validation\">";
-    html += "<div class=\"form-group has-feedback col-md-4 com-sm-4\">";
-    html += "<img src=\"" + data[0].photo + "\" id=\"profile-image\" class=\"col-md-12 img img-responsive\">";
-    html += "<div class=\"col-md-12 filebox my-form\">";
-    html += "<label for='image-input-file'>이미지 등록</label>"
-    html += "<input type=\"file\" class=\"form-control\" id=\"image-input-file\" required>";
-    html += "<input type=\"hidden\" id=\"photo\" name=\"photo\" value='" + data[0].photo + "' required>";
-    html += "<button type=\"button\" class=\"btn btn-default btn-100\" onclick=\"clearImg()\">이미지 삭제</button>"
+    $("#photo2").val(data[0].photo);
+    $("#profile-image2").attr("src", data[0].photo);
+
     if(errors != undefined && errors.valid_photo != undefined) {
-        html += "<sapn>" + errors.valid_photo + "</span>";
+        $("#photo_validate").html(errors.valid_photo);
     }
-    html += "</div>";
-    html += "</div>";
-    html += "<div class=\"col-md-8\">";
     html += "<div class=\"row\">";
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
     html += "<label>사원번호</label>";
@@ -344,18 +366,18 @@ function clickupdate(data, errors) {
     html += "</div>";
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
     html += "<label>성명</label>";
-    html += "<input type=\"text\" name=\"name\" value=\"" + data[0].name + "\" class=\"form-control\" min=\"2\" max=\"8\" id=\"name\" placeholder=\"사원이름\" required>"
+    html += "<input type=\"text\" name=\"name\" pattern=\"^[ㄱ-ㅎ가-힣]{2,8}$\" oninvalid=\"invalidMsg(this, '한글 3~8자로 입력해주세요.');\" value=\"" + data[0].name + "\" class=\"form-control\" min=\"2\" max=\"8\" id=\"name\" placeholder=\"사원이름\" required>"
     if(errors != undefined && errors.valid_name != undefined) {
-        html += "<sapn>" + errors.valid_name + "</span>";
+        html += "<span>" + errors.valid_name + "</span>";
     }
     html += "</div>";
     html += "</div>";
     html += "<div class=\"row\">";
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
     html += "<label>주민등록 번호</label>";
-    html += "<input type=\"text\" name=\"jumin\" value=\"" + data[0].jumin + "\" class=\"form-control\" min=\"12\" max=\"12\" id=\"jumin\" placeholder=\"900000-1111111\" required>";
+    html += "<input type=\"text\" name=\"jumin\" pattern=\"\d{2}([0]\\d|[1][0-2])([0][1-9]|[1-2]\\d|[3][0-1])[-]*[1-4]\\d{6}\" oninvalid=\"invalidMsg(this, '주민번호가 유효하지않습니다. 다시 입력해주세요.');\" value=\"" + data[0].jumin + "\" class=\"form-control\" min=\"12\" max=\"12\" id=\"jumin\" placeholder=\"900000-1111111\" required>";
     if(errors != undefined && errors.valid_jumin != undefined) {
-        html += "<sapn>" + errors.valid_jumin + "</span>";
+        html += "<span>" + errors.valid_jumin + "</span>";
     }
     html += "</div>";
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
@@ -365,40 +387,44 @@ function clickupdate(data, errors) {
             "onmouseout=\"timeFunctionLong(this)\">";
     html += "</div>";
     html += "</div>";
+
     html += "<div class=\"row\">";
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
     html += "<label>부서명</label>";
     html += "<select name=\"dept\" class=\"form-control\">";
-    html += "<option value=\"인사\"" + select1 + ">인사</option>";
-    html += "<option value=\"제품\"" + select2 + ">제품</option>";
-    html += "<option value=\"영업\"" + select3 + ">영업</option>";
-    html += "<option value=\"물류\"" + select4 + ">물류</option>";
-    html += "<option value=\"회계\"" + select5 + ">회계</option>";
+    html += "<option value=\"인사\" " + select1 + ">인사</option>";
+    html += "<option value=\"제품\" " + select2 + ">제품</option>";
+    html += "<option value=\"영업\" " + select3 + ">영업</option>";
+    html += "<option value=\"물류\" " + select4 + ">물류</option>";
+    html += "<option value=\"회계\" " + select5 + ">회계</option>";
     html += "</select>";
     html += "</div>";
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
+
     html += "<label>퇴사일자</label>";
     html += "<input class=\"date-picker form-control\" value='" + data[0].emplResigdate + "' name=\"emplResigdate\" placeholder=\"yyyy-mm-dd\" type=\"date\" required=\"required\"" +
             "onfocus=\"this.type='date'\" onmouseover=\"this.type='date'\" onclick=\"this.type='date'\" onblur=\"this.type='text'\"" +
             "onmouseout=\"timeFunctionLong(this)\">";
     html += "</div>";
     html += "</div>";
+
     html += "<div class=\"row\">";
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
     html += "<label>연락처</label>";
-    html += "<input type=\"text\" name=\"phone\" value='" + data[0].phone + "' class=\"form-control\" min=\"10\" max=\"11\" id=\"phone\" placeholder=\"핸드폰 번호\" required>";
+    html += "<input type=\"text\" name=\"phone\" pattern=\"^d{3}-\\d{3,4}-\\d{4}$\" oninvalid=\"invalidMsg(this, '형식에 맞는 연락처를 입력해주세요.');\" value='" + data[0].phone + "' class=\"form-control\" min=\"10\" max=\"11\" id=\"phone\" placeholder=\"핸드폰 번호\" required>";
     if(errors != undefined && errors.valid_phone != undefined) {
-        html += "<sapn>" + errors.valid_phone + "</span>";
+        html += "<span>" + errors.valid_phone + "</span>";
     }
     html += "</div>";
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
     html += "<label>Email</label>";
-    html += "<input type=\"text\" name=\"email\" value=\"" + data[0].email + "\" class=\"form-control\" id=\"email\" placeholder=\"Email\" required>"
+    html += "<input type=\"text\" name=\"email\" pattern=\"^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}$/i\" oninvalid=\"invalidMsg(this, '유효하지 않은 이메일입니다.');\" value=\"" + data[0].email + "\" class=\"form-control\" id=\"email\" placeholder=\"Email\" required>"
     if(errors != undefined && errors.valid_email != undefined) {
-        html += "<sapn>" + errors.valid_email + "</span>";
+        html += "<span>" + errors.valid_email + "</span>";
     }
     html += "</div>";
     html += "</div>";
+
     html += "<div class=\"form-group has-feedback col-md-12 com-sm-12\">";
     html += "<label class=\"col-md-12\">주소</label>";
     html += "<div class=\"col-md-5 col-sm-5\">";
@@ -406,27 +432,19 @@ function clickupdate(data, errors) {
     html += "</div>";
     html += "<button id=\"postnumBtn\" onclick='showjusoPopup(\"수정\")' class=\"btn btn-default\">검색</button>";
     if(errors != undefined && errors.valid_post_num != undefined) {
-        html += "<sapn>" + errors.valid_post_num + "</span>";
+        html += "<span>" + errors.valid_post_num + "</span>";
     }
     html += "</div>";
     html += "<div class=\"form-group has-feedback col-md-12 com-sm-12\">";
     html += "<div class=\"col-md-12\">";
     html += "<input type=\"text\" name=\"address\" value=\"" + data[0].address + "\" class=\"form-control\" id=\"updateAddr\" placeholder=\"주소\" required>";
     if(errors != undefined && errors.valid_address != undefined) {
-        html += "<sapn>" + errors.valid_address + "</span>";
+        html += "<span>" + errors.valid_address + "</span>";
     }
-    html += "</div>";
-    html += "</div>";
-    html += "</div>";
-    html += "<div class=\"form-group text-right has-feedback col-md-12 com-sm-12\">";
-    html += "<button type=\"button\" onclick='showresetpwModal(\"" + data[0].emplId + "\")' id=\"resetBtn\" class=\"btn btn-default\">비빌번호 초기화</button>"
-    html += "</div>";
-    html += "<div class=\"form-group text-right has-feedback col-md-12 com-sm-12\">";
-    html += "<button type=\"button\" onclick='updateAjax()' id=\"updateEmplBtn\" class=\"btn btn-default\">등록</button>";
-    html += "</div>";
-    html += "</form>";
 
-    $("#updateContent").html(html);
+    $("#resetPwBtn").html("<button type=\"button\" onclick='showresetpwModal(" + data[0].emplId + ")' id=\"resetBtn\" class=\"btn btn-default\">비빌번호 초기화</button>")
+
+    $("#upc-box").html(html);
     $("#detailDialog").hide();
     $("#updateDialog").show();
 }
@@ -446,9 +464,9 @@ function showresetpwModal(emplId, errors) {
     html += "<input id='resetpwinput' type='password' class='col-md-8' name='password'/>";
     html += "<button type='button' class='btn btn-default col-md-4' onclick='showreset(\"" + id + "\")'>확인</button>"
     html += "</form>";
-    html += "</div>"
-    html += "</div>"
-    html += "</div>"
+    html += "</div>";
+    html += "</div>";
+    html += "</div>";
 
 
     $("#resetpwDialog").show();

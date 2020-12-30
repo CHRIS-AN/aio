@@ -29,15 +29,16 @@ public class ProductServiceImpl implements ProductService {
 
 
     public List<Product> productList(Product product) {
-
         return (List<Product>) productRepo.findAll();
     }
 
 
     public void insertProduct(Product product, Long corp_id) {
-       Corp corp = corpRepo.findById(corp_id).get();
+
+        Corp corp = corpRepo.findById(corp_id).get();
        product.setCorp(corp);
        productRepo.save(product);
+
     }
 
     public Product getProduct(Product product) {

@@ -40,6 +40,7 @@ public class EmplService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Empl empl = emplRepository.findByEmplId(username);
+
         String dept = "";
         String role = "";
 
@@ -87,6 +88,8 @@ public class EmplService implements UserDetailsService {
                 //TODO 각 부서마다 권한을 정해주세요.
                 // 제품 영업 물류 회계
             }
+        } else if (empl.getWork_state().equals("퇴사")) {
+            role = "ROLE_VIEW";
         } else {
             role = "ROLE_ALL";
         }
@@ -147,7 +150,10 @@ public class EmplService implements UserDetailsService {
     }
 
     public boolean checkPassword(Empl empl, String password) {
-        boolean matches = passwordEncoder.matches(passwordEncoder.encode(password) , empl.getPassword());
+        log.info(empl.getPassword());
+        log.info(password);
+        boolean matches = passwordEncoder.matches(password , empl.getPassword());
+        System.out.println(matches);
         return matches;
     }
 
@@ -162,7 +168,7 @@ public class EmplService implements UserDetailsService {
 
         String tempPassword = UUID.randomUUID().toString().replaceAll("-","").substring(0, 10);
 
-        toEmpl.setPassword(tempPassword);
+        toEmpl.setPassword(passwordEncoder.encode(tempPassword));
 
         buffer.append("비밀번호 : " + tempPassword);
 
