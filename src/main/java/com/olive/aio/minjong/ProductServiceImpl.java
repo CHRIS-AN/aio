@@ -47,11 +47,9 @@ public class ProductServiceImpl implements ProductService {
 
 
     public void updateProduct(Product product, Long corp_id, Empl empl) {
-        log.info("1");
         Product beforeProduct = productRepo.findById(product.getProd_id()).get();
         Corp beforeCorp = corpRepo.findById(corp_id).get();
         Empl beforeEmpl = emplRepo.findByEmplId(empl.getEmplId());      
-        log.info(String.valueOf(beforeEmpl));
 
 
         beforeProduct.setProdName(product.getProdName());
@@ -61,14 +59,11 @@ public class ProductServiceImpl implements ProductService {
         beforeProduct.setProd_catag(product.getProd_catag());
         beforeProduct.setProd_explain(product.getProd_explain());
         beforeProduct.setProd_image(product.getProd_image());
-        log.info("2");
 
         beforeProduct.setCorp(beforeCorp);
         beforeProduct.setEmpl(beforeEmpl);
-        log.info("3");
 
         productRepo.save(beforeProduct);
-        log.info("4");
     }
 
 
