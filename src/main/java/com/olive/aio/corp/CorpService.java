@@ -1,5 +1,8 @@
 package com.olive.aio.corp;
 
+import com.olive.aio.domain.Empl;
+import com.olive.aio.employee.CurrentEmpl;
+
 import java.util.List;
 
 public interface CorpService {
@@ -7,10 +10,10 @@ public interface CorpService {
     List<Corp> findAll(Corp corp);
 
     //거래터 등록
-    void insertCorp(Corp corp);;
+    void insertCorp(Corp corp);
 
     //거래처 수정
-    void updateCorp(Corp corp);
+    void updateCorp(Corp corp, @CurrentEmpl Empl empl);
 
     //거래처 삭제
     void deleteById(Corp corp);

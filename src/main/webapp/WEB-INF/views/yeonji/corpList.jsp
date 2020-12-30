@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
-    <title>거래처 조회</title>
+    <title>AIO</title>
 
     <!-- 부트스트랩 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -89,12 +89,13 @@
                                 <tr id="tr${c.corp_id}" onclick="detail()" data-toggle="modal" data-target="#modal_2"
                                     data-corpid="${c.corp_id}" data-corpname='${c.corp_name}'
                                     data-corpnum='${c.corp_num}' data-corpceo='${c.corp_ceo}'
-                                    data-corpcall='${c.corp_call}' data-corpaddress='${c.corp_address}'>
+                                    data-corpcall='${c.corp_call}' data-corpaddress='${c.corp_address}'
+                                    data-emplname='${c.empl.name}'>
                                     <td>${c.corp_id}</td>
                                     <td>${c.corp_name}</td>
                                     <td>${c.corp_ceo}</td>
                                     <td>${c.corp_call}</td>
-                                    <td>누구냐넌</td>
+                                    <td>${c.empl.name}</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -112,7 +113,7 @@
         <!-- /footer  -->
 
 
-        <%--  모달 1 : 거래처 등록록  --%>
+        <%--  모달 1 : 거래처 등록  --%>
         <div class="modal" id="modal_1">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -204,7 +205,7 @@
                             </tr>
                             <tr>
                                 <th>담당자</th>
-                                <th>누구냐넌</th>
+                                <th><span id="modal2_7"></span></th>
                             </tr>
                             <tr>
                                 <th>발주 품목</th>
@@ -234,12 +235,14 @@
                     var corpceo = $(event.relatedTarget).data('corpceo');
                     var corpcall = $(event.relatedTarget).data('corpcall');
                     var corpaddress = $(event.relatedTarget).data('corpaddress');
+                    var emplname = $(event.relatedTarget).data('emplname');
                     $(this).find("#modal2_1").text(corpname);
                     $(this).find("#modal2_2").text(corpid);
                     $(this).find("#modal2_3").text(corpnum);
                     $(this).find("#modal2_4").text(corpceo);
                     $(this).find("#modal2_5").text(corpcall);
                     $(this).find("#modal2_6").text(corpaddress);
+                    $(this).find("#modal2_7").text(emplname);
                 });
             }
         </script>
@@ -280,14 +283,6 @@
                                 <tr>
                                     <th>주소</th>
                                     <th><input type="text" id="modal3_6" name="corp_address" value=""/></th>
-                                </tr>
-                                <tr>
-                                    <th>담당자</th>
-                                    <th>누구냐넌</th>
-                                </tr>
-                                <tr>
-                                    <th>발주 품목</th>
-                                    <th>할수잇냐</th>
                                 </tr>
                             </table>
                             <div class="modal-footer">
@@ -356,8 +351,6 @@
                     var corpid = $('#modal2_2').text();
                     $(this).find("#deleteCorpName").html(corpname);
                     $(this).find("#deleteCorpId").val(corpid);
-                    console.log("+++++++++++++++corpname"+corpname+"}");
-                    console.log("+++++++++++++++corpid"+corpid+"}");
                 });
             }
         </script>
