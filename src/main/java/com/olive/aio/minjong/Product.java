@@ -1,19 +1,23 @@
 package com.olive.aio.minjong;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.olive.aio.domain.Derivativelist;
+import com.olive.aio.draft.Draft;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.HashSet;
+import java.util.Set;
 
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "PROD")
 public class Product {
@@ -50,4 +54,9 @@ public class Product {
 
     @Lob
     private String prod_explain;
+
+//    @OneToMany( mappedBy = "product", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+    @JsonBackReference
+    private Set<Draft> draftseq = new HashSet<>();
 }

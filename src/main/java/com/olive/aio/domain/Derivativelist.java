@@ -1,29 +1,25 @@
 package com.olive.aio.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
-import java.time.LocalDateTime;
 
 @Entity
 @Data
-public class Derivativelist implements Serializable {
+public class Derivativelist{
 
-    @OneToOne @Id
-    private Derivative derivid;
+    @Id @Column(name = "deriv_list_id")
+    @GeneratedValue
+    private Integer derivListid;
 
     @NotNull @Column(name = "deriv_ok_confirmcnt")
     private Integer derivokconfirmcnt;
 
-    @NotNull @Column(name = "deriv_ok_confirmdate")
-    private LocalDateTime derivokconfirmdate;
-
-    @NotNull @Column(name = "deriv_ok_confirmtotcnt")
-    private Integer derivokconfirmtotcnt;
+    @ManyToOne
+    @JoinColumn(name = "deriv_id")
+    @JsonBackReference
+    private Derivative derivativeid;
 
 }

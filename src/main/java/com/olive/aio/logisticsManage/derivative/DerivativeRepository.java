@@ -13,7 +13,7 @@ public interface DerivativeRepository extends JpaRepository<Derivative, Integer>
     List<Derivative> findByDerivstateOrderByDerividAsc(String state);
     List<Derivative> findByDerivstateOrderByDerividDesc(String state);
 
-
+    Derivative findByDerivid(Integer derivativeid);
 
 }
 

@@ -41,9 +41,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.logout()
                 .logoutSuccessUrl("/login");
 
-        http.rememberMe()
-                .userDetailsService(userDetailsService)
-                .tokenRepository(tokenRepository());
     }
 
     @Bean
