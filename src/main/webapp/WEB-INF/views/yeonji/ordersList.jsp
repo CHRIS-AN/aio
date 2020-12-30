@@ -82,11 +82,11 @@
                                 <tbody>
                                 <c:forEach var="o" items="${orders}">
                                     <tr  id="tr${o.orders_id}"  data-toggle="modal" data-target="#detailModal"
-                                        onclick="detail('${o.orders_id}','${o.corp.corp_name}','${o.empl.name}','${o.orders_regdate}',
+                                        onclick="detail('${o.orders_id}','${o.corp.corpName}','${o.empl.name}','${o.orders_regdate}',
                                                 '${o.orders_cnt}','${o.orders_totsum}','${o.corp.corp_ceo}','${o.corp.corp_call}',
                                                 '${o.corp.corp_address}')">
                                         <td>${o.orders_id}</td>
-                                        <td>${o.corp.corp_name}</td>
+                                        <td>${o.corp.corpName}</td>
                                         <td>${o.empl.name}</td>
                                         <td>${o.orders_regdate}</td>
                                         <td>${o.orders_cnt}</td>
@@ -147,7 +147,7 @@
                                     <tr>
                                         <td rowspan="2">발주처</td>
                                         <td>회사명</td>
-                                        <td><span id="corp_name"></span></td>
+                                        <td><span id="corpName"></span></td>
                                         <td>전화</td>
                                         <td><span id="corp_call"></span></td>
                                     </tr>
@@ -216,11 +216,11 @@
 
         <script>
             var updatelink;
-            function detail(orders_id,corp_name,empl_name,orders_regdate,orders_cnt,orders_totsum,corp_ceo,corp_call,corp_address){
+            function detail(orders_id,corpName,empl_name,orders_regdate,orders_cnt,orders_totsum,corp_ceo,corp_call,corp_address){
                 updatelink = orders_id;
                 $('#detailModal').on('show.bs.modal', function (event) {
                     $(this).find("#orders_id").text(orders_id);
-                    $(this).find("#corp_name").text(corp_name);
+                    $(this).find("#corpName").text(corpName);
                     $(this).find("#empl_name").text(empl_name);
                     $(this).find("#orders_regdate").text(orders_regdate);
                     $(this).find("#orders_cnt").text(orders_cnt);

@@ -87,12 +87,12 @@
                             <tbody>
                             <c:forEach var="c" items="${corp}">
                                 <tr id="tr${c.corp_id}" onclick="detail()" data-toggle="modal" data-target="#modal_2"
-                                    data-corpid="${c.corp_id}" data-corpname='${c.corp_name}'
+                                    data-corpid="${c.corp_id}" data-corpname='${c.corpName}'
                                     data-corpnum='${c.corp_num}' data-corpceo='${c.corp_ceo}'
                                     data-corpcall='${c.corp_call}' data-corpaddress='${c.corp_address}'
                                     data-emplname='${c.empl.name}'>
                                     <td>${c.corp_id}</td>
-                                    <td>${c.corp_name}</td>
+                                    <td>${c.corpName}</td>
                                     <td>${c.corp_ceo}</td>
                                     <td>${c.corp_call}</td>
                                     <td>${c.empl.name}</td>
@@ -131,7 +131,7 @@
                             <table class="table table-bordered">
                                 <tr>
                                     <th>상호</th>
-                                    <th><input type="text" name="corp_name" placeholder="내용을 입력해주세요" value="" autofocus>
+                                    <th><input type="text" name="corpName" placeholder="내용을 입력해주세요" value="" autofocus>
                                     </th>
                                 </tr>
                                 <tr>
@@ -264,7 +264,7 @@
                             <table class="table table-bordered">
                                 <tr>
                                     <th>상호(업체코드)</th>
-                                    <th><input type="text" id="modal3_1" name="corp_name" value=""/>
+                                    <th><input type="text" id="modal3_1" name="corpName" value=""/>
                                         (<span type="text" id="modal3_2_1" value=""></span>
                                         <input type="hidden" name="corp_id" id="modal3_2_2" value="">)</th>
                                 </tr>

@@ -69,7 +69,7 @@
                                     <tr>
                                         <td><input type="radio" name="corp"></td>
                                         <td>${p.corp_id}</td>
-                                        <td>${p.corp_name}</td>
+                                        <td>${p.corpName}</td>
                                         <td>${p.corp_num}</td>
                                     </tr>
                                 </c:forEach>
@@ -91,7 +91,7 @@
 
         <script>
             var corp_id;
-            var corp_name;
+            var corpName;
             var corp_num;
             var td;
 
@@ -109,10 +109,10 @@
 
             function chkSelect(){
                 var corp_id = td.eq(1).text();
-                var corp_name = td.eq(2).text();
+                var corpName = td.eq(2).text();
 
                 opener.document.getElementById("corp_id").value = corp_id;
-                opener.document.getElementById("corps").innerText = corp_name;
+                opener.document.getElementById("corps").innerText = corpName;
 
                 window.close();
             }

@@ -24,8 +24,8 @@ public class CorpInsertFormValidator implements Validator {
     public void validate(Object object, Errors errors) {
         //TODO 제품명 중복 검사
         Corp corp = (Corp) object;
-        if(corpRepository.existsByCorpName(corp.getCorp_name())){
-            errors.rejectValue("corp_name", "invalid.corp_name", new Object[]{corp.getCorp_name()},"제품명이 중복됩니다.");
+        if(corpRepository.existsByCorpName(corp.getCorpName())){
+            errors.rejectValue("corpName", "invalid.corpName", new Object[]{corp.getCorpName()},"제품명이 중복됩니다.");
         }
     }
 }

@@ -25,7 +25,7 @@
                     <tr>
                         <td rowspan="2">발주처</td>
                         <td>회사명</td>
-                        <td><span id="corp_name">롯데</span></td>
+                        <td><span id="corpName">롯데</span></td>
                         <td>전화</td>
                         <td><span id="corp_call">111-1111-1111</span></td>
                     </tr>
@@ -123,7 +123,7 @@
             <tr>
                 <td rowspan="2">발주처</td>
                 <td>회사명</td>
-                <td><span id="corp_name">연슬</span></td>
+                <td><span id="corpName">연슬</span></td>
                 <td>전화</td>
                 <td><span id="corp_call">111-1111-1111</span></td>
             </tr>

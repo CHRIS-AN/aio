@@ -65,8 +65,8 @@
                                     <label>거래처</label>
                                 </div>
                                 <div class="col-md-7">
-                                    <span id="corpname"> ${orders.corp.corp_name} </span>
-                                    <input type="hidden" name="corp_id" id="corp_id" value="${orders.corp.corp_name}"/>
+                                    <span id="corpname"> ${orders.corp.corpName} </span>
+                                    <input type="hidden" name="corp_id" id="corp_id" value="${orders.corp.corpName}"/>
                                 </div>
                                 <div class="col-md-2">
                                     <button type="button" class="btn btn-primary" onclick="openWinCorp()">

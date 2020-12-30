@@ -48,7 +48,7 @@
                     </tr>
                     <tr>
                         <td>거래처</td>
-                        <td><input type="text" name="empl" value="${product.corp.corp_name}" disabled/></td>
+                        <td><input type="text" name="empl" value="${product.corp.corpName}" disabled/></td>
                     </tr>
                     <tr>
                         <td>담당자</td>

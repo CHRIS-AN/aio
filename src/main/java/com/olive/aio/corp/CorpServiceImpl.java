@@ -36,7 +36,7 @@ public class CorpServiceImpl implements CorpService {
     public void updateCorp(Corp corp, Empl empl) {
         Corp beforeCorp = corpRepository.findById(corp.getCorp_id()).get();
         Empl beforeEmpl = emplRepository.findByEmplId(empl.getEmplId());
-        beforeCorp.setCorp_name(corp.getCorp_name());
+        beforeCorp.setCorpName(corp.getCorpName());
         beforeCorp.setCorp_num(corp.getCorp_num());
         beforeCorp.setCorp_ceo(corp.getCorp_ceo());
         beforeCorp.setCorp_call(corp.getCorp_call());
