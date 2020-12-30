@@ -32,7 +32,7 @@
 </head>
 <!-- head -->
 <body class="nav-md">
-<%! int i = 0; %>
+
 <div class="container body">
     <div class="main_container">
 
@@ -59,6 +59,7 @@
                         </div>
                     </div>
                     <div class="card-body">
+
                         <form id="corpSelectForm" action="ordersInsert" method="post">
                             <%--     거래처 등록 row    --%>
                             <div class="row p-4 bg-gray-200 m-2">
@@ -107,11 +108,12 @@
                                         <tbody>
                                         <c:set var = "totcnt" value = "0" />
                                         <c:set var = "totprice" value = "0" />
+                                        <% int i = 0; %>
                                         <c:forEach var="d" items="${nulldraft}" >
                                             <tr id="tr${d.draft_seq}" onclick="update()" data-toggle="modal" data-target="#updateModal"
-                                                data-draftseq='${d.draft_seq}' data-prodname='${d.product.prodName}' data-prodbundle='${d.product.prod_bundle}'
+                                                data-draftseq='${d.draft_seq}' data-prodid='${d.product.prod_id}' data-prodname='${d.product.prodName}' data-prodbundle='${d.product.prod_bundle}'
                                                 data-sellprice='${d.product.sell_price}' data-draftcnt='${d.draft_cnt}' data-draftprodprice='${d.draft_prod_price}' >
-                                                <td><%= i+1 %><input type="hidden" name="drafts[<%= i %>].draft_seq" value="${d.draft_seq}"></td>
+                                                <td><%= i + 1 %><input type="hidden" name="drafts[<%= i %>].draft_seq" value="${d.draft_seq}"></td>
                                                 <td>${d.product.prodName}</td>
                                                 <td>${d.product.prod_bundle}</td>
                                                 <td>${d.product.sell_price}</td>
@@ -122,6 +124,7 @@
                                             </tr>
                                             <% i++; %>
                                         </c:forEach>
+
                                         </tbody>
                                         <tfoot>
                                         <tr>
@@ -144,6 +147,7 @@
                                 </div>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -368,13 +372,14 @@
             function update() {
                 $('#updateModal').on('show.bs.modal', function (event) {
                     var draftseq = $(event.relatedTarget).data('draftseq');
+                    var prodid = $(event.relatedTarget).data('prodid');
                     var prodName = $(event.relatedTarget).data('prodname');
                     var prodbundle = $(event.relatedTarget).data('prodbundle');
                     var sellprice = $(event.relatedTarget).data('sellprice');
                     var draftcnt = $(event.relatedTarget).data('draftcnt');
                     var draftprodprice = $(event.relatedTarget).data('draftprodprice');
-
                     $(this).find("#draftseq").val(draftseq);
+                    $(this).find("#prod_idup").val(prodid);
                     $(this).find("#goodsup").text(prodName);
                     $(this).find("#goodsunitup").text(prodbundle);
                     $(this).find("#goodspriceup").text(sellprice);

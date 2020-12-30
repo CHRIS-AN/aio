@@ -53,7 +53,11 @@ public class DraftController {
     // 발주물품 수정
     @PostMapping("draftUpdate")
     public String draftUpdate(Draft draft, Long prod_id) {
+        log.info("야 update 컨트롤러 들어옴");
+        log.info("야 update 컨트롤러 draft:"+draft);
+        log.info("야 update 컨트롤러 prod_id:"+prod_id);
         draftService.updateDraft(draft, prod_id);
+        log.info("야 update 컨트롤러 나감");
         return "redirect:draftList";
     }
 

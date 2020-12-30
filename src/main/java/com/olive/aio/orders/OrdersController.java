@@ -47,16 +47,21 @@ public class OrdersController {
     // 발주서 등록
     @PostMapping("ordersInsert")
     public String ordersInsert(Orders orders, @CurrentEmpl Empl empl, Long corp_id, DraftList draftList){
+        log.info("야 insert컨트롤러 들어롬");
         orders.setEmpl(empl);
-        System.out.println("draftList.getDrafts() : " + draftList.getDrafts());
+        System.out.println("야 draftList.getDrafts() : " + draftList.getDrafts());
         ordersService.insertOrders(orders, corp_id, draftList);
+        log.info("야 insert컨트롤러 나감");
         return "redirect:ordersList";
     }
 
     // 발주 수정페이지에 값 넣기
     @GetMapping("ordersUpdate")
     public String orderUpdatePage(Orders orders, Model model){
-        model.addAttribute("orders",ordersService.getOrders(orders));
+        Orders orders1 = ordersService.getOrders(orders);
+        log.info("야 :{}", orders1.toString()2);
+        model.addAttribute("orders", orders1);
+
         return "yeonji/ordersUpdate";
     }
 

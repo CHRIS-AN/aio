@@ -106,7 +106,7 @@
                                         <tbody>
                                         <c:set var = "totcnt" value = "0" />
                                         <c:set var = "totprice" value = "0" />
-                                        <c:forEach var="d" items="${draft}">
+                                        <c:forEach var="d" items="${nulldraft}">
                                             <tr id="tr${d.draft_seq}" onclick="update()" data-toggle="modal" data-target="#updateModal"
                                                 data-draftseq='${d.draft_seq}' data-prodname='${d.product.prodName}' data-prodbundle='${d.product.prod_bundle}'
                                                 data-sellprice='${d.product.sell_price}' data-draftcnt='${d.draft_cnt}' data-draftprodprice='${d.draft_prod_price}' >

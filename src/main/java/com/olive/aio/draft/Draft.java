@@ -2,7 +2,6 @@ package com.olive.aio.draft;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.olive.aio.corp.Corp;
 import com.olive.aio.minjong.Product;
 import com.olive.aio.orders.Orders;
 import lombok.*;
@@ -35,10 +34,6 @@ public class Draft {
     @ManyToOne
     @JsonManagedReference
     Product product;
-
-    @ManyToOne
-    @JsonBackReference
-    Corp corp;
 
     @ManyToOne
     @JsonBackReference

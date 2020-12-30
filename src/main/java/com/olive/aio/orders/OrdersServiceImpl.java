@@ -39,13 +39,19 @@ public class OrdersServiceImpl implements OrdersService {
 
     @Override
     public void insertOrders(Orders orders, Long corp_id, DraftList draftList) {
+        log.info("야 insert 서비스 들어옴");
         Corp corp = corpRepository.findById(corp_id).get();
+        log.info("야 insert 서비스 1");
         draftList.getDrafts().forEach(e -> {
+            log.info("야 insert 서비스 2");
             Optional<Draft> byId = draftRepository.findById(e.getDraft_seq());
             orders.addDraft(byId.get());
+            log.info("야 insert 서비스 3");
         });
         orders.setCorp(corp);
+        log.info("야 insert 서비스 4");
         ordersRepository.save(orders);
+        log.info("야 insert 서비스 나감");
     }
 
     @Override

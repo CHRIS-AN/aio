@@ -33,12 +33,18 @@ public class DraftServiceImpl implements DraftService {
 
     @Override
     public void updateDraft(Draft draft, Long prod_id) {
+        log.info("야 update 서비스 들어옴");
         Draft beforeDraft = draftRepository.findById(draft.getDraft_seq()).get();
         Product product = productRepository.findById(prod_id).get();
+        log.info("야 update 서비스 1");
         beforeDraft.setDraft_cnt(draft.getDraft_cnt());
+        log.info("야 update 서비스 2");
         beforeDraft.setDraft_prod_price(draft.getDraft_prod_price());
+        log.info("야 update 서비스 3");
         beforeDraft.setProduct(product);
+        log.info("야 update 서비스 4");
         draftRepository.save(beforeDraft);
+        log.info("야 update 서비스 나감");
     }
 
     @Override
