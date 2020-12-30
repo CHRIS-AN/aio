@@ -12,5 +12,11 @@ public interface SlipRepositoryExtention {
 
     Page<Slip> findByKeywordAndPayStatementType(String keyword, Pageable pageable);
 
+    // 전표관리 search
+    Page<Slip> findByKeywordAndPayStatementType(String keyword, Pageable pageable, String type);
+
     Page<Slip> findByKeywordAndPayStatementType(Pageable pageable);
+
+    Page<Slip> findByPayStatementTypeAndSlipDateBetweenAndSlipWriteContaining(
+            String type, String startDate, String minusMonths, String keyword, Pageable pageable);
 }
