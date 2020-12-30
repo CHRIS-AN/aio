@@ -74,7 +74,7 @@ public class OrdersController {
     @GetMapping("ordersUpdate")
     public String orderUpdatePage(Orders orders, Model model){
         Orders orders1 = ordersService.getOrders(orders);
-        log.info("야 :{}", orders1.toString()2);
+        log.info("야 :{}", orders1.toString());
         model.addAttribute("orders", orders1);
 
         return "yeonji/ordersUpdate";
