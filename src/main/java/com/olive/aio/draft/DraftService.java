@@ -1,10 +1,14 @@
 package com.olive.aio.draft;
 
 import com.olive.aio.orders.Orders;
+import org.springframework.validation.Errors;
 
 import java.util.List;
+import java.util.Map;
 
 public interface DraftService {
+
+
 
     //발주품목 리스트 조회
     List<Draft> findAll(Draft draft);
@@ -22,5 +26,7 @@ public interface DraftService {
     List<Draft> findByOrders(Orders orders);
 
     List<Draft> findByOrders(Long orders_id);
+
+    Map<String, String> validateHandling(Errors errors);
 
 }

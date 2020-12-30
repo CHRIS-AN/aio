@@ -212,7 +212,7 @@
                                             </div>
                                             <div class="form-group has-feedback col-md-9 com-sm-9">
                                                 <input type="text" name="draft_cnt" value="" class="form-control goodsnumber numkeyup" placeholder="수량을 입력해주세요" required>
-                                                <span>${valid_goodsnumber}</span>
+                                                <span>${valid_draft_}</span>
                                             </div>
                                         </div>
 

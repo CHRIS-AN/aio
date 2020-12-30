@@ -11,11 +11,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @AllArgsConstructor
@@ -45,7 +48,24 @@ public class DraftController {
 
     // 발주물품 등록
     @PostMapping("draftInsert")
-    public String draftInsert(Draft draft, Long prod_id){
+    public String draftInsert(@Valid Draft draft, Errors errors, Long prod_id, Model model){
+
+        if (errors.hasErrors()) {
+
+            //제품 등록 실패시, 입력 데이터를 유지
+            model.addAttribute("draft", draft);
+
+            //유효성 통과 못한 필드와 메시지를 핸들링
+            Map<String, String> validatorResult = draftService.validateHandling(errors);
+            for (String key : validatorResult.keySet()) {
+                model.addAttribute(key, validatorResult.get(key));
+            }
+
+            return "yeonji/draftList";
+
+        }
+
+
         draftService.insertDraft(draft, prod_id);
         return "redirect:draftList";
     }

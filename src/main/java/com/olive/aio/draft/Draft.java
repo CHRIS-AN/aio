@@ -26,8 +26,7 @@ public class Draft {
     @GeneratedValue
     private Long draft_seq; //물품순서
 
-    @NotNull
-    @Pattern(regexp = "^[0-9]{1,10}$")
+    @Pattern(regexp = "^[0-9]{1,10}$", message = "수량을 입력해주세요.")
     private int draft_cnt; //물품수량
 
     @NotNull
