@@ -51,26 +51,29 @@
                                   action="/finance/purchaseSalesTradingRegister" method="post">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                 <div class="row form-group">
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-5">
                                         <span class="fa fas fa-archive form-control-feedback left"></span>
-                                        <select name="tradingType" class="form-control has-feedback-left"
-                                                id="tradingType" onchange="tradingTypeKindChange(this)">
+                                        <select name="tradingType"  class="form-control has-feedback-left"
+                                                id="tradingType" onchange="tradingTypeKindChange(this)" >
                                             <option disabled selected>전표 타입</option>
                                             <option value="지출 결과서">지출 결과서</option>
                                             <option value="입금 보고서">입금 보고서</option>
                                             <option value="매출 거래">매출 거래</option>
                                             <option value="매입 거래">매입 거래</option>
-
                                         </select>
-                                    </div>
-                                    <div class="col-md-2"></div>
-                                    <div class="form-group col-md-6">
-                                        <span class="glyphicon glyphicon-user form-control-feedback left"></span>
-                                        <input name="slipWrite" type="text" class="form-control has-feedback-left"
-                                               placeholder="작성자"
-                                               maxlength="20" value="${slip.slipWrite}">
                                         <small class="form-text text-danger">
-                                            ${valid_slipWrite}
+                                            ${valid_tradingType}
+                                        </small>
+                                    </div>
+
+                                    <div class="col-md-2"></div>
+                                    <h4><strong> 작성자명 : </strong></h4>
+                                    <div class="form-group col-md-3">
+                                        <span class="fa far fa-retweet form-control-feedback left"></span>
+                                        <input name="slipWrite" type="text" readonly style="width: 190px"
+                                               class="form-control has-feedback-left" value="${empl.name} (${empl.emplId})">
+                                        <small class="form-text text-danger">
+                                                ${valid_slipWrite}
                                         </small>
                                     </div>
                                 </div>
@@ -90,8 +93,7 @@
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <span class="fa fas fa-tasks form-control-feedback left"></span>
-                                        <select name="slipCode" class="form-control has-feedback-left"
-                                                id="slipCode">
+                                        <select name="slipCode" class="form-control has-feedback-left" id="slipCode">
                                             <option disabled selected>선택해주세요. (계정 과목)</option>
                                         </select>
                                         <small class="form-text text-danger">
@@ -100,24 +102,40 @@
                                     </div>
                                 </div>
 
-                                <!-- corp 연관관계 설정 -->
                                 <div class="form-group">
-                                    <div class="col-md-12">
-                                        <i class="fa far fa-retweet form-control-feedback left"></i>
-                                        <input name="corp" type="text" class="form-control has-feedback-left" id="corp"
-                                               placeholder="거래처" value="${slip.corp}">
-                                        <small class="form-text text-danger">
-                                            ${valid_corp}
-                                        </small>
+                                    <div class="form-group col-md-4">
+                                        <span class="fa far fa-retweet form-control-feedback left"></span>
+                                        <c:choose>
+                                            <c:when test="${empty slip.corp}">
+                                                <select name="corp" class="form-control has-feedback-left">
+                                                    <option disabled selected>거래처를 입력하세요</option>
+                                                    <c:forEach items="${corpList}" var="corp">
+                                                        <option value="${corp.corp_id}">${corp.corp_name}</option>
+                                                    </c:forEach>
+                                                </select>
+                                                <small class="form-text text-danger">
+                                                        ${valid_corp}
+                                                </small>
+                                            </c:when>
+
+                                            <c:when test="${not empty slip.corp}">
+                                                <select name="corp" class="form-control has-feedback-left">
+                                                    <c:forEach items="${corpList}" var="corp">
+                                                        <option value="${corp.corp_id}">${corp.corp_name}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </c:when>
+                                        </c:choose>
                                     </div>
                                 </div>
+
 
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <i class="fa fas fa-dollar form-control-feedback left"></i>
                                         <input name="slip_account" type="text" class="form-control has-feedback-left"
                                                id="money" onkeyup="numberWithCommas(this.value)"
-                                               placeholder="거래 금액" value="${slip.slip.account}">
+                                               placeholder="거래 금액" value="${slip.slip_account}">
                                         <small class="form-text text-danger">
                                             ${valid_slip_account}
                                         </small>
@@ -147,27 +165,30 @@
                                         </small>
                                     </div>
                                 </div>
+
                                 <div>
                                     <div class="col-md-12">
                                         <i class="fa far fa-credit-card"></i>
                                         <select name="paymentType" class="form-control" id="paymentType">
-                                            <option disabled selected>결제 수단</option>
+                                            <option selected disabled="">결제 수단</option>
                                             <option>현금</option>
                                             <option>신한은행 23123-144-993213 안정민</option>
                                             <option>하나은행 86391-11-7428321 안정민</option>
                                             <option>국민은행 2552125-9231111 안정민</option>
                                         </select>
+                                        <small class="form-text text-danger">
+                                            ${valid_paymentType}
+                                        </small>
                                     </div>
                                 </div>
 
                                 <div> </div>
                                 <div class="col-sm-12 text-right">
-                                    <button type="submit" class="btn btn-primary" onclick="registerClick()"><em>전표 등록</em></button>
+                                    <button type="submit" class="btn btn-primary" onclick="button_register()"><em>전표 등록</em></button>
                                 </div>
 
                             </form>
                         </div>
-
                     </div>
                 </div>
                 </div>
@@ -181,14 +202,12 @@
 </div>
 <!-- script -->
 <script>
-    function registerClick() {
-        alert("확인하시겠습니까?")
-    }
     function numberWithCommas(x) {
         let y = "";
         x = x.replace(/[^0-9]/g,'');
         if(x != "") {
             y = parseInt(x)/10;
+            y = Math.ceil(y);
         }
         $("#money").val(x.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
         $("#moneyVAT").val((""+y).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
@@ -216,10 +235,17 @@
             target.appendChild(opt);
         }
     }
+
+    function button_register(){
+        if (confirm("정말 등록하시겠습니까??") == true){    //확인
+            document.form.submit();
+        }else if (confirm("정말 등록하시겠습니까??") == false){   //취소
+            return;
+        }
+    }
 </script>
 <!-- script -->
 <jsp:include page="../layout/script.jsp" />
 <!-- /script -->
-
 </body>
 </html>

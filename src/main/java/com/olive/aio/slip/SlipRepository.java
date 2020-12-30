@@ -18,5 +18,5 @@ public interface SlipRepository extends JpaRepository<Slip, Long>, SlipRepositor
     List<Slip> findByPayStatementntType(String payStatementntType);
 
     Page<Slip> findByPayStatementntTypeAndSlipDateBetweenAndSlipWriteContaining(
-            String type, String startDate, String minusMonths, String keyword, Pageable pageable );
+            String type, String startDate, String minusMonths, String keyword, Pageable pageable);
 }

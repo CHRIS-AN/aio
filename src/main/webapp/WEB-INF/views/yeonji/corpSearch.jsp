@@ -47,7 +47,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable example-table-1" width="100%" cellspacing="0">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
                                     <th>#</th>
@@ -112,7 +112,7 @@
                 var corpName = td.eq(2).text();
 
                 opener.document.getElementById("corp_id").value = corp_id;
-                opener.document.getElementById("corps").innerText = corpName;
+                opener.document.getElementById("corpname").innerText = corpName;
 
                 window.close();
             }

@@ -1,6 +1,7 @@
 package com.olive.aio.slip;
 
 
+import com.olive.aio.corp.Corp;
 import com.olive.aio.domain.Slip;
 import com.olive.aio.slip.form.SlipForm;
 import lombok.RequiredArgsConstructor;
@@ -30,8 +31,14 @@ public class SlipService {
         for (FieldError error : errors.getFieldErrors()) {
             String validKeyName = String.format("valid_%s", error.getField());
             validatorResult.put(validKeyName, error.getDefaultMessage());
+            System.out.println("유효성검증 에러 이름 : " + validKeyName);
         }
         return validatorResult;
+    }
+
+    // 전표 등록
+    public void saveSlip(Slip slip) {
+        repository.save(slip);
     }
 
     // 상세보기 수정
@@ -47,10 +54,6 @@ public class SlipService {
         return slipList;
     }
 
-    public void saveSlip(Slip slip) {
-        repository.save(slip);
-    }
-
     public List<Slip> listSlip() {
         List<Slip> slipList = repository.findByPayStatementntType("대기");
         return slipList;
@@ -62,9 +65,10 @@ public class SlipService {
         }
     }
 
-
     // 상세보기 수정 submit
-    public void updateSlip(SlipForm newForm, Long slipId) {
+    public void updateSlip(SlipForm newForm, Long slipId, Corp corp) {
+        newForm.setCorp(corp.getCorp_name());
+        System.out.println("여기도 와?**************");
         Slip bySlipId = repository.findBySlipId(slipId);
         modelMapper.map(newForm, bySlipId);
         //SlipForm.builder().slipId().build()
@@ -76,8 +80,8 @@ public class SlipService {
         modelMapper.map(newForm, bySlipId);
     }
 
-    public void deleteSlip(SlipForm slipId) {
-        Slip slip = repository.findBySlipId(slipId.getSlipId());
+    public void deleteSlip(Long slipId) {
+        Slip slip = repository.findBySlipId(slipId);
         repository.delete(slip);
     }
 
