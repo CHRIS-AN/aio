@@ -67,7 +67,7 @@ public class SlipService {
 
     // 상세보기 수정 submit
     public void updateSlip(SlipForm newForm, Long slipId, Corp corp) {
-        newForm.setCorp(corp.getCorp_name());
+        newForm.setCorp(corp.getCorpName());
         System.out.println("여기도 와?**************");
         Slip bySlipId = repository.findBySlipId(slipId);
         modelMapper.map(newForm, bySlipId);
