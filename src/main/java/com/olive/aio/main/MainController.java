@@ -8,6 +8,7 @@ import com.olive.aio.employee.EmplService;
 import com.olive.aio.employee.form.EmplForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -40,6 +41,9 @@ public class MainController {
         return "layout/example";
     }
 
-
-
+    @GetMapping("/logout")
+    public String logOff() {
+        SecurityContextHolder.clearContext();
+        return "redirect:/login";
+    }
 }

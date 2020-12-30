@@ -1,13 +1,12 @@
 package com.olive.aio.corp;
 
+import com.olive.aio.domain.Slip;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Data
@@ -39,5 +38,7 @@ public class Corp {
     @NotBlank(message = "사업자등록번호를 입력해주세요.")
 //    @Pattern(regexp = "^[1-9]{10,30}", message = "유효한 값을 작성해주세요.")
     private String corp_num; //사업자 등록번호
+
+
 
 }

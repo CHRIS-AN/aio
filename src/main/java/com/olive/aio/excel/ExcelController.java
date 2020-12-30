@@ -4,23 +4,22 @@ package com.olive.aio.excel;
 import com.olive.aio.domain.Slip;
 import com.olive.aio.slip.SlipRepository;
 import com.olive.aio.slip.SlipService;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.LifecycleState;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
@@ -42,7 +41,9 @@ public class ExcelController {
     // 손익
     @GetMapping(IS)
     public String incomeStatement(Model model, Integer months) {
+
         System.out.println("손익계산서 months:" + months);
+
         if (months == null || months.equals("null")) {
             months = 0;
         }
@@ -51,6 +52,10 @@ public class ExcelController {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(tday);
             calendar.add(Calendar.MONTH, -months);
+
+            String nowDate = new SimpleDateFormat("yyyy-MM-dd").format(tday);
+            String searchDate = new SimpleDateFormat("yyyy-MM-dd").format(calendar.getTime());
+
 
             // 매출액
             String [] take = {"외상매입금", "지급어음", "미지급금", "선수수익"};
@@ -191,18 +196,24 @@ public class ExcelController {
             model.addAttribute("netIncome", gg);
 
 
+
+            model.addAttribute("nowDate", nowDate);
+            model.addAttribute("searchDate", searchDate);
         }
+
         return "finance" + IS;
     }
 
     @PostMapping(IS)
     public String spendingResolutionRegisterSubmit(@Valid Slip slip, Errors errors, Model model) {
-        if (errors.hasErrors()) {
-            model.addAttribute("slip", slip);
 
+        if (errors.hasErrors()) {
+
+            model.addAttribute("slip", slip);
             Map<String, String> validatorResult = SlipService.validateHandling(errors);
             for (String key : validatorResult.keySet()) {
                 model.addAttribute(key, validatorResult.get(key));
+
                 log.info(key);
             }
             return FINANCE +  IS;
@@ -211,12 +222,10 @@ public class ExcelController {
         return "thymeleaf/searchList" + IS;
     }
 
-
     // 화장품 전표 하나당 엑셀 다운로드 !
     @GetMapping("/downloadExcel")
     public void downloadExcel(HttpServletResponse response, Long slipId) throws Exception {
 
-        System.out.println("slipId : " + slipId);
         // 엑셀 파일 하나를 만듬.
         Workbook wb = new HSSFWorkbook();
         // 엑셀 파일 내부에 Sheet를 하나 생성합니다. ( 엑셀 파일 하나에는 여러 Sheet이 있을 수 있다)
@@ -290,6 +299,99 @@ public class ExcelController {
 
             response.setContentType("ms-vnd/excel");
             response.setHeader("Content-Disposition", "attachment;filename=test.xls");
+
+        wb.write(response.getOutputStream());
+        wb.close();
+    }
+
+    // 손익계산서 엑셀 다운로드
+    @PostMapping("/excelDown")
+    public void incomeStatementExcel(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        // 워크북 생성
+        Workbook wb = new HSSFWorkbook();
+        Sheet sheet = wb.createSheet("손익계산서");
+
+        Row row = null;
+        Cell cell = null;
+
+        int rowNo = 0;
+
+        // 헤더 생성
+        row = sheet.createRow(rowNo++);
+        cell = row.createCell(0);
+        cell.setCellValue("과목");
+        cell = row.createCell(1);
+        cell.setCellValue("금액");
+
+
+        String value = "";
+
+        // 데이터 부분 생성
+        row = sheet.createRow(rowNo++);
+        cell = row.createCell(0);
+        cell.setCellValue("Ⅰ. 매출액");
+        value = request.getParameter("take");
+        cell = row.createCell(1);
+        cell.setCellValue(value);
+
+        row = sheet.createRow(rowNo++);
+        cell = row.createCell(0);
+        cell.setCellValue("Ⅱ. 매출원가");
+        value = request.getParameter("costOfSales");
+        cell = row.createCell(1);
+        cell.setCellValue(value);
+
+        row = sheet.createRow(rowNo++);
+        cell = row.createCell(0);
+        cell.setCellValue("Ⅲ. 매출총이익");
+        value = request.getParameter("grossProfit");
+        cell = row.createCell(1);
+        cell.setCellValue(value);
+
+        row = sheet.createRow(rowNo++);
+        cell = row.createCell(0);
+        cell.setCellValue("판매비와관리비");
+        value = request.getParameter("maintenanceSales");
+        cell = row.createCell(1);
+        cell.setCellValue(value);
+
+        row = sheet.createRow(rowNo++);
+        cell = row.createCell(0);
+        cell.setCellValue("Ⅳ. 영업이익");
+        value = request.getParameter("salesIncome");
+        cell = row.createCell(1);
+        cell.setCellValue(value);
+
+        row = sheet.createRow(rowNo++);
+        cell = row.createCell(0);
+        cell.setCellValue("기타수익");
+        value = request.getParameter("otherIncome");
+        cell = row.createCell(1);
+        cell.setCellValue(value);
+
+        row = sheet.createRow(rowNo++);
+        cell = row.createCell(0);
+        cell.setCellValue("기타비용");
+        value = request.getParameter("otherExpenses");
+        cell = row.createCell(1);
+        cell.setCellValue(value);
+
+        row = sheet.createRow(rowNo++);
+        cell = row.createCell(0);
+        cell.setCellValue("법인세비용");
+        value = request.getParameter("incomeTaxExpense");
+        cell = row.createCell(1);
+        cell.setCellValue(value);
+
+        row = sheet.createRow(rowNo++);
+        cell = row.createCell(0);
+        cell.setCellValue("Ⅵ. 당기순이익");
+        value = request.getParameter("netIncome");
+        cell = row.createCell(1);
+        cell.setCellValue(value);
+
+        response.setContentType("ms-vnd/excel");
+        response.setHeader("Content-Disposition", "attachment;filename=income_statement.xls");
 
         wb.write(response.getOutputStream());
         wb.close();

@@ -20,43 +20,38 @@
 <body class="nav-md">
 <div class="container body">
     <div class="main_container">
-        <!-- sidebar -->
         <jsp:include page="../layout/side-bar.jsp"/>
-        <!-- /sidebar -->
-
-        <!-- top-nav -->
         <jsp:include page="../layout/top-nav.jsp">
             <jsp:param name="empl" value="${empl}"/>
         </jsp:include>
-        <!-- top-nav -->
+
         <div class="right_col" role="main">
             <a onclick="history.back()"><h1><i class="fa far fa-reply-all"></i></h1></a>
             <div class="row">
-        <span class="col-12 text-center">
-           <h2>${title}</h2>
-        </span>
+                <span class="col-12 text-center">
+                   <h2>${title}</h2>
+                </span>
             </div>
             <hr>
             <c:forEach items="${slipList}" var="slip">
-
                 <div class="row justify-content-center">
                     <div class="col-lg-4">
                         <form class="needs-validation" action="" method="get">
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             <div class="container ">
-                    <span class="row form-group">
-                        <div class="col-4 mt-3" style="">
-                            <i class="fa fas fa-archive"></i>
-                            <label>거래타입</label><br>
-                            :${slip.tradingType}
-                        </div>
-                        <div class="col-4"></div>
-                        <div class="form-group col-4 mt-3">
-                            <i class="fa far fa-id-badge"></i>
-                            <label>작성자</label><br>
-                            :  ${slip.slipWrite}
-                        </div>
-                    </span>
+                                <span class="row form-group">
+                                    <div class="col-4 mt-3" style="">
+                                        <i class="fa fas fa-archive"></i>
+                                        <label>거래타입</label><br>
+                                        :${slip.tradingType}
+                                    </div>
+                                    <div class="col-4"></div>
+                                    <div class="form-group col-4 mt-3">
+                                        <i class="fa far fa-id-badge"></i>
+                                        <label>작성자</label><br>
+                                        :  ${slip.slipWrite}
+                                    </div>
+                                </span>
 
                                 <div class="form-group mt-2">
                                     <i class="fa far fa-calendar"></i>
@@ -77,18 +72,19 @@
                                 </div>
 
                                 <span class="row form-group">
-                        <div class="col-4 mt-2" style="">
-                           <i class="fa fas fa-dollar"></i>
-                            <label>거래 금액</label><br>
-                            :  ${slip.slip_account}
-                        </div>
-                        <div class="col-4"></div>
-                        <div class="form-group col-4 mt-2">
-                           <i class="fa far fa-plus"></i>
-                            <label>부가세</label><br>
-                            :${slip.slip_vat}
-                        </div>
-                    </span>
+                                    <div class="col-4 mt-2" style="">
+                                       <i class="fa fas fa-dollar"></i>
+                                        <label>거래 금액</label><br>
+                                        :  ${slip.slip_account}
+                                    </div>
+                                    <div class="col-4"></div>
+                                    <div class="form-group col-4 mt-2">
+                                       <i class="fa far fa-plus"></i>
+                                        <label>부가세</label><br>
+                                        :${slip.slip_vat}
+                                    </div>
+                                </span>
+
 
                                 <div class="form-group mt-1">
                                     <i class="fa fas fa-pencil"></i>
@@ -100,7 +96,6 @@
                                     <label>결제 방식</label><br>
                                     : ${slip.paymentType}
                                 </div>
-
                             </div>
                         </form>
                     </div>
@@ -109,38 +104,57 @@
 
             <c:forEach items="${slipList}" var="slip">
                 <div class="container mt-5">
-            <span class="row justify-content-center">
+                    <span class="row justify-content-center">
 
-                <div class="col-3"></div>
+                        <div class="col-3"></div>
 
-                <div class="form-group col-4">
-                    <a href="/finance/outstandingAuthorizationDetailView/${slip.slipId}/edit"
-                       class="btn btn-primary" role="button">eidt</a>
-                </div>
+                        <div class="form-group col-4">
+                            <a href="/finance/outstandingAuthorizationDetailView/${slip.slipId}/edit"
+                               class="btn btn-primary" role="button">전표 수정</a>
+                        </div>
 
-
-                <div class="form-group col-4">
-                    <form id="delete-form" action="/finance/outstandingAuthorizationDetailView/delete" method="post">
-                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                         <span class="row form-group">
-                            <div class="col-6" style="">
-                                <button type="submit" class="btn btn-primary">delete</button>
-                                <input type="hidden" value="${slip.slipId}" name="slipId">
-                            </div>
-                            <div class="col-3"></div>
-                         </span>
-                    </form>
-                </div>
-            </span>
+                        <c:choose>
+                            <c:when test="${title eq '전표 상세보기'}">
+                                <div class="form-group col-4">
+                                    <form id="deleteOut-form" action="/finance/statementManagementDetailView/delete" method="post">
+                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                         <span class="row form-group">
+                                            <div class="col-6" style="">
+                                                <button type="submit" class="btn btn-primary" onclick="deleteChk()">전표 삭제</button>
+                                                <input type="hidden" value="${slip.slipId}" name="slipId">
+                                            </div>
+                                            <div class="col-3"></div>
+                                         </span>
+                                    </form>
+                                </div>
+                            </c:when>
+                            <c:when test="${title eq '승인 대기 전표 상세보기'}">
+                                <div class="form-group col-4">
+                                    <form id="deleteSlip-form" action="/finance/outstandingAuthorizationDetailView/delete" method="post">
+                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                         <span class="row form-group">
+                                            <div class="col-6" style="">
+                                                <button type="submit" class="btn btn-primary" onclick="deleteChk()">전표 삭제</button>
+                                                <input type="hidden" value="${slip.slipId}" name="slipId">
+                                            </div>
+                                            <div class="col-3"></div>
+                                         </span>
+                                    </form>
+                                </div>
+                            </c:when>
+                        </c:choose>
+                    </span>
                 </div>
             </c:forEach>
         </div>
-        <!-- footer  -->
         <jsp:include page="../layout/footer.jsp" />
-        <!-- /footer  -->
     </div>
 </div>
-</div>
+<script>
+    function deleteChk() {
+        alert("삭제합니다.")
+    }
+</script>
 <!-- script -->
 <jsp:include page="../layout/script.jsp" />
 <!-- /script -->

@@ -26,7 +26,7 @@
                         <h3><i class="fa fas fa-search col-1 mt-5"></i></h3>
                         <span class="col-4 mt-5">
                             <form th:action="@{/finance/search/slipmanagement}" method="get">
-                                <input class="form-control" name="keyword" type="search" placeholder="작성자명으로 검색해주세요."
+                                <input class="form-control" name="keyword" type="search" placeholder="거래처명 또는 작성자명으로 검색해주세요."
                                        aria-label="Search"/>
                             </form>
                         </span>
@@ -104,18 +104,18 @@
                             <nav>
                                 <ul class="pagination justify-content-center">
                                     <li class="page-item" th:classappend="${!slipList.hasPrevious()}? disabled">
-                                        <a th:href="@{'/finance/statementManagement/list?months='+ ${months} +'&keyword=' + ${keyword} + '&page=' + ${slipList.getNumber() - 1}}"
+                                        <a th:href="@{'/finance/search/slipmanagement?keyword=' + ${keyword} + '&page=' + ${slipList.getNumber() - 1}}"
                                            class="page-link" tabindex="-1" aria-disabled="true">
                                             Previous
                                         </a>
                                     </li>
                                     <li class="page-item" th:classappend="${i == slipList.getNumber()}? active"
                                         th:each="i: ${#numbers.sequence(0, slipList.getTotalPages() - 1)}">
-                                        <a th:href="@{'/finance/statementManagement/list?months='+ ${months} +'&keyword=' + ${keyword} + '&page=' + ${i}}"
+                                        <a th:href="@{'/finance/search/slipmanagement?keyword=' + ${keyword} + '&page=' + ${i}}"
                                            class="page-link" href="#" th:text="${i + 1}">1</a>
                                     </li>
                                     <li class="page-item" th:classappend="${!slipList.hasNext()}? disabled">
-                                        <a th:href="@{'/finance/statementManagement/list?months='+ ${months} +'&keyword=' + ${keyword} + '&page=' + ${slipList.getNumber() + 1}}"
+                                        <a th:href="@{'/finance/search/slipmanagement?keyword=' + ${keyword} + '&page=' + ${slipList.getNumber() + 1}}"
                                            class="page-link">
                                             Next
                                         </a>

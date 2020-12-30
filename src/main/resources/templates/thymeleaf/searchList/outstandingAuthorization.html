@@ -4,109 +4,114 @@
     <meta charset="UTF-8">
     <head>
         <title>승인 요청 대기</title>
-
-
+        <link href="/css/sb-admin-2.min.css" rel="stylesheet">
         <link href="/node_modules/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Font Awesome -->
         <link href="/node_modules/gentelella/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <link href="/node_modules/gentelella/build/css/custom.css" rel="stylesheet">
         <script src="/node_modules/gentelella/vendors/jquery/dist/jquery.min.js"></script>
-
-        <link href="/css/sb-admin-2.min.css" rel="stylesheet">
     </head>
 </head>
 <body class="nav-md">
 <div class="container body">
     <div class="main_container">
-
         <div th:replace="thymeleaf/fragments.html :: side-bar"></div>
-
         <div th:replace="thymeleaf/fragments.html :: top-nav"></div>
 
         <div class="right_col" role="main">
             <div class="row mb-5">
-
-        <span class="col-12 text-center">
-            <h2>승인 요청 대기</h2>
-            <span class="row form-group">
-                <div class="col-6"></div>
-                <h2><i class="fa fas fa-search col-1 mt-5"></i></h2>
-                <span class="col-4 mt-5">
-                    <form th:action="@{/finance/search/slip}" method="get">
-                        <input class="form-control" name="keyword" type="search" placeholder="작성자명, 거래처로 검색해주세요."
-                               aria-label="Search"/>
-                    </form>
-                </span>
-            </span>
-            <div class="mt-5">
-            승인 대기 중 전표 수
-                <strong><h3><span th:text="${slipList.getTotalElements()}"></span></h3></strong><br>
-            </div>
-            <strong th:text="${keyword}" id="keyword" name="keyword" class="context"></strong>
-        <div class="row justify-content-center mt-5">
-            <div>
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th style="text-align: center">전표번호</th>
-                        <th style="text-align: center">등록날짜</th>
-                        <th style="text-align: center">거래유형</th>
-                        <th style="text-align: center">계정코드</th>
-                        <th style="text-align: center">금액</th>
-                        <th style="text-align: center">거래처명</th>
-                        <th style="text-align: center">적요</th>
-                        <th style="text-align: center">작성자명</th>
-                        <th style="text-align: center">결제 승인/취소</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr th:each="slip : ${slipList}"
-                            th:onclick="'window.location.href = \'' + @{/finance/outstandingAuthorizationDetailView/{slipId} (slipId=${slip.slipId})} + '\''">
-                            <td th:text="${slip.slipId}"></td>
-                            <td th:text="${slip.slipDate}"></td>
-                            <td th:text="${slip.tradingType}"></td>
-                            <td th:text="${slip.slipCode}"></td>
-                            <td th:text="${slip.slip_account}"></td>
-                            <td class="context" th:text="${slip.corp}"></td>
-                            <td th:text="${slip.slip_summary}"></td>
-                            <td class="context" th:text="${slip.slipWrite}"></td>
-                            <td>
-                                <a th:href="@{/finance/slipPayment/approve(slipId=${slip.slipId}, keyword=${param.keyword})}">승인</a>/
-                                <a th:href="@{/finance/slipPayment/reject(slipId=${slip.slipId}, keyword=${param.keyword})}">거절</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="row justify-content-center mt-5">
-                    <div class="col-sm-10">
-                        <nav>
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item" th:classappend="${!slipList.hasPrevious()}? disabled">
-                                    <a th:href="@{'/finance/search/slip?keyword=' + ${keyword} + '&page=' + ${slipList.getNumber() - 1}}"
-                                       class="page-link" tabindex="-1" aria-disabled="true">
-                                        Previous
-                                    </a>
-                                </li>
-                                <li class="page-item" th:classappend="${i == slipList.getNumber()}? active"
-                                    th:each="i: ${#numbers.sequence(0, slipList.getTotalPages() - 1)}">
-                                    <a th:href="@{'/finance/search/slip?keyword=' + ${keyword} + '&page=' + ${i}}"
-                                       class="page-link" href="#" th:text="${i + 1}">1</a>
-                                </li>
-                                <li class="page-item" th:classappend="${!slipList.hasNext()}? disabled">
-                                    <a th:href="@{'/finance/search/slip?keyword=' + ${keyword} + '&page=' + ${slipList.getNumber() + 1}}"
-                                       class="page-link">
-                                        Next
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+                <span class="col-12 text-center">
+                    <strong><h1>승인 요청 대기</h1></strong>
+                    <span class="row form-group">
+                        <div class="col-6"></div>
+                        <h3>
+                            <i class="fa fas fa-search col-1 mt-5"></i>
+                        </h3>
+                        <span class="col-4 mt-5">
+                            <form th:action="@{/finance/search/slip}" method="get">
+                                <input class="form-control" name="keyword" type="search" placeholder="작성자명, 거래처로 검색해주세요."
+                                       aria-label="Search"/>
+                            </form>
+                        </span>
+                    </span>
+                    <div class="mt-5">
+                        <h4>승인 대기 중 전표 수</h4>
+                        <strong>
+                            <h3><span th:text="${slipList.getTotalElements()}"></span></h3>
+                        </strong>
                     </div>
-                </div>
-            </div>
-        </div>
-        </span>
+
+                    <div class="text-xl-right">
+                        <h4>현재 페이지</h4>
+                        <span th:text="${slipList.getNumber()+1}"></span> / <span th:text="${slipList.getTotalPages()}"></span>
+                    </div>
+                    <strong th:text="${keyword}" id="keyword" name="keyword" class="context"></strong>
+
+                    <!-- 전표 리스트 -->
+                    <div class="row justify-content-center mt-5">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center">전표번호</th>
+                                    <th style="text-align: center">등록날짜</th>
+                                    <th style="text-align: center">거래유형</th>
+                                    <th style="text-align: center">계정코드</th>
+                                    <th style="text-align: center">금액</th>
+                                    <th style="text-align: center">거래처명</th>
+                                    <th style="text-align: center">적요</th>
+                                    <th style="text-align: center">작성자명</th>
+                                    <th th:if="${empl.dept} == '회계'"
+                                        style="text-align: center">결제 승인 / 거절</th>
+                                   <th th:unless="${empl.dept} != '회계'"></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr th:each="slip : ${slipList}"
+                                    th:onclick="'window.location.href = \'' + @{/finance/outstandingAuthorizationDetailView/{slipId} (slipId=${slip.slipId})} + '\''">
+                                    <td th:text="${slip.slipId}"></td>
+                                    <td th:text="${slip.slipDate}"></td>
+                                    <td th:text="${slip.tradingType}"></td>
+                                    <td th:text="${slip.slipCode}"></td>
+                                    <td th:text="${slip.slip_account}"></td>
+                                    <td class="context" th:text="${slip.corp}"></td>
+                                    <td th:text="${slip.slip_summary}"></td>
+                                    <td class="context" th:text="${slip.slipWrite}"></td>
+                                    <td th:if="${empl.dept} == '회계'" >
+                                        <a class="text-info" th:href="@{/finance/slipPayment/approve(slipId=${slip.slipId}, keyword=${param.keyword})}">승인</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;
+                                        <a class="text-danger" th:href="@{/finance/slipPayment/reject(slipId=${slip.slipId}, keyword=${param.keyword})}">거절</a>
+                                    </td>
+                                    <td th:unless="${empl.dept} != '회계'"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                     <div class="row justify-content-center mt-5">
+                        <div class="col-sm-10">
+                            <nav>
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item" th:classappend="${!slipList.hasPrevious()}? disabled">
+                                        <a th:href="@{'/finance/search/slip?keyword=' + ${keyword} + '&page=' + ${slipList.getNumber() - 1}}"
+                                           class="page-link" tabindex="-1" aria-disabled="true">
+                                            Previous
+                                        </a>
+                                    </li>
+                                    <li class="page-item" th:classappend="${i == slipList.getNumber()}? active"
+                                        th:each="i: ${#numbers.sequence(0, slipList.getTotalPages() - 1)}">
+                                        <a th:href="@{'/finance/search/slip?keyword=' + ${keyword} + '&page=' + ${i}}"
+                                           class="page-link" href="#" th:text="${i + 1}">1</a>
+                                    </li>
+                                    <li class="page-item" th:classappend="${!slipList.hasNext()}? disabled">
+                                        <a th:href="@{'/finance/search/slip?keyword=' + ${keyword} + '&page=' + ${slipList.getNumber() + 1}}"
+                                           class="page-link">
+                                            Next
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                     </div>
+                </span>
             </div>
         </div>
         <footer th:replace="thymeleaf/fragments.html :: footer"></footer>

@@ -23,6 +23,8 @@
 
         .body {
             overflow: auto;
+            display: flex;
+            align-items: center;
         }
 
         .body::before {
@@ -51,7 +53,6 @@
 
         .login-box {
             margin: auto;
-            margin-top: 18%;
             box-shadow: 0 0 10px #888888;
             border-radius: 15px;
             padding: 0;
