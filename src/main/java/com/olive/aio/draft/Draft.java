@@ -2,10 +2,20 @@ package com.olive.aio.draft;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.olive.aio.minjong.Product;
+import com.olive.aio.orders.Orders;
+import lombok.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.olive.aio.domain.test.Testorders;
-import com.olive.aio.minjong.Product;
-import lombok.*;
+
 
 import javax.persistence.*;
 
@@ -22,24 +32,20 @@ public class Draft {
     @GeneratedValue
     private Long draft_seq; //물품순서
 
-    //    @NotBlank
-//    @Pattern(regexp = "^[0-9]{1,10}$")
+    @Pattern(regexp = "^[0-9]{1,10}$", message = "수량을 입력해주세요.")
     private int draft_cnt; //물품수량
 
-    //    @NotBlank
-//    @Pattern(regexp = "^[0-9]{1,50}$")
+    @NotNull
+    @Pattern(regexp = "^[0-9]{1,50}$")
     private int draft_prod_price; //물품가격
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "prod_id")
-    @JsonManagedReference
-    private Product product;
-
-//    @ManyToOne(fetch = FetchType.LAZY)
     @ManyToOne
-    @JoinColumn(name = "testordersid")
+    @JsonManagedReference
+    Product product;
+
+    @ManyToOne
     @JsonBackReference
-    private Testorders testordersid;
+    Orders orders;
 
 }
+

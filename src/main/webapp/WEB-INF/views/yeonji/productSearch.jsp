@@ -10,8 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
-    <title>거래처 검색</title>
-
+    <title>AIO</title>
     <!-- 부트스트랩 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <!-- Custom styles for this page -->
@@ -21,13 +20,10 @@
     <!-- Font Awesome -->
     <link href="/node_modules/gentelella/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- Custom Theme Style -->
-
     <link href="/node_modules/gentelella/build/css/custom.css" rel="stylesheet">
     <script src="/node_modules/gentelella/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Custom styles for this template -->
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
-
-
 </head>
 <body class="nav-md">
 
@@ -42,35 +38,41 @@
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <div style="float:left">
-                            <h3 class="m-0 font-weight-bold text-primary">거래처 검색</h3>
+                            <h3 class="m-0 font-weight-bold text-primary">물품 검색</h3>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable example-table-1" width="100%" cellspacing="0">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>거래처코드</th>
-                                    <th>거래처명</th>
-                                    <th>사업자등록번호</th>
+                                    <th>제품코드</th>
+                                    <th>제품명</th>
+                                    <th>단위</th>
+                                    <th>판매가</th>
+                                    <th>카테고리</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
                                     <th>#</th>
-                                    <th>거래처코드</th>
-                                    <th>거래처명</th>
-                                    <th>사업자등록번호</th>
+                                    <th>제품코드</th>
+                                    <th>제품명</th>
+                                    <th>단위</th>
+                                    <th>판매가</th>
+                                    <th>카테고리</th>
                                 </tr>
                                 </tfoot>
                                 <tbody>
-                                <c:forEach var="p" items="${corpsList}">
+                                <c:forEach var="p" items="${productImport}">
                                     <tr>
-                                        <td><input type="radio" name="corp"></td>
-                                        <td>${p.corp_id}</td>
-                                        <td>${p.corpName}</td>
-                                        <td>${p.corp_num}</td>
+                                        <td><input type="radio" name="prod"></td>
+                                        <td>${p.prod_id}</td>
+                                        <td>${p.prodName}</td>
+                                        <td>${p.prod_bundle}</td>
+                                        <td>${p.sell_price}</td>
+                                        <td>${p.prod_catag}</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -90,12 +92,15 @@
         </div>
 
         <script>
-            var corp_id;
-            var corpName;
-            var corp_num;
+            var prod_id;
+            var prodName;
+            var prod_bundle;
+            var sell_price;
             var td;
 
-            $("input:radio[name='corp']").click(function() {
+            $("input:radio[name='prod']").click(function() {
+                var str = ""
+                var tdArr = new Array();	// 배열 선언
                 var checkBtn = $(this);
 
                 // checkBtn.parent() : checkBtn의 부모는 <td>이다.
@@ -108,11 +113,20 @@
             })
 
             function chkSelect(){
-                var corp_id = td.eq(1).text();
-                var corpName = td.eq(2).text();
+                var prod_id = td.eq(1).text();
+                var prodName = td.eq(2).text();
+                var prod_bundle = td.eq(3).text();
+                var sell_price = td.eq(4).text();
 
-                opener.document.getElementById("corp_id").value = corp_id;
-                opener.document.getElementById("corps").innerText = corpName;
+                opener.document.getElementById("prod_id").value = prod_id;
+                opener.document.getElementById("goods").innerText = prodName;
+                opener.document.getElementById("goodsunit").innerText = prod_bundle;
+                opener.document.getElementById("goodsprice").innerText = sell_price;
+
+                opener.document.getElementById("prod_idup").value = prod_id;
+                opener.document.getElementById("goodsup").innerText = prodName;
+                opener.document.getElementById("goodsunitup").innerText = prod_bundle;
+                opener.document.getElementById("goodspriceup").innerText = sell_price;
 
                 window.close();
             }
@@ -154,3 +168,4 @@
 
 </body>
 </html>
+

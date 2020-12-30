@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
@@ -42,7 +43,7 @@
                 <table class="table table-bordered" style="width: 50%; margin: auto;">
                     <tr>
                         <td>제품명</td>
-                        <td><input type="text" name="prodName"/>${valid_prodName}</td>
+                        <td><input type="text" name="prodName" value="${product.prodName}"/>${valid_prodName}</td>
                         <form:errors path="prodName"/>
                     </tr>
                     <tr>
@@ -53,35 +54,35 @@
                         <td>거래처</td>
                         <td>
                             <input type="hidden" id="corp_id" name="corp_id">
-                            <span name="corps" id="corps" class="corps">거래처를 등록해주세요</span>
+                            <span name="corps" id="corps" class="corps" >거래처를 등록해주세요</span>
                             <button type="button" class="btn btn-primary" onclick="openWin()">거래처 검색</button>
                         </td>
                     </tr>
                     <tr>
                         <td>단위</td>
-                        <td><input type="text" name="prod_bundle"/>${valid_prod_bundle}</td>
+                        <td><input type="text" name="prod_bundle" value="${product.prod_bundle}"/>${valid_prod_bundle}</td>
                     </tr>
                     <tr>
                         <td>판매가</td>
-                        <td><input type="text" name="sell_price"/>${valid_sell_price}</td>
+                        <td><input type="text" name="sell_price" value="${product.sell_price}"/>${valid_sell_price}</td>
                     </tr>
                     <tr>
                         <td>구매가</td>
-                        <td><input type="text" name="buy_price"/>${valid_buy_price}</td>
+                        <td><input type="text" name="buy_price" value="${product.buy_price}"/>${valid_buy_price}</td>
                     </tr>
                     <tr>
                         <td>카테고리</td>
-                        <td><input type="text" name="prod_catag"/>${valid_prod_catag}</td>
+                        <td><input type="text" name="prod_catag" value="${product.prod_catag}"/>${valid_prod_catag}</td>
                     </tr>
                     <tr>
                         <td>제품 설명</td>
-                        <td><textarea name="prod_explain" cols="40" rows="10"></textarea></td>
+                        <td><textarea name="prod_explain" cols="40" rows="10" ></textarea></td>
                     </tr>
                     <tr>
                         <td>제품 사진</td>
                         <td>
-                            <input type="file" class="form-control" id="image-input-file">
-                            <input type="hidden" id="photo" name="prod_image">
+                            <input type="file" class="form-control" id="image-input-file" >
+                            <input type="hidden" id="photo" name="prod_image" >
                             <img id="profile-image" class="col-md-3 img img-responsive">
                         </td>
 

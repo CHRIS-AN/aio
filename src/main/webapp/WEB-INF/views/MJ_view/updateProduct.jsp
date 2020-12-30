@@ -51,7 +51,7 @@
                         <td>거래처</td>
                         <td>
                             <input type="hidden" id="corp_id" name="corp_id" value="${product.corp.corp_id}">
-                            <span name="corps" id="corps" class="corps">${product.corp.corp_name}</span>
+                            <span name="corps" id="corps" class="corps">${product.corp.corpName}</span>
                             <button type="button" class="btn btn-primary" onclick="openWin()">거래처 검색</button>
                         </td>
                     </tr>

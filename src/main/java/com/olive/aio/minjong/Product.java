@@ -62,6 +62,8 @@ public class Product {
     @Lob
     private String prod_image;
 
+
+    @NotNull
     @ManyToOne
     Empl empl;
 
