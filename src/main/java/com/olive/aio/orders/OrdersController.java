@@ -2,7 +2,6 @@ package com.olive.aio.orders;
 
 import com.olive.aio.corp.CorpService;
 import com.olive.aio.domain.Empl;
-import com.olive.aio.draft.Draft;
 import com.olive.aio.draft.DraftList;
 import com.olive.aio.draft.DraftService;
 import com.olive.aio.employee.CurrentEmpl;
@@ -40,9 +39,8 @@ public class OrdersController {
     @GetMapping("ordersList")
     public String ordersList(Model model, Orders orders){
         List<Orders> ordersList = ordersService.findAll(orders);
-        List<Draft> draftList = draftService.findByOrders(orders.getOrders_id());
         model.addAttribute("orders", ordersList);
-        model.addAttribute("draft", draftList);
+
         return "yeonji/ordersList";
     }
 
@@ -77,5 +75,6 @@ public class OrdersController {
         ordersService.deleteById(orders);
         return "redirect:ordersList";
     }
+
 
 }

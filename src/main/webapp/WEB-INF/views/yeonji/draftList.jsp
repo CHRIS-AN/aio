@@ -32,6 +32,7 @@
 </head>
 <!-- head -->
 <body class="nav-md">
+<%! int i = 0; %>
 <div class="container body">
     <div class="main_container">
 
@@ -106,11 +107,11 @@
                                         <tbody>
                                         <c:set var = "totcnt" value = "0" />
                                         <c:set var = "totprice" value = "0" />
-                                        <c:forEach var="d" items="${draft}">
+                                        <c:forEach var="d" items="${nulldraft}" >
                                             <tr id="tr${d.draft_seq}" onclick="update()" data-toggle="modal" data-target="#updateModal"
                                                 data-draftseq='${d.draft_seq}' data-prodname='${d.product.prodName}' data-prodbundle='${d.product.prod_bundle}'
                                                 data-sellprice='${d.product.sell_price}' data-draftcnt='${d.draft_cnt}' data-draftprodprice='${d.draft_prod_price}' >
-                                                <td>${d.draft_seq}<input type="hidden" name="drafts[0].draft_seq" value="${d.draft_seq}"></td>
+                                                <td><%= i+1 %><input type="hidden" name="drafts[<%= i %>].draft_seq" value="${d.draft_seq}"></td>
                                                 <td>${d.product.prodName}</td>
                                                 <td>${d.product.prod_bundle}</td>
                                                 <td>${d.product.sell_price}</td>
@@ -119,6 +120,7 @@
                                                 <c:set var= "totcnt" value="${totcnt + d.draft_cnt}"/>
                                                 <c:set var= "totprice" value="${totprice + d.draft_prod_price}"/>
                                             </tr>
+                                            <% i++; %>
                                         </c:forEach>
                                         </tbody>
                                         <tfoot>
@@ -127,8 +129,8 @@
                                             <th></th>
                                             <th></th>
                                             <th></th>
-                                            <th>총수량:<c:out value="${totcnt}"/> 개 <input type="hidden" name="orders_cnt" id="orders_cnt" value="${totcnt}"></th>
-                                            <th>총합계:<c:out value="${totprice}"/> 원<input type="hidden" name="orders_totsum" id="orders_totsum" value="${totprice}"></th>
+                                            <th>총수량:${totcnt} 개 <input type="hidden" name="orders_cnt" id="orders_cnt" value="${totcnt}"></th>
+                                            <th>총합계:${totprice} 원<input type="hidden" name="orders_totsum" id="orders_totsum" value="${totprice}"></th>
                                         </tr>
                                         </tfoot>
                                     </table>

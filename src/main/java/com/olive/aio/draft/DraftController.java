@@ -4,6 +4,8 @@ import com.olive.aio.corp.Corp;
 import com.olive.aio.corp.CorpService;
 import com.olive.aio.minjong.Product;
 import com.olive.aio.minjong.ProductService;
+import com.olive.aio.orders.Orders;
+import com.olive.aio.orders.OrdersService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +32,14 @@ public class DraftController {
     @Autowired
     private CorpService corpService;
 
+    @Autowired
+    private OrdersService ordersService;
+
     // 발주물품 목록
     @GetMapping("draftList")
-    public String DraftList(Model model, Draft draft){
-        List<Draft> draftList = draftService.findAll(draft);
-        model.addAttribute("draft", draftList);
+    public String DraftList(Model model, Orders orders){
+        List<Draft> draftList = draftService.findByOrders(orders.getOrders_id());
+        model.addAttribute("nulldraft", draftList);
         return "yeonji/draftList";
     }
 

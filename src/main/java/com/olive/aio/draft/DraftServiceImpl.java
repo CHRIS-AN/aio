@@ -2,6 +2,7 @@ package com.olive.aio.draft;
 
 import com.olive.aio.minjong.Product;
 import com.olive.aio.minjong.ProductRepository;
+import com.olive.aio.orders.Orders;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,7 +46,14 @@ public class DraftServiceImpl implements DraftService {
         draftRepository.deleteById(draft.getDraft_seq());
     }
 
-    public List<Draft> findByOrders(Long orders_id){
-        return draftRepository.findByOrders(orders_id);
+    public List<Draft> findByOrders(Orders orders){
+
+        return draftRepository.findByOrders(orders);
     }
+
+    @Override
+    public List<Draft> findByOrders(Long orders_id) {
+        return (List<Draft>) draftRepository.findByOrders(orders_id);
+    }
+
 }
