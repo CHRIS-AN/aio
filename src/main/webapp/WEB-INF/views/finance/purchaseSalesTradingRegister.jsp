@@ -67,11 +67,11 @@
                                     </div>
 
                                     <div class="col-md-2"></div>
-                                    <h4><strong>&nbsp;&nbsp;&nbsp;&nbsp;작성자명 :&nbsp;&nbsp;</strong></h4>
+                                    <h4><strong> 작성자명 : </strong></h4>
                                     <div class="form-group col-md-3">
                                         <span class="fa far fa-retweet form-control-feedback left"></span>
-                                        <input name="slipWrite" type="text" readonly
-                                               class="form-control has-feedback-left" value="${empl.name}">
+                                        <input name="slipWrite" type="text" readonly style="width: 190px"
+                                               class="form-control has-feedback-left" value="${empl.name} (${empl.emplId})">
                                         <small class="form-text text-danger">
                                                 ${valid_slipWrite}
                                         </small>
