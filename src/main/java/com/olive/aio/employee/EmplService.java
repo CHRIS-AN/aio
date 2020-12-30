@@ -1,6 +1,7 @@
 package com.olive.aio.employee;
 
 import com.olive.aio.MyPage.MyCalendarRepository;
+import com.olive.aio.config.WebAccessDeniedHandler;
 import com.olive.aio.domain.Empl;
 import com.olive.aio.domain.MyCalendar;
 import com.olive.aio.email.EmailMessage;
@@ -12,10 +13,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -36,6 +39,7 @@ public class EmplService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
     private final EmailService emailService;
     private final MyCalendarRepository myCalendarRepository;
+    private final WebAccessDeniedHandler webAccessDeniedHandler;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -50,6 +54,7 @@ public class EmplService implements UserDetailsService {
             role = decideAuth(username, empl, role);
         }
         log.info("role {}", role);
+
         return new UserEmpl(empl, role);
     }
 
@@ -68,31 +73,34 @@ public class EmplService implements UserDetailsService {
     private String decideAuth(String username, Empl empl, String role) {
         String dept;
         if (!username.equals("admin")){
-            dept = empl.getDept();
-            switch (dept) {
-                case "인사":
-                    role = "ROLE_HR";
-                    break;
-                case "제품":
-                    role = "ROLE_PRODUCT";
-                    break;
-                case "영업":
-                    role = "ROLE_SALES";
-                    break;
-                case "물류":
-                    role = "ROLE_LOGISTICS";
-                    break;
-                case "회계":
-                    role = "ROLE_FINANCE";
-                    break;
-                //TODO 각 부서마다 권한을 정해주세요.
-                // 제품 영업 물류 회계
+            if(empl.getWork_state().equals("퇴사")){
+                role = "ROLE_RETIREE";
+            } else {
+                dept = empl.getDept();
+                switch (dept) {
+                    case "인사":
+                        role = "ROLE_HR";
+                        break;
+                    case "제품":
+                        role = "ROLE_PRODUCT";
+                        break;
+                    case "영업":
+                        role = "ROLE_SALES";
+                        break;
+                    case "물류":
+                        role = "ROLE_LOGISTICS";
+                        break;
+                    case "회계":
+                        role = "ROLE_FINANCE";
+                        break;
+                    //TODO 각 부서마다 권한을 정해주세요.
+                    // 제품 영업 물류 회계
+                }
             }
-        } else if (empl.getWork_state().equals("퇴사")) {
-            role = "ROLE_VIEW";
         } else {
             role = "ROLE_ALL";
         }
+
         return role;
     }
 
@@ -121,7 +129,6 @@ public class EmplService implements UserDetailsService {
         }
 
         modelMapper.map(emplForm, byEmplId);
-        loadUserByUsername(byEmplId.getEmplId());
 
         return byEmplId;
     }

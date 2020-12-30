@@ -1,5 +1,6 @@
-package com.olive.aio.MyPage;
+package com.olive.aio.employee.validator;
 
+import com.olive.aio.MyPage.MyCalendarRepository;
 import com.olive.aio.config.WebAccessDeniedHandler;
 import com.olive.aio.domain.Empl;
 import com.olive.aio.employee.UserEmpl;
@@ -15,36 +16,26 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 @Component
 @RequiredArgsConstructor
-public class AttendanceInterceptor implements HandlerInterceptor {
+public class LoginDeniedInterceptor implements HandlerInterceptor {
+
     private final MyCalendarRepository myCalendarRepository;
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (modelAndView != null && isRedirectView(modelAndView) && authentication != null && authentication.getPrincipal() instanceof UserEmpl) {
+        if (modelAndView != null && authentication != null && authentication.getPrincipal() instanceof UserEmpl) {
             Empl empl = ((UserEmpl) authentication.getPrincipal()).getEmpl();
-            checkWorkState(empl);
+            if (empl.getWork_state() != null && empl.getWork_state().equals("퇴사")) {
+                AccessDeniedHandler accessDeniedHandler = new WebAccessDeniedHandler();
+                accessDeniedHandler.handle(request, response, new AccessDeniedException(empl.getEmplId()));
+            }
         }
-    }
-
-    private void checkWorkState(Empl empl) {
-        String now = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE);
-        int count = myCalendarRepository.countByEmplAndAttendanceAndCalWorkDateContains(
-                empl, "출근", now);
-        empl.setGoWork(empl.isGoWork(count));
-        System.out.println("empl gowork: " + empl.isGoWork());
-        count = myCalendarRepository.countByEmplAndAttendanceAndCalWorkDateContains(
-                empl, "퇴근", now);
-        empl.setGoHome(empl.isGoHome(count));
-        System.out.println("empl gohome: " + empl.isGoHome());
     }
 
     private boolean isRedirectView(ModelAndView modelAndView) {

@@ -75,7 +75,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="">
                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="cus-dropdown" aria-expanded="false">
-                        <img th:if="${#strings.isEmpty(empl?.photo)}" src="/images/default-image.png" alt=""><span th:if="${#strings.isEmpty(empl?.name)}" th:text="${empl.name}"></span>
+                        <img th:if="${#strings.isEmpty(empl?.photo)}" src="/images/tiger.png" alt=""><span th:if="${#strings.isEmpty(empl?.name)}" th:text="${empl.name}"></span>
                         <img th:if="${!#strings.isEmpty(empl?.photo)}" th:src="${empl.photo}" alt=""><span th:if="${!#strings.isEmpty(empl?.name)}" th:text="${empl.name}"></span>
                         <span class=" fa fa-angle-down"></span>
                     </a>
