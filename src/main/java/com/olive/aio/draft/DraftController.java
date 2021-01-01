@@ -41,7 +41,7 @@ public class DraftController {
     // 발주물품 목록
     @GetMapping("draftList")
     public String DraftList(Model model, Orders orders){
-        List<Draft> draftList = draftService.findByOrders(orders.getOrders_id());
+        List<Draft> draftList = draftService.findByOrders(orders.getOrdersid());
         model.addAttribute("nulldraft", draftList);
         return "yeonji/draftList";
     }

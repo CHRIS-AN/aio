@@ -14,7 +14,7 @@ public class Derivativelist{
     @GeneratedValue
     private Integer derivListid;
 
-    @NotNull @Column(name = "deriv_ok_confirmcnt")
+    @Column(name = "deriv_ok_confirmcnt", columnDefinition = "Integer default 0")
     private Integer derivokconfirmcnt;
 
     @ManyToOne

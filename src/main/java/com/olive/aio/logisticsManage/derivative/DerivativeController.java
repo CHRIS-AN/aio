@@ -2,11 +2,9 @@ package com.olive.aio.logisticsManage.derivative;
 
 
 import com.olive.aio.domain.Derivative;
-import com.olive.aio.domain.Derivativelist;
-import com.olive.aio.domain.Empl;
-import com.olive.aio.domain.test.Testorders;
+import com.olive.aio.domain.Empl;;
 import com.olive.aio.employee.CurrentEmpl;
-import com.olive.aio.logisticsManage.derivative.form.TestderivInsertForm;
+import com.olive.aio.orders.Orders;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Controller;
@@ -16,16 +14,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
-    @RequestMapping("/logistics")
+@RequestMapping("/logistics")
 public class DerivativeController {
 
     private final DerivativeService derivativeService;
@@ -44,13 +39,11 @@ public class DerivativeController {
     public String derivWaitInsert(@CurrentEmpl Empl empl,Model model, Derivative derivative){
 
         String state = "검수요청";
-        derivative.setDerivstate(state);
+        Long ordersid = derivative.getOrdersid().getOrdersid();
 
-        derivativeService.saveDerivChk(derivative);
+        derivativeService.saveDerivChk(derivative, ordersid, state);
 
-        Integer odersid = derivative.getOrdersid().getTestordersid();
-
-        derivativeService.updateOdersState(odersid, state);
+        derivativeService.updateOdersState(ordersid, state);
 
         viewList(model);
         model.addAttribute("empl", empl);
@@ -64,8 +57,8 @@ public class DerivativeController {
         String state = derivative.getDerivstate();
         derivativeService.derivOkSave(confirmCnt, derivative, state);
 
-        Integer odersid = derivative.getOrdersid().getTestordersid();
-        derivativeService.updateOdersState(odersid, state);
+        long ordersid = derivative.getOrdersid().getOrdersid();
+        derivativeService.updateOdersState(ordersid, state);
 
         viewList(model);
         model.addAttribute("empl", empl);
@@ -77,7 +70,18 @@ public class DerivativeController {
     // ======= 중복코드 메소드 ======
     private void viewList(Model model) {
         String derivWait = "결제완료";
-        List<Testorders> derivWaitList = derivativeService.findByOdersState(derivWait);
+        List<Orders> derivWaitList = derivativeService.findByOdersState(derivWait);
+        List<String> derivTitleList = derivativeService.makeDerivTitleList(derivWait);
+        Map<Orders, String> derivWaitListInTitle = new HashMap<>();
+
+        for (int i = 0 ; i < derivWaitList.size() ;i++){
+            for (int j = 0 ; j < derivTitleList.size() ;j++) {
+                if(i == j) {
+                    derivWaitListInTitle.put(derivWaitList.get(i), derivTitleList.get(j));
+                }
+            }
+        }
+        System.out.println("헐??" + derivWaitListInTitle.toString() + ", 몇개" + derivWaitListInTitle.size());
 
         String derivChk = "검수요청";
         List<Derivative> derivChkList = derivativeService.findByDerivstateA(derivChk);
@@ -85,7 +89,8 @@ public class DerivativeController {
         String derivOk = "입고완료";
         List<Derivative> derivOkList = derivativeService.findByDerivstateD(derivOk);
 
-        model.addAttribute("derivWaitList", derivWaitList);
+//        model.addAttribute("derivWaitList", derivWaitList);
+        model.addAttribute("derivWaitList", derivWaitListInTitle);
         model.addAttribute("derivChkList", derivChkList);
         model.addAttribute("derivOkList", derivOkList);
     }

@@ -60,12 +60,12 @@ public class OrdersServiceImpl implements OrdersService {
 
     @Override
     public Orders getOrders(Orders orders) {
-        return ordersRepository.findById(orders.getOrders_id()).get();
+        return ordersRepository.findById(orders.getOrdersid()).get();
     }
 
     @Override
     public void updateOrders(Orders orders, Long corp_id, Empl empl) {
-        Orders beforeOrders = ordersRepository.findById(orders.getOrders_id()).get();
+        Orders beforeOrders = ordersRepository.findById(orders.getOrdersid()).get();
         Corp beforeCorp = corpRepository.findById(corp_id).get();
         Empl beforeEmpl = emplRepository.findByEmplId(empl.getEmplId());
 
@@ -93,6 +93,6 @@ public class OrdersServiceImpl implements OrdersService {
 
     @Override
     public void deleteById(Orders orders) {
-        ordersRepository.deleteById(orders.getOrders_id());
+        ordersRepository.deleteById(orders.getOrdersid());
     }
 }

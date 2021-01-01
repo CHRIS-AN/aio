@@ -3,8 +3,10 @@
 .mainColor1 { background-color: #372c81; color: #f5f5f5;}
 .mainColor2 { background-color: #6a5acd; color: #f5f5f5;}
 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none; }
 
-/* 모달2 */
 .ListWrap {padding: 10px;}
 
 .modalTileTxt {
@@ -25,18 +27,28 @@
 }
 
 .listTableTitle {margin-bottom: 30px;}
-.listTableTitle table, .listTableProds table{ width: 100%; font-size: 1.2em;}
-.listTableTitle tr, .listTableProds table{ border-top: 2px solid #7f8c8d; border-bottom: 2px solid #7f8c8d;}
+.listTableTitle table, .listTableProds table, .OkList table{ width: 100%; font-size: 1.2em;}
+.listTableTitle tr, .listTableProds table, .OkList table{ border-top: 2px solid #7f8c8d; border-bottom: 2px solid #7f8c8d;}
 .listTableTitle th, .prodHeader { background-color: #a69ce1; color: #f0f0f0; text-align: center;}
+#modal_2 .listTableTitle th,#modal_3 .listTableTitle th
+{ background-color: #a69ce1; color: #f0f0f0; text-align: center; width: 100px;}
 
-.listTableProds {max-height: 500px; overflow: auto;}
-.listTableProds table {text-align: center;}
+.listTableProds, .OkList {max-height: 500px; overflow: auto;}
+.listTableProds table , .OkList table{text-align: center;}
 .headerSticky {position: sticky; top: 0;}
 .resultAll {
     display: flex;
     justify-content: space-between;
-    font-size: 1.3em;
+    font-size: 1.4em;
     font-weight: bold;
+    margin-top: 15px;
 }
-.confirmCntLen {width: 50px;}
-.inspector {float: right; font-size: 1.3em; font-weight: bold;}
+
+.confirmCntLen {width: 55px;}
+
+.inspectorName {
+    float: right;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 15px;
+}
