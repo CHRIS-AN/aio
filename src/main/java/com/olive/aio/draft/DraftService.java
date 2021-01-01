@@ -1,6 +1,5 @@
 package com.olive.aio.draft;
 
-import com.olive.aio.orders.Orders;
 import org.springframework.validation.Errors;
 
 import java.util.List;
@@ -23,9 +22,8 @@ public interface DraftService {
     void deleteDraft(Draft draft);
 
     //발주품목 리스트 뽑기
-    List<Draft> findByOrders(Orders orders);
 
-    List<Draft> findByOrders(Long ordersid);
+    List<Draft> findByOrders(Long orders_id);
 
     Map<String, String> validateHandling(Errors errors);
 

@@ -58,25 +58,25 @@ public class OrdersServiceImpl implements OrdersService {
         log.info("야 insert 서비스 나감");
     }
 
-    @Override
-    public Orders getOrders(Orders orders) {
-        return ordersRepository.findById(orders.getOrdersid()).get();
-    }
-
-    @Override
-    public void updateOrders(Orders orders, Long corp_id, Empl empl) {
-        Orders beforeOrders = ordersRepository.findById(orders.getOrdersid()).get();
-        Corp beforeCorp = corpRepository.findById(corp_id).get();
-        Empl beforeEmpl = emplRepository.findByEmplId(empl.getEmplId());
-
-        beforeOrders.setOrders_regdate(orders.getOrders_regdate());
-
-        beforeOrders.setCorp(beforeCorp);
-        beforeOrders.setEmpl(beforeEmpl);
-        log.info("3");
-
-        ordersRepository.save(beforeOrders);
-    }
+//    @Override
+//    public Orders getOrders(Orders orders) {
+//        return ordersRepository.findById(orders.getOrdersid()).get();
+//    }
+//
+//    @Override
+//    public void updateOrders(Orders orders, Long corp_id, Empl empl) {
+//        Orders beforeOrders = ordersRepository.findById(orders.getOrdersid()).get();
+//        Corp beforeCorp = corpRepository.findById(corp_id).get();
+//        Empl beforeEmpl = emplRepository.findByEmplId(empl.getEmplId());
+//
+//        beforeOrders.setOrders_regdate(orders.getOrders_regdate());
+//
+//        beforeOrders.setCorp(beforeCorp);
+//        beforeOrders.setEmpl(beforeEmpl);
+//        log.info("3");
+//
+//        ordersRepository.save(beforeOrders);
+//    }
 
 //    @Override
 //    public Map<String, String> validateHandling(Errors errors) {

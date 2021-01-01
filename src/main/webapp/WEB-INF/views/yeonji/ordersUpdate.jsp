@@ -92,6 +92,8 @@
                             <%--     발주물품 테이블 row    --%>
                             <div class="row">
                                 <div class="table-responsive">
+                                    <div id="contents" style="width: 100%"></div>
+
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                         <tr>
@@ -106,20 +108,16 @@
                                         <tbody>
                                         <c:set var = "totcnt" value = "0" />
                                         <c:set var = "totprice" value = "0" />
-                                        <c:forEach var="d" items="${nulldraft}">
-                                            <tr id="tr${d.draft_seq}" onclick="update()" data-toggle="modal" data-target="#updateModal"
-                                                data-draftseq='${d.draft_seq}' data-prodname='${d.product.prodName}' data-prodbundle='${d.product.prod_bundle}'
-                                                data-sellprice='${d.product.sell_price}' data-draftcnt='${d.draft_cnt}' data-draftprodprice='${d.draft_prod_price}' >
-                                                <td>${d.draft_seq}</td>
-                                                <td>${d.product.prodName}</td>
-                                                <td>${d.product.prod_bundle}</td>
-                                                <td>${d.product.sell_price}</td>
-                                                <td>${d.draft_cnt}</td>
-                                                <td>${d.draft_prod_price}</td>
+                                            <tr>
+<%--                                                <td>${orders.draft.draft_seq}</td>--%>
+<%--                                                <td>${orders.product.prodName}</td>--%>
+<%--                                                <td>${orders.product.prod_bundle}</td>--%>
+<%--                                                <td>${orders.product.sell_price}</td>--%>
+<%--                                                <td>${orders.draft_cnt}</td>--%>
+<%--                                                <td>${orders.draft_prod_price}</td>--%>
                                                 <c:set var= "totcnt" value="${totcnt + d.draft_cnt}"/>
                                                 <c:set var= "totprice" value="${totprice + d.draft_prod_price}"/>
                                             </tr>
-                                        </c:forEach>
                                         </tbody>
                                         <tfoot>
                                         <tr>
@@ -127,8 +125,8 @@
                                             <th></th>
                                             <th></th>
                                             <th></th>
-                                            <th>총수량:<c:out value="${totcnt}"/> 개 <input type="hidden" name="orders_cnt" id="orders_cnt" value="${totcnt}"></th>
-                                            <th>총합계:<c:out value="${totprice}"/> 원<input type="hidden" name="orders_totsum" id="orders_totsum" value="${totprice}"></th>
+                                            <th>총수량:<span>${orders.orders_cnt}</span> 개 <input type="hidden" name="orders_cnt" id="orders_cnt" value=""></th>
+                                            <th>총합계:<span>${orders.orders_totsum}</span> 원<input type="hidden" name="orders_totsum" id="orders_totsum" value=""></th>
                                         </tr>
                                         </tfoot>
                                     </table>
@@ -150,6 +148,51 @@
         <!-- footer  -->
         <jsp:include page="../layout/footer.jsp" />
         <!-- /footer  -->
+
+        <script>
+            $(document).ready(function() {
+                    $.ajax({
+                        url: "./" + ordersid,
+                        type : "Get",
+                        cache: false,
+                        success: function (data){
+                            console.log(data);
+                            var contentW = "";
+                            var drafts = data.draft;
+                            contentW += "<table class='table table-bordered' width='80%' cellspacing='0' style='text-align: center'>" +
+                                "<td>No.</td>"+
+                                "<td colspan=\"2\">품명</td>"+
+                                "<td>단위</td>"+
+                                "<td>단가</td>"+
+                                "<td>수량</td>"+
+                                "<td>금액</td>"+
+                                "</tr></thead>" +
+                                "<tbody>"
+                            for (var i = 0; i < drafts.length; i++) {
+                                contentW += "<tr>"
+                                // contentW += "<td>" + drafts[i].draft_seq + "</td>"
+                                contentW += "<td>" + (i+1) + "</td>"
+                                contentW += "<td colspan='2'>" + drafts[i].product.prodName + "</td>"
+                                contentW += "<td>" + drafts[i].product.prod_bundle + "</td>"
+                                contentW += "<td>" + drafts[i].product.buy_price + "</td>"
+                                contentW += "<td>" + drafts[i].draft_cnt + "</td>"
+                                contentW += "<td>" + drafts[i].draft_prod_price+ "</td>"
+                                contentW += "</tr>"
+                            }
+                            contentW += "<tr>"+
+                                "<td colspan='4'>합계</td>"+
+                                "<td></td>"+
+                                "<td></td>"+
+                                "<td><span id='orders_totsum'>"+orders_totsum+"</span></td>"+
+                                "</tr>"+
+                                "</tbody></table>"
+                            $("#contents").html(contentW);
+                        }
+                    })
+            });
+
+        </script>
+
 
         <%--  모달 1 : 발주 물품 등록  --%>
         <div class="modal" id="registerModal">
@@ -364,22 +407,22 @@
         <script>
             //발주 물품 수정
             function update() {
-                $('#updateModal').on('show.bs.modal', function (event) {
-                    var draftseq = $(event.relatedTarget).data('draftseq');
-                    var prodName = $(event.relatedTarget).data('prodname');
-                    var prodbundle = $(event.relatedTarget).data('prodbundle');
-                    var sellprice = $(event.relatedTarget).data('sellprice');
-                    var draftcnt = $(event.relatedTarget).data('draftcnt');
-                    var draftprodprice = $(event.relatedTarget).data('draftprodprice');
-
-                    $(this).find("#draftseq").val(draftseq);
-                    $(this).find("#goodsup").text(prodName);
-                    $(this).find("#goodsunitup").text(prodbundle);
-                    $(this).find("#goodspriceup").text(sellprice);
-                    $(this).find("#draftcnt").val(draftcnt);
-                    $(this).find("#goodssum_1").text(draftprodprice);
-                    $(this).find("#goodssum_2").val(draftprodprice);
-                });
+                // $('#updateModal').on('show.bs.modal', function (event) {
+                //     var draftseq = $(event.relatedTarget).data('draftseq');
+                //     var prodName = $(event.relatedTarget).data('prodname');
+                //     var prodbundle = $(event.relatedTarget).data('prodbundle');
+                //     var sellprice = $(event.relatedTarget).data('sellprice');
+                //     var draftcnt = $(event.relatedTarget).data('draftcnt');
+                //     var draftprodprice = $(event.relatedTarget).data('draftprodprice');
+                //
+                //     $(this).find("#draftseq").val(draftseq);
+                //     $(this).find("#goodsup").text(prodName);
+                //     $(this).find("#goodsunitup").text(prodbundle);
+                //     $(this).find("#goodspriceup").text(sellprice);
+                //     $(this).find("#draftcnt").val(draftcnt);
+                //     $(this).find("#goodssum_1").text(draftprodprice);
+                //     $(this).find("#goodssum_2").val(draftprodprice);
+                // });
 
                 $('input.numkeyup2').on('keyup',function(){
                     var cnt = $("input.goodsnumber2").length;
@@ -428,10 +471,10 @@
         <script>
             //삭제하기
             function draftDelete() {
-                $('#deleteModal').on('show.bs.modal', function (event) {
-                    var draftseq = $('#draftseq').val();
-                    $(this).find("#deleteDraftId").val(draftseq);
-                });
+                // $('#deleteModal').on('show.bs.modal', function (event) {
+                //     var draftseq = $('#draftseq').val();
+                //     $(this).find("#deleteDraftId").val(draftseq);
+                // });
             }
         </script>
 

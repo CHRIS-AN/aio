@@ -251,8 +251,7 @@
             }
 
             function updateorders(){
-                location.href = "ordersUpdate?ordersid="+updatelink;
-
+                location.href = "ordersUpdate";
             }
 
             function print(printArea){

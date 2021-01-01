@@ -70,24 +70,24 @@ public class OrdersController {
         return "redirect:ordersList";
     }
 
-    // 발주 수정페이지에 값 넣기
-    @GetMapping("ordersUpdate")
-    public String orderUpdatePage(Orders orders, Model model){
-        Orders orders1 = ordersService.getOrders(orders);
-        log.info("야 :{}", orders1.toString());
-        model.addAttribute("orders", orders1);
-
-        return "yeonji/ordersUpdate";
-    }
-
-    // 발주 수정 submit
-    @PostMapping("ordersUpdate")
-    public String orderUpdate(@Valid Orders orders, Errors errors, @CurrentEmpl Empl empl, Long corp_id){
-
-        ordersService.updateOrders(orders, corp_id, empl);
-
-        return "redirect:ordersList";
-    }
+//    // 발주 수정페이지에 값 넣기
+//    @GetMapping("ordersUpdate")
+//    public String orderUpdatePage(Orders orders, Model model){
+//        List<Draft> draftList = draftService.findByOrders(orders.getOrdersid());
+//        model.addAttribute("nulldraft", draftList);
+//
+//        model.addAttribute("orders", ordersService.getOrders(orders));
+//        return "yeonji/ordersUpdate";
+//    }
+//
+//    // 발주 수정 submit
+//    @PostMapping("ordersUpdate")
+//    public String orderUpdate(@Valid Orders orders, Errors errors, @CurrentEmpl Empl empl, Long corp_id){
+//
+//        ordersService.updateOrders(orders, corp_id, empl);
+//
+//        return "redirect:ordersList";
+//    }
 
     // 발주 삭제
     @PostMapping("ordersDelete")
