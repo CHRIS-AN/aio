@@ -52,7 +52,7 @@
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <div style="float:left">
-                            <h3 class="m-0 font-weight-bold text-primary">발주서 작성</h3>
+                            <h1 class="m-0 font-weight-bold text-primary pl-3">발주서 작성</h1>
                         </div>
                         <div style="float: right">
                             <button type="button" class="btn btn-primary" onclick="location.href='ordersList'">뒤로가기
@@ -64,15 +64,15 @@
                         <form id="corpSelectForm" action="ordersInsert" method="post">
                             <%--     거래처 등록 row    --%>
                             <div class="row p-4 bg-gray-200 m-2">
-                                <div class="col-md-3">
-                                    <label>거래처</label>
+                                <div class="col-md-3 col-xs-4 m-auto">
+                                    <label class="h3 m-auto"><strong>거래처</strong></label>
                                 </div>
-                                <div class="col-md-7">
-                                    <span id="corpname"> 거래처를 등록해주세요.</span>
-                                    <input type="hidden" name="corp_id" id="corp_id"/>
+                                <div class="col-md-7 col-xs-6 m-auto">
+                                    <span id="corpname" class="h4"> 거래처를 등록해주세요.</span>
+                                    <input type="hidden" name="corp_id" id="corp_id" />
                                 </div>
-                                <div class="col-md-2">
-                                    <button type="button" class="btn btn-primary" onclick="openWinCorp()">
+                                <div class="col-md-2 m-auto">
+                                    <button type="button" class="btn btn-primary h4 m-auto" onclick="openWinCorp()">
                                         거래처 검색
                                     </button>
                                 </div>
@@ -81,22 +81,20 @@
                             <div class="row p-3">
                                 <div class="col-md-11">
                                     <div style="float:left" class="p-1">
-                                        <label>납기일:</label>
-                                        <input type="date" name="orders_regdate" id="orders_regdate"/>
+                                        <label class="h4 m-auto pl-3 pr-2"><strong>납기일:</strong></label>
+                                        <input type="date" name="orders_regdate" id="orders_regdate" class="m-auto pl-2"/>
                                     </div>
                                 </div>
                                 <div class="col-md-1">
-                                    <div style="float: right" class="p-1">
-                                        <button type="button" name="registerModalBtn" class="btn btn-primary"
-                                                data-toggle="modal"
-                                                data-target="#registerModal">+
-                                        </button>
+                                    <div  style="float: right" class="m-auto pr-3">
+                                        <button type="button" name="registerModalBtn" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#registerModal">+</button>
                                     </div>
                                 </div>
                             </div>
                             <%--     발주물품 테이블 row    --%>
                             <div class="row">
-                                <div class="table-responsive">
+                                <div class="table-responsive pt-1">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                         <tr>
@@ -199,74 +197,70 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
-                                <div class="x_title cus-title">
-                                    <h2> 발주 물품 등록 </h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </ul>
-                                    <div class="clearfix"></div>
+                                <div class="modal-header">
+                                    <h1 class="modal-title font-weight-bold text-primary pl-3"> 발주 물품 등록 </h1>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
-                                <div class="x_content">
+                                <div class="x_content pt-3">
                                     <form action="draftInsert" method="post" class="form needs-validation">
                                         <div class="row">
-                                            <div class="form-group has-feedback col-md-3 com-sm-3">
-                                                <label>발주 물품</label>
+                                            <div class="form-group has-feedback col-md-3">
+                                                <label class="h3 text-dark m-auto font-weight-bold">발주 물품</label>
                                             </div>
-                                            <div class="form-group has-feedback col-md-6 com-sm-6">
-                                                <span name="goods" id="goods" class="goods">물품을 등록해주세요</span>
+                                            <div class="form-group has-feedback col-md-6">
+                                                <span name="goods" id="goods" class="goods m-auto" >물품을 등록해주세요</span>
                                                 <input type="hidden" id="prod_id" name="prod_id">
                                             </div>
-                                            <div class="form-group col-md-3 com-sm-3">
-                                                <button type="button" class="btn btn-primary goodsSearch"
-                                                        onclick="openWin()">
+                                            <div class="form-group col-md-3">
+                                                <button type="button" class="btn btn-primary goodsSearch" onclick="openWin()">
                                                     물품 검색
                                                 </button>
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="form-group has-feedback col-md-3 com-sm-3">
-                                                <label>단위</label>
+                                            <div class="form-group has-feedback col-md-3">
+                                                <label class="h3 text-dark m-auto font-weight-bold">단위</label>
                                             </div>
-                                            <div class="form-group has-feedback col-md-9 com-sm-9">
-                                                <span name="goodsunit" id="goodsunit" class="goodsunit">정보 없음</span>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="form-group has-feedback col-md-3 com-sm-3">
-                                                <label>가격</label>
-                                            </div>
-                                            <div class="form-group has-feedback col-md-9 com-sm-9">
-                                                <span name="goodsprice" id="goodsprice" class="goodsprice">정보 없음</span>
+                                            <div class="form-group has-feedback col-md-9">
+                                                <span name="goodsunit" id="goodsunit" class="goodsunit" >정보 없음</span>
+                                                <span>${valid_goodsunit}</span>
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="form-group has-feedback col-md-3 com-sm-3">
-                                                <label>수량</label>
+                                            <div class="form-group has-feedback col-md-3">
+                                                <label class="h3 text-dark m-auto font-weight-bold">가격</label>
                                             </div>
-                                            <div class="form-group has-feedback col-md-9 com-sm-9">
-                                                <input type="text" name="draft_cnt" value=""
-                                                       class="form-control goodsnumber numkeyup"
-                                                       placeholder="수량을 입력해주세요" required>
-                                                <span>${valid_draft_cnt}</span>
+                                            <div class="form-group has-feedback col-md-9">
+                                                <span name="goodsprice" id="goodsprice" class="goodsprice" >정보 없음</span>
+                                                <span>${valid_goodsprice}</span>
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="form-group has-feedback col-md-3 com-sm-3">
-                                                <label>합계</label>
+                                            <div class="form-group has-feedback col-md-3">
+                                                <label class="h3 text-dark m-auto font-weight-bold">수량</label>
                                             </div>
-                                            <div class="form-group has-feedback col-md-9 com-sm-9">
-                                                <span class="goodssum">0</span>
-                                                <input type="hidden" name="draft_prod_price" value=""
-                                                       class="form-control goodssum" id="amount">
+                                            <div class="form-group has-feedback col-md-9">
+                                                <input type="text" name="draft_cnt" value="" class="form-control goodsnumber numkeyup" placeholder="수량을 입력해주세요" required>
+                                                <span>${valid_draft_}</span>
                                             </div>
                                         </div>
 
-                                        <div class="form-group text-center has-feedback col-md-12 com-sm-12">
-                                            <button type="submit" id="submit" class="btn btn-primary">등록</button>
+                                        <div class="row">
+                                            <div class="form-group has-feedback col-md-3">
+                                                <label class="h3 text-dark m-auto font-weight-bold">합계</label>
+                                            </div>
+                                            <div class="form-group has-feedback col-md-9">
+                                                <span class="goodssum" >0</span>
+                                                <input type="hidden" name="draft_prod_price" value="" class="form-control goodssum" id="amount" >
+                                                <span>${valid_amount}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group text-center has-feedback col-md-12">
+                                            <button type="submit"class="btn btn-primary">등록</button>
                                         </div>
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     </form>
@@ -329,22 +323,19 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
-                                <div class="x_title cus-title">
-                                    <h2> 발주 물품 수정 </h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </ul>
-                                    <div class="clearfix"></div>
+                                <div class="modal-header">
+                                    <h1 class="modal-title font-weight-bold text-primary pl-3"> 발주 물품 수정 </h1>
+                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
-                                <div class="x_content">
+                                <div class="x_content pt-3">
                                     <form action="draftUpdate" method="post" class="form needs-validation">
                                         <input type="hidden" name="draft_seq" id="draftseq">
                                         <div class="row">
                                             <div class="form-group has-feedback col-md-3 com-sm-3">
-                                                <label>발주 물품</label>
+                                                <label class="h3 text-dark m-auto font-weight-bold">발주 물품</label>
                                             </div>
                                             <div class="form-group has-feedback col-md-6 com-sm-6">
-                                                <span name="goods" class="goods" id="goodsup">물품을 등록해주세요</span>
+                                                <span name="goods" class="goods m-auto" id="goodsup">물품을 등록해주세요</span>
                                                 <input type="hidden" id="prod_idup" name="prod_id">
                                                 <span>${valid_goods}</span>
                                             </div>
@@ -358,7 +349,7 @@
 
                                         <div class="row">
                                             <div class="form-group has-feedback col-md-3 com-sm-3">
-                                                <label>단위</label>
+                                                <label class="h3 text-dark m-auto font-weight-bold">단위</label>
                                             </div>
                                             <div class="form-group has-feedback col-md-9 com-sm-9">
                                                 <span name="goodsunit" class="goodsunit" id="goodsunitup">정보 없음</span>
@@ -368,7 +359,7 @@
 
                                         <div class="row">
                                             <div class="form-group has-feedback col-md-3 com-sm-3">
-                                                <label>가격</label>
+                                                <label class="h3 text-dark m-auto font-weight-bold">가격</label>
                                             </div>
                                             <div class="form-group has-feedback col-md-9 com-sm-9">
                                                 <span name="goodsprice" class="goodsprice2"
@@ -379,7 +370,7 @@
 
                                         <div class="row">
                                             <div class="form-group has-feedback col-md-3 com-sm-3">
-                                                <label>수량</label>
+                                                <label class="h3 text-dark m-auto font-weight-bold">수량</label>
                                             </div>
                                             <div class="form-group has-feedback col-md-9 com-sm-9">
                                                 <input type="text" name="draft_cnt" id="draftcnt"
@@ -391,7 +382,7 @@
 
                                         <div class="row">
                                             <div class="form-group has-feedback col-md-3 com-sm-3">
-                                                <label>합계</label>
+                                                <label class="h3 text-dark m-auto font-weight-bold">합계</label>
                                             </div>
                                             <div class="form-group has-feedback col-md-9 com-sm-9">
                                                 <span id="goodssum_1" class="goodssum2" placeholder="0"></span>
@@ -402,10 +393,9 @@
                                         </div>
 
                                         <div class="form-group text-center has-feedback col-md-12 com-sm-12">
-                                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                    data-target="#deleteModal" onclick="draftDelete()">삭제
-                                            </button>
-                                            <button type="submit" class="btn btn-primary">수정</button>
+                                            <button type="button"class="btn btn-danger" data-toggle="modal"
+                                                    data-target="#deleteModal" onclick="draftDelete()">삭제</button>
+                                            <button type="submit"class="btn btn-warning">수정</button>
                                         </div>
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     </form>

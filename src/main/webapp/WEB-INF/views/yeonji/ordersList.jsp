@@ -48,7 +48,7 @@
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <div style="float:left">
-                            <h3 class="m-0 font-weight-bold text-primary">발주 조회</h3>
+                            <h1 class="m-0 font-weight-bold text-primary pl-3">발주 조회</h1>
                         </div>
                         <div style="float: right">
                             <button type="button" class="btn btn-primary" onclick="location.href='draftList'">발주서 작성</button>
@@ -118,10 +118,10 @@
                     <div class="modal-header">
                         <div class="col-sm-12">
                             <div style="float:left">
-                                <h4 class="modal-title">발주서</h4>
+                                <h2 class="modal-title font-weight-bold text-primary pl-3">발주서</h2>
                             </div>
                             <div style="float: right">
-                                <button type="button" class="btn btn-primary" onclick="print(document.getElementById('modalbody').innerHTML)">인쇄</button>
+                                <button type="button" class="btn btn-dark" onclick="print(document.getElementById('modalbody').innerHTML)">인쇄</button>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                         </div>
@@ -133,8 +133,7 @@
                             <div class="col-sm-12">
                                 <div class="text-center">
                                     <h1>발주서</h1>
-                                    <p></p>
-                                    <p></p>
+                                    <br><br>
                                 </div>
                                 <div class="row">
                                     <table class="table table-bordered" width="80%" cellspacing="0" style="text-align: center">
@@ -180,9 +179,8 @@
                     </div>
                     <!-- Modal footer -->
                     <div class="form-group text-center has-feedback col-md-12 com-sm-12">
-                        <input type="button" class="btn btn-primary" value="삭제" id="ordersDelete"  data-toggle="modal"
+                        <input type="button" class="btn btn-danger" value="삭제" id="ordersDelete"  data-toggle="modal"
                                data-target="#deleteModal" onclick="ordersDelete()">
-                        <input type="button" class="btn btn-primary" value="수정" onclick="updateorders()">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     </div>
                     <p></p>
@@ -196,7 +194,6 @@
             function detail(ordersid,corpName,empl_name,orders_regdate,orders_cnt,orders_totsum,corp_ceo,corp_call,corp_address){
                 updatelink = ordersid;
                 $('#detailModal').on('show.bs.modal', function (event) {
-
 
                     $.ajax({
                         url: "./" + ordersid,
@@ -243,15 +240,11 @@
                     $(this).find("#empl_name").text(empl_name);
                     $(this).find("#orders_regdate").text(orders_regdate);
                     $(this).find("#orders_cnt").text(orders_cnt);
-                    // $(this).find("#orders_totsum").text(orders_totsum);
+                    $(this).find("#orders_totsum").text(orders_totsum);
                     $(this).find("#corp_ceo").text(corp_ceo);
                     $(this).find("#corp_call").text(corp_call);
                     $(this).find("#corp_address").text(corp_address);
                 });
-            }
-
-            function updateorders(){
-                location.href = "ordersUpdate";
             }
 
             function print(printArea){
@@ -266,6 +259,7 @@
                 win.document.write('<link href="/node_modules/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">\n');
                 win.document.write('<link href="/css/sb-admin-2.min.css" rel="stylesheet"></head>');
                 win.document.write('<body class="nav-md modal-open" cz-shortcut-listen="true">');
+                win.document.write('<br><br><br><br>');
                 win.document.write(printArea);
                 win.document.write('</body></html>');
 
@@ -285,14 +279,14 @@
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">발주 삭제</h4>
+                        <h2 class="modal-title font-weight-bold text-primary pl-3">발주 삭제</h2>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
 
                     <!-- Modal body -->
                     <div class="modal-body">
                         <form action="ordersDelete" method="post">
-                            정말 삭제하시겠습니까?
+                            <p class="h3 text-dark pl-3">정말 삭제하시겠습니까?</p>
                             <input type="hidden" id="deleteOrdersId" name="ordersid" value="">
                             <div class="modal-footer">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
