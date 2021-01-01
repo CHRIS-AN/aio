@@ -1,7 +1,8 @@
 package com.olive.aio.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.olive.aio.domain.test.Testorders;
+
+import com.olive.aio.orders.Orders;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,7 +26,10 @@ public class Derivative {
     @NotNull
     @Column(name = "deriv_regdate")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date derivregdate;
+    private String derivregdate;
+
+    @Column(name = "deriv_title")
+    private String derivtitle;
 
     @NotBlank
     @Column(name = "deriv_state")
@@ -43,9 +47,9 @@ public class Derivative {
 
     @OneToOne
     @JoinColumn(name = "orders_id")
-    private Testorders ordersid;
+    private Orders ordersid;
 
-    @OneToMany(mappedBy = "derivativeid", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "derivativeid", fetch = FetchType.EAGER)
     @JsonManagedReference
     private Set<Derivativelist> derivlistid = new HashSet<>();
 

@@ -28,7 +28,8 @@ public class Orders implements Serializable {
 
     @Id //기본 키 매핑 어노테이션. 필수사항
     @GeneratedValue //id가 선언된 필드에 기본 키 값을 자동으로 할당 (Default : AUTO)
-    private Long orders_id; //발주번호
+    @Column(name = "orders_id")
+    private Long ordersid; //발주번호
 
     @NotNull //null과 "", " " 허용안함
     private int orders_cnt; //총수량
@@ -39,13 +40,14 @@ public class Orders implements Serializable {
     private String orders_regdate; //납기일자
 
     @NotNull //null과 "" 허용안함
-    private String orders_state; //상태
+    @Column(name = "orders_state")
+    private String ordersstate; //상태
 
     @NotNull
     private int orders_totsum; //총금액
 
     @ManyToOne
-    @JsonBackReference
+    @JsonManagedReference
     Corp corp;
 
     @ManyToOne
