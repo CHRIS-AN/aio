@@ -135,7 +135,7 @@
                                 </div>
                             </div>
                             <div class="row text-center">
-                                    <input type="hidden" name="orders_state" id="orders_state" value="결제 대기">
+                                    <input type="hidden" name="ordersstate" id="ordersstate" value="결제 대기">
                                 <div class="col-md-12">
                                     <button type="submit"class="btn btn-primary" >발주요청수정</button>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />

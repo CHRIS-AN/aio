@@ -81,17 +81,17 @@
                                 </tfoot>
                                 <tbody>
                                 <c:forEach var="o" items="${orders}">
-                                    <tr  id="tr${o.orders_id}"  data-toggle="modal" data-target="#detailModal"
-                                         onclick="detail('${o.orders_id}','${o.corp.corpName}','${o.empl.name}','${o.orders_regdate}',
+                                    <tr  id="tr${o.ordersid}"  data-toggle="modal" data-target="#detailModal"
+                                         onclick="detail('${o.ordersid}','${o.corp.corpName}','${o.empl.name}','${o.orders_regdate}',
                                                  '${o.orders_cnt}','${o.orders_totsum}','${o.corp.corp_ceo}','${o.corp.corp_call}',
                                                  '${o.corp.corp_address}')">
-                                        <td>${o.orders_id}</td>
+                                        <td>${o.ordersid}</td>
                                         <td>${o.corp.corpName}</td>
                                         <td>${o.empl.name}</td>
                                         <td>${o.orders_regdate}</td>
                                         <td>${o.orders_cnt}</td>
                                         <td>${o.orders_totsum}</td>
-                                        <td>${o.orders_state}</td>
+                                        <td>${o.ordersstate}</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -140,7 +140,7 @@
                                     <table class="table table-bordered" width="80%" cellspacing="0" style="text-align: center">
                                         <tr>
                                             <td>발주번호</td>
-                                            <td colspan="2"><span id="orders_id"></span></td>
+                                            <td colspan="2"><span id="ordersid"></span></td>
                                             <td>납기일</td>
                                             <td><span id="orders_regdate"></span></td>
                                         </tr>
@@ -193,13 +193,13 @@
 
         <script>
             var updatelink;
-            function detail(orders_id,corpName,empl_name,orders_regdate,orders_cnt,orders_totsum,corp_ceo,corp_call,corp_address){
-                updatelink = orders_id;
+            function detail(ordersid,corpName,empl_name,orders_regdate,orders_cnt,orders_totsum,corp_ceo,corp_call,corp_address){
+                updatelink = ordersid;
                 $('#detailModal').on('show.bs.modal', function (event) {
 
 
                     $.ajax({
-                        url: "./" + orders_id,
+                        url: "./" + ordersid,
                         type : "Get",
                         cache: false,
                         success: function (data){
@@ -238,7 +238,7 @@
                     })
 
 
-                    $(this).find("#orders_id").text(orders_id);
+                    $(this).find("#ordersid").text(ordersid);
                     $(this).find("#corpName").text(corpName);
                     $(this).find("#empl_name").text(empl_name);
                     $(this).find("#orders_regdate").text(orders_regdate);
@@ -251,7 +251,7 @@
             }
 
             function updateorders(){
-                location.href = "ordersUpdate?orders_id="+updatelink;
+                location.href = "ordersUpdate?ordersid="+updatelink;
 
             }
 
@@ -294,7 +294,7 @@
                     <div class="modal-body">
                         <form action="ordersDelete" method="post">
                             정말 삭제하시겠습니까?
-                            <input type="hidden" id="deleteOrdersId" name="orders_id" value="">
+                            <input type="hidden" id="deleteOrdersId" name="ordersid" value="">
                             <div class="modal-footer">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                 <button type="submit"class="btn btn-primary">확인</button>
@@ -308,8 +308,8 @@
             //삭제하기
             function ordersDelete() {
                 $('#deleteModal').on('show.bs.modal', function (event) {
-                    var orders_id = $('#orders_id').text();
-                    $(this).find("#deleteOrdersId").val(orders_id);
+                    var ordersid = $('#ordersid').text();
+                    $(this).find("#deleteOrdersId").val(ordersid);
                 });
             }
         </script>

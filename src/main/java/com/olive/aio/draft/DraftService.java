@@ -25,7 +25,7 @@ public interface DraftService {
     //발주품목 리스트 뽑기
     List<Draft> findByOrders(Orders orders);
 
-    List<Draft> findByOrders(Long orders_id);
+    List<Draft> findByOrders(Long ordersid);
 
     Map<String, String> validateHandling(Errors errors);
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface DraftRepository extends JpaRepository<Draft,Long> {
-    List<Draft> findByOrders(Orders orders_id);
+    List<Draft> findByOrders(Orders ordersid);
 
-    List<Draft> findByOrders(Long orders_id);
+    List<Draft> findByOrders(Long ordersid);
 }

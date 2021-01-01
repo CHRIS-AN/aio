@@ -21,9 +21,9 @@ public class OrdersRestController {
     @Autowired
     private OrdersRepository ordersRepository;
 
-    @GetMapping("{orders_id}")
-    public Orders ordersId (@PathVariable Long orders_id){
-        return ordersRepository.findById(orders_id).get();
+    @GetMapping("{ordersid}")
+    public Orders ordersId (@PathVariable Long ordersid){
+        return ordersRepository.findById(ordersid).get();
     }
 
 }

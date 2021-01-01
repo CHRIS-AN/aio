@@ -62,8 +62,8 @@ public class DraftServiceImpl implements DraftService {
     }
 
     @Override
-    public List<Draft> findByOrders(Long orders_id) {
-        return (List<Draft>) draftRepository.findByOrders(orders_id);
+    public List<Draft> findByOrders(Long ordersid) {
+        return (List<Draft>) draftRepository.findByOrders(ordersid);
     }
 
     @Override

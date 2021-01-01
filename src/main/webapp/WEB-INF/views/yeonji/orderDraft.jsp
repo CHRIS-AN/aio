@@ -18,7 +18,7 @@
                 <table class="table table-bordered" width="80%" cellspacing="0" style="text-align: center">
                     <tbody><tr>
                         <td>발주번호</td>
-                        <td colspan="2"><span id="orders_id">1</span></td>
+                        <td colspan="2"><span id="ordersid">1</span></td>
                         <td>납기일</td>
                         <td><span id="orders_regdate">2020-12-28 21:11:40</span></td>
                     </tr>
@@ -116,7 +116,7 @@
         <table class="table table-bordered" width="80%" cellspacing="0" style="text-align: center">
             <tbody><tr>
                 <td>발주번호</td>
-                <td colspan="2"><span id="orders_id">56</span></td>
+                <td colspan="2"><span id="ordersid">56</span></td>
                 <td>납기일</td>
                 <td><span id="orders_regdate">2020-12-03 00:00:00</span></td>
             </tr>
