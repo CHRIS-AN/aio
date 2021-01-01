@@ -29,9 +29,11 @@ public class DraftServiceImpl implements DraftService {
 
     @Override
     public void insertDraft(Draft draft, Long prod_id) {
+        log.info("5");
         Product product = productRepository.findById(prod_id).get();
         draft.setProduct(product);
         draftRepository.save(draft);
+        log.info("6");
     }
 
     @Override

@@ -36,8 +36,8 @@ public class ProductServiceImpl implements ProductService {
     public void insertProduct(Product product, Long corp_id) {
 
         Corp corp = corpRepo.findById(corp_id).get();
-       product.setCorp(corp);
-       productRepo.save(product);
+        product.setCorp(corp);
+        productRepo.save(product);
 
     }
 
@@ -50,7 +50,7 @@ public class ProductServiceImpl implements ProductService {
     public void updateProduct(Product product, Long corp_id, Empl empl) {
         Product beforeProduct = productRepo.findById(product.getProd_id()).get();
         Corp beforeCorp = corpRepo.findById(corp_id).get();
-        Empl beforeEmpl = emplRepo.findByEmplId(empl.getEmplId());      
+        Empl beforeEmpl = emplRepo.findByEmplId(empl.getEmplId());
 
 
         beforeProduct.setProdName(product.getProdName());
