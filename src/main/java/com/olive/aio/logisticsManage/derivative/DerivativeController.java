@@ -2,11 +2,10 @@ package com.olive.aio.logisticsManage.derivative;
 
 
 import com.olive.aio.domain.Derivative;
-import com.olive.aio.domain.Empl;;
+import com.olive.aio.domain.Empl;
 import com.olive.aio.employee.CurrentEmpl;
 import com.olive.aio.orders.Orders;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+;
 
 @Controller
 @RequiredArgsConstructor

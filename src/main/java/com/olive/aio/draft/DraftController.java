@@ -43,28 +43,27 @@ public class DraftController {
     public String DraftList(Model model, Orders orders){
         List<Draft> draftList = draftService.findByOrders(orders.getOrdersid());
         model.addAttribute("nulldraft", draftList);
+
         return "yeonji/draftList";
     }
 
     // 발주물품 등록
     @PostMapping("draftInsert")
     public String draftInsert(@Valid Draft draft, Errors errors, Long prod_id, Model model){
-
+        log.info("1");
         if (errors.hasErrors()) {
-
+            log.info("2");
             //제품 등록 실패시, 입력 데이터를 유지
             model.addAttribute("draft", draft);
-
+            log.info("3");
             //유효성 통과 못한 필드와 메시지를 핸들링
             Map<String, String> validatorResult = draftService.validateHandling(errors);
             for (String key : validatorResult.keySet()) {
                 model.addAttribute(key, validatorResult.get(key));
             }
-
+            log.info("4");
             return "yeonji/draftList";
-
         }
-
 
         draftService.insertDraft(draft, prod_id);
         return "redirect:draftList";

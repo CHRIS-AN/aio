@@ -379,19 +379,18 @@
         </div>
         <script>
             //유효성 검사 에러 시 바로 모달 창 띄우기
-            if(${not empty error}){
-                $( document ).ready(function() {
-                    $("#modal_1").modal('show');
-                });
+            <%--if(${not empty error}){--%>
+            <%--    $( document ).ready(function() {--%>
+            <%--        $("#modal_1").modal('show');--%>
+            <%--    });--%>
 
-            }
+            <%--}--%>
 
-            if(${not empty error2}){
-                $( document ).ready(function() {
-                    $("#modal_3").modal('show');
-                });
-
-            }
+            <%--if(${not empty error2}){--%>
+            <%--    $( document ).ready(function() {--%>
+            <%--        $("#modal_3").modal('show');--%>
+            <%--    });--%>
+            <%--}--%>
 
             //삭제하기
             function corpDelete() {

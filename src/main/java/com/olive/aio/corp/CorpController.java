@@ -53,7 +53,6 @@ public class CorpController {
             //모달 창 바로 뜨게 하기 위한 model
             model.addAttribute("error","error");
 
-
             //유효성 통과 못한 필드와 메시지를 핸들링
             Map<String, String> validatorResult = corpService.validateHandling(errors);
             for (String key : validatorResult.keySet()) {
@@ -72,26 +71,25 @@ public class CorpController {
     // 거래처 수정
     @PostMapping("corpUpdate")
     public String corpUpdate(@CurrentEmpl Empl empl, @Valid Corp corp, Errors errors,  Model model) {
-
+        log.info("1");
         if (errors.hasErrors()) {
 
             model.addAttribute("corpError2", corp);
-
+            log.info("2");
             //제품 등록 실패시, 입력 데이터를 유지
             List<Corp> corpList = corpService.findAll(corp);
             model.addAttribute("corp", corpList);
-
+            log.info("3");
             //모달 창 바로 뜨게 하기 위한 model
             model.addAttribute("error2","error");
-
+            log.info("4");
             //유효성 통과 못한 필드와 메시지를 핸들링
             Map<String, String> validatorResult = corpService.validateHandling(errors);
             for (String key : validatorResult.keySet()) {
                 model.addAttribute(key, validatorResult.get(key));
             }
-
+            log.info("5");
             return "yeonji/corpList";
-
         }
 
         corpService.updateCorp(corp, empl);
