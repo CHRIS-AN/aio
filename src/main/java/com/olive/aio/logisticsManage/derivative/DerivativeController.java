@@ -46,22 +46,22 @@ public class DerivativeController {
         derivativeService.updateOdersState(ordersid, state);
 
         viewList(model);
-        model.addAttribute("empl", empl);
+        model.addAttribute("nowEmpl", empl);
 
         return "redirect:/logistics/derivative";
     }
 
     @PostMapping("/deirvConfirm")
-    public String derivConfirmUpdate(@CurrentEmpl Empl empl, Model model, @ModelAttribute ConfirmCnt confirmCnt, Derivative derivative) throws Exception{
+    public String derivConfirmUpdate(@CurrentEmpl Empl empl, Model model, @ModelAttribute ConfirmCntD confirmCntD, Derivative derivative) throws Exception{
 
         String state = derivative.getDerivstate();
-        derivativeService.derivOkSave(confirmCnt, derivative, state);
+        derivativeService.derivOkSave(confirmCntD, derivative, state);
 
         long ordersid = derivative.getOrdersid().getOrdersid();
         derivativeService.updateOdersState(ordersid, state);
 
         viewList(model);
-        model.addAttribute("empl", empl);
+        model.addAttribute("nowEmpl", empl);
 
         return "redirect:/logistics/derivative";
     }
@@ -81,7 +81,6 @@ public class DerivativeController {
                 }
             }
         }
-        System.out.println("헐??" + derivWaitListInTitle.toString() + ", 몇개" + derivWaitListInTitle.size());
 
         String derivChk = "검수요청";
         List<Derivative> derivChkList = derivativeService.findByDerivstateA(derivChk);
@@ -89,7 +88,6 @@ public class DerivativeController {
         String derivOk = "입고완료";
         List<Derivative> derivOkList = derivativeService.findByDerivstateD(derivOk);
 
-//        model.addAttribute("derivWaitList", derivWaitList);
         model.addAttribute("derivWaitList", derivWaitListInTitle);
         model.addAttribute("derivChkList", derivChkList);
         model.addAttribute("derivOkList", derivOkList);
