@@ -23,6 +23,8 @@ function addId(tableId) {
     $("#tableScript").html(tableScript);
 }
 
+// ======= 입고대기 =======
+
 function regist_deriv() {
     $('#modal_1').on('show.bs.modal', function (event) {
         let ordersid = $(event.relatedTarget).data('ordersid');
@@ -50,6 +52,11 @@ function registChkSubmit() {
     return true;
 } // registChkSubmit() END
 
+// ======= 입고대기 END =======
+
+
+// ======= 검수요청 =======
+
 function confirm_deriv(derivid, emplId, emplDept) {
 
     $.ajax({
@@ -62,7 +69,7 @@ function confirm_deriv(derivid, emplId, emplDept) {
     })
 } // confirm_deriv() END
 
-function derivChkList(data,  emplId, emplDept){
+function derivChkList(data, emplId, emplDept){
 
     var contentW = "";
     var drafts = data.ordersid.draft;
@@ -78,7 +85,6 @@ function derivChkList(data,  emplId, emplDept){
     $("#modal_2_2").text(derivregdate);
     $("#modal_2_3").text(derivordersid);
     $("#modal_2_4").text(derivcorpname);
-    $("#modal_2_5").text(derivtotcnt);
     $("#derivid").val(derivid);
     $("#ordersidParam").val(derivordersid);
 
@@ -137,7 +143,7 @@ function onlyNum(event) {
         || event.keyCode == 8)) {
         return false;
     }
-}
+} // onlyNum() END
 
 function sum(){
 
@@ -190,11 +196,16 @@ function confirmOnSubmit() {
         return false;
     }
 
-    var totalDerivCnt = $(".totalDerivCnt").val();
+    var totalDerivCnt = $(".totalDerivCnt").eq('0').text();
     $("#derivokconfirmtotcnt").val(totalDerivCnt);
 
     return true;
 } // registChkSubmit() END
+
+// ======= 검수요청 END =======
+
+
+// ======= 입고완료 =======
 
 function derivOkModal(derivid) {
 
@@ -203,46 +214,62 @@ function derivOkModal(derivid) {
         type: "GET",
         cache: false,
         success: function (data) {
-            var contentW = "";
-            var drafts = data.ordersid.draftseq;
-
-            var derivid = data.derivid;
-            var derividStr = "입고번호 : D" + derivid;
-            var derivregdate = "입고일 : " + data.derivregdate;
-            var derivcorpname = data.ordersid.crop;
-            var derivtotcnt = data.ordersid.testorderscnt;
-            var derivordersid = data.ordersid.testordersid;
-
-
-            $("#modal_2_1").text(derividStr);
-            $("#modal_2_2").text(derivregdate);
-            $("#modal_2_3").text(derivordersid);
-            $("#modal_2_4").text(derivcorpname);
-            $("#modal_2_5").text(derivtotcnt);
-            $("#derivid").val(derivid);
-            $("#ordersidParam").val(derivordersid);
-
-
-            contentW += "<table class='table'><thead><tr>" +
-                "<th>번호</th>" +
-                "<th>제품코드</th>" +
-                "<th>입고품목</th>" +
-                "<th>발주 수량</th>" +
-                "</tr></thead>" +
-                "<tbody>"
-            for (var i = 0; i < data.length(); i++) {
-                contentW += "<tr>"
-                contentW += "<td>" + i + "</td>"
-                contentW += "<td>" + data[i].ordersid.draftseq[i].product.prod_id + "</td>"
-                contentW += "<td>" + data[i].ordersid.draftseq[i].product.prodName + "</td>"
-                contentW += "<td>" + data[i].ordersid.testorderscnt + "</td>"
-                contentW += "</tr>"
-            }
-            contentW += "</tbody></table>"
-        $(".OkList").html(contentW);
+            derivOkList(data)
         }
     })
-}
+} // derivOkModal
+
+function derivOkList(data){
+
+    var contentW = "";
+    var drafts = data.ordersid.draft;
+
+    var derivid = data.derivid;
+    var derividStr = "입고번호 : D" + derivid;
+    var derivregdate = "입고일 : " + data.derivregdate;
+    var derivcorpname = data.ordersid.corp.corpName;
+    var derivtotcnt = data.ordersid.orders_totsum;
+    var derivordersid = data.ordersid.ordersid;
+    var derivConfirmCnt = data.derivlistid;
+    var derivConfirmTotCnt = data.derivokconfirmtotcnt;
+    var derivInspector = data.emplid.name + "(" + data.emplid.emplId + ")"
+
+    $("#modal_3_1").text(derividStr);
+    $("#modal_3_2").text(derivregdate);
+    $("#modal_3_3").text(derivordersid);
+    $("#modal_3_4").text(derivcorpname);
+
+    contentW += "<table class='table'><thead><tr class='prodHeader'>" +
+        "<th>번호</th>" +
+        "<th>제품코드</th>" +
+        "<th>입고품목</th>" +
+        "<th>발주 수량</th>" +
+        "<th>실입고 수량</th>" +
+        "</tr></thead>" +
+        "<tbody>"
+
+    for (var i = 0; i < drafts.length; i++) {
+        contentW += "<tr>"
+        contentW += "<td>" + (1 + i) + "</td>"
+        contentW += "<td>" + drafts[i].product.prod_id + "</td>"
+        contentW += "<td>" + drafts[i].product.prodName + "</td>"
+        contentW += "<td>" + drafts[i].draft_cnt + "</td>"
+        contentW += "<td>" + derivConfirmCnt[i].derivokconfirmcnt + "</td>"
+        contentW += "</tr>"
+    }
+    contentW += "</tbody></table>"
+
+    $(".OkList").html(contentW);
+
+    $(".totalProdCnt").text("총 " + drafts.length + "품목");
+    $(".totalOrdersCnt").text(derivtotcnt);
+
+    $(".totalDerivCnt").css("color", "#372c81")
+    $(".totalDerivCnt").eq('1').text(derivConfirmTotCnt)
+
+    $("#inspector").text(derivInspector)
+} // derivChkList() END
+
 
 
 

@@ -43,6 +43,7 @@ public class Derivative {
 
     @ManyToOne
     @JoinColumn(name = "empl_id")
+    @JsonManagedReference
     private Empl emplid;
 
     @OneToOne

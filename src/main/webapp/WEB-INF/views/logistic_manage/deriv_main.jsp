@@ -115,12 +115,12 @@
             background-color: #372c81;
         }
 
-        .modalHeanderColor.close {
+        .modalHeanderColor .close {
             color: #ddd;
         }
 
         .modal-footer {
-            margin-top: 40px;
+            margin-top: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -287,7 +287,8 @@
                                             <td>D${okList.derivid}</td>
                                             <td>${okList.derivokconfirmdate}</td>
                                             <td id="tr_title${okList.derivid}"
-                                                onclick="derivOkModal('${okList.derivid}')">
+                                                onclick="derivOkModal('${okList.derivid}')"
+                                                data-toggle="modal" data-target="#modal_3">
                                                     ${okList.derivtitle}</td>
                                             <td>${okList.ordersid.corp.corpName}</td>
                                             <td>${okList.derivokconfirmtotcnt}</td>
@@ -319,8 +320,7 @@
             <div class="modal-content">
 
                 <!-- Modal Header -->
-                <div class="modal-header">
-                    <h3 class="modal-title font-weight-bold" style="color: #372c81;">검수요청 등록</h3>
+                <div class="modal-header modalHeanderColor"">
                     <button type="button" class="close registCancle" data-dismiss="modal">&times;</button>
                 </div>
 
@@ -492,11 +492,11 @@
                             <div class="OkList"></div>
 
                           <div class="resultAll">
-                              <div><span class="totalProdCnt">총 20품목</span></div>
+                              <div><span class="totalProdCnt"></span></div>
                               <div>
-                                  <span class="totalOrdersCnt">12340</span>
+                                  <span class="totalOrdersCnt"></span>
                                   <span>&nbsp;/&nbsp;</span>
-                                  <span class="totalDerivCnt">123</span>
+                                  <span class="totalDerivCnt"></span>
                               </div>
                           </div>
 

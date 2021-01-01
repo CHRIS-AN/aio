@@ -7,8 +7,6 @@ input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none; }
 
-
-/* 모달2 */
 .ListWrap {padding: 10px;}
 
 .modalTileTxt {
@@ -29,13 +27,14 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .listTableTitle {margin-bottom: 30px;}
-.listTableTitle table, .listTableProds table{ width: 100%; font-size: 1.2em;}
-.listTableTitle tr, .listTableProds table{ border-top: 2px solid #7f8c8d; border-bottom: 2px solid #7f8c8d;}
+.listTableTitle table, .listTableProds table, .OkList table{ width: 100%; font-size: 1.2em;}
+.listTableTitle tr, .listTableProds table, .OkList table{ border-top: 2px solid #7f8c8d; border-bottom: 2px solid #7f8c8d;}
 .listTableTitle th, .prodHeader { background-color: #a69ce1; color: #f0f0f0; text-align: center;}
-#modal_2 .listTableTitle th { background-color: #a69ce1; color: #f0f0f0; text-align: center; width: 100px;}
+#modal_2 .listTableTitle th,#modal_3 .listTableTitle th
+{ background-color: #a69ce1; color: #f0f0f0; text-align: center; width: 100px;}
 
-.listTableProds {max-height: 500px; overflow: auto;}
-.listTableProds table {text-align: center;}
+.listTableProds, .OkList {max-height: 500px; overflow: auto;}
+.listTableProds table , .OkList table{text-align: center;}
 .headerSticky {position: sticky; top: 0;}
 .resultAll {
     display: flex;

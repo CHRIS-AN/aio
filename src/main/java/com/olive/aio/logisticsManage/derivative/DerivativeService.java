@@ -102,6 +102,7 @@ public class DerivativeService {
         String derivConfirmDate = sdf.format(date);
 
         select.setDerivokconfirmdate(derivConfirmDate);
+        select.setDerivokconfirmtotcnt(derivative.getDerivokconfirmtotcnt());
         select.setDerivstate(state);
         select.setEmplid(derivative.getEmplid());
 
