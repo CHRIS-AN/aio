@@ -17,7 +17,7 @@ input[type="number"]::-webkit-inner-spin-button {
     margin: 40px auto;
 }
 
-.derivInfo {
+.logisticInfo {
     color: #777;
     font-size: 1.3em;
     font-weight: bold;
@@ -48,7 +48,15 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .inspectorName {
     float: right;
-    font-size: 1.5em;
+    font-size: 1.4em;
     font-weight: bold;
     margin-top: 15px;
 }
+
+/* 출고요청 */
+#rej { margin-top: 20px; display: flex; justify-content: space-between;}
+#rej span{ font-size: 1.3em; font-weight: bold;}
+#rej textarea {width: 330px; resize: none;}
+
+#requestTable .listTableTitle th { width: 160px;}
+#requestTable .listTableProds th { font-size: 0.7em;}

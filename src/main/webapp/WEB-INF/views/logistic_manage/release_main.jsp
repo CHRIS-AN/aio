@@ -62,11 +62,11 @@
             height: 25px;
         }
 
-        #derivWaitTable {
+        #requestTable {
             font-size: 1.35em;
         }
 
-        #derivWaitTable tr {
+        #requestTable tr {
             height: 25px;
         }
 
@@ -162,7 +162,7 @@
 
                     <div class="card-header py-3">
                         <h2 class="m-0 font-weight-bold"
-                            style="color: #372c81;">물류관리 &gt; 입고관리</h2>
+                            style="color: #372c81;">물류관리 &gt; 출고관리</h2>
                     </div>
 
                     <div class="card-body">
@@ -171,16 +171,16 @@
                         <div class="listTabWrap">
                             <ul class="nav nav-pills" role="tablist">
                                 <li class="nav-item col-sm-4" style="margin: 0; padding: 0;">
-                                    <a id="derivWaitTab" class="nav-link aio_maincolor active" data-toggle="tab"
-                                       href="#derivWait">입고대기</a>
+                                    <a id="requestTab" class="nav-link aio_maincolor active" data-toggle="tab"
+                                       href="#requestStore">출고요청</a>
                                 </li>
                                 <li class="nav-item col-sm-4" style="margin: 0; padding: 0;">
-                                    <a id="derivChkTab" class="nav-link aio_maincolor" data-toggle="tab"
-                                       href="#derivChk" onclick="addId('derivChk'); this.onclick=null;">검수요청</a>
+                                    <a id="releaWaitTab" class="nav-link aio_maincolor" data-toggle="tab"
+                                       href="#releaWait" onclick="addId('releaWait'); this.onclick=null;">출고대기</a>
                                 </li>
                                 <li class="nav-item col-sm-4" style="margin: 0; padding: 0;">
-                                    <a id="derivOkTab" class="nav-link aio_maincolor" data-toggle="tab" href="#derivOk"
-                                       onclick="addId('derivOk'); this.onclick=null;">입고완료</a>
+                                    <a id="releaOkTab" class="nav-link aio_maincolor" data-toggle="tab"
+                                       href="#releaOk" onclick="addId('releaOk'); this.onclick=null;">출고완료</a>
                                 </li>
                             </ul>
                         </div>
@@ -188,78 +188,82 @@
                         <!-- content -->
                         <div class="tab-content">
 
-                            <div id="derivWait" class="table-responsive tab-pane active">
-                                <table id='dataTable' class='table table-bordered derivWaitT' width='100%'
+                            <div id="requestStore" class="table-responsive tab-pane active">
+                                <table id='dataTable' class='table table-bordered requestT' width='100%'
                                        cellpadding='0'>
                                     <thead>
                                     <tr>
-                                        <th>발주번호</th>
-                                        <th>발주품목</th>
-                                        <th>회사명</th>
+                                        <th>출고요청번호</th>
+                                        <th>출고요청품목</th>
+                                        <th>지점명</th>
                                         <th>총수량</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
-                                        <th>발주번호</th>
-                                        <th>발주품목</th>
-                                        <th>회사명</th>
+                                        <th>출고요청번호</th>
+                                        <th>출고요청품목</th>
+                                        <th>지점명</th>
                                         <th>총수량</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
-                                    <c:forEach var="waitList" items="${derivWaitList}">
-                                        <tr id='tr ${waitList.key.ordersid}'>
-                                            <td>${waitList.key.ordersid}</td>
-                                            <td id='tr_title${waitList.key.ordersid}' onclick='regist_deriv()'
-                                                data-toggle='modal' data-target='#modal_1'
-                                                data-ordersid="${waitList.key.ordersid}"
-                                                data-regdate='${waitList.key.orders_regdate}'
-                                                data-corpname='${waitList.key.corp.corpName}'
-                                                data-prodtitle='${waitList.value}'
-                                                data-totcnt='${waitList.key.orders_cnt}'>
-                                                    ${waitList.value}</td>
-                                            <td>${waitList.key.corp.corpName}</td>
-                                            <td>${waitList.key.orders_cnt}</td>
+                                    <c:forEach var="reqList" items="${requestList}">
+                                        <tr id='tr ${reqList.key.requestid}'>
+                                            <td>S${reqList.key.requestid}</td>
+                                            <td id="tr_title${reqList.key.requestid}"
+                                                onclick="regist_relea('${reqList.key.requestid}', '${nowEmpl.emplId}', '${nowEmpl.dept}')"
+                                                data-toggle="modal" data-target="#modal_1">
+                                                    ${reqList.value}</td>
+                                            <td>${reqList.key.storename}</td>
+                                            <td>${reqList.key.requesttotcnt}</td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- derivWait END -->
+                            <!-- requestStore END -->
 
 
-                            <div id="derivChk" class="table-responsive tab-pane">
-                                <table class='table table-bordered derivChkT' width='100%' cellpadding='0'>
+                            <div id="releaWait" class="table-responsive tab-pane">
+                                <table class='table table-bordered releaWaitT' width='100%' cellpadding='0'>
                                     <thead>
                                     <tr>
-                                        <th>입고번호</th>
-                                        <th>입고일</th>
-                                        <th>입고품목</th>
-                                        <th>회사명</th>
+                                        <th>출고번호</th>
+                                        <th>출고대기일</th>
+                                        <th>출고품목</th>
+                                        <th>지점명</th>
                                         <th>총 수량</th>
+                                        <th>작업자</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
-                                        <th>입고번호</th>
-                                        <th>입고일</th>
-                                        <th>입고품목</th>
-                                        <th>회사명</th>
+                                        <th>출고번호</th>
+                                        <th>출고대기일</th>
+                                        <th>출고품목</th>
+                                        <th>지점명</th>
                                         <th>총 수량</th>
+                                        <th>작업자</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
-                                    <c:forEach var="chkList" items="${derivChkList}">
-                                        <tr id="tr${chkList.derivid}">
-                                            <td>D${chkList.derivid}</td>
-                                            <td>${chkList.derivregdate}</td>
-                                            <td id="tr_title${chkList.derivid}"
-                                                onclick="confirm_deriv('${chkList.derivid}', '${nowEmpl.emplId}', '${nowEmpl.dept}')"
-                                                data-toggle="modal" data-target="#modal_2">
-                                                    ${chkList.derivtitle}</td>
-                                            <td>${chkList.ordersid.corp.corpName}</td>
-                                            <td>${chkList.ordersid.orders_cnt}</td>
+                                    <c:forEach var="waitList" items="${releaWaitList}">
+                                        <tr id="tr${waitList.releaid}">
+                                            <td>R${waitList.releaid}</td>
+                                            <td>${waitList.relearegdate}</td>
+                                            <td id="tr_title${waitList.releatitle}"
+                                                onclick="confirm_relea()"
+                                                data-toggle="modal" data-target="#modal_2"
+                                                data-releaid="${waitList.releaid}"
+                                                data-relearegdate='${waitList.relearegdate}'
+                                                data-prodtitle='${waitList.releatitle}'
+                                                data-storename='${waitList.requestid.storename}'
+                                                data-totcnt='${waitList.releaOktotcnt}'>
+                                                    ${waitList.releatitle}</td>
+                                            <td>${waitList.requestid.storename}</td>
+                                            <td>${waitList.releaOktotcnt}</td>
+                                            <td>${waitList.emplid.name}(${waitList.emplid.emplId})</td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -268,46 +272,46 @@
                             <!-- derivChk END -->
 
 
-                            <div id="derivOk" class="table-responsive tab-pane">
-                                <table class='table table-bordered derivOkT' width='100%' cellpadding='0'>
+                            <div id="releaOk" class="table-responsive tab-pane">
+                                <table class='table table-bordered releaOkT' width='100%' cellpadding='0'>
                                     <thead>
                                     <tr>
-                                        <th>입고번호</th>
-                                        <th>입고확정일</th>
-                                        <th>입고품목</th>
-                                        <th>회사명</th>
-                                        <th>확정 총 수량</th>
-                                        <th>검수자</th>
+                                        <th>출고번호</th>
+                                        <th>출고일</th>
+                                        <th>출고품목</th>
+                                        <th>지점명</th>
+                                        <th>총 수량</th>
+                                        <th>작업자</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
-                                        <th>입고번호</th>
-                                        <th>입고확정일</th>
-                                        <th>입고품목</th>
-                                        <th>회사명</th>
-                                        <th>확정 총 수량</th>
-                                        <th>검수자</th>
+                                        <th>출고번호</th>
+                                        <th>출고일</th>
+                                        <th>출고품목</th>
+                                        <th>지점명</th>
+                                        <th>총 수량</th>
+                                        <th>작업자</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
-                                    <c:forEach var="okList" items="${derivOkList}">
-                                        <tr id='tr${okList.derivid}'>
-                                            <td>D${okList.derivid}</td>
-                                            <td>${okList.derivokconfirmdate}</td>
-                                            <td id="tr_title${okList.derivid}"
-                                                onclick="derivOkModal('${okList.derivid}')"
+                                    <c:forEach var="okList" items="${releaOkList}">
+                                        <tr id='tr${okList.releaid}'>
+                                            <td>R${okList.releaid}</td>
+                                            <td>${okList.releaokconfirmdate}</td>
+                                            <td id="tr_title${okList.releaid}"
+                                                onclick="releaOkModal('${okList.releaid}')"
                                                 data-toggle="modal" data-target="#modal_3">
-                                                    ${okList.derivtitle}</td>
-                                            <td>${okList.ordersid.corp.corpName}</td>
-                                            <td>${okList.derivokconfirmtotcnt}</td>
+                                                    ${okList.releatitle}</td>
+                                            <td>${okList.requestid.storename}</td>
+                                            <td>${okList.releaOktotcnt}</td>
                                             <td>${okList.emplid.name}(${okList.emplid.emplId})</td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- derivOk -->
+                            <!-- releaOk END -->
 
                         </div>
 
@@ -334,49 +338,67 @@
                 </div>
 
                 <!-- Modal body -->
-                <div id="derivWaitTable" class="modal-body">
-                    <form name="deirvRegist" action="deirvRegist" onsubmit="return registChkSubmit()" method="post">
-                        <input type="hidden" id="ordersid" name="ordersid"/>
+                <div id="requestTable" class="modal-body">
+                    <form name="releaRegist" action="releaRegist" onsubmit="return reqConfirmSubmit()" method="post">
+                        <input type="hidden" id="requestid" name="requestid">
+                        <input type="hidden" id="releaOktotcnt" name="releaOktotcnt">
+                        <input type="hidden" id="releastate" name="releastate" value="출고대기">
+                        <input type="hidden" id="emplid" name="emplid" value="${nowEmpl.emplId}">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
                         <div class="ListWrap">
-                            <div class="modalTileTxt"><span>검수요청</span></div>
+                            <div class="modalTileTxt"><span>출고요청 리스트</span></div>
 
                             <div class="listTableTitle">
                                 <table class="table">
                                     <tr>
-                                        <th>발주번호</th>
+                                        <th>출고요청번호</th>
                                         <td><span id="modal_1_1"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <th>납기요청일</th>
+                                    </tr><tr>
+                                        <th>출고요청일</th>
                                         <td><span id="modal_1_2"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <th>기업명</th>
+                                    </tr><tr>
+                                        <th>지점명</th>
                                         <td><span id="modal_1_3"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <th>품목</th>
-                                        <td><span id="modal_1_4"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <th>총수량</th>
-                                        <td><span id="modal_1_5"></span></td>
                                     </tr>
                                 </table>
                             </div>
+
+                            <div class="listTableProds"></div>
+
+                            <c:choose>
+                                <c:when test="${nowEmpl.dept eq '물류' || nowEmpl.emplId eq 'admin'}">
+                                    <div>
+                                        <div class="resultAll">
+                                            <div><span class="totalProdCnt"></span></div>
+                                            <div>
+                                                <span class="totalReqCnt"></span>
+                                                <span>&nbsp;/&nbsp;</span>
+                                                <span class="totalReleaCnt"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="inspectorName"><span>작업자&nbsp;:&nbsp;</span><span>${nowEmpl.name}(${nowEmpl.emplId})</span></div>
+                                    </div>
+                                </c:when>
+
+                                <c:otherwise>
+                                    <div class="resultAll">
+                                        <div><span class="totalProdCnt"></span></div>
+                                        <div><span class="totalReqCnt"></span></div>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                         <!-- ListWrap END -->
                         <c:if test="${nowEmpl.dept eq '물류' || nowEmpl.emplId eq 'admin'}">
                             <!-- Modal footer -->
                             <div class="modal-footer">
-                                <input type="button" class="btn btn_aio2" data-dismiss="modal" value="취소"/>
-                                <input type="submit" class="btn btn_aio" value="검수요청"/>
+                                <input type="button" id="reqCancle" class="btn btn_aio2" data-dismiss="modal"
+                                        value="취소"/>
+                                <input type="submit" id="reqSubmit" class="btn btn_aio" value="출고대기"/>
                             </div>
                         </c:if>
-
-
                     </form>
                 </div>
                 <!-- modal body -->
@@ -396,67 +418,46 @@
                 </div>
 
                 <!-- Modal body -->
-                <div class="modal-body">
-                    <form name="deirvConfirm" action="deirvConfirm" onsubmit="return confirmOnSubmit();" method="post">
-                        <input type="hidden" id="derivid" name="derivid">
-                        <input type="hidden" id="ordersidParam" name="ordersid">
-                        <input type="hidden" id="derivokconfirmtotcnt" name="derivokconfirmtotcnt">
-                        <input type="hidden" id="derivState" name="derivstate" value="입고완료">
-                        <input type="hidden" id="emplid" name="emplid" value="${nowEmpl.emplId}">
+                <div id="releaWaitTable" class="modal-body">
+                    <form name="releaOk" action="releaOk" onsubmit="return releaOkSubmit()" method="post">
+                        <input type="hidden" id="releaid" name="releaid"/>
+                        <input type="hidden" id="releastate1" name="releastate" value="출고완료">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
                         <div class="ListWrap">
-                            <div class="modalTileTxt"><span>검수요청 리스트</span></div>
-
-                            <div class="logisticInfo">
-                                <span id="modal_2_1"></span>
-                                <span id="modal_2_2"></span>
-                            </div>
+                            <div class="modalTileTxt"><span>출고요청</span></div>
 
                             <div class="listTableTitle">
                                 <table class="table">
                                     <tr>
-                                        <th>발주번호</th>
+                                        <th>출고번호</th>
+                                        <td><span id="modal_2_1"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>출고대기일</th>
+                                        <td><span id="modal_2_2"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>지점명</th>
                                         <td><span id="modal_2_3"></span></td>
-                                        <th>입고회사</th>
+                                    </tr>
+                                    <tr>
+                                        <th>품목</th>
                                         <td><span id="modal_2_4"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>총수량</th>
+                                        <td><span id="modal_2_5"></span></td>
                                     </tr>
                                 </table>
                             </div>
-
-                            <div class="listTableProds"></div>
-
-                            <c:choose>
-                                <c:when test="${nowEmpl.dept eq '물류' || nowEmpl.emplId eq 'admin'}">
-                                    <div>
-                                        <div class="resultAll">
-                                            <div><span class="totalProdCnt"></span></div>
-                                            <div>
-                                                <span class="totalOrdersCnt"></span>
-                                                <span>&nbsp;/&nbsp;</span>
-                                                <span class="totalDerivCnt"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="inspectorName"><span>검수자&nbsp;:&nbsp&nbsp;</span><span>${nowEmpl.name}(${nowEmpl.emplId})</span></div>
-                                    </div>
-                                </c:when>
-
-                                <c:otherwise>
-                                    <div class="resultAll">
-                                        <div><span class="totalProdCnt">총 20품목</span></div>
-                                        <div><span class="totalOrdersCnt">12340</span></div>
-                                    </div>
-                                </c:otherwise>
-                            </c:choose>
                         </div>
                         <!-- ListWrap END -->
                         <c:if test="${nowEmpl.dept eq '물류' || nowEmpl.emplId eq 'admin'}">
                             <!-- Modal footer -->
                             <div class="modal-footer">
-                                <input type="button" id="confirmCancle" class="btn btn_aio2" data-dismiss="modal"
-                                       value="취소"/>
-                                <input type="submit" id="confirmSubmit" class="btn btn_aio" value="검수완료"/>
+                                <input type="button" class="btn btn_aio2" data-dismiss="modal" value="취소"/>
+                                <input type="submit" class="btn btn_aio" value="출고완료"/>
                             </div>
                         </c:if>
                     </form>
@@ -480,20 +481,21 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                       <div class="ListWrap">
-                            <div class="modalTileTxt"><span>입고확정 리스트</span></div>
-
-                            <div class="logisticInfo">
-                                <span id="modal_3_1"></span>
-                                <span id="modal_3_2"></span>
-                            </div>
+                            <div class="modalTileTxt"><span>출고완료 리스트</span></div>
 
                             <div class="listTableTitle">
                                 <table class="table">
                                     <tr>
-                                        <th>발주번호</th>
+                                        <th>출고번호</th>
+                                        <td><span id="modal_3_1"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>출고일</th>
+                                        <td><span id="modal_3_2"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>출고지점</th>
                                         <td><span id="modal_3_3"></span></td>
-                                        <th>입고회사</th>
-                                        <td><span id="modal_3_4"></span></td>
                                     </tr>
                                 </table>
                             </div>
@@ -503,9 +505,9 @@
                           <div class="resultAll">
                               <div><span class="totalProdCnt"></span></div>
                               <div>
-                                  <span class="totalOrdersCnt"></span>
+                                  <span class="totalReqCnt"></span>
                                   <span>&nbsp;/&nbsp;</span>
-                                  <span class="totalDerivCnt"></span>
+                                  <span class="totalReleaCnt"></span>
                               </div>
                           </div>
 
@@ -533,8 +535,8 @@
 <jsp:include page="../layout/footer.jsp"/>
 <!-- /footer  -->
 
-<!-- 입고관리 js -->
-<script src="/js/derivative.js"></script>
+<!-- 출고관리 js -->
+<script src="/js/release.js"></script>
 
 
 <!-- autocomplete from jQuery Ui -->
