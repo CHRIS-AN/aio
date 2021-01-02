@@ -4,12 +4,14 @@ import com.olive.aio.domain.Derivative;
 import com.olive.aio.domain.Derivativelist;
 import com.olive.aio.orders.Orders;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+@Slf4j
 @Transactional
 @Service
 @RequiredArgsConstructor
@@ -57,6 +59,8 @@ public class DerivativeService {
     }
 
     public void saveDerivChk(Derivative derivative, Long ordersid, String state) {
+
+
 
         Orders select = derivativeOrdersRepository.findByOrdersid(ordersid);
 
@@ -120,4 +124,7 @@ public class DerivativeService {
         derivativeRepository.save(select);
     }
 
+    public Orders ordersList(Long ordersid) {
+        return derivativeOrdersRepository.findByOrdersid(ordersid);
+    }
 }

@@ -211,13 +211,13 @@
                                     <c:forEach var="waitList" items="${derivWaitList}">
                                         <tr id='tr ${waitList.key.ordersid}'>
                                             <td>${waitList.key.ordersid}</td>
-                                            <td id='tr_title${waitList.key.ordersid}' onclick='regist_deriv()'
-                                                data-toggle='modal' data-target='#modal_1'
-                                                data-ordersid="${waitList.key.ordersid}"
-                                                data-regdate='${waitList.key.orders_regdate}'
-                                                data-corpname='${waitList.key.corp.corpName}'
-                                                data-prodtitle='${waitList.value}'
-                                                data-totcnt='${waitList.key.orders_cnt}'>
+                                            <td id="tr_title${waitList.key.ordersid}" onclick="regist_deriv('${waitList.key.ordersid}', '${waitList.value}')"
+                                                data-toggle="modal" data-target="#modal_1">
+<%--                                                data-ordersid="${waitList.key.ordersid}"--%>
+<%--                                                data-regdate='${waitList.key.orders_regdate}'--%>
+<%--                                                data-corpname='${waitList.key.corp.corpName}'--%>
+<%--                                                data-prodtitle='${waitList.value}'--%>
+<%--                                                data-totcnt='${waitList.key.orders_cnt}'>--%>
                                                     ${waitList.value}</td>
                                             <td>${waitList.key.corp.corpName}</td>
                                             <td>${waitList.key.orders_cnt}</td>
@@ -335,8 +335,9 @@
 
                 <!-- Modal body -->
                 <div id="derivWaitTable" class="modal-body">
-                    <form name="deirvRegist" action="deirvRegist" onsubmit="return registChkSubmit()" method="post">
-                        <input type="hidden" id="ordersid" name="ordersid"/>
+                    <form name="derivRegist" action="derivRegist" onsubmit="return registChkSubmit()" method="post">
+<%--                        <div id="addOrdersid"></div>--%>
+                        <input type="hidden" id="ordersid" name="ordersid">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
                         <div class="ListWrap">
