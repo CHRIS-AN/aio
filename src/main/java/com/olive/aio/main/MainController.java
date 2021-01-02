@@ -30,7 +30,7 @@ public class MainController {
     @GetMapping("/")
     public String index(@CurrentEmpl Empl empl, Model model) {
         model.addAttribute(empl);
-        String now = new SimpleDateFormat("yyyy-MM").format(new Date());
+        String now = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         model.addAttribute("workDates", myCalendarRepository.findByEmplAndCalWorkDateContains(empl, now));
         return "index";
     }

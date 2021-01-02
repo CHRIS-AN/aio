@@ -102,7 +102,7 @@
                         <div class="x_content">
                             <form action="/hr" method="post" class="form needs-validation">
                                 <div class="form-group has-feedback col-md-4 com-sm-4">
-                                    <div class="row text-center">
+                                    <div class="row" style="padding: 10px;">
                                         <img src="${emplForm.photo}" id="profile-image" class="img img-responsive">
                                     </div>
                                     <div class="filebox my-form">
@@ -203,7 +203,7 @@
 
             </div>
         </div>
-
+        </div>
         <div id="detailDialog">
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -239,7 +239,7 @@
                                 </li>
                             </ul>
                             <div class="clearfix"></div>
-                        </div
+                        </div>
                         <div id="updateContent" class="x_content">
                             <form id='forms' enctype='multipart/form-data' method='post' class="form needs-validation">
                                 <div class="form-group has-feedback col-md-4 com-sm-4">

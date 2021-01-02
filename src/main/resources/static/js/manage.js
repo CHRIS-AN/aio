@@ -307,7 +307,7 @@ function showEmpldetail(data) {
     html += "</div>"
     html += "</div>";
     detailContent.html(html);
-    $("#detailDialog").show();
+    $("#detailDialog").css("display","block")
 
 }
 
