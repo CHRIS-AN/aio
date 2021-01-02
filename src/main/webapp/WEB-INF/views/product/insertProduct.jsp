@@ -111,6 +111,8 @@
 <jsp:include page="../layout/script.jsp"/>
 
 <script>
+
+
     $("#image-input-file").change(function (e) {
         if (e.target.files.length === 1) {
             const reader = new FileReader();
