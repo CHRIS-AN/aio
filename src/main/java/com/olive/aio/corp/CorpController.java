@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -25,12 +27,12 @@ public class CorpController {
     @Autowired
     private CorpService corpService;
 
-//    private final CorpInsertFormValidator corpInsertFormValidator;
-//
-//    @InitBinder("corp")
-//    public void initBinder(WebDataBinder webDataBinder){
-//        webDataBinder.addValidators(corpInsertFormValidator);
-//    }
+    private final CorpInsertFormValidator corpInsertFormValidator;
+
+    @InitBinder("corp")
+    public void initBinder(WebDataBinder webDataBinder){
+        webDataBinder.addValidators(corpInsertFormValidator);
+    }
 
     // 모든 거래처 목록 조회
     @GetMapping("corpList")
