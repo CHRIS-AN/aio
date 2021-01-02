@@ -71,7 +71,7 @@
                                     <div class="form-group col-md-3">
                                         <span class="fa far fa-retweet form-control-feedback left"></span>
                                         <input name="slipWrite" type="text" readonly style="width: 194px"
-                                               class="form-control has-feedback-left" value="${empl.name} (${empl.emplId})">
+                                               class="form-control has-feedback-left" value="${empl.emplId}">
                                         <small class="form-text text-danger">
                                                 ${valid_slipWrite}
                                         </small>
