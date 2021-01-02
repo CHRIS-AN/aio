@@ -107,8 +107,8 @@
                                         <span class="fa far fa-retweet form-control-feedback left"></span>
                                         <c:choose>
                                             <c:when test="${empty slip.corp}">
-                                                <select name="corp" class="form-control has-feedback-left">
-                                                    <option disabled selected>거래처를 입력하세요</option>
+                                                <select name="corp" class="form-control has-feedback-left" style="width:300px">
+                                                    <option disabled selected >거래처</option>
                                                     <c:forEach items="${corpList}" var="corp">
                                                         <option value="${corp.corp_id}">${corp.corp_name}</option>
                                                     </c:forEach>
