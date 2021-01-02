@@ -1,4 +1,4 @@
-package com.olive.aio.minjong;
+package com.olive.aio.product;
 
 import com.olive.aio.corp.Corp;
 import com.olive.aio.corp.CorpService;
@@ -23,13 +23,13 @@ import java.util.Map;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("MJ_view")
+@RequestMapping("product")
 public class ProductController {
 
     private final InsertFormValidator insertFormValidator;
 
     @InitBinder("product")
-    public void initBinder(WebDataBinder webDataBinder){
+    public void initBinder(WebDataBinder webDataBinder) {
         webDataBinder.addValidators(insertFormValidator);
     }
 
@@ -41,34 +41,35 @@ public class ProductController {
 
 
     @RequestMapping("/productList")
-    public String productList(Model model, Product product){
+    public String productList(Model model, Product product) {
         List<Product> productsList = productService.productList(product);
         model.addAttribute("productList", productsList);
-        return "MJ_view/productList";
+        return "product/productList";
     }
 
     @GetMapping("/insertProduct")
-    public String insertProductView(@CurrentEmpl Empl empl, Product product, Model model){
-        model.addAttribute("empl",empl);
+    public String insertProductView(@CurrentEmpl Empl empl, Product product, Model model) {
+        model.addAttribute("empl", empl);
 
-        return "MJ_view/insertProduct";
+        return "product/insertProduct";
     }
 
     @PostMapping("/insertProduct")
     public String insertProduct(Long corp_id, @CurrentEmpl Empl empl, @Valid Product product, Errors errors, Model model) {       //Long corp_id
 
-        if(errors.hasErrors()) {
+        if (errors.hasErrors()) {
 
             //제품 등록 실패시, 입력 데이터를 유지
             model.addAttribute("product", product);
+            model.addAttribute("empl", empl);
 
             //유효성 통과 못한 필드와 메시지를 핸들링
             Map<String, String> validatorResult = productService.validateHandling(errors);
-            for (String key : validatorResult.keySet()){
+            for (String key : validatorResult.keySet()) {
                 model.addAttribute(key, validatorResult.get(key));
             }
 
-            return "MJ_view/insertProduct";
+            return "product/insertProduct";
 
         }
         // 제품명 중복 검사
@@ -84,38 +85,37 @@ public class ProductController {
     }
 
     @GetMapping("/getProduct")
-    public String getProduct(Product product, Model model){
+    public String getProduct(Product product, Model model) {
         model.addAttribute("product", productService.getProduct(product));
-        return "MJ_view/getProduct";
+        return "product/getProduct";
     }
 
     @GetMapping("/updateProduct")
-    public String updateProduct(@CurrentEmpl Empl empl, Product product, Model model){
-        model.addAttribute("empl",empl);
+    public String updateProduct(@CurrentEmpl Empl empl, Product product, Model model) {
+        model.addAttribute("empl", empl);
         model.addAttribute("product", productService.getProduct(product));
-        return "MJ_view/updateProduct";
+        return "product/updateProduct";
     }
 
     @PostMapping("/updateProduct")
-    public String updateProduct(Long corp_id, @CurrentEmpl Empl empl, @Valid Product product, Errors errors, Model model){
+    public String updateProduct(Long corp_id, @CurrentEmpl Empl empl, @Valid Product product, Errors errors, Model model) {
 
 
-        if(errors.hasErrors()) {
+        if (errors.hasErrors()) {
             //제품 등록 실패시, 입력 데이터를 유지
             model.addAttribute("product", product);
+            model.addAttribute("empl", empl);
 
             //유효성 통과 못한 필드와 메시지를 핸들링
             Map<String, String> validatorResult = productService.validateHandling(errors);
-            for (String key : validatorResult.keySet()){
+            for (String key : validatorResult.keySet()) {
                 model.addAttribute(key, validatorResult.get(key));
             }
-            log.info("error");
-            return "MJ_view/updateProduct";
+            return "product/updateProduct";
 
         }
 
         productService.updateProduct(product, corp_id, empl);
-        log.info("5");
         return "redirect:productList";
     }
 
@@ -126,12 +126,12 @@ public class ProductController {
     }
 
     @GetMapping("/searchCorp")
-    public String searchCorp(Model model, Corp corp){
+    public String searchCorp(Model model, Corp corp) {
 
         List<Corp> corpsList = corpService.findAll(corp);
         model.addAttribute("corpsList", corpsList);
 
 
-        return "MJ_view/searchCorp";
+        return "product/searchCorp";
     }
 }

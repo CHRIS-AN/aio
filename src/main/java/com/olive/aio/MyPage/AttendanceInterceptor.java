@@ -1,10 +1,13 @@
 package com.olive.aio.MyPage;
 
+import com.olive.aio.config.WebAccessDeniedHandler;
 import com.olive.aio.domain.Empl;
 import com.olive.aio.employee.UserEmpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,12 +23,12 @@ import java.util.Date;
 @Component
 @RequiredArgsConstructor
 public class AttendanceInterceptor implements HandlerInterceptor {
-
     private final MyCalendarRepository myCalendarRepository;
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
         if (modelAndView != null && isRedirectView(modelAndView) && authentication != null && authentication.getPrincipal() instanceof UserEmpl) {
             Empl empl = ((UserEmpl) authentication.getPrincipal()).getEmpl();
             checkWorkState(empl);

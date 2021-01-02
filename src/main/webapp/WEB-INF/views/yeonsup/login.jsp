@@ -69,7 +69,8 @@
             padding-right: 0;
             padding-left: 0;
             overflow: hidden;
-            background: #b8b7b7;
+            /*b8b7b7*/
+            background: #333333;
             border-radius: 15px 0 0 15px;
         }
 

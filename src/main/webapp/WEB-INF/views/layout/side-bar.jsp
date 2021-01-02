@@ -25,19 +25,19 @@
                     </li>
                     <li><a><i class="fa fa-desktop"></i> 제품관리 <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="/MJ_view/productList">제품관리</a></li>
+                            <li><a href="/product/productList">제품관리</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-table"></i> 영업관리 <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="/yeonji/corpList">거래처관리</a></li>
-                            <li><a href="#">발주관리</a></li>
+                            <li><a href="/yeonji/ordersList">발주관리</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-bar-chart-o"></i> 물류관리 <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="/logistics/derivative">입고관리</a></li>
-                            <li><a href="#">출고관리</a></li>
+                            <li><a href="/logistics/release">출고관리</a></li>
                             <li><a href="#">재고관리</a></li>
                         </ul>
                     </li>

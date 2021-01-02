@@ -21,6 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
     private final DataSource dataSource;
+    private final WebAccessDeniedHandler webAccessDeniedHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -41,6 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.logout()
                 .logoutSuccessUrl("/login");
 
+        http.exceptionHandling().accessDeniedHandler(webAccessDeniedHandler);
     }
 
     @Bean

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
-    <title>거래처 조회</title>
+    <title>AIO</title>
 
     <!-- 부트스트랩 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -26,10 +27,7 @@
     <script src="/node_modules/gentelella/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Custom styles for this template -->
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
-
-    <style>
-
-    </style>
+    <link href="/css/corporder.css" rel="stylesheet">
 
 </head>
 <body class="nav-md">
@@ -55,10 +53,10 @@
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <div style="float:left">
-                    <h3 class="m-0 font-weight-bold text-primary">거래처 조회</h3>
+                    <h1 class="m-0 font-weight-bold text-primary pl-3">거래처 조회</h1>
                     </div>
                     <div style="float: right">
-                        <button type="button" name="corpAdd" class="btn btn-primary" data-toggle="modal"
+                        <button type="button" id="corpAdd" name="corpAdd" class="btn btn-primary" data-toggle="modal"
                                 data-target="#modal_1">+
                         </button>
                     </div>
@@ -87,14 +85,15 @@
                             <tbody>
                             <c:forEach var="c" items="${corp}">
                                 <tr id="tr${c.corp_id}" onclick="detail()" data-toggle="modal" data-target="#modal_2"
-                                    data-corpid="${c.corp_id}" data-corpname='${c.corp_name}'
+                                    data-corpid="${c.corp_id}" data-corpname='${c.corpName}'
                                     data-corpnum='${c.corp_num}' data-corpceo='${c.corp_ceo}'
-                                    data-corpcall='${c.corp_call}' data-corpaddress='${c.corp_address}'>
+                                    data-corpcall='${c.corp_call}' data-corpaddress='${c.corp_address}'
+                                    data-emplname='${c.empl.name}'>
                                     <td>${c.corp_id}</td>
-                                    <td>${c.corp_name}</td>
+                                    <td>${c.corpName}</td>
                                     <td>${c.corp_ceo}</td>
                                     <td>${c.corp_call}</td>
-                                    <td>누구냐넌</td>
+                                    <td>${c.empl.name}</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -112,52 +111,71 @@
         <!-- /footer  -->
 
 
-        <%--  모달 1 : 거래처 등록록  --%>
+        <%--  모달 1 : 거래처 등록  --%>
         <div class="modal" id="modal_1">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">거래처 등록</h4>
+                        <h1 class="modal-title font-weight-bold text-primary pl-3">거래처 등록</h1>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
 
                     <!-- Modal body -->
                     <div class="modal-body">
 
-                        <form action="corpInsert" method="post">
-                            <table class="table table-bordered">
+                        <form action="corpInsert" method="post" >
+                            <table class="table">
                                 <tr>
-                                    <th>상호</th>
-                                    <th><input type="text" name="corp_name" placeholder="내용을 입력해주세요" value="" autofocus>
-                                    </th>
+                                    <th class="h3 text-dark" style="border-style: none"><dt>상호</dt></th>
+                                    <th style="border-style: none"><input type="text" class="p-1" style="width:100%" name="corpName" value="${corpError.corpName}" placeholder="내용을 입력해주세요" autofocus required/></th>
+                                    <th style="border-style: none"> <p class="h5 font-weight-normal">한글과 영어 특수문자(<small> _ : , . ' ' ( ) </small>)만 가능</p> </th>
+                                    <form:errors path="corpName"/>
                                 </tr>
                                 <tr>
-                                    <th>사업자 등록번호</th>
-                                    <th><input type="text" name="corp_num" placeholder="ex)000-00-00000" value=""
-                                               autofocus></th>
+                                    <th style="border-style: none"></th>
+                                    <th style="border-style: none" colspan="2">${valid_corpName}</th>
                                 </tr>
                                 <tr>
-                                    <th>대표자</th>
-                                    <th><input type="text" name="corp_ceo" placeholder="내용을 입력해주세요" value="" autofocus>
-                                    </th>
+                                    <th class="h3 text-dark" style="border-style: none"><dt>사업자 등록번호</dt></th>
+                                    <th style="border-style: none"><input type="text" class="p-1" style="width:100%" name="corp_num" placeholder="'-'를 포함해서 작성해주세요." value="${corpError.corp_num}"
+                                               autofocus required/></th>
+                                    <th style="border-style: none"> <p class="h5 font-weight-normal">ex)111-22-33333 </p></th>
                                 </tr>
                                 <tr>
-                                    <th>연락처</th>
-                                    <th><input type="text" name="corp_call" placeholder="연락처를 입력해주세요" value=""
-                                               autofocus></th>
+                                    <th style="border-style: none"></th>
+                                    <th style="border-style: none" colspan="2">${valid_corp_num}</th>
                                 </tr>
                                 <tr>
-                                    <th>주소</th>
-                                    <th><input type="text" name="corp_address" placeholder="도로명 주소" value=""
-                                               autofocus><input type="button" value="주소 검색"></th>
-                                    <%--                <th><input type="text" name="corp_address" placeholder="상세정보" autofocus></th>--%>
+                                    <th class="h3 text-dark" style="border-style: none"><dt>대표자</dt></th>
+                                    <th style="border-style: none"><input type="text" class="p-1" style="width:100%" name="corp_ceo" placeholder="내용을 입력해주세요"  value="${corpError.corp_ceo}" autofocus required/></th>
+                                    <th style="border-style: none"> <p class="h5 font-weight-normal">한글과 영어만 가능</p> </th>
+                                </tr>
+                                <tr>
+                                    <th style="border-style: none"></th>
+                                    <th style="border-style: none" colspan="2">${valid_corp_ceo}</th>
+                                </tr>
+                                <tr>
+                                    <th class="h3 text-dark" style="border-style: none"><dt>연락처</dt></th>
+                                    <th style="border-style: none"><input type="text" class="p-1" style="width:100%" name="corp_call" placeholder="'-'를 포함해서 작성해주세요." value="${corpError.corp_call}"
+                                               autofocus required/></th>
+                                    <th style="border-style: none"><p class="h5 font-weight-normal"> ex)1588-1111</p> </th>
+                                </tr>
+                                <tr>
+                                    <th style="border-style: none"></th>
+                                    <th style="border-style: none" colspan="2">${valid_corp_call}</th>
+                                </tr>
+                                <tr>
+                                    <th class="h3 text-dark" style="border-style: none"><dt>주소</dt>   </th>
+                                    <th style="border-style: none"><input type="text" class="p-1" style="width:100%" name="corp_address" placeholder="도로명 주소"
+                                               autofocus required></th>
+                                    <th style="border-style: none"> <button type="button" class="btn btn-primary">주소 검색</button> </th>
                                 </tr>
                             </table>
                             <!-- Modal footer -->
                             <div class="modal-footer">
-                                <input type="submit" class="btn btn-primary" value="등록">
+                                <input type="submit" class="btn btn-primary h4 p-2" value="등록" size="30">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                             </div>
                         </form>
@@ -170,45 +188,41 @@
 
         <%--  모달 2 : 거래처 상세정보  --%>
         <div class="modal" id="modal_2">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered ">
                 <div class="modal-content">
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">거래처 등록</h4>
+                        <h2 class="modal-title font-weight-bold text-primary pl-3">거래처 상세정보</h2>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <table class="table table-bordered">
+                        <table class="table">
                             <tr>
-                                <th>상호(업체코드)</th>
-                                <th><span id="modal2_1"></span>(<span id="modal2_2"></span>)</th>
+                                    <th class="h3 text-dark" style="border-style: none"><dt>상호(업체코드)</dt></th>
+                                <th style="border-style: none"><span id="modal2_1"></span>(<span id="modal2_2"></span>)</th>
                             </tr>
                             <tr>
-                                <th>사업자 등록번호</th>
-                                <th><span id="modal2_3"></span></th>
+                                    <th class="h3 text-dark" style="border-style: none"><dt>사업자 등록번호</dt></th>
+                                <th style="border-style: none"><span id="modal2_3"></span></th>
                             </tr>
                             <tr>
-                                <th>대표자</th>
-                                <th><span id="modal2_4"></span></th>
+                                    <th class="h3 text-dark" style="border-style: none"><dt>대표자</dt></th>
+                                <th style="border-style: none"><span id="modal2_4"></span></th>
                             </tr>
                             <tr>
-                                <th>연락처</th>
-                                <th><span id="modal2_5"></span></th>
+                                    <th class="h3 text-dark" style="border-style: none"><dt>연락처</dt></th>
+                                <th style="border-style: none"><span id="modal2_5"></span></th>
                             </tr>
                             <tr>
-                                <th>주소</th>
-                                <th><span id="modal2_6"></span></th>
+                                    <th class="h3 text-dark" style="border-style: none"><dt>주소</dt></th>
+                                <th style="border-style: none"><span id="modal2_6"></span></th>
                             </tr>
                             <tr>
-                                <th>담당자</th>
-                                <th>누구냐넌</th>
-                            </tr>
-                            <tr>
-                                <th>발주 품목</th>
-                                <th>할수잇냐</th>
+                                    <th class="h3 text-dark" style="border-style: none"><dt>담당자</dt></th>
+                                <th style="border-style: none"><span id="modal2_7"></span></th>
                             </tr>
                         </table>
                         <!-- Modal footer -->
@@ -216,7 +230,7 @@
                             <button name="corpUpdate" value="modal2_2" class="btn btn-warning" data-toggle="modal"
                                     data-target="#modal_3" data-dismiss="modal" onclick="update()">수정
                             </button>
-                            <button name="corpDelete" class="btn btn-primary" data-toggle="modal"
+                            <button name="corpDelete" class="btn btn-danger" data-toggle="modal"
                                     data-target="#modal_4" onclick="corpDelete()">삭제
                             </button>
                         </div>
@@ -234,60 +248,75 @@
                     var corpceo = $(event.relatedTarget).data('corpceo');
                     var corpcall = $(event.relatedTarget).data('corpcall');
                     var corpaddress = $(event.relatedTarget).data('corpaddress');
+                    var emplname = $(event.relatedTarget).data('emplname');
                     $(this).find("#modal2_1").text(corpname);
                     $(this).find("#modal2_2").text(corpid);
                     $(this).find("#modal2_3").text(corpnum);
                     $(this).find("#modal2_4").text(corpceo);
                     $(this).find("#modal2_5").text(corpcall);
                     $(this).find("#modal2_6").text(corpaddress);
+                    $(this).find("#modal2_7").text(emplname);
                 });
             }
         </script>
 
         <%--  모달 3 : 거래처 수정  --%>
         <div class="modal" id="modal_3">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">거래처 수정</h4>
+                        <h1 class="modal-title font-weight-bold text-primary pl-3">거래처 수정</h1>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
 
                     <!-- Modal body -->
                     <div class="modal-body">
                         <form action="corpUpdate" method="post">
-                            <table class="table table-bordered">
+                            <table class="table">
                                 <tr>
-                                    <th>상호(업체코드)</th>
-                                    <th><input type="text" id="modal3_1" name="corp_name" value=""/>
-                                        (<span type="text" id="modal3_2_1" value=""></span>
-                                        <input type="hidden" name="corp_id" id="modal3_2_2" value="">)</th>
+                                    <th class="h3 text-dark" style="border-style: none"><dt>상호</dt></th>
+                                    <th style="border-style: none"><input type="text" class="p-1" style="width:100%" id="modal3_1" name="corpName" value="${corpError2.corpName}" placeholder="내용을 입력해주세요" autofocus required/>
+                                        <input type="hidden" name="corp_id" id="modal3_2_2" ></th>
+                                    <th style="border-style: none"> <p class="h5 font-weight-normal">한글과 영어 특수문자(<small> _ : , . ' ' ( ) </small>)만 가능</p> </th>
+                                    <form:errors path="corpName"/>
                                 </tr>
                                 <tr>
-                                    <th>사업자 등록번호</th>
-                                    <th><input type="text" id="modal3_3" name="corp_num" value=""/></th>
+                                    <th style="border-style: none"></th>
+                                    <th style="border-style: none" colspan="2">${valid_corpName}</th>
                                 </tr>
                                 <tr>
-                                    <th>대표자</th>
-                                    <th><input type="text" id="modal3_4" name="corp_ceo" value=""/></th>
+                                    <th class="h3 text-dark" style="border-style: none"><dt>사업자 등록번호</dt></th>
+                                    <th style="border-style: none"><input type="text" class="p-1" style="width:100%" id="modal3_3" name="corp_num" value="${corpError2.corp_num}" placeholder="'-'를 포함해서 작성해주세요." autofocus required/>
+                                    <th style="border-style: none"> <p class="h5 font-weight-normal">ex)111-22-33333 </p></th>
                                 </tr>
                                 <tr>
-                                    <th>연락처</th>
-                                    <th><input type="text" id="modal3_5" name="corp_call" value=""/></th>
+                                    <th style="border-style: none"></th>
+                                    <th style="border-style: none" colspan="2">${valid_corp_num}</th>
                                 </tr>
                                 <tr>
-                                    <th>주소</th>
-                                    <th><input type="text" id="modal3_6" name="corp_address" value=""/></th>
+                                    <th class="h3 text-dark" style="border-style: none"><dt>대표자</dt></th>
+                                    <th style="border-style: none"><input type="text" class="p-1" style="width:100%" id="modal3_4" name="corp_ceo" placeholder="내용을 입력해주세요" value="${corpError2.corp_ceo}" autofocus required/></th>
+                                    <th style="border-style: none"> <p class="h5 font-weight-normal">한글과 영어만 가능</p> </th>
                                 </tr>
                                 <tr>
-                                    <th>담당자</th>
-                                    <th>누구냐넌</th>
+                                    <th style="border-style: none"></th>
+                                    <th style="border-style: none" colspan="2">${valid_corp_ceo}</th>
                                 </tr>
                                 <tr>
-                                    <th>발주 품목</th>
-                                    <th>할수잇냐</th>
+                                    <th class="h3 text-dark" style="border-style: none"><dt>연락처</dt></th>
+                                    <th style="border-style: none"><input type="text" class="p-1" style="width:100%" id="modal3_5" name="corp_call" value="${corpError2.corp_call}" placeholder="'-'를 포함해서 작성해주세요." autofocus required/></th>
+                                    <th style="border-style: none"><p class="h5 font-weight-normal"> ex)1588-1111</p> </th>
+                                </tr>
+                                <tr>
+                                    <th style="border-style: none"></th>
+                                    <th style="border-style: none" colspan="2">${valid_corp_call}</th>
+                                </tr>
+                                <tr>
+                                    <th class="h3 text-dark" style="border-style: none"><dt>주소</dt></th>
+                                    <th style="border-style: none"><input type="text" class="p-1" style="width:100%" id="modal3_6" name="corp_address" value="${corpError2.corp_address}" placeholder="도로명 주소" autofocus required/></th>
+                                    <th style="border-style: none"> <button type="button" class="btn btn-primary">주소 검색</button> </th>
                                 </tr>
                             </table>
                             <div class="modal-footer">
@@ -330,14 +359,14 @@
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">거래처 삭제</h4>
+                        <h2 class="modal-title font-weight-bold text-primary pl-3">거래처 삭제</h2>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
 
                     <!-- Modal body -->
                     <div class="modal-body">
                         <form action="corpDelete" method="post">
-                            <span id="deleteCorpName"></span> 을(를) 정말 삭제하시겠습니까?
+                            <p class="h3 text-dark pl-3">거래처 <strong>" <span id="deleteCorpName"></span> "</strong> 을(를) 정말 삭제하시겠습니까?</p>
                             <input type="hidden" id="deleteCorpId" name="corp_id" value="">
                             <div class="modal-footer">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
@@ -349,6 +378,20 @@
             </div>
         </div>
         <script>
+            //유효성 검사 에러 시 바로 모달 창 띄우기
+            <%--if(${not empty error}){--%>
+            <%--    $( document ).ready(function() {--%>
+            <%--        $("#modal_1").modal('show');--%>
+            <%--    });--%>
+
+            <%--}--%>
+
+            <%--if(${not empty error2}){--%>
+            <%--    $( document ).ready(function() {--%>
+            <%--        $("#modal_3").modal('show');--%>
+            <%--    });--%>
+            <%--}--%>
+
             //삭제하기
             function corpDelete() {
                 $('#modal_4').on('show.bs.modal', function (event) {
@@ -356,8 +399,6 @@
                     var corpid = $('#modal2_2').text();
                     $(this).find("#deleteCorpName").html(corpname);
                     $(this).find("#deleteCorpId").val(corpid);
-                    console.log("+++++++++++++++corpname"+corpname+"}");
-                    console.log("+++++++++++++++corpid"+corpid+"}");
                 });
             }
         </script>

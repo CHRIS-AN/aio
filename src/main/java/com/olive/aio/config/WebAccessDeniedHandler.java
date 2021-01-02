@@ -18,26 +18,28 @@ import java.io.IOException;
 @Slf4j
 @Component
 public class WebAccessDeniedHandler implements AccessDeniedHandler {
-
+// || ((User)authentication.getPrincipal()).getAuthorities().contains(new SimpleGrantedAuthority("ROLE_VIEW"))
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException e) throws IOException, ServletException {
         response.setStatus(HttpStatus.FORBIDDEN.value());
 
         if(e instanceof AccessDeniedException) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            if(authentication != null &&
-                    ((User)authentication.getPrincipal()).getAuthorities().contains(new SimpleGrantedAuthority("ROLE_VIEW"))) {
-                request.setAttribute("msg", "접근권한이 없는 사용자입니다.");
-                request.setAttribute("nextPage", "/");
-            } else {
-                request.setAttribute("msg", "로그인 권한이 없는 사용자입니다.");
-                request.setAttribute("nextPage", "/login");
-                response.setStatus(HttpStatus.UNAUTHORIZED.value());
-                SecurityContextHolder.clearContext();
+            if(authentication != null) {
+                if(((User)authentication.getPrincipal()).getAuthorities().contains(new SimpleGrantedAuthority("ROLE_RETIREE"))) {
+                    log.info(">>>>> 로그인 권한이 없는 사용자");
+                    request.setAttribute("msg", "로그인 권한이 없는 사용자입니다.");
+                    request.setAttribute("nextPage", "/login");
+                    response.setStatus(HttpStatus.UNAUTHORIZED.value());
+                    SecurityContextHolder.clearContext();
+                } else {
+                    request.setAttribute("msg", "접근권한이 없는 사용자입니다.");
+                    request.setAttribute("nextPage", "/");
+                }
             }
         } else {
             log.info(e.getClass().getCanonicalName());
         }
-        request.getRequestDispatcher("err/denied-page").forward(request, response);
+        request.getRequestDispatcher("/err/denied-page").forward(request, response);
     }
 }

@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "derivative_list")
 @Data
 public class Derivativelist{
 
@@ -14,7 +14,7 @@ public class Derivativelist{
     @GeneratedValue
     private Integer derivListid;
 
-    @NotNull @Column(name = "deriv_ok_confirmcnt")
+    @Column(name = "deriv_ok_confirmcnt", columnDefinition = "Integer default 0")
     private Integer derivokconfirmcnt;
 
     @ManyToOne

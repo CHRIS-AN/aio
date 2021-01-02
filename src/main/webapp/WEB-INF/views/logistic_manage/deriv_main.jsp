@@ -16,7 +16,7 @@
     <link href="/node_modules/gentelella/build/css/custom.css" rel="stylesheet">
     <script src="/node_modules/gentelella/vendors/jquery/dist/jquery.min.js"></script>
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="/css/derivativeStyle.css" rel="stylesheet">
+    <link href="/css/logisticStyle.css" rel="stylesheet">
 
 
     <%--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>--%>
@@ -70,21 +70,48 @@
             height: 25px;
         }
 
-        .btn_aio {
+        #modal_1 .btn_aio {
             background-color: #6a5acd;
             color: #f5f5f5;
-            width: 65px;
-            height: 35px;
-            font-size: 0.9em;
+            width: 70px;
+            height: 40px;
+            font-size: 0.75em;
             font-weight: bold;
         }
 
-        .btn_aio2 {
+        #modal_1 .btn_aio2 {
             background-color: #e0e0e0;
             color: #404040;
-            width: 65px;
-            height: 35px;
-            font-size: 0.9em;
+            width: 70px;
+            height: 40px;
+            font-size: 0.75em;
+            font-weight: bold;
+        }
+
+        #modal_2 .btn_aio {
+            background-color: #6a5acd;
+            color: #f5f5f5;
+            width: 70px;
+            height: 40px;
+            font-size: 1.05em;
+            font-weight: bold;
+        }
+
+        #modal_2 .btn_aio2 {
+            background-color: #e0e0e0;
+            color: #404040;
+            width: 70px;
+            height: 40px;
+            font-size: 1.05em;
+            font-weight: bold;
+        }
+
+        #modal_3 .btn_aio {
+            background-color: #6a5acd;
+            color: #f5f5f5;
+            width: 70px;
+            height: 40px;
+            font-size: 1.05em;
             font-weight: bold;
         }
 
@@ -93,16 +120,19 @@
             cursor: pointer;
         }
 
-        .modalHeandrColor {
+        .modalHeanderColor {
             background-color: #372c81;
         }
 
-        .modalHeandrColor.close {
+        .modalHeanderColor .close {
             color: #ddd;
         }
 
         .modal-footer {
-            text-align: center;
+            margin-top: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
     </style>
@@ -157,6 +187,7 @@
 
                         <!-- content -->
                         <div class="tab-content">
+
                             <div id="derivWait" class="table-responsive tab-pane active">
                                 <table id='dataTable' class='table table-bordered derivWaitT' width='100%'
                                        cellpadding='0'>
@@ -178,23 +209,25 @@
                                     </tfoot>
                                     <tbody>
                                     <c:forEach var="waitList" items="${derivWaitList}">
-                                        <tr id='tr ${waitList.testordersid}'>
-                                            <td>${waitList.testordersid}</td>
-                                            <td id='tr_title${waitList.testordersid}' onclick='regist_deriv()'
+                                        <tr id='tr ${waitList.key.ordersid}'>
+                                            <td>${waitList.key.ordersid}</td>
+                                            <td id='tr_title${waitList.key.ordersid}' onclick='regist_deriv()'
                                                 data-toggle='modal' data-target='#modal_1'
-                                                data-odersid="${waitList.testordersid}"
-                                                data-prodtitle='${waitList.testtitle}'
-                                                data-corpname='${waitList.crop}'
-                                                data-totcnt='${waitList.testorderscnt}'>
-                                                    ${waitList.testtitle}</td>
-                                            <td>${waitList.crop}</td>
-                                            <td>${waitList.testorderscnt}</td>
+                                                data-ordersid="${waitList.key.ordersid}"
+                                                data-regdate='${waitList.key.orders_regdate}'
+                                                data-corpname='${waitList.key.corp.corpName}'
+                                                data-prodtitle='${waitList.value}'
+                                                data-totcnt='${waitList.key.orders_cnt}'>
+                                                    ${waitList.value}</td>
+                                            <td>${waitList.key.corp.corpName}</td>
+                                            <td>${waitList.key.orders_cnt}</td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
                             <!-- derivWait END -->
+
 
                             <div id="derivChk" class="table-responsive tab-pane">
                                 <table class='table table-bordered derivChkT' width='100%' cellpadding='0'>
@@ -224,15 +257,16 @@
                                             <td id="tr_title${chkList.derivid}"
                                                 onclick="confirm_deriv('${chkList.derivid}', '${nowEmpl.emplId}', '${nowEmpl.dept}')"
                                                 data-toggle="modal" data-target="#modal_2">
-                                                    ${chkList.ordersid.testtitle}</td>
-                                            <td>${chkList.ordersid.crop}</td>
-                                            <td>${chkList.ordersid.testorderscnt}</td>
+                                                    ${chkList.derivtitle}</td>
+                                            <td>${chkList.ordersid.corp.corpName}</td>
+                                            <td>${chkList.ordersid.orders_cnt}</td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
                             <!-- derivChk END -->
+
 
                             <div id="derivOk" class="table-responsive tab-pane">
                                 <table class='table table-bordered derivOkT' width='100%' cellpadding='0'>
@@ -259,12 +293,13 @@
                                     <tbody>
                                     <c:forEach var="okList" items="${derivOkList}">
                                         <tr id='tr${okList.derivid}'>
-                                            <td>${okList.derivid}</td>
+                                            <td>D${okList.derivid}</td>
                                             <td>${okList.derivokconfirmdate}</td>
                                             <td id="tr_title${okList.derivid}"
-                                                onclick="derivOkModal('${okList.derivid}')">
-                                                    ${okList.ordersid.testtitle}</td>
-                                            <td>${okList.ordersid.crop}</td>
+                                                onclick="derivOkModal('${okList.derivid}')"
+                                                data-toggle="modal" data-target="#modal_3">
+                                                    ${okList.derivtitle}</td>
+                                            <td>${okList.ordersid.corp.corpName}</td>
                                             <td>${okList.derivokconfirmtotcnt}</td>
                                             <td>${okList.emplid.name}(${okList.emplid.emplId})</td>
                                         </tr>
@@ -294,9 +329,8 @@
             <div class="modal-content">
 
                 <!-- Modal Header -->
-                <div class="modal-header">
-                    <h3 class="modal-title font-weight-bold" style="color: #372c81;">검수요청 등록</h3>
-                    <button type="button" class="close registCancle" data-dismiss="modal">&times;</button>
+                <div class="modal-header modalHeanderColor">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
                 <!-- Modal body -->
@@ -304,40 +338,45 @@
                     <form name="deirvRegist" action="deirvRegist" onsubmit="return registChkSubmit()" method="post">
                         <input type="hidden" id="ordersid" name="ordersid"/>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                        <table class="table table-bordered">
-                            <tr>
-                                <th>발주번호</th>
-                                <td><span id="modal1_1"></span></td>
-                            </tr>
-                            <tr>
-                                <th>회사명</th>
-                                <td><span id="modal1_3"></span></td>
-                            </tr>
-                            <tr>
-                                <th>입고품목</th>
-                                <td><span id="modal1_2"></span></td>
-                            </tr>
-                            <tr>
-                                <th>총수량</th>
-                                <td><span id="modal1_4"></span></td>
-                            </tr>
 
-                            <c:if test="${nowEmpl.dept eq '물류' || nowEmpl.emplId eq 'admin'}">
-                                <tr>
-                                    <th>입고일</th>
-                                    <td><input type="date" id="derivregdate" class="short-input" name="derivregdate"
-                                               placeholder="yyyy-mm-dd"/></td>
-                                </tr>
-                            </c:if>
+                        <div class="ListWrap">
+                            <div class="modalTileTxt"><span>검수요청</span></div>
 
-                        </table>
+                            <div class="listTableTitle">
+                                <table class="table">
+                                    <tr>
+                                        <th>발주번호</th>
+                                        <td><span id="modal_1_1"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>납기요청일</th>
+                                        <td><span id="modal_1_2"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>기업명</th>
+                                        <td><span id="modal_1_3"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>품목</th>
+                                        <td><span id="modal_1_4"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>총수량</th>
+                                        <td><span id="modal_1_5"></span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- ListWrap END -->
                         <c:if test="${nowEmpl.dept eq '물류' || nowEmpl.emplId eq 'admin'}">
                             <!-- Modal footer -->
                             <div class="modal-footer">
-                                <input type="button" class="btn btn_aio2 registCancle" data-dismiss="modal" value="취소"/>
-                                <input type="submit" class="btn btn_aio" value="등록"/>
+                                <input type="button" class="btn btn_aio2" data-dismiss="modal" value="취소"/>
+                                <input type="submit" class="btn btn_aio" value="검수요청"/>
                             </div>
                         </c:if>
+
+
                     </form>
                 </div>
                 <!-- modal body -->
@@ -352,13 +391,13 @@
             <div class="modal-content">
 
                 <!-- Modal Header -->
-                <div class="modal-header modalHeandrColor">
+                <div class="modal-header modalHeanderColor">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form name="deirvConfirm" action="deirvConfirm" method="post">
+                    <form name="deirvConfirm" action="deirvConfirm" onsubmit="return confirmOnSubmit();" method="post">
                         <input type="hidden" id="derivid" name="derivid">
                         <input type="hidden" id="ordersidParam" name="ordersid">
                         <input type="hidden" id="derivokconfirmtotcnt" name="derivokconfirmtotcnt">
@@ -369,7 +408,7 @@
                         <div class="ListWrap">
                             <div class="modalTileTxt"><span>검수요청 리스트</span></div>
 
-                            <div class="derivInfo">
+                            <div class="logisticInfo">
                                 <span id="modal_2_1"></span>
                                 <span id="modal_2_2"></span>
                             </div>
@@ -389,16 +428,18 @@
 
                             <c:choose>
                                 <c:when test="${nowEmpl.dept eq '물류' || nowEmpl.emplId eq 'admin'}">
-                                    <div class="resultAll">
-                                        <div><span class="totalProdCnt">총 20품목</span></div>
-                                        <div>
-                                            <span class="totalOrdersCnt">12340</span>
-                                            <span>&nbsp;/&nbsp;</span>
-                                            <span class="totalDerivCnt">123</span>
+                                    <div>
+                                        <div class="resultAll">
+                                            <div><span class="totalProdCnt"></span></div>
+                                            <div>
+                                                <span class="totalOrdersCnt"></span>
+                                                <span>&nbsp;/&nbsp;</span>
+                                                <span class="totalDerivCnt"></span>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="inspectorName"><span>검수자 </span><span>${nowEmpl.name}(${nowEmpl.emplId})</span></div>
+                                        <div class="inspectorName"><span>검수자&nbsp;:&nbsp&nbsp;</span><span>${nowEmpl.name}(${nowEmpl.emplId})</span></div>
+                                    </div>
                                 </c:when>
 
                                 <c:otherwise>
@@ -432,7 +473,7 @@
             <div class="modal-content">
 
                 <!-- Modal Header -->
-                <div class="modal-header modalHeandrColor">
+                <div class="modal-header modalHeanderColor">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
@@ -441,7 +482,7 @@
                       <div class="ListWrap">
                             <div class="modalTileTxt"><span>입고확정 리스트</span></div>
 
-                            <div class="derivInfo">
+                            <div class="logisticInfo">
                                 <span id="modal_3_1"></span>
                                 <span id="modal_3_2"></span>
                             </div>
@@ -460,11 +501,11 @@
                             <div class="OkList"></div>
 
                           <div class="resultAll">
-                              <div><span class="totalProdCnt">총 20품목</span></div>
+                              <div><span class="totalProdCnt"></span></div>
                               <div>
-                                  <span class="totalOrdersCnt">12340</span>
+                                  <span class="totalOrdersCnt"></span>
                                   <span>&nbsp;/&nbsp;</span>
-                                  <span class="totalDerivCnt">123</span>
+                                  <span class="totalDerivCnt"></span>
                               </div>
                           </div>
 

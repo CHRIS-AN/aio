@@ -103,7 +103,7 @@
                             <form action="/hr" method="post" class="form needs-validation">
                                 <div class="form-group has-feedback col-md-4 com-sm-4">
                                     <div class="row text-center">
-                                        <img src="${emplForm.photo}" id="profile-image" class="img col-md-12 img-responsive">
+                                        <img src="${emplForm.photo}" id="profile-image" class="img img-responsive">
                                     </div>
                                     <div class="filebox my-form">
                                         <label for="image-input-file">이미지 첨부</label>
@@ -200,7 +200,7 @@
                             </form>
                         </div>
                     </div>
-                </div>
+
             </div>
         </div>
 
@@ -344,7 +344,7 @@ function showjusoPopup(type1){
             }
 
 
-        }).open({autoClose: true});
+        }}).open({autoClose: true});
     }
 </script>
 <script src="/js/manage.js"></script>

@@ -14,8 +14,7 @@
                             <img src="${empl.photo}" alt=""><span>${empl.name}</span>
                         </c:if>
                         <c:if test="${ empty empl.photo}">
-                            <img src="/images/default-image.png" alt="">
-                            <span>${empl.name}</span>
+                            <img src="/images/tiger.png" alt=""><span>${empl.name}</span>
                         </c:if>
                         <span class=" fa fa-angle-down"></span>
                     </a>
