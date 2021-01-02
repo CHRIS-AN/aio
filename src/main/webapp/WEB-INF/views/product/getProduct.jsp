@@ -75,11 +75,7 @@
                     <td><input type="text" name="prod_catag" value="${product.prod_catag}" disabled/>${valid_prod_catag}
                     </td>
                 </tr>
-                <tr>
-                    <td>제품 상태</td>
-                    <td>
-                        <input type="text" name="prod_state" value="${product.prod_state}" disabled/>${valid_prod_state}</td>
-                </tr>
+
                 <tr>
                     <td>제품설명</td>
                     <td><textarea name="prod_explain" cols="40"
