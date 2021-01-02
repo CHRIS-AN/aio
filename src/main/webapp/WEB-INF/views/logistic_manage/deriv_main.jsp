@@ -336,7 +336,6 @@
                 <!-- Modal body -->
                 <div id="derivWaitTable" class="modal-body">
                     <form name="derivRegist" action="derivRegist" onsubmit="return registChkSubmit()" method="post">
-<%--                        <div id="addOrdersid"></div>--%>
                         <input type="hidden" id="ordersid" name="ordersid">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 

@@ -14,8 +14,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-;
-
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/logistics")
@@ -35,11 +33,9 @@ public class DerivativeController {
 
     @PostMapping("/derivRegist")
     public String derivWaitInsert(@CurrentEmpl Empl empl, Model model, Derivative derivative){
-        System.out.println("왜 안들어와?");
+
         String state = "검수요청";
         Long ordersid = derivative.getOrdersid().getOrdersid();
-
-        System.out.println("아니.. 몬데..." + ordersid);
 
         derivativeService.saveDerivChk(derivative, ordersid, state);
 

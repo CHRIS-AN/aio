@@ -38,7 +38,6 @@ function regist_deriv(ordersid, prodtitle) {
             var prodTitle = prodtitle;
             var corpName = data.corp.corpName;
             var totcnt = data.orders_cnt
-            // var addParam = "<input type='hidden' id='ordersid' name='ordersid' value='" + ordersid + "'>"
 
             $("#modal_1_1").text(ordersId);
             $("#modal_1_2").text(regDate);
