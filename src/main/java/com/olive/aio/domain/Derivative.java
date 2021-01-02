@@ -1,11 +1,9 @@
 package com.olive.aio.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import com.olive.aio.orders.Orders;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
