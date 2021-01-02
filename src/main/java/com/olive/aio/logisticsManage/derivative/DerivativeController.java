@@ -33,11 +33,13 @@ public class DerivativeController {
         return "logistic_manage/deriv_main";
     }
 
-    @PostMapping("/deirvRegist")
+    @PostMapping("/derivRegist")
     public String derivWaitInsert(@CurrentEmpl Empl empl, Model model, Derivative derivative){
         System.out.println("왜 안들어와?");
         String state = "검수요청";
         Long ordersid = derivative.getOrdersid().getOrdersid();
+
+        System.out.println("아니.. 몬데..." + ordersid);
 
         derivativeService.saveDerivChk(derivative, ordersid, state);
 
