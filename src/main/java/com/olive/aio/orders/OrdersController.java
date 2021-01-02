@@ -5,7 +5,7 @@ import com.olive.aio.domain.Empl;
 import com.olive.aio.draft.DraftList;
 import com.olive.aio.draft.DraftService;
 import com.olive.aio.employee.CurrentEmpl;
-import com.olive.aio.minjong.ProductService;
+import com.olive.aio.product.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

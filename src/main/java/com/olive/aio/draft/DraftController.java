@@ -2,8 +2,8 @@ package com.olive.aio.draft;
 
 import com.olive.aio.corp.Corp;
 import com.olive.aio.corp.CorpService;
-import com.olive.aio.minjong.Product;
-import com.olive.aio.minjong.ProductService;
+import com.olive.aio.product.Product;
+import com.olive.aio.product.ProductService;
 import com.olive.aio.orders.Orders;
 import com.olive.aio.orders.OrdersService;
 import lombok.AllArgsConstructor;

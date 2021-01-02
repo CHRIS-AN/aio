@@ -1,4 +1,4 @@
-package com.olive.aio.minjong;
+package com.olive.aio.product;
 
 import com.olive.aio.corp.Corp;
 import com.olive.aio.domain.Empl;

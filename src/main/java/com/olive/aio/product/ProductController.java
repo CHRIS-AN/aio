@@ -1,4 +1,4 @@
-package com.olive.aio.minjong;
+package com.olive.aio.product;
 
 import com.olive.aio.corp.Corp;
 import com.olive.aio.corp.CorpService;
@@ -23,7 +23,7 @@ import java.util.Map;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("MJ_view")
+@RequestMapping("product")
 public class ProductController {
 
     private final InsertFormValidator insertFormValidator;
@@ -44,14 +44,14 @@ public class ProductController {
     public String productList(Model model, Product product) {
         List<Product> productsList = productService.productList(product);
         model.addAttribute("productList", productsList);
-        return "MJ_view/productList";
+        return "product/productList";
     }
 
     @GetMapping("/insertProduct")
     public String insertProductView(@CurrentEmpl Empl empl, Product product, Model model) {
         model.addAttribute("empl", empl);
 
-        return "MJ_view/insertProduct";
+        return "product/insertProduct";
     }
 
     @PostMapping("/insertProduct")
@@ -69,7 +69,7 @@ public class ProductController {
                 model.addAttribute(key, validatorResult.get(key));
             }
 
-            return "MJ_view/insertProduct";
+            return "product/insertProduct";
 
         }
         // 제품명 중복 검사
@@ -87,14 +87,14 @@ public class ProductController {
     @GetMapping("/getProduct")
     public String getProduct(Product product, Model model) {
         model.addAttribute("product", productService.getProduct(product));
-        return "MJ_view/getProduct";
+        return "product/getProduct";
     }
 
     @GetMapping("/updateProduct")
     public String updateProduct(@CurrentEmpl Empl empl, Product product, Model model) {
         model.addAttribute("empl", empl);
         model.addAttribute("product", productService.getProduct(product));
-        return "MJ_view/updateProduct";
+        return "product/updateProduct";
     }
 
     @PostMapping("/updateProduct")
@@ -111,7 +111,7 @@ public class ProductController {
             for (String key : validatorResult.keySet()) {
                 model.addAttribute(key, validatorResult.get(key));
             }
-            return "MJ_view/updateProduct";
+            return "product/updateProduct";
 
         }
 
@@ -132,6 +132,6 @@ public class ProductController {
         model.addAttribute("corpsList", corpsList);
 
 
-        return "MJ_view/searchCorp";
+        return "product/searchCorp";
     }
 }

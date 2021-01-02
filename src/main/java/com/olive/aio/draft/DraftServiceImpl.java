@@ -1,7 +1,7 @@
 package com.olive.aio.draft;
 
-import com.olive.aio.minjong.Product;
-import com.olive.aio.minjong.ProductRepository;
+import com.olive.aio.product.Product;
+import com.olive.aio.product.ProductRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

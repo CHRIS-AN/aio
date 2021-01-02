@@ -1,18 +1,11 @@
-package com.olive.aio.minjong;
+package com.olive.aio.product;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.olive.aio.domain.Derivativelist;
-import com.olive.aio.draft.Draft;
-import lombok.*;
-
 import com.olive.aio.corp.Corp;
 import com.olive.aio.domain.Empl;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.olive.aio.draft.Draft;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -61,7 +54,6 @@ public class Product {
 
     @Lob
     private String prod_image;
-
 
     @NotNull
     @ManyToOne

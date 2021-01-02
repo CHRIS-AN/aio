@@ -2,7 +2,7 @@ package com.olive.aio.draft;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.olive.aio.minjong.Product;
+import com.olive.aio.product.Product;
 import com.olive.aio.orders.Orders;
 import lombok.*;
 
