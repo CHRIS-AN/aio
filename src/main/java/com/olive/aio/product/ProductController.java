@@ -56,19 +56,18 @@ public class ProductController {
 
     @PostMapping("/insertProduct")
     public String insertProduct(Long corp_id, @CurrentEmpl Empl empl, @Valid Product product, Errors errors, Model model) {       //Long corp_id
-
+        log.info("1");
         if (errors.hasErrors()) {
-
+            log.info("2");
             //제품 등록 실패시, 입력 데이터를 유지
             model.addAttribute("product", product);
             model.addAttribute("empl", empl);
-
             //유효성 통과 못한 필드와 메시지를 핸들링
             Map<String, String> validatorResult = productService.validateHandling(errors);
             for (String key : validatorResult.keySet()) {
                 model.addAttribute(key, validatorResult.get(key));
             }
-
+            log.info("4");
             return "product/insertProduct";
 
         }

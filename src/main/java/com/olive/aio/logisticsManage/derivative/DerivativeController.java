@@ -8,10 +8,7 @@ import com.olive.aio.orders.Orders;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -37,8 +34,8 @@ public class DerivativeController {
     }
 
     @PostMapping("/deirvRegist")
-    public String derivWaitInsert(@CurrentEmpl Empl empl,Model model, Derivative derivative){
-
+    public String derivWaitInsert(@CurrentEmpl Empl empl, Model model, Derivative derivative){
+        System.out.println("왜 안들어와?");
         String state = "검수요청";
         Long ordersid = derivative.getOrdersid().getOrdersid();
 
@@ -70,7 +67,7 @@ public class DerivativeController {
 
     // ======= 중복코드 메소드 ======
     private void viewList(Model model) {
-        String derivWait = "결제완료";
+        String derivWait = "결제 완료";
         List<Orders> derivWaitList = derivativeService.findByOdersState(derivWait);
         List<String> derivTitleList = derivativeService.makeDerivTitleList(derivWait);
         Map<Orders, String> derivWaitListInTitle = new HashMap<>();
