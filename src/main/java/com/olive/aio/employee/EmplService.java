@@ -204,13 +204,11 @@ public class EmplService implements UserDetailsService {
             MyCalendar myCalendar = new MyCalendar();
             empl.setAttendance("출근");
             empl.addMyCalendar(myCalendar);
-            model.addAttribute("workDate", myCalendar.getCalWorkDate());
             myCalendarRepository.save(myCalendar);
         } else if(state.equals("gohome")) {
             MyCalendar myCalendar = new MyCalendar();
             empl.setAttendance("퇴근");
             empl.addMyCalendar(myCalendar);
-            model.addAttribute("workDate", myCalendar.getCalWorkDate());
             myCalendarRepository.save(myCalendar);
         }
         emplRepository.save(empl);

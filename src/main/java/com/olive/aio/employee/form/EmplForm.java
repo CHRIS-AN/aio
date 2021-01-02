@@ -13,16 +13,16 @@ public class EmplForm {
     @NotBlank
     private String emplId;
 
-    @NotBlank
+    @NotBlank(message = "이름은 필수입니다.")
     @Length(min = 2, max = 8)
-    @Pattern(regexp = "^[ㄱ-ㅎ가-힣]{2,8}$")
+    @Pattern(regexp = "^[ㄱ-ㅎ가-힣]{2,8}$", message = "한글 2~8자만 입력해주세요.")
     private String name;
 
     @NotBlank(message = "주민등록번호는 필수 입력 값 입니다.")
     @Length(min = 14, max = 14)
     private String jumin;
 
-    @NotBlank
+    @NotBlank(message = "주소는 필수입니다.")
     private String address;
 
     @NotNull
