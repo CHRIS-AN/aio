@@ -1,6 +1,7 @@
 package com.olive.aio.main;
 
 
+import com.olive.aio.MyPage.MyCalendarRepository;
 import com.olive.aio.employee.CurrentEmpl;
 import com.olive.aio.domain.Empl;
 import com.olive.aio.employee.EmplService;
@@ -13,6 +14,8 @@ import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 @Slf4j
@@ -21,10 +24,14 @@ import org.springframework.web.bind.annotation.*;
 public class MainController {
 
     private final EmplService emplService;
+    private final MyCalendarRepository myCalendarRepository;
+
 
     @GetMapping("/")
     public String index(@CurrentEmpl Empl empl, Model model) {
         model.addAttribute(empl);
+        String now = new SimpleDateFormat("yyyy-MM").format(new Date());
+        model.addAttribute("workDates", myCalendarRepository.findByEmplAndCalWorkDateContains(empl, now));
         return "index";
     }
 

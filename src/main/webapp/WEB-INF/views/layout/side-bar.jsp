@@ -37,7 +37,7 @@
                     <li><a><i class="fa fa-bar-chart-o"></i> 물류관리 <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="/logistics/derivative">입고관리</a></li>
-                            <li><a href="#">출고관리</a></li>
+                            <li><a href="/logistics/release">출고관리</a></li>
                             <li><a href="#">재고관리</a></li>
                         </ul>
                     </li>

@@ -20,12 +20,13 @@
     }
 
     .weather-pannel {
-        background-color: rgb(51, 122, 183);
-        color: white;
+        /*background-color: rgb(51, 122, 183);*/
+        color: black;
+
     }
 
     .weather-pannel small, .weather-pannel i {
-        color: white;
+        color: black;
     }
 
     .text-right {
@@ -38,11 +39,7 @@
     }
 
     .x_title span {
-        color: white;
-    }
-
-    body .container.body .right_col {
-        background: white;
+        color: black;
     }
 
     .nav-md .container.body .right_col {
@@ -75,55 +72,59 @@
         <!-- content -->
         <div class="right_col" role="main">
             <div class="col-md-12 my-5">
-                <h1>AIO <small>All In One</small></h1>
             </div>
             <div class="col-md-12">
                 <div class="m-auto col-md-4 col-lg-4 col-xs-12">
                     <div class="x_panel">
-                        <div class="x_title">
-                            <h2>출근/퇴근</h2>
-                            <ul class="nav navbar-right panel_toolbox">
-                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                </li>
-                                <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                </li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
                         <div class="x_content">
-                            <div id="chkBox" class="row text-center">
-                                <label>${workDate}</label>
-                            </div>
-
                             <div id="attdBox" class="">
+                                <div class="col-md-6">
                                 <c:if test="${empl.goWork}">
-                                    <div class="col-md-6 text-right">
+                                    <div class="col-md-12 text-center">
                                         <a href="#" class="btn" style="background: #777777; color: white">출근</a>
                                     </div>
                                 </c:if>
                                 <c:if test="${!empl.goWork}">
-                                    <div class="col-md-6 text-right">
-                                        <a href="/work/gowork" class="btn" style="background: blue; color: white">출근</a>
+                                    <div class="col-md-12 text-center">
+                                        <a href="/work/gowork" class="btn" style="background: #2727c4; color: white">출근</a>
                                     </div>
                                 </c:if>
+                                <div id="chkBox" class="col-md-12 text-center">
+                                    <c:forEach items="${workDates}" var="date">
+                                        <c:if test="${date.attendance eq '출근'}">
+                                            <label>${date.calWorkDate}</label>
+                                        </c:if>
+                                    </c:forEach>
+                                </div>
+                                </div>
+                                <div class="col-md-6">
                                 <c:if test="${empl.goHome}">
-                                    <div class="col-md-6 text-left">
+                                    <div class="col-md-12 text-center">
                                         <a href="#" class="btn" style="background: #777777; color: white">퇴근</a>
                                     </div>
                                 </c:if>
                                 <c:if test="${!empl.goHome}">
-                                    <div class="col-md-6 text-left">
+                                    <div class="col-md-12 text-center">
                                         <a href="/work/gohome" class="btn"
-                                           style="background: purple; color: white">퇴근</a>
+                                           style="background: #a104a1; color: white">퇴근</a>
                                     </div>
                                 </c:if>
+
+                                <div id="chkBox" class="col-md-12 text-center">
+                                    <c:forEach items="${workDates}" var="date">
+                                        <c:if test="${date.attendance eq '퇴근'}">
+                                            <label>${date.calWorkDate}</label>
+                                        </c:if>
+                                    </c:forEach>
+                                </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-1"></div>
-                <div class="m-auto col-md-4">
-                    <div class="x_panel weather-pannel">
+                <div class="col-md-4">
+                    <div class="weather-pannel">
                         <div class="x_title">
                             <img class="col-md-4" id="weatherIcon" src="">
                             <div class="col-md-8 mt-5">

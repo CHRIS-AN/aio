@@ -27,7 +27,7 @@ function addId(tableId) {
 
 function regist_deriv() {
     $('#modal_1').on('show.bs.modal', function (event) {
-        let ordersid = $(event.relatedTarget).data('ordersid');
+        var ordersid = $(event.relatedTarget).data('ordersid');
         var regdate = $(event.relatedTarget).data('regdate');
         var prodtitle = $(event.relatedTarget).data('prodtitle');
         var corpname = $(event.relatedTarget).data('corpname');
@@ -95,8 +95,8 @@ function derivChkList(data, emplId, emplDept){
             "<th>번호</th>" +
             "<th>제품코드</th>" +
             "<th>입고품목</th>" +
-            "<th>발주 수량</th>" +
-            "<th>실입고 수량</th>" +
+            "<th>발주수량</th>" +
+            "<th>실입고수량</th>" +
             "</tr></thead>" +
             "<tbody>"
 
@@ -106,8 +106,8 @@ function derivChkList(data, emplId, emplDept){
             contentW += "<td>" + drafts[i].product.prod_id + "</td>"
             contentW += "<td>" + drafts[i].product.prodName + "</td>"
             contentW += "<td>" + drafts[i].draft_cnt + "</td>"
-            contentW += "<td><input type='number' class='confirmCntLen' id='confirmCnt[" + i + "].derivokconfirmcnt'" +
-                "name='confirmCnt[" + i + "].derivokconfirmcnt' onkeydown='onlyNum(event)' onkeyup='sum();'></td>"
+            contentW += "<td><input type='number' class='confirmCntLen' id='confirmCntD[" + i + "].derivokconfirmcnt'" +
+                "name='confirmCntD[" + i + "].derivokconfirmcnt' onkeydown='onlyNum(event)' onkeyup='sum();'></td>"
             contentW += "</tr>"
         }
     } else {
@@ -115,7 +115,7 @@ function derivChkList(data, emplId, emplDept){
             "<th>번호</th>" +
             "<th>제품코드</th>" +
             "<th>입고품목</th>" +
-            "<th>발주 수량</th>" +
+            "<th>발주수량</th>" +
             "</tr></thead>" +
             "<tbody>"
         for (var i = 0; i < drafts.length; i++) {
@@ -243,8 +243,8 @@ function derivOkList(data){
         "<th>번호</th>" +
         "<th>제품코드</th>" +
         "<th>입고품목</th>" +
-        "<th>발주 수량</th>" +
-        "<th>실입고 수량</th>" +
+        "<th>발주수량</th>" +
+        "<th>실입고수량</th>" +
         "</tr></thead>" +
         "<tbody>"
 

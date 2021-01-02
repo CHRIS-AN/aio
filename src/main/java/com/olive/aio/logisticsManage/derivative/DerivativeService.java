@@ -93,7 +93,7 @@ public class DerivativeService {
         return derivativeRepository.findByDerivid(derivId);
     }
 
-    public void derivOkSave(ConfirmCnt confirmCnt, Derivative derivative, String state) throws Exception{
+    public void derivOkSave(ConfirmCntD confirmCntD, Derivative derivative, String state) throws Exception{
 
         Derivative select = derivativeRepository.findByDerivid(derivative.getDerivid());
 
@@ -107,7 +107,7 @@ public class DerivativeService {
         select.setEmplid(derivative.getEmplid());
 
         Set<Derivativelist> derivProds = new HashSet<>();
-        for (Derivativelist derivativelist : confirmCnt.confirmCnt) {
+        for (Derivativelist derivativelist : confirmCntD.confirmCntD) {
 
             Derivativelist prod = new Derivativelist();
             prod.setDerivativeid(select);

@@ -6,8 +6,8 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class ConfirmCnt {
+public class ConfirmCntD {
 
-    List<Derivativelist> confirmCnt;
+    List<Derivativelist> confirmCntD;
 
 }

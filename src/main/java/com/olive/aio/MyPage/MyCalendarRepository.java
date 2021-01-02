@@ -14,4 +14,6 @@ public interface MyCalendarRepository extends JpaRepository <MyCalendar, Long> {
     int countByEmplAndAttendanceAndCalWorkDateContains(Empl empl, String attendance, String now);
 
     List<MyCalendar> findByEmpl(Empl empl);
+
+    List<MyCalendar> findByEmplAndCalWorkDateContains(Empl empl, String now);
 }
