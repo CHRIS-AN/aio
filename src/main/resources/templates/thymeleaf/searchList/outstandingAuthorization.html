@@ -58,7 +58,7 @@
                                     <th style="text-align: center">금액</th>
                                     <th style="text-align: center">거래처명</th>
                                     <th style="text-align: center">적요</th>
-                                    <th style="text-align: center">작성자명</th>
+                                    <th style="text-align: center">작성자</th>
                                     <th th:if="${empl.dept} == '회계'"
                                         style="text-align: center">결제 승인 / 거절</th>
                                    <th th:unless="${empl.dept} != '회계'"></th>
@@ -76,7 +76,7 @@
                                     <td class="context" th:text="${slip.corp}"></td>
                                     <td th:text="${slip.slip_summary}"></td>
                                     <td class="context" th:text="${slip.slipWrite}"></td>
-                                    <td th:if="${empl.dept} == '회계'" >
+                                    <td th:if="${empl.dept eq '회계' || empl.emplId eq 'admin'}" >
                                         <a class="text-info" th:href="@{/finance/slipPayment/approve(slipId=${slip.slipId}, keyword=${param.keyword})}">승인</a>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;
                                         <a class="text-danger" th:href="@{/finance/slipPayment/reject(slipId=${slip.slipId}, keyword=${param.keyword})}">거절</a>
                                     </td>

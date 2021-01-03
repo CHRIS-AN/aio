@@ -5,7 +5,7 @@ import com.olive.aio.domain.Empl;
 import com.olive.aio.draft.DraftList;
 import com.olive.aio.draft.DraftService;
 import com.olive.aio.employee.CurrentEmpl;
-import com.olive.aio.minjong.ProductService;
+import com.olive.aio.product.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -48,21 +47,9 @@ public class OrdersController {
 
     // 발주서 등록
     @PostMapping("ordersInsert")
-    public String ordersInsert(@Valid Orders orders, Errors errors, Model model, @CurrentEmpl Empl empl, Long corp_id, DraftList draftList){
+    public String ordersInsert(Orders orders, Errors errors, Model model, @CurrentEmpl Empl empl, Long corp_id, DraftList draftList){
 
-//        if (errors.hasErrors()) {
-//
-//            //제품 등록 실패시, 입력 데이터를 유지
-//            model.addAttribute("orders", orders);
-//
-//            //유효성 통과 못한 필드와 메시지를 핸들링
-//            Map<String, String> validatorResult = ordersService.validateHandling(errors);
-//            for (String key : validatorResult.keySet()) {
-//                model.addAttribute(key, validatorResult.get(key));
-//            }
-//            return "yeonji/corpList";
-//        }
-
+        log.info("orderstate{}", orders.getOrdersstate());
         orders.setEmpl(empl);
         System.out.println("야 draftList.getDrafts() : " + draftList.getDrafts());
         ordersService.insertOrders(orders, corp_id, draftList);

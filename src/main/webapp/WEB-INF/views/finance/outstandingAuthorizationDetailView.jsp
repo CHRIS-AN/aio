@@ -103,9 +103,8 @@
             </c:forEach>
 
             <c:forEach items="${slipList}" var="slip">
-
                 <c:choose>
-                    <c:when test="${empl.name eq slip.slipWrite || empl.dept eq '회계'}">
+                    <c:when test="${empl.emplId eq slip.slipWrite || empl.dept eq '회계' || empl.emplId eq 'admin'}">
                         <div class="container mt-5">
                             <span class="row justify-content-center">
 

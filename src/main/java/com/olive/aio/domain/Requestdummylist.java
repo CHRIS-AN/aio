@@ -2,7 +2,7 @@ package com.olive.aio.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.olive.aio.minjong.Product;
+import com.olive.aio.product.Product;
 import lombok.Data;
 
 import javax.persistence.*;

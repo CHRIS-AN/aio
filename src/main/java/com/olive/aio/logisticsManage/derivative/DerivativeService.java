@@ -58,6 +58,8 @@ public class DerivativeService {
 
     public void saveDerivChk(Derivative derivative, Long ordersid, String state) {
 
+
+
         Orders select = derivativeOrdersRepository.findByOrdersid(ordersid);
 
         int orderProds = select.getDraft().size() - 1;
@@ -120,4 +122,7 @@ public class DerivativeService {
         derivativeRepository.save(select);
     }
 
+    public Orders ordersList(Long ordersid) {
+        return derivativeOrdersRepository.findByOrdersid(ordersid);
+    }
 }

@@ -1,4 +1,4 @@
-package com.olive.aio.minjong;
+package com.olive.aio.product;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
