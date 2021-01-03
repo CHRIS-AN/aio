@@ -48,11 +48,11 @@
                                 <span class="fa fas fa-archive form-control-feedback left"></span>
                                 <select name="tradingType"  class="form-control has-feedback-left"
                                         id="tradingType" onchange="tradingTypeKindChange(this)" >
-                                    <option disabled selected>${slip.tradingType}&nbsp;&nbsp;&nbsp;*수정전</option>
-                                    <option value="지출 결과서">지출 결과서</option>
-                                    <option value="입금 보고서">입금 보고서</option>
-                                    <option value="매출 거래">매출 거래</option>
-                                    <option value="매입 거래">매입 거래</option>
+<%--                                    <option disabled selected>${slip.tradingType}&nbsp;&nbsp;&nbsp;*수정전</option>--%>
+                                    <option value="지출 결과서" ${slip.tradingType == '지출 결과서'? 'selected' : ''} >지출 결과서</option>
+                                    <option value="입금 보고서" ${slip.tradingType == '입금 보고서'? 'selected' : ''} >입금 보고서</option>
+                                    <option value="매출 거래" ${slip.tradingType == '매출 거래'? 'selected' : ''} >매출 거래</option>
+                                    <option value="매입 거래" ${slip.tradingType == '매입 거래'? 'selected' : ''} >매입 거래</option>
                                 </select>
                                 <small class="form-text text-danger">
                                         ${valid_tradingType}
@@ -88,7 +88,7 @@
                                 <span class="fa fas fa-tasks form-control-feedback left"></span>
                                 <select name="slipCode" class="form-control has-feedback-left"
                                         id="slipCode">
-                                    <option disabled selected>${slip.slipCode}&nbsp;&nbsp;&nbsp;*수정전</option>
+                                    <option readonly selected>${slip.slipCode}</option>
                                 </select>
 
                                 <small class="form-text text-danger">
@@ -105,7 +105,7 @@
                                         <select name="corp" class="form-control has-feedback-left">
                                             <option disabled selected>거래처를 입력하세요</option>
                                             <c:forEach items="${corpList}" var="corp">
-                                                <option value="${corp.corp_id}">${corp.corp_name}</option>
+                                                <option value="${corp.corp_id}">${corp.corpName}</option>
                                             </c:forEach>
                                         </select>
                                         <small class="form-text text-danger">
@@ -165,11 +165,11 @@
                             <div class="col-md-12">
                                 <i class="fa far fa-credit-card"></i>
                                 <select name="paymentType" class="form-control" id="paymentType">
-                                    <option disabled selected>${slip.paymentType}&nbsp;&nbsp;&nbsp;*수정전</option>
-                                    <option>현금</option>
-                                    <option>신한은행 23123-144-993213 안정민</option>
-                                    <option>하나은행 86391-11-7428321 안정민</option>
-                                    <option>국민은행 2552125-9231111 안정민</option>
+<%--                                    <option disabled selected>${slip.paymentType}&nbsp;&nbsp;&nbsp;*수정전</option>--%>
+                                    <option ${slip.paymentType == '현금'? 'selected' : ''}>현금</option>
+                                    <option ${slip.paymentType == '신한은행 23123-144-993213 안정민'? 'selected' : ''}>신한은행 23123-144-993213 안정민</option>
+                                    <option ${slip.paymentType == '하나은행 86391-11-7428321 안정민'? 'selected' : ''}>하나은행 86391-11-7428321 안정민</option>
+                                    <option ${slip.paymentType == '국민은행 2552125-9231111 안정민'? 'selected' : ''}>국민은행 2552125-9231111 안정민</option>
                                 </select>
                                 <small class="form-text text-danger">
                                         ${valid_paymentType}

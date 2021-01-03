@@ -63,7 +63,7 @@
         }
 
         #requestTable {
-            font-size: 1.35em;
+            font-size: 1.2em;
         }
 
         #requestTable tr {
@@ -210,7 +210,7 @@
                                     <tbody>
                                     <c:forEach var="reqList" items="${requestList}">
                                         <tr id='tr ${reqList.key.requestid}'>
-                                            <td>S${reqList.key.requestid}</td>
+                                            <td>Q${reqList.key.requestid}</td>
                                             <td id="tr_title${reqList.key.requestid}"
                                                 onclick="regist_relea('${reqList.key.requestid}', '${nowEmpl.emplId}', '${nowEmpl.dept}')"
                                                 data-toggle="modal" data-target="#modal_1">

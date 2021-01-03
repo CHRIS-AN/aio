@@ -69,7 +69,7 @@
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h1 class="m-0 font-weight-bold text-primary">제품 목록</h1>
-                        <button type="button" class="btn btn-primary" onclick="location.href='insertProduct'">제품 추가</button>
+                        <button type="button" class="btn btn-primary" onclick="location.href='insertProduct'">새 제품 등록</button>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

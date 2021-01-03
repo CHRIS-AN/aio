@@ -79,3 +79,7 @@
     padding: 0.3em;
     font-size: 15px;
 }
+
+.text-red {
+    color: red;
+}

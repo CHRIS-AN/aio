@@ -58,6 +58,8 @@ public class DerivativeService {
 
     public void saveDerivChk(Derivative derivative, Long ordersid, String state) {
 
+
+
         Orders select = derivativeOrdersRepository.findByOrdersid(ordersid);
 
         int orderProds = select.getDraft().size() - 1;
@@ -93,6 +95,15 @@ public class DerivativeService {
         return derivativeRepository.findByDerivid(derivId);
     }
 
+    public List<Derivativelist> derivOkList(Integer derivId){
+        System.out.println("오니?? " + derivId);
+
+        List<Derivativelist> list = derivativeListRepository.findByDerivativeid_Derivid(derivId);
+        System.out.println("gg " + list.toArray());
+
+        return derivativeListRepository.findByDerivativeid_Derivid(derivId);
+    }
+
     public void derivOkSave(ConfirmCntD confirmCntD, Derivative derivative, String state) throws Exception{
 
         Derivative select = derivativeRepository.findByDerivid(derivative.getDerivid());
@@ -120,4 +131,7 @@ public class DerivativeService {
         derivativeRepository.save(select);
     }
 
+    public Orders ordersList(Long ordersid) {
+        return derivativeOrdersRepository.findByOrdersid(ordersid);
+    }
 }

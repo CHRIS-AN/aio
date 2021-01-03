@@ -102,7 +102,7 @@
                         <div class="x_content">
                             <form action="/hr" method="post" class="form needs-validation">
                                 <div class="form-group has-feedback col-md-4 com-sm-4">
-                                    <div class="row text-center">
+                                    <div class="row" style="padding: 10px;">
                                         <img src="${emplForm.photo}" id="profile-image" class="img img-responsive">
                                     </div>
                                     <div class="filebox my-form">
@@ -111,6 +111,7 @@
                                         <button type="button" class="btn btn-default btn-100" onclick="clearImg()">이미지 삭제</button>
                                     </div>
                                     <input type="hidden" value="${emplForm.photo}" id="photo" name="photo">
+                                    <span class="text-red">${valid_photo}</span>
                                 </div>
                                 <div class="col-md-8">
                                 <div class="row">
@@ -118,19 +119,19 @@
                                         <label>사원번호</label>
                                         <input type="text" name="emplId" value="${emplForm.emplId}" class="form-control"
                                                id="empl-id" placeholder="사원번호"/>
-                                        <span>${valid_emplId}</span>
+                                        <span class="text-red">${valid_emplId}</span>
                                     </div>
                                     <div class="form-group has-feedback col-md-6 com-sm-6">
                                         <label>성명</label>
-                                        <input type="text" name="name" pattern="^[ㄱ-ㅎ가-힣]{2,8}$" oninvalid="invalidMsg(this, '한글 3~8자로 입력해주세요.');" value="${emplForm.name}" class="form-control" id="name" placeholder="사원이름">
-                                        <span>${valid_name}</span>
+                                        <input type="text" name="name" value="${emplForm.name}" class="form-control" id="name" placeholder="사원이름">
+                                        <span class="text-red">${valid_name}</span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group has-feedback col-md-6 com-sm-6">
                                         <label>주민등록 번호</label>
-                                        <input type="text" name="jumin" pattern="\d{2}([0]\d|[1][0-2])([0][1-9]|[1-2]\d|[3][0-1])[-]*[1-4]\d{6}" oninvalid="invalidMsg(this, '주민번호가 유효하지않습니다. 다시 입력해주세요.');" value="${emplForm.jumin}" class="form-control" id="jumin" placeholder="900000-1111111">
-                                        <span>${valid_jumin}</span>
+                                        <input type="text" name="jumin" value="${emplForm.jumin}" class="form-control" id="jumin" placeholder="900000-1111111">
+                                        <span class="text-red">${valid_jumin}</span>
                                     </div>
                                     <div class="form-group has-feedback col-md-6 com-sm-6">
                                         <label>입사일자</label>
@@ -140,6 +141,7 @@
                                                onfocus="this.type='date'" onmouseover="this.type='date'"
                                                onclick="this.type='date'" onblur="this.type='text'"
                                                onmouseout="timeFunctionLong(this)">
+                                        <span class="text-red">${valid_emplRegdate}</span>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -165,13 +167,13 @@
                                 <div class="row">
                                 <div class="form-group has-feedback col-md-6 com-sm-6">
                                     <label>연락처</label>
-                                    <input type="text" name="phone" pattern="^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$" oninvalid="invalidMsg(this, '형식에 맞는 연락처를 입력해주세요.');" value="${emplForm.phone}" class="form-control" id="phone" placeholder="010-0000-0000, 010-000-0000">
-                                    <span>${valid_phone}</span>
+                                    <input type="text" name="phone" value="${emplForm.phone}" class="form-control" id="phone" placeholder="010-0000-0000, 010-000-0000">
+                                    <span class="text-red">${valid_phone}</span>
                                 </div>
                                 <div class="form-group has-feedback col-md-6 com-sm-6">
                                     <label>Email</label>
-                                    <input type="text" name="email" pattern="^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$" oninvalid="invalidMsg(this, '유효하지 않은 이메일입니다.');" value="${emplForm.email}" class="form-control" id="email" placeholder="Email">
-                                    <span>${valid_email}</span>
+                                    <input type="text" name="email" value="${emplForm.email}" class="form-control" id="email" placeholder="Email">
+                                    <span class="text-red">${valid_email}</span>
                                 </div>
                                 </div>
                                 <div class="form-group has-feedback col-md-12 com-sm-12">
@@ -179,7 +181,7 @@
                                     <div class="col-md-5 col-sm-5">
                                         <input type="text" name="post_num" value="${emplForm.post_num}"
                                                class="form-control" id="postnum" placeholder="우편번호" readonly>
-                                        <span>${valid_post_num}</span>
+                                        <span class="text-red">${valid_post_num}</span>
                                     </div>
                                     <button type="button" id="postnumBtn" onclick="showjusoPopup('등록')"
                                             class="btn btn-default">검색
@@ -189,7 +191,7 @@
                                     <div class="col-md-12">
                                         <input type="text" name="address" value="${emplForm.address}"
                                                class="form-control" id="address" placeholder="주소">
-                                        <span>${valid_address}</span>
+                                        <span class="text-red">${valid_address}</span>
                                     </div>
                                 </div>
                                 <div class="form-group text-right has-feedback col-md-12 com-sm-12">
@@ -203,7 +205,7 @@
 
             </div>
         </div>
-
+        </div>
         <div id="detailDialog">
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -239,7 +241,7 @@
                                 </li>
                             </ul>
                             <div class="clearfix"></div>
-                        </div
+                        </div>
                         <div id="updateContent" class="x_content">
                             <form id='forms' enctype='multipart/form-data' method='post' class="form needs-validation">
                                 <div class="form-group has-feedback col-md-4 com-sm-4">
@@ -249,7 +251,7 @@
                                         <input type="file" class="form-control" id="image-input-file2" required>
                                         <input type="hidden" id="photo2" name="photo" value='" + data[0].photo + "' required>
 
-                                        <button type="button" class="btn btn-default btn-100" onclick="clearImg()">이미지 삭제</button>
+                                        <button type="button" class="btn btn-default btn-100" onclick="clearImg2()">이미지 삭제</button>
                                         <span id="photo_validate"></span>
                                     </div>
                                 </div>

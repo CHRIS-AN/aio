@@ -10,26 +10,25 @@ import javax.validation.constraints.*;
 public class EmplForm {
 
     @Id
-    @NotBlank
+    @NotBlank(message = "사원 아이디를 입력해주세요.")
     private String emplId;
 
     @NotBlank(message = "이름은 필수입니다.")
-    @Length(min = 2, max = 8)
     @Pattern(regexp = "^[ㄱ-ㅎ가-힣]{2,8}$", message = "한글 2~8자만 입력해주세요.")
     private String name;
 
-    @NotBlank(message = "주민등록번호는 필수 입력 값 입니다.")
-    @Length(min = 14, max = 14)
+    @NotBlank(message = "주민등록번호는 필수입니다.")
+    @Pattern(regexp = "\\d{2}([0]\\d|[1][0-2])([0][1-9]|[1-2]\\d|[3][0-1])[-]*[1-4]\\d{6}", message = "알맞는 주민번호를 입력해주세요")
     private String jumin;
 
     @NotBlank(message = "주소는 필수입니다.")
     private String address;
 
-    @NotNull
+    @NotNull(message = "주소는 필수입니다.")
     private Integer post_num;
 
     @NotBlank
-    @Length(min = 12, max = 13)
+    @Pattern(regexp = "^01(?:0|1|[6-9])-(?:\\d{3}|\\d{4})-\\d{4}$", message = "형식에 맞게 다시 입력해주세요.")
     private String phone;
 
     @NotBlank
@@ -37,16 +36,17 @@ public class EmplForm {
 
     private String password;
 
+    @NotBlank(message = "이미지는 필수입니다.")
     private String photo;
 
-    @NotBlank
+    @NotBlank(message = "이메일을 입력해주세요")
+    @Pattern(regexp = "^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}$", message = "유효한 이메일이 아닙니다.")
     private String email;
 
-    @NotBlank
     private String work_state  = "재직";
 
     @Column(name = "empl_regdate")
-    @NotBlank
+    @NotBlank(message = "입사 일자를 선택해주세요")
     private String emplRegdate;
 
     @Column(name = "empl_resigdate")

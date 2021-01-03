@@ -5,10 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.olive.aio.corp.Corp;
 import com.olive.aio.domain.Empl;
 import com.olive.aio.draft.Draft;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -59,8 +56,8 @@ public class Orders implements Serializable {
     private Set<Draft> draft = new HashSet<>();
 
     public void addDraft(Draft draft) {
-        this.draft.add(draft);
         draft.setOrders(this);
+        this.draft.add(draft);
     }
 
 }

@@ -56,6 +56,7 @@
                 </div>
 
                 <div class="row">
+                    <div class="col-md-2"></div>
                     <div class="col-md-8 col-sm-8 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
@@ -113,7 +114,7 @@
                                         </div>
                                         <div class="row mg-3">
                                             <label class="col-md-3">입사일자</label>
-                                            <span class="col-md-6" th:text="${empl.emplRegdate}"></span>
+                                            <span class="col-md-6 myInfo" th:text="${empl.emplRegdate}"></span>
                                         </div>
                                         <div class="row mg-3">
                                             <label class="col-md-3">퇴사날짜</label>
@@ -165,7 +166,7 @@
                                     <label class="">비밀번호 확인</label>
                                     <input class="col-md-7 form-control" onkeyup="chkNewPw()" type="password" id="chkPwInput" />
                                 </div>
-                                <div class="alert-danger" id="noMatchPw"></div>
+                                <div class="" style="color: red" id="noMatchPw"></div>
                                 <div class="form-group">
                                     <button class="btn btn-default" type="submit">확인</button>
                                 </div>

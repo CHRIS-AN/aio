@@ -85,18 +85,16 @@ $(document).ready(function (){
 
 });
 
-function invalidMsg(textbox, message) {
-    if(textbox.validity.patternMismatch){
-        textbox.setCustomValidity(message);
-    }
-    else {
-        textbox.setCustomValidity('');
-    }
-}
-
 function clearImg() {
     $("#photo").val("")
     $("#profile-image").attr("src", "");
+    $("#image-input-file").val("");
+}
+
+function clearImg2() {
+    $("#photo2").val("")
+    $("#profile-image2").attr("src", "");
+    $("#image-input-file2").val("");
 }
 
 function changePage(pageNum) {
@@ -109,8 +107,6 @@ function search() {
     let cntVal = $("#cnt").val();
     let deptVal = $("#dept").val();
     let keywordVal = $("#keyword").val();
-
-
 
     let url = "";
     console.log(keywordVal)
@@ -307,7 +303,7 @@ function showEmpldetail(data) {
     html += "</div>"
     html += "</div>";
     detailContent.html(html);
-    $("#detailDialog").show();
+    $("#detailDialog").css("display","block")
 
 }
 
@@ -366,7 +362,7 @@ function clickupdate(data, errors) {
     html += "</div>";
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
     html += "<label>성명</label>";
-    html += "<input type=\"text\" name=\"name\" pattern=\"^[ㄱ-ㅎ가-힣]{2,8}$\" oninvalid=\"invalidMsg(this, '한글 3~8자로 입력해주세요.');\" value=\"" + data[0].name + "\" class=\"form-control\" min=\"2\" max=\"8\" id=\"name\" placeholder=\"사원이름\" required>"
+    html += "<input type=\"text\" name=\"name\" value=\"" + data[0].name + "\" class=\"form-control\" min=\"2\" max=\"8\" id=\"name\" placeholder=\"사원이름\" required>"
     if(errors != undefined && errors.valid_name != undefined) {
         html += "<span>" + errors.valid_name + "</span>";
     }
@@ -375,7 +371,7 @@ function clickupdate(data, errors) {
     html += "<div class=\"row\">";
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
     html += "<label>주민등록 번호</label>";
-    html += "<input type=\"text\" name=\"jumin\" pattern=\"\d{2}([0]\\d|[1][0-2])([0][1-9]|[1-2]\\d|[3][0-1])[-]*[1-4]\\d{6}\" oninvalid=\"invalidMsg(this, '주민번호가 유효하지않습니다. 다시 입력해주세요.');\" value=\"" + data[0].jumin + "\" class=\"form-control\" min=\"12\" max=\"12\" id=\"jumin\" placeholder=\"900000-1111111\" required>";
+    html += "<input type=\"text\" name=\"jumin\" value=\"" + data[0].jumin + "\" class=\"form-control\" min=\"12\" max=\"12\" id=\"jumin\" placeholder=\"900000-1111111\" required>";
     if(errors != undefined && errors.valid_jumin != undefined) {
         html += "<span>" + errors.valid_jumin + "</span>";
     }
@@ -411,14 +407,14 @@ function clickupdate(data, errors) {
     html += "<div class=\"row\">";
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
     html += "<label>연락처</label>";
-    html += "<input type=\"text\" name=\"phone\" pattern=\"^d{3}-\\d{3,4}-\\d{4}$\" oninvalid=\"invalidMsg(this, '형식에 맞는 연락처를 입력해주세요.');\" value='" + data[0].phone + "' class=\"form-control\" min=\"10\" max=\"11\" id=\"phone\" placeholder=\"핸드폰 번호\" required>";
+    html += "<input type=\"text\" name=\"phone\" value='" + data[0].phone + "' class=\"form-control\" min=\"10\" max=\"11\" id=\"phone\" placeholder=\"핸드폰 번호\" required>";
     if(errors != undefined && errors.valid_phone != undefined) {
         html += "<span>" + errors.valid_phone + "</span>";
     }
     html += "</div>";
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
     html += "<label>Email</label>";
-    html += "<input type=\"text\" name=\"email\" pattern=\"^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}$/i\" oninvalid=\"invalidMsg(this, '유효하지 않은 이메일입니다.');\" value=\"" + data[0].email + "\" class=\"form-control\" id=\"email\" placeholder=\"Email\" required>"
+    html += "<input type=\"text\" name=\"email\" value=\"" + data[0].email + "\" class=\"form-control\" id=\"email\" placeholder=\"Email\" required>"
     if(errors != undefined && errors.valid_email != undefined) {
         html += "<span>" + errors.valid_email + "</span>";
     }

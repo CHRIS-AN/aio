@@ -131,4 +131,8 @@ public class ReleaseService {
         return releaseRepository.findByReleaid(releaid);
     }
 
+    public List<Releaselist> releaOkList(Integer releaid){
+        return releaseListRepository.findByReleaseid_Releaid(releaid);
+    }
+
 }

@@ -84,7 +84,7 @@
                                     <tr  id="tr${o.ordersid}"  data-toggle="modal" data-target="#detailModal"
                                          onclick="detail('${o.ordersid}','${o.corp.corpName}','${o.empl.name}','${o.orders_regdate}',
                                                  '${o.orders_cnt}','${o.orders_totsum}','${o.corp.corp_ceo}','${o.corp.corp_call}',
-                                                 '${o.corp.corp_address}')">
+                                                 '${o.corp.corp_address}','${o.ordersstate}')">
                                         <td>${o.ordersid}</td>
                                         <td>${o.corp.corpName}</td>
                                         <td>${o.empl.name}</td>
@@ -118,7 +118,7 @@
                     <div class="modal-header">
                         <div class="col-sm-12">
                             <div style="float:left">
-                                <h2 class="modal-title font-weight-bold text-primary pl-3">발주서</h2>
+                                <h2 class="modal-title font-weight-bold text-primary pl-3">발주 상세보기</h2>
                             </div>
                             <div style="float: right">
                                 <button type="button" class="btn btn-dark" onclick="print(document.getElementById('modalbody').innerHTML)">인쇄</button>
@@ -178,11 +178,10 @@
                         </div>
                     </div>
                     <!-- Modal footer -->
-                    <div class="form-group text-center has-feedback col-md-12 com-sm-12">
-                        <input type="button" class="btn btn-danger" value="삭제" id="ordersDelete"  data-toggle="modal"
-                               data-target="#deleteModal" onclick="ordersDelete()">
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                    </div>
+                        <div id="statehidden" class="form-group text-center has-feedback col-md-12 com-sm-12">
+<%--                            <input type="button" class="btn btn-danger" value="삭제" id="ordersDelete"  data-toggle="modal"--%>
+<%--                                   data-target="#deleteModal" onclick="ordersDelete()">--%>
+                        </div>
                     <p></p>
                     <p></p>
                 </div>
@@ -191,61 +190,70 @@
 
         <script>
             var updatelink;
-            function detail(ordersid,corpName,empl_name,orders_regdate,orders_cnt,orders_totsum,corp_ceo,corp_call,corp_address){
+            function detail(ordersid,corpName,empl_name,orders_regdate,orders_cnt,orders_totsum,corp_ceo,corp_call,corp_address,ordersstate){
                 updatelink = ordersid;
+                alert(ordersstate);
                 $('#detailModal').on('show.bs.modal', function (event) {
-
                     $.ajax({
                         url: "./" + ordersid,
                         type : "Get",
                         cache: false,
-                        success: function (data){
+                        success: function (data) {
                             console.log(data);
                             var contentW = "";
                             var drafts = data.draft;
                             contentW += "<table class='table table-bordered' width='80%' cellspacing='0' style='text-align: center'>" +
-                                        "<td>No.</td>"+
-                                        "<td colspan=\"2\">품명</td>"+
-                                        "<td>단위</td>"+
-                                        "<td>단가</td>"+
-                                        "<td>수량</td>"+
-                                        "<td>금액</td>"+
-                                        "</tr></thead>" +
-                                        "<tbody>"
+                                "<td>No.</td>" +
+                                "<td colspan=\"2\">품명</td>" +
+                                "<td>단위</td>" +
+                                "<td>단가</td>" +
+                                "<td>수량</td>" +
+                                "<td>금액</td>" +
+                                "</tr></thead>" +
+                                "<tbody>"
                             for (var i = 0; i < drafts.length; i++) {
                                 contentW += "<tr>"
                                 // contentW += "<td>" + drafts[i].draft_seq + "</td>"
-                                contentW += "<td>" + (i+1) + "</td>"
+                                contentW += "<td>" + (i + 1) + "</td>"
                                 contentW += "<td colspan='2'>" + drafts[i].product.prodName + "</td>"
                                 contentW += "<td>" + drafts[i].product.prod_bundle + "</td>"
                                 contentW += "<td>" + drafts[i].product.buy_price + "</td>"
                                 contentW += "<td>" + drafts[i].draft_cnt + "</td>"
-                                contentW += "<td>" + drafts[i].draft_prod_price+ "</td>"
+                                contentW += "<td>" + drafts[i].draft_prod_price + "</td>"
                                 contentW += "</tr>"
                             }
-                            contentW += "<tr>"+
-                                        "<td colspan='4'>합계</td>"+
-                                        "<td></td>"+
-                                        "<td></td>"+
-                                        "<td><span id='orders_totsum'>"+orders_totsum+"</span></td>"+
-                                        "</tr>"+
-                                        "</tbody></table>"
+                            contentW += "<tr>" +
+                                "<td colspan='4'>합계</td>" +
+                                "<td></td>" +
+                                "<td></td>" +
+                                "<td><span id='orders_totsum'>" + orders_totsum + "</span></td>" +
+                                "</tr>" +
+                                "</tbody></table>"
                             $("#contents").html(contentW);
-                        }
+
+                            var checkbutton = "";
+
+                            if(ordersstate === "결제 대기"){
+
+                                checkbutton +=
+                                    "<input type='button' class='btn btn-danger' value='삭제' id='ordersDelete'  data-toggle='modal' " +
+                                    "data-target='#deleteModal' onclick='ordersDelete()'> "
+
+                                $("#statehidden").html(checkbutton);
+                            }
+                            }
+                        });
+                        $(this).find("#ordersid").text(ordersid);
+                        $(this).find("#corpName").text(corpName);
+                        $(this).find("#empl_name").text(empl_name);
+                        $(this).find("#orders_regdate").text(orders_regdate);
+                        $(this).find("#orders_cnt").text(orders_cnt);
+                        $(this).find("#orders_totsum").text(orders_totsum);
+                        $(this).find("#corp_ceo").text(corp_ceo);
+                        $(this).find("#corp_call").text(corp_call);
+                        $(this).find("#corp_address").text(corp_address);
                     })
-
-
-                    $(this).find("#ordersid").text(ordersid);
-                    $(this).find("#corpName").text(corpName);
-                    $(this).find("#empl_name").text(empl_name);
-                    $(this).find("#orders_regdate").text(orders_regdate);
-                    $(this).find("#orders_cnt").text(orders_cnt);
-                    $(this).find("#orders_totsum").text(orders_totsum);
-                    $(this).find("#corp_ceo").text(corp_ceo);
-                    $(this).find("#corp_call").text(corp_call);
-                    $(this).find("#corp_address").text(corp_address);
-                });
-            }
+            };
 
             function print(printArea){
                 var win;

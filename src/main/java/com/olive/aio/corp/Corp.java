@@ -31,7 +31,7 @@ public class Corp {
     private String corp_address; //주소
 
     @NotNull(message="전화번호를 입력해주세요.")
-    @Pattern(regexp="^([0-9]{4}-[0-9]{8})$", message="올바른 전화번호를 입력해주세요.")
+    @Pattern(regexp="^([0-9]{4}-[0-9]{1,8})$", message="올바른 전화번호를 입력해주세요.")
     private String corp_call; //연락처
 
     @NotNull(message = "대표자를 입력해주세요.")
