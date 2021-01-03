@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface DerivativeListRepository extends JpaRepository<Derivativelist, Integer> {
 
+    List<Derivativelist> findByDerivativeid_Derivid(Integer derivId);
 
 }

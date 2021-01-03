@@ -1,5 +1,6 @@
 package com.olive.aio.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -43,6 +44,6 @@ public class Release {
     private Requestdummy requestid;
 
     @OneToMany(mappedBy = "releaseid", fetch = FetchType.EAGER)
-    @JsonManagedReference
+    @JsonBackReference
     private Set<Releaselist> releaselists = new HashSet<>();
 }

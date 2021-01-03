@@ -1,5 +1,6 @@
 package com.olive.aio.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.olive.aio.orders.Orders;
 import lombok.Data;
@@ -47,7 +48,7 @@ public class Derivative {
     private Orders ordersid;
 
     @OneToMany(mappedBy = "derivativeid", fetch = FetchType.EAGER)
-    @JsonManagedReference
+    @JsonBackReference
     private Set<Derivativelist> derivlistid = new HashSet<>();
 
 }
