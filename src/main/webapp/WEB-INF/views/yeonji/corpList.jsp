@@ -135,7 +135,7 @@
                                 </tr>
                                 <tr>
                                     <th style="border-style: none"></th>
-                                    <th style="border-style: none" colspan="2">${valid_corpName}</th>
+                                    <th style="border-style: none; color: red;" colspan="2">${valid_corpName}</th>
                                 </tr>
                                 <tr>
                                     <th class="h3 text-dark" style="border-style: none"><dt>사업자 등록번호</dt></th>
@@ -145,7 +145,7 @@
                                 </tr>
                                 <tr>
                                     <th style="border-style: none"></th>
-                                    <th style="border-style: none" colspan="2">${valid_corp_num}</th>
+                                    <th style="border-style: none; color: red;" colspan="2">${valid_corp_num}</th>
                                 </tr>
                                 <tr>
                                     <th class="h3 text-dark" style="border-style: none"><dt>대표자</dt></th>
@@ -154,7 +154,7 @@
                                 </tr>
                                 <tr>
                                     <th style="border-style: none"></th>
-                                    <th style="border-style: none" colspan="2">${valid_corp_ceo}</th>
+                                    <th style="border-style: none; color: red;" colspan="2">${valid_corp_ceo}</th>
                                 </tr>
                                 <tr>
                                     <th class="h3 text-dark" style="border-style: none"><dt>연락처</dt></th>
@@ -164,13 +164,13 @@
                                 </tr>
                                 <tr>
                                     <th style="border-style: none"></th>
-                                    <th style="border-style: none" colspan="2">${valid_corp_call}</th>
+                                    <th style="border-style: none; color: red;" colspan="2">${valid_corp_call}</th>
                                 </tr>
                                 <tr>
                                     <th class="h3 text-dark" style="border-style: none"><dt>주소</dt>   </th>
-                                    <th style="border-style: none"><input type="text" class="p-1" style="width:100%" name="corp_address" placeholder="도로명 주소"
+                                    <th style="border-style: none"><input type="text" class="p-1" style="width:100%" name="corp_address" placeholder="주소를 입력해주세요"
                                                autofocus required></th>
-                                    <th style="border-style: none"> <button type="button" class="btn btn-primary">주소 검색</button> </th>
+                                    <th style="border-style: none"> </th>
                                 </tr>
                             </table>
                             <!-- Modal footer -->
@@ -284,7 +284,7 @@
                                 </tr>
                                 <tr>
                                     <th style="border-style: none"></th>
-                                    <th style="border-style: none" colspan="2">${valid_corpName}</th>
+                                    <th style="border-style: none; color: red;" colspan="2">${valid_corpName}</th>
                                 </tr>
                                 <tr>
                                     <th class="h3 text-dark" style="border-style: none"><dt>사업자 등록번호</dt></th>
@@ -293,7 +293,7 @@
                                 </tr>
                                 <tr>
                                     <th style="border-style: none"></th>
-                                    <th style="border-style: none" colspan="2">${valid_corp_num}</th>
+                                    <th style="border-style: none; color: red;" colspan="2">${valid_corp_num}</th>
                                 </tr>
                                 <tr>
                                     <th class="h3 text-dark" style="border-style: none"><dt>대표자</dt></th>
@@ -302,7 +302,7 @@
                                 </tr>
                                 <tr>
                                     <th style="border-style: none"></th>
-                                    <th style="border-style: none" colspan="2">${valid_corp_ceo}</th>
+                                    <th style="border-style: none; color: red;" colspan="2">${valid_corp_ceo}</th>
                                 </tr>
                                 <tr>
                                     <th class="h3 text-dark" style="border-style: none"><dt>연락처</dt></th>
@@ -311,12 +311,12 @@
                                 </tr>
                                 <tr>
                                     <th style="border-style: none"></th>
-                                    <th style="border-style: none" colspan="2">${valid_corp_call}</th>
+                                    <th style="border-style: none; color: red;" colspan="2">${valid_corp_call}</th>
                                 </tr>
                                 <tr>
                                     <th class="h3 text-dark" style="border-style: none"><dt>주소</dt></th>
                                     <th style="border-style: none"><input type="text" class="p-1" style="width:100%" id="modal3_6" name="corp_address" value="${corpError2.corp_address}" placeholder="도로명 주소" autofocus required/></th>
-                                    <th style="border-style: none"> <button type="button" class="btn btn-primary">주소 검색</button> </th>
+                                    <th style="border-style: none">  </th>
                                 </tr>
                             </table>
                             <div class="modal-footer">
