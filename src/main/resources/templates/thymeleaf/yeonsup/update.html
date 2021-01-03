@@ -62,7 +62,9 @@
         .btn-100 {
             width: 100%;
         }
-
+        .text-red {
+            color: red;
+        }
     </style>
 </head>
 <body class="nav-md">
@@ -115,7 +117,7 @@
                                                                 onclick="clearImg()">이미지 삭제
                                                         </button>
                                                     </div>
-                                                    <span class="text-red" th:value="${valid_photo}"></span>
+                                                    <span class="text-red" th:text="${valid_photo}"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -125,7 +127,7 @@
                                                     <label class="">사원 번호</label>
                                                     <input type="text" class="form-control" name="emplId"
                                                            th:value="${myInfoForm.emplId}" readonly/>
-                                                    <span class="text-red" th:value="${valid_emplId}"></span>
+                                                    <span class="text-red" th:text="${valid_emplId}"></span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -133,7 +135,7 @@
                                                     <label class="">성명</label>
                                                     <input type="text" class="form-control" name="name"
                                                            th:value="${myInfoForm.name}" />
-                                                    <span class="text-red" th:value="${valid_name}"></span>
+                                                    <span class="text-red" th:text="${valid_name}"></span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -159,7 +161,7 @@
                                                     <label class="">주민등록 번호</label>
                                                     <input type="text" class="form-control" name="jumin"
                                                            th:value="${myInfoForm.jumin}" />
-                                                    <span class="text-red" th:value="${valid_jumin}"></span>
+                                                    <span class="text-red" th:text="${valid_jumin}"></span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -167,7 +169,7 @@
                                                     <label class="">연락처</label>
                                                     <input type="text" class="form-control" name="phone"
                                                            th:value="${myInfoForm.phone}" />
-                                                    <span class="text-red" th:value="${valid_phone}"></span>
+                                                    <span class="text-red" th:text="${valid_phone}"></span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -175,7 +177,7 @@
                                                     <label class="">Email</label>
                                                     <input type="text" class="form-control" name="email"
                                                            th:value="${myInfoForm.email}" />
-                                                    <span class="text-red" th:value="${valid_email}"></span>
+                                                    <span class="text-red" th:text="${valid_email}"></span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -194,7 +196,7 @@
                                                 <div class="col-md-12">
                                                     <input type="text" class="form-control" id="updateAddr"
                                                            name="address" th:value="${myInfoForm.address}" />
-                                                    <span class="text-red" th:value="${valid_address}"></span>
+                                                    <span class="text-red" th:text="${valid_address}"></span>
                                                 </div>
                                             </div>
                                             <div class="form-group">

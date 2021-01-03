@@ -25,7 +25,7 @@ public class EmplForm {
     private String address;
 
     @NotNull(message = "주소는 필수입니다.")
-    private Integer post_num;
+    private String post_num;
 
     @NotBlank
     @Pattern(regexp = "^01(?:0|1|[6-9])-(?:\\d{3}|\\d{4})-\\d{4}$", message = "형식에 맞게 다시 입력해주세요.")

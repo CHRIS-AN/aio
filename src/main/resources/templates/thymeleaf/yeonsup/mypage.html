@@ -160,7 +160,7 @@
                                 </div>
                                 <div class="form-group mb-lg-5">
                                     <label class="">새 비밀번호</label>
-                                    <input class="col-md-7 form-control" pattern="^[a-zA-Z0-9]{8,20}$" oninvalid="invalidMsg('영문자 혹은 숫자 8~20자를 입력해주세요.');" type="password" id="newPw" name="newPw" />
+                                    <input class="col-md-7 form-control" onkeyup="chkNewPw()" pattern="^[a-zA-Z0-9]{8,20}$" oninvalid="invalidMsg(this, '영문자 혹은 숫자 8~20자를 입력해주세요.');" placeholder="영문자 혹은 숫자 8~20자를 입력해주세요." type="password" id="newPw" name="newPw" />
                                 </div>
                                 <div class="form-group mb-lg-5">
                                     <label class="">비밀번호 확인</label>
@@ -196,9 +196,9 @@
         });
     });
 
-    function invalidMsg(textbox) {
+    function invalidMsg(textbox, message) {
         if(textbox.validity.patternMismatch){
-            textbox.setCustomValidity(textbox);
+            textbox.setCustomValidity(message);
         }
         else {
             textbox.setCustomValidity('');

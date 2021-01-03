@@ -55,9 +55,11 @@ public class MyPageController {
 
     @PostMapping("/mypage/update")
     public String submitUpdateMyInfo(@CurrentEmpl Empl empl, @Valid EmplUpdateForm myInfoForm, Errors errors, Model model) {
-
+            log.info("myinfoForm {}", myInfoForm);
         if(errors.hasErrors()) {
-            model.addAttribute(myInfoForm);
+            log.info("errors{}",errors);
+            model.addAttribute("myInfoForm", myInfoForm);
+            model.addAttribute("empl", empl);
             Map<String, String> validatorResult = emplService.validateHandling(errors);
             for (String key : validatorResult.keySet()) {
                 model.addAttribute(key, validatorResult.get(key));

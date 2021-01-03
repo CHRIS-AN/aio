@@ -28,7 +28,7 @@ public class Empl {
     private String address;
 
 
-    private Integer post_num;
+    private String post_num;
 
 
     private String phone;

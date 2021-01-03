@@ -40,16 +40,17 @@
                     </div>
                 </div>
                 <div id="datatable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
-                    <form id="searchfrm">
-                        <div class="row">
+                        <div class="col-md-12">
                             <div class="col-md-2">
-                                <select id="cnt" class="">
+                                <select id="cnt" class="form-control">
                                     <option value="10">10</option>
                                     <option value="20">20</option>
                                     <option value="50">50</option>
                                     <option value="100">100</option>
                                 </select>
-                                <select id="dept" class="">
+                            </div>
+                            <div class="col-md-2">
+                                <select id="dept" class="form-control">
                                     <option value="부서명">부서명</option>
                                     <option value="인사">인사</option>
                                     <option value="제품">제품</option>
@@ -58,12 +59,17 @@
                                     <option value="회계">회계</option>
                                 </select>
                             </div>
-                            <div class="text-right col-md-10">
-                                <input type="text" id="keyword"/>
-                                <button type="button" id="searchBtn">검색</button>
+                            <div class="col-md-5"></div>
+                            <div class="text-right col-md-3">
+                                <div class="col-md-10">
+                                    <input type="text" onkeyup="enterkey()" class="form-control" id="keyword"/>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-default " id="searchBtn">검색</button>
+                                </div>
                             </div>
                         </div>
-                    </form>
+
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="row" id="hrm">
@@ -251,8 +257,8 @@
                                         <input type="hidden" id="photo2" name="photo" value='" + data[0].photo + "'>
 
                                         <button type="button" class="btn btn-default btn-100" onclick="clearImg2()">이미지 삭제</button>
-                                        <span id="photo_validate"></span>
                                     </div>
+                                    <span class="text-red" id="photo_validate"></span>
                                 </div>
                                 <div id="upc-box" class="col-md-8">
 
