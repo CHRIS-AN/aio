@@ -56,7 +56,6 @@ public class ExcelController {
             String nowDate = new SimpleDateFormat("yyyy-MM-dd").format(tday);
             String searchDate = new SimpleDateFormat("yyyy-MM-dd").format(calendar.getTime());
 
-
             // 매출액
             String [] take = {"외상매입금", "지급어음", "미지급금", "선수수익"};
             // 매입액
@@ -93,7 +92,6 @@ public class ExcelController {
                    model.addAttribute("maintenanceSales", cc);
                 }
             }//end for문 (maintenanceSales)
-
 
             // 매출액 take
             for (int i = 0; i < take.length; i++ ) {
@@ -132,7 +130,6 @@ public class ExcelController {
             String dd = excelService.setComma(grossProfit);
             model.addAttribute("grossProfit", dd);
 
-
             // 기타수익 otherIncome
             for (int i = 0; i < otherIncome.length; i++ ) {
                 List<Slip> slipIncomeStatement = excelService.countIncomeStatement("승인",
@@ -165,12 +162,10 @@ public class ExcelController {
                 }
             }//end for문 (otherExpenses)
 
-
             // 영업 이익
             int salesIncome = otherIncomeI - otherExpensesI;
             String ee = excelService.setComma(salesIncome);
             model.addAttribute("salesIncome", ee);
-
 
             // 법인세비 incomeTaxExpense
             for (int i = 0; i < incomeTaxExpense.length; i++ ) {
@@ -194,8 +189,6 @@ public class ExcelController {
             netIncomeI = grossProfit - maintenanceSalesI + salesIncome - incomeTaxExpenseI;
             String gg = excelService.setComma(netIncomeI);
             model.addAttribute("netIncome", gg);
-
-
 
             model.addAttribute("nowDate", nowDate);
             model.addAttribute("searchDate", searchDate);
