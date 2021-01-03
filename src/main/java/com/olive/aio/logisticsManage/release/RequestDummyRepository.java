@@ -16,5 +16,3 @@ public interface RequestDummyRepository extends JpaRepository<Requestdummy, Inte
     Requestdummy findByRequestid(Integer requestid);
 
 }
-
-

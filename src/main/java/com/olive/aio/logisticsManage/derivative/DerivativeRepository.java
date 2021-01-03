@@ -16,5 +16,3 @@ public interface DerivativeRepository extends JpaRepository<Derivative, Integer>
     Derivative findByDerivid(Integer derivativeid);
 
 }
-
-
