@@ -453,14 +453,14 @@
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">발주 물품 삭제</h4>
+                        <h2 class="modal-title font-weight-bold text-primary pl-3">발주 물품 삭제</h2>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
 
                     <!-- Modal body -->
                     <div class="modal-body">
                         <form action="draftDelete" method="post">
-                            정말 삭제하시겠습니까?
+                            <p class="h3 text-dark pl-3">정말 삭제하시겠습니까?</p>
                             <input type="hidden" id="deleteDraftId" name="draft_seq" value="">
                             <div class="modal-footer">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

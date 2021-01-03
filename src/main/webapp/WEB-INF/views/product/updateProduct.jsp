@@ -43,12 +43,12 @@
                 <input name="prod_id" type="hidden" value="${product.prod_id}">
                 <table class="table table-bordered" style="width: 50%; margin: auto;">
                     <tr>
-                        <td>제품명</td>
-                        <td><input type="text" name="prodName" value="${product.prodName}"/>${valid_prodName}</td>
+                        <td>* 제품명</td>
+                        <td><input type="text" name="prodName" value="${product.prodName}"/> (한글, 영어, 숫자, 특수문자()(<small> _ : , . ' ' ( ) </small>)로 50자 이하) <p style="border-style: none; color: red;">${valid_prodName}</p></td>
                         <form:errors path="prodName"/>
                     </tr>
                     <tr>
-                        <td>거래처</td>
+                        <td>* 거래처</td>
                         <td>
                             <input type="hidden" id="corp_id" name="corp_id" value="${product.corp.corp_id}">
                             <span name="corps" id="corps" class="corps">${product.corp.corpName}</span>
@@ -60,21 +60,21 @@
                         <td><input type="text" value="${empl.name}" name="name" disabled/></td>
                     </tr>
                     <tr>
-                        <td>단위</td>
-                        <td><input type="text" name="prod_bundle" value="${product.prod_bundle}"/>${valid_prod_bundle}
+                        <td>* 단위</td>
+                        <td><input type="text" name="prod_bundle" value="${product.prod_bundle}"/> (숫자로 10자이하) <p style="border-style: none; color: red;">${valid_prod_bundle}</p>
                         </td>
                     </tr>
                     <tr>
-                        <td>판매가</td>
-                        <td><input type="text" name="sell_price" value="${product.sell_price}"/>${valid_sell_price}</td>
+                        <td>* 판매가</td>
+                        <td><input type="text" name="sell_price" value="${product.sell_price}"/> (숫자로 10자이하) <p style="border-style: none; color: red;">${valid_sell_price}</p></td>
                     </tr>
                     <tr>
-                        <td>구매가</td>
-                        <td><input type="text" name="buy_price" value="${product.buy_price}"/>${valid_buy_price}</td>
+                        <td>* 구매가</td>
+                        <td><input type="text" name="buy_price" value="${product.buy_price}"/> (숫자로 10자이하) <p style="color: red;">${valid_buy_price}</p></td>
                     </tr>
                     <tr>
-                        <td>카테고리</td>
-                        <td><input type="text" name="prod_catag" value="${product.prod_catag}"/>${valid_prod_catag}</td>
+                        <td>* 카테고리</td>
+                        <td><input type="text" name="prod_catag" value="${product.prod_catag}"/> (한글, 영어, 숫자, 특수문자()(<small> _ : , . ' ' ( ) </small>)로 10자 이하) <p style="border-style: none; color: red;">${valid_prod_catag}</p></td>
                     </tr>
                     <tr>
                         <td>제품설명</td>
@@ -88,6 +88,9 @@
                             <input type="file" class="form-control" id="image-input-file">
                             <input type="hidden" value="${product.prod_image}"  id="photo" name="prod_image">
                         </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="color: red;"> * 이 붙은 것은 필수입니다. </td>
                     </tr>
                     <tr>
                         <td colspan="2" align="center">
