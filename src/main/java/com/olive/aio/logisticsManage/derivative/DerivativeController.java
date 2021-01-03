@@ -67,7 +67,6 @@ public class DerivativeController {
     private void viewList(Model model) {
 
         String derivWait = "결제 완료";
-
         List<Orders> derivWaitList = derivativeService.findByOdersState(derivWait);
         List<String> derivTitleList = derivativeService.makeDerivTitleList(derivWait);
         Map<Orders, String> derivWaitListInTitle = new HashMap<>();
