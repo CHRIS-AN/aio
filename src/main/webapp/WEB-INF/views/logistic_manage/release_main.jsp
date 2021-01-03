@@ -63,7 +63,7 @@
         }
 
         #requestTable {
-            font-size: 1.2em;
+            font-size: 1.35em;
         }
 
         #requestTable tr {
@@ -355,12 +355,12 @@
                                         <th>출고요청번호</th>
                                         <td><span id="modal_1_1"></span></td>
                                     </tr><tr>
-                                        <th>출고요청일</th>
-                                        <td><span id="modal_1_2"></span></td>
-                                    </tr><tr>
-                                        <th>지점명</th>
-                                        <td><span id="modal_1_3"></span></td>
-                                    </tr>
+                                    <th>출고요청일</th>
+                                    <td><span id="modal_1_2"></span></td>
+                                </tr><tr>
+                                    <th>지점명</th>
+                                    <td><span id="modal_1_3"></span></td>
+                                </tr>
                                 </table>
                             </div>
 
@@ -395,7 +395,7 @@
                             <!-- Modal footer -->
                             <div class="modal-footer">
                                 <input type="button" id="reqCancle" class="btn btn_aio2" data-dismiss="modal"
-                                        value="취소"/>
+                                       value="취소"/>
                                 <input type="submit" id="reqSubmit" class="btn btn_aio" value="출고대기"/>
                             </div>
                         </c:if>
@@ -480,46 +480,46 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                      <div class="ListWrap">
-                            <div class="modalTileTxt"><span>출고완료 리스트</span></div>
+                    <div class="ListWrap">
+                        <div class="modalTileTxt"><span>출고완료 리스트</span></div>
 
-                            <div class="listTableTitle">
-                                <table class="table">
-                                    <tr>
-                                        <th>출고번호</th>
-                                        <td><span id="modal_3_1"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <th>출고일</th>
-                                        <td><span id="modal_3_2"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <th>출고지점</th>
-                                        <td><span id="modal_3_3"></span></td>
-                                    </tr>
-                                </table>
+                        <div class="listTableTitle">
+                            <table class="table">
+                                <tr>
+                                    <th>출고번호</th>
+                                    <td><span id="modal_3_1"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>출고일</th>
+                                    <td><span id="modal_3_2"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>출고지점</th>
+                                    <td><span id="modal_3_3"></span></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="OkList"></div>
+
+                        <div class="resultAll">
+                            <div><span class="totalProdCnt"></span></div>
+                            <div>
+                                <span class="totalReqCnt"></span>
+                                <span>&nbsp;/&nbsp;</span>
+                                <span class="totalReleaCnt1"></span>
                             </div>
+                        </div>
 
-                            <div class="OkList"></div>
+                        <div class="inspectorName"><span id="inspector"></span></div>
 
-                          <div class="resultAll">
-                              <div><span class="totalProdCnt"></span></div>
-                              <div>
-                                  <span class="totalReqCnt"></span>
-                                  <span>&nbsp;/&nbsp;</span>
-                                  <span class="totalReleaCnt"></span>
-                              </div>
-                          </div>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <input type="button" class="btn btn_aio" data-dismiss="modal" value="확인"/>
+                        </div>
 
-                          <div class="inspectorName"><span id="inspector"></span></div>
-
-                          <!-- Modal footer -->
-                          <div class="modal-footer">
-                              <input type="button" class="btn btn_aio" data-dismiss="modal" value="확인"/>
-                          </div>
-
-                      </div>
-                        <!-- ListWrap END -->
+                    </div>
+                    <!-- ListWrap END -->
                 </div>
                 <!-- modal body -->
             </div>

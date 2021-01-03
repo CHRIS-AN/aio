@@ -27,14 +27,14 @@ function addId(tableId) {
 
 function regist_relea(requestid, emplId, emplDept) {
 
-        $.ajax({
-            url: "./getReqList/" + requestid,
-            type: "GET",
-            cache: false,
-            success: function (data) {
-                reqList(data, emplId, emplDept)
-            }
-        })
+    $.ajax({
+        url: "./getReqList/" + requestid,
+        type: "GET",
+        cache: false,
+        success: function (data) {
+            reqList(data, emplId, emplDept)
+        }
+    })
 } // regist_relea() END
 
 function reqList(data, emplId, emplDept){
@@ -44,7 +44,7 @@ function reqList(data, emplId, emplDept){
     var reqList = data.dummyLists;
 
     var requestid = data.requestid;
-    var requestidStr = "Q" + requestid;
+    var requestidStr = "S" + requestid;
     var requestregdate = data.requestregdate;
     var storename = data.storename;
     var requesttotcnt = data.requesttotcnt;
@@ -69,7 +69,7 @@ function reqList(data, emplId, emplDept){
         for (var i = 0; i < reqList.length; i++) {
             contentW += "<tr>"
             contentW += "<td>" + (1 + i) + "</td>"
-            contentW += "<td>" + reqList[i].prodid.prod_id+ "</td>"
+            contentW += "<td>" + reqList[i].prodid.prod_id + "</td>"
             contentW += "<td>" + reqList[i].prodid.prodName + "</td>"
             contentW += "<td>" + reqList[i].requestcnt + "</td>"
             contentW += "<td><input type='number' class='confirmCntLen' id='confirmCntR[" + i + "].releaokconfirmcnt'" +
@@ -80,16 +80,15 @@ function reqList(data, emplId, emplDept){
         contentW += "<table class='table'><thead><tr tr class='prodHeader'>" +
             "<th>번호</th>" +
             "<th>제품코드</th>" +
-            "<th>출고요청 품목</th>" +
-            "<th>요청수량</th>" +
-            "<th>실출고수량</th>" +
+            "<th>출고요청품목</th>" +
+            "<th>출고요청수량</th>" +
             "<tbody>"
         for (var i = 0; i < reqList.length; i++) {
             contentW += "<tr>"
             contentW += "<td>" + (1 + i) + "</td>"
-            contentW += "<td>" + reqList[i].product.prod_id + "</td>"
-            contentW += "<td>" + reqList[i].product.prodName + "</td>"
-            contentW += "<td>" + reqList[i].draft_cnt + "</td>"
+            contentW += "<td>" + reqList[i].prodid.prod_id + "</td>"
+            contentW += "<td>" + reqList[i].prodid.prodName + "</td>"
+            contentW += "<td>" + reqList[i].requestcnt + "</td>"
             contentW += "</tr>"
         }
         contentW += "</tbody></table>"
@@ -209,7 +208,7 @@ function releaOkSubmit() {
 function releaOkModal(releaid) {
 
     $.ajax({
-        url: "./getReleaOkList/" + releaid,
+        url: "./getReleaList/" + releaid,
         type: "GET",
         cache: false,
         success: function (data) {
@@ -220,18 +219,18 @@ function releaOkModal(releaid) {
 
 function releaOkList(data){
 
-    for (var i = 0; i < data.length; i++) {
-    console.log(data[i])}
-
     var contentW = "";
+    console.log(data)
+    var reqList = data.requestid.dummyLists;
+    var releaList = data.releaselists;
 
-    var releaid = data[0].releaseid.releaid;
+    var releaid = data.releaid;
     var releaidStr = "R" + releaid;
-    var releaokconfirmdate = data[0].releaseid.releaokconfirmdate;
-    var storename = data[0].releaseid.requestid.storename;
-    var reqtotcnt = data[0].releaseid.requestid.requesttotcnt;
-    var releaOktotcnt = data[0].releaseid.releaOktotcnt;
-    var releaInspector = data[0].releaseid.emplid.name + "(" + data[0].releaseid.emplid.emplId + ")"
+    var releaokconfirmdate = "출고일 : " + data.releaokconfirmdate;
+    var storename = data.requestid.storename;
+    var reqtotcnt = data.requestid.requesttotcnt;
+    var releaOktotcnt = data.releaOktotcnt;
+    var releaInspector = data.emplid.name + "(" + data.emplid.emplId + ")"
 
     $("#modal_3_1").text(releaidStr);
     $("#modal_3_2").text(releaokconfirmdate);
@@ -241,29 +240,29 @@ function releaOkList(data){
         "<th>번호</th>" +
         "<th>제품코드</th>" +
         "<th>출고요청품목</th>" +
-        "<th>요청수량</th>" +
+        "<th>출고요청수량</th>" +
         "<th>실출고수량</th>" +
         "</tr></thead>" +
         "<tbody>"
 
-    for (var i = 0; i < data.length; i++) {
+    for (var i = 0; i < reqList.length; i++) {
         contentW += "<tr>"
         contentW += "<td>" + (1 + i) + "</td>"
-        contentW += "<td>" + data[i].releaseid.requestid.dummyLists[i].prodid.prod_id + "</td>"
-        contentW += "<td>" + data[i].releaseid.requestid.dummyLists[i].prodid.prodName + "</td>"
-        contentW += "<td>" + data[i].releaseid.requestid.dummyLists[i].requestcnt + "</td>"
-        contentW += "<td>" + data[i].releaokconfirmcnt + "</td>"
+        contentW += "<td>" + reqList[i].prodid.prod_id + "</td>"
+        contentW += "<td>" + reqList[i].prodid.prodName + "</td>"
+        contentW += "<td>" + reqList[i].requestcnt + "</td>"
+        contentW += "<td>" + releaList[i].releaokconfirmcnt + "</td>"
         contentW += "</tr>"
     }
     contentW += "</tbody></table>"
 
     $(".OkList").html(contentW);
 
-    $(".totalProdCnt").text("총 " + data.length + "품목");
+    $(".totalProdCnt").text("총 " + reqList.length + "품목");
     $(".totalReqCnt").text(reqtotcnt);
 
-    $(".totalReleaCnt").css("color", "#372c81")
-    $(".totalReleaCnt").eq('1').text(releaOktotcnt)
+    $(".totalReleaCnt1").css("color", "#372c81")
+    $(".totalReleaCnt1").eq('0').text(releaOktotcnt)
 
     $("#inspector").text(releaInspector)
 } // releaOkList() END

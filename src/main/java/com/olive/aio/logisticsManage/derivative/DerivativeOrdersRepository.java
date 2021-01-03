@@ -15,5 +15,3 @@ public interface DerivativeOrdersRepository extends JpaRepository<Orders, Long>{
     Orders findByOrdersid(Long ordersid);
 
 }
-
-
