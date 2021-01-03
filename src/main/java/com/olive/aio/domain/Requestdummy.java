@@ -30,9 +30,6 @@ public class Requestdummy {
     @Column(name = "store_name")
     private String storename;
 
-    @Lob
-    private String reason;
-
     @OneToOne
     @JoinColumn(name = "relea_id")
     private Release releaseid;

@@ -116,6 +116,7 @@ function derivChkList(data, emplId, emplDept){
             contentW += "<td><input type='number' class='confirmCntLen' id='confirmCntD[" + i + "].derivokconfirmcnt'" +
                 "name='confirmCntD[" + i + "].derivokconfirmcnt' onkeydown='onlyNum(event)' onkeyup='sum();'></td>"
             contentW += "</tr>"
+            $(".totalOrdersCnt").text(derivtotcnt);
         }
     } else {
         contentW += "<table class='table'><thead><tr tr class='prodHeader'>" +
@@ -134,11 +135,11 @@ function derivChkList(data, emplId, emplDept){
             contentW += "</tr>"
         }
         contentW += "</tbody></table>"
+        $(".totalOrdersCnt").text(derivtotcnt + "개");
     }
     $(".listTableProds").html(contentW);
 
     $(".totalProdCnt").text("총 " + drafts.length + "품목");
-    $(".totalOrdersCnt").text(derivtotcnt);
 
     $(".totalDerivCnt").css("color", "#f57c32")
     $(".totalDerivCnt").eq('0').text("0")
@@ -272,7 +273,7 @@ function derivOkList(data){
     $(".totalOrdersCnt").text(derivtotcnt);
 
     $(".totalDerivCnt1").css("color", "#372c81")
-    $(".totalDerivCnt1").eq('1').text(derivConfirmTotCnt)
+    $(".totalDerivCnt1").eq('0').text(derivConfirmTotCnt)
 
     $("#inspector").text(derivInspector)
 } // derivChkList() END

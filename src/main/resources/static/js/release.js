@@ -69,7 +69,7 @@ function reqList(data, emplId, emplDept){
         for (var i = 0; i < reqList.length; i++) {
             contentW += "<tr>"
             contentW += "<td>" + (1 + i) + "</td>"
-            contentW += "<td>" + reqList[i].prodid.prod_id+ "</td>"
+            contentW += "<td>" + reqList[i].prodid.prod_id + "</td>"
             contentW += "<td>" + reqList[i].prodid.prodName + "</td>"
             contentW += "<td>" + reqList[i].requestcnt + "</td>"
             contentW += "<td><input type='number' class='confirmCntLen' id='confirmCntR[" + i + "].releaokconfirmcnt'" +
@@ -80,16 +80,15 @@ function reqList(data, emplId, emplDept){
         contentW += "<table class='table'><thead><tr tr class='prodHeader'>" +
             "<th>번호</th>" +
             "<th>제품코드</th>" +
-            "<th>출고요청 품목</th>" +
-            "<th>출고요청 수량</th>" +
-            "<th>실출고 수량</th>" +
+            "<th>출고요청품목</th>" +
+            "<th>출고요청수량</th>" +
             "<tbody>"
         for (var i = 0; i < reqList.length; i++) {
             contentW += "<tr>"
             contentW += "<td>" + (1 + i) + "</td>"
-            contentW += "<td>" + reqList[i].product.prod_id + "</td>"
-            contentW += "<td>" + reqList[i].product.prodName + "</td>"
-            contentW += "<td>" + reqList[i].draft_cnt + "</td>"
+            contentW += "<td>" + reqList[i].prodid.prod_id + "</td>"
+            contentW += "<td>" + reqList[i].prodid.prodName + "</td>"
+            contentW += "<td>" + reqList[i].requestcnt + "</td>"
             contentW += "</tr>"
         }
         contentW += "</tbody></table>"
