@@ -217,10 +217,9 @@ function confirmOnSubmit() {
 function derivOkModal(derivid) {
 
     $.ajax({
-        url: "./getDerivOkList/" + derivid,
+        url: "./getDerivList/" + derivid,
         type: "GET",
         cache: false,
-        dataType : 'json',
         success: function (data) {
             derivOkList(data)
         }
@@ -230,18 +229,17 @@ function derivOkModal(derivid) {
 function derivOkList(data){
 
     var contentW = "";
-    for (var i = 0; i < data.length; i++) {
-        console.log(data[i])
-    }
+    var drafts = data.ordersid.draft;
 
-    var derivid = data[0].derivativeid.derivid;
+    var derivid = data.derivid;
     var derividStr = "입고번호 : D" + derivid;
-    var derivregdate = "입고완료일 : " + data[0].derivativeid.derivregdate;
-    var derivcorpname = data[0].derivativeid.ordersid.corp.corpName;
-    var derivtotcnt = data[0].derivativeid.ordersid.orders_cnt;
-    var derivordersid = data[0].derivativeid.ordersid.ordersid;
-    var derivConfirmTotCnt = data[0].derivativeid.derivokconfirmtotcnt;
-    var derivInspector = data[0].derivativeid.emplid.name + "(" + data[0].derivativeid.emplid.emplId + ")"
+    var derivregdate = "입고일 : " + data.derivregdate;
+    var derivcorpname = data.ordersid.corp.corpName;
+    var derivtotcnt = data.ordersid.orders_totsum;
+    var derivordersid = data.ordersid.ordersid;
+    var derivConfirmCnt = data.derivlistid;
+    var derivConfirmTotCnt = data.derivokconfirmtotcnt;
+    var derivInspector = data.emplid.name + "(" + data.emplid.emplId + ")"
 
     $("#modal_3_1").text(derividStr);
     $("#modal_3_2").text(derivregdate);
@@ -257,24 +255,24 @@ function derivOkList(data){
         "</tr></thead>" +
         "<tbody>"
 
-    for (var i = 0; i < data.length; i++) {
+    for (var i = 0; i < drafts.length; i++) {
         contentW += "<tr>"
         contentW += "<td>" + (1 + i) + "</td>"
-        contentW += "<td>" + data[i].derivativeid.ordersid.draft[i].product.prod_id + "</td>"
-        contentW += "<td>" + data[i].derivativeid.ordersid.draft[i].product.prodName + "</td>"
-        contentW += "<td>" + data[i].derivativeid.ordersid.draft[i].draft_cnt + "</td>"
-        contentW += "<td>" + data[i].derivokconfirmcnt + "</td>"
+        contentW += "<td>" + drafts[i].product.prod_id + "</td>"
+        contentW += "<td>" + drafts[i].product.prodName + "</td>"
+        contentW += "<td>" + drafts[i].draft_cnt + "</td>"
+        contentW += "<td>" + derivConfirmCnt[i].derivokconfirmcnt + "</td>"
         contentW += "</tr>"
     }
     contentW += "</tbody></table>"
 
     $(".OkList").html(contentW);
 
-    $(".totalProdCnt").text("총 " + data.length + "품목");
+    $(".totalProdCnt").text("총 " + drafts.length + "품목");
     $(".totalOrdersCnt").text(derivtotcnt);
 
-    $(".totalDerivCnt").css("color", "#372c81")
-    $(".totalDerivCnt").eq('1').text(derivConfirmTotCnt)
+    $(".totalDerivCnt1").css("color", "#372c81")
+    $(".totalDerivCnt1").eq('1').text(derivConfirmTotCnt)
 
     $("#inspector").text(derivInspector)
 } // derivChkList() END
