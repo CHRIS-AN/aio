@@ -130,7 +130,7 @@
                                 <tr>
                                     <th class="h3 text-dark" style="border-style: none"><dt>상호</dt></th>
                                     <th style="border-style: none"><input type="text" class="p-1" style="width:100%" name="corpName" value="${corpError.corpName}" placeholder="내용을 입력해주세요" autofocus required/></th>
-                                    <th style="border-style: none"> <p class="h5 font-weight-normal">한글과 영어 특수문자(<small> _ : , . ' ' ( ) </small>)만 가능</p> </th>
+                                    <th style="border-style: none"> <p class="h5 font-weight-normal">한글, 영어, 숫자, 특수문자(<small> _ : , . ' ' ( ) </small>)만 20자 이하 가능</p> </th>
                                     <form:errors path="corpName"/>
                                 </tr>
                                 <tr>
@@ -279,7 +279,7 @@
                                     <th class="h3 text-dark" style="border-style: none"><dt>상호</dt></th>
                                     <th style="border-style: none"><input type="text" class="p-1" style="width:100%" id="modal3_1" name="corpName" value="${corpError2.corpName}" placeholder="내용을 입력해주세요" autofocus required/>
                                         <input type="hidden" name="corp_id" id="modal3_2_2" ></th>
-                                    <th style="border-style: none"> <p class="h5 font-weight-normal">한글과 영어 특수문자(<small> _ : , . ' ' ( ) </small>)만 가능</p> </th>
+                                    <th style="border-style: none"> <p class="h5 font-weight-normal">한글, 영어, 숫자, 특수문자(<small> _ : , . ' ' ( ) </small>)만 20자 이하 가능</p> </th>
                                     <form:errors path="corpName"/>
                                 </tr>
                                 <tr>
@@ -315,7 +315,7 @@
                                 </tr>
                                 <tr>
                                     <th class="h3 text-dark" style="border-style: none"><dt>주소</dt></th>
-                                    <th style="border-style: none"><input type="text" class="p-1" style="width:100%" id="modal3_6" name="corp_address" value="${corpError2.corp_address}" placeholder="도로명 주소" autofocus required/></th>
+                                    <th style="border-style: none"><input type="text" class="p-1" style="width:100%" id="modal3_6" name="corp_address" value="${corpError2.corp_address}" placeholder="주소를 입력해주세요" autofocus required/></th>
                                     <th style="border-style: none">  </th>
                                 </tr>
                             </table>

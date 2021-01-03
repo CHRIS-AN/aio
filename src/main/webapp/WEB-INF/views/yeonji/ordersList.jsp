@@ -192,7 +192,7 @@
             var updatelink;
             function detail(ordersid,corpName,empl_name,orders_regdate,orders_cnt,orders_totsum,corp_ceo,corp_call,corp_address,ordersstate){
                 updatelink = ordersid;
-                alert(ordersstate);
+
                 $('#detailModal').on('show.bs.modal', function (event) {
                     $.ajax({
                         url: "./" + ordersid,
