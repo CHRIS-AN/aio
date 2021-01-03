@@ -12,12 +12,13 @@ import java.util.Date;
 @Entity
 @Getter @Setter @EqualsAndHashCode(of = "id")
 @Builder @AllArgsConstructor @NoArgsConstructor
+@SequenceGenerator(name = "ORDERS_SEQ_GENERATOR", sequenceName = "ORDERS_SEQ", initialValue = 10, allocationSize = 1)
 @ToString
 public class Slip {
 
     // 자동 생성 전략
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CORP_SEQ_GENERATOR")
     private Long slipId; // 전표 고유번호
 
     @NotBlank(message="날짜 입력란이 비어있습니다.")

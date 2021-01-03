@@ -18,13 +18,14 @@ import java.util.Set;
 @AllArgsConstructor //모든 인스턴스 변수를 포함하는 생성자 생성
 @Getter @Setter
 @Entity //해당 클래스 인스턴스 변수들이 Entity임을 명시함. JPA를 사용해서 테이블과 매필할 클래스에 붙이는 어노테이션. 데이터베이스에 저장하기 위해서 유저가 정의한 클래스.
+@SequenceGenerator(name = "ORDERS_SEQ_GENERATOR", sequenceName = "ORDERS_SEQ", initialValue = 33, allocationSize = 1)
 @Table(name = "ORDERS") //클래스 선언부에 작성, 테이블명을 정해준다. 미지정 시 클래스 명으로 생성됨
 public class Orders implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id //기본 키 매핑 어노테이션. 필수사항
-    @GeneratedValue //id가 선언된 필드에 기본 키 값을 자동으로 할당 (Default : AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ORDERS_SEQ_GENERATOR")
     @Column(name = "orders_id")
     private Long ordersid; //발주번호
 

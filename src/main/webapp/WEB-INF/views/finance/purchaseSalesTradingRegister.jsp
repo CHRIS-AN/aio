@@ -48,7 +48,7 @@
                     <div class="row col-12">
                         <div class="col-lg-12 mb-5">
                             <form class="needs-validation form-horizontal"
-                                  action="/finance/purchaseSalesTradingRegister" method="post">
+                                  action="/finance/purchaseSalesTradingRegister" onsubmit="return button_register()"  method="post">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                 <div class="row form-group">
                                     <div class="form-group col-md-5">
@@ -184,7 +184,7 @@
 
                                 <div> </div>
                                 <div class="col-sm-12 text-right">
-                                    <button type="submit" class="btn btn-primary" onclick="button_register()"><em>전표 등록</em></button>
+                                  <button type="submit" class="btn btn-primary"><em>전표 등록</em></button>
                                 </div>
 
                             </form>
@@ -235,13 +235,22 @@
             target.appendChild(opt);
         }
     }
+    // function button_register(){
+    //
+    //     confirm("정말 등록하시겠습니까??")
+    //     if (!confirm){   //취소
+    //         return false;
+    //     }
+    //     return true;
+    // }
 
     function button_register(){
-        if (confirm("정말 등록하시겠습니까??") == true){    //확인
-            document.form.submit();
-        }else if (confirm("정말 등록하시겠습니까??") == false){   //취소
-            return;
+        var chkConfrim =  confirm("정말 등록하시겠습니까??")
+
+        if (!chkConfrim){    //확인
+            return false;
         }
+            return true;
     }
 </script>
 <!-- script -->

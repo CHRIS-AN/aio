@@ -63,17 +63,20 @@ public class SlipController {
                                                      @Valid Slip slip,
                                                      Errors errors,
                                                      Model model, Corp corp) {
-
-        System.out.println("empltoString submit:" + empl.toString());
-        try{
             List<Corp> corpList = corpService.findAll(corp);
             System.out.println(slip.toString());
             if (errors.hasErrors()) {
                 System.out.println("2번리턴?");
 
-                if(slip.getSlipCode().equals("계정과목을 선택해주세요.")){
-                    model.addAttribute("valid_slipCode", "전표타입을 선택하신 다음, 다시 계정과목을 선택해주세요.");
-                }
+//                if(slip.getSlipCode().equals("계정과목을 선택해주세요.")){
+//                    System.out.println("여기는 들어오니?");
+//                    model.addAttribute("valid_slipCode", "전표타입을 선택하신 다음, 다시 계정과목을 선택해주세요.");
+//                }else{
+//
+//                }
+
+
+
                 model.addAttribute("empl", empl);
                 model.addAttribute("slip", slip);
                 model.addAttribute("corpList", corpList);
@@ -82,15 +85,12 @@ public class SlipController {
                     model.addAttribute(key, validatorResult.get(key));
                 }
                 return FINANCE + PSTR;
+
             }
             slip.setCorp(corp.getCorpName());
             slipService.saveSlip(slip);
             model.addAttribute("empl", empl);
             return "redirect:/finance" + OA;
-        }catch (NullPointerException e){
-            e.printStackTrace();
-            return FINANCE + PSTR;
-        }
     }
 
     //  승인 요청대기 리스트 뽑는 핸들러

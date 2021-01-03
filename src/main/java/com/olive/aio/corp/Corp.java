@@ -21,11 +21,12 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@SequenceGenerator(name = "CORP_SEQ_GENERATOR", sequenceName = "CORP_SEQ", initialValue = 31, allocationSize = 1)
 @Table(name = "CORP")
 public class Corp {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CORP_SEQ_GENERATOR")
     private long corp_id; // 거래처 고유번호
 
     @Column(name = "CORP_NAME")

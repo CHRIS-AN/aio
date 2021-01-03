@@ -20,10 +20,11 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@SequenceGenerator(name = "PROD_SEQ_GENERATOR", sequenceName = "PROD_SEQ", initialValue = 16, allocationSize = 1)
 @Table(name = "PROD")
 public class Product {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PROD_SEQ_GENERATOR")
     private long prod_id;
 
     @NotNull(message = "값을 비울 수 없습니다.")
