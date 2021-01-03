@@ -235,7 +235,7 @@ function derivOkList(data){
     var derividStr = "입고번호 : D" + derivid;
     var derivregdate = "입고일 : " + data.derivregdate;
     var derivcorpname = data.ordersid.corp.corpName;
-    var derivtotcnt = data.ordersid.orders_totsum;
+    var derivtotcnt = data.ordersid.orders_cnt;
     var derivordersid = data.ordersid.ordersid;
     var derivConfirmCnt = data.derivlistid;
     var derivConfirmTotCnt = data.derivokconfirmtotcnt;

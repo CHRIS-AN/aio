@@ -8,7 +8,7 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "request_dummy_list")
+@Table(name = "Request_dummy_list")
 @Data
 public class Requestdummylist {
 

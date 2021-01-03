@@ -1,7 +1,6 @@
 package com.olive.aio.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -20,7 +19,7 @@ public class Releaselist {
 
     @ManyToOne
     @JoinColumn(name = "relea_id")
-    @JsonManagedReference
+    @JsonBackReference
     private Release releaseid;
 
 }

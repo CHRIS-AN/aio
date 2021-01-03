@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "request_dummy")
+@Table(name = "Request_dummy")
 @Data @EqualsAndHashCode(of = "requestid")
 public class Requestdummy {
 
@@ -30,14 +30,15 @@ public class Requestdummy {
     @Column(name = "store_name")
     private String storename;
 
-//    @Lob
-//    private String reason;
+    @Lob
+    private String reason;
 
     @OneToOne
     @JoinColumn(name = "relea_id")
     private Release releaseid;
 
     @OneToMany(mappedBy = "reqdummyid", fetch = FetchType.EAGER)
+    @OrderBy("reqdummylistid asc")
     @JsonManagedReference
     private Set<Requestdummylist> dummyLists = new HashSet<>();
 
