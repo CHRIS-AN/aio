@@ -32,12 +32,10 @@ input[type="number"]::-webkit-inner-spin-button {
 .listTableTitle th, .prodHeader { background-color: #a69ce1; color: #f0f0f0; text-align: center;}
 #modal_2 .listTableTitle th,#modal_3 .listTableTitle th
 { background-color: #a69ce1; color: #f0f0f0; text-align: center; width: 100px;}
-#modal_1 {font-size: 0.9em;}
 
 .listTableProds, .OkList {max-height: 500px; overflow: auto;}
 .listTableProds table , .OkList table{text-align: center;}
-.listTableProds th {font-size: 0.85em;}
-#modal_3 .OkList th {font-size: 0.9em;}
+#modal_2 .listTableProds th {font-size: 0.9em;}
 .headerSticky {position: sticky; top: 0;}
 .resultAll {
     display: flex;
@@ -62,3 +60,4 @@ input[type="number"]::-webkit-inner-spin-button {
 #rej textarea {width: 330px; resize: none;}
 
 #requestTable .listTableTitle th { width: 160px;}
+#requestTable .listTableProds th { font-size: 0.7em;}
