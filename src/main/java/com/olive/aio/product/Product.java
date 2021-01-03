@@ -2,6 +2,7 @@ package com.olive.aio.product;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.olive.aio.corp.Corp;
 import com.olive.aio.domain.Empl;
 import com.olive.aio.draft.Draft;
@@ -59,6 +60,8 @@ public class Product {
     Empl empl;
 
     @ManyToOne
+    @JoinColumn(name = "corp_id")
+    @JsonManagedReference
     Corp corp;
 
 }

@@ -132,7 +132,7 @@
                                                 <div class="col-md-12">
                                                     <label class="">성명</label>
                                                     <input type="text" class="form-control" name="name"
-                                                           th:value="${myInfoForm.name}" required/>
+                                                           th:value="${myInfoForm.name}" />
                                                     <span class="text-red" th:value="${valid_name}"></span>
                                                 </div>
                                             </div>
@@ -158,7 +158,7 @@
                                                 <div class="col-md-12">
                                                     <label class="">주민등록 번호</label>
                                                     <input type="text" class="form-control" name="jumin"
-                                                           th:value="${myInfoForm.jumin}" required/>
+                                                           th:value="${myInfoForm.jumin}" />
                                                     <span class="text-red" th:value="${valid_jumin}"></span>
                                                 </div>
                                             </div>
@@ -166,7 +166,7 @@
                                                 <div class="col-md-12">
                                                     <label class="">연락처</label>
                                                     <input type="text" class="form-control" name="phone"
-                                                           th:value="${myInfoForm.phone}" required/>
+                                                           th:value="${myInfoForm.phone}" />
                                                     <span class="text-red" th:value="${valid_phone}"></span>
                                                 </div>
                                             </div>
@@ -174,7 +174,7 @@
                                                 <div class="col-md-12">
                                                     <label class="">Email</label>
                                                     <input type="text" class="form-control" name="email"
-                                                           th:value="${myInfoForm.email}" required/>
+                                                           th:value="${myInfoForm.email}" />
                                                     <span class="text-red" th:value="${valid_email}"></span>
                                                 </div>
                                             </div>
@@ -184,7 +184,7 @@
                                                 </div>
                                                 <div class="col-md-3">
                                                     <input type="text" class="form-control" id="pdtnum" name="post_num"
-                                                           th:value="${myInfoForm.post_num}" required readonly/>
+                                                           th:value="${myInfoForm.post_num}"  readonly/>
                                                 </div>
                                                 <button type="button" class="btn btn-default"
                                                         onclick="showjusoPopup('수정')">검색
@@ -193,7 +193,7 @@
                                             <div class="form-group">
                                                 <div class="col-md-12">
                                                     <input type="text" class="form-control" id="updateAddr"
-                                                           name="address" th:value="${myInfoForm.address}" required/>
+                                                           name="address" th:value="${myInfoForm.address}" />
                                                     <span class="text-red" th:value="${valid_address}"></span>
                                                 </div>
                                             </div>
@@ -209,7 +209,7 @@
                                                     <label class="">입사일자</label>
                                                     <input class="date-picker form-control" name="emplRegdate"
                                                            th:value="${myInfoForm.emplRegdate}" placeholder="yyyy-mm-dd"
-                                                           type="date" required="required"
+                                                           type="date"
                                                            onfocus="this.type='date'" onmouseover="this.type='date'"
                                                            onclick="this.type='date'" onblur="this.type='text'"
                                                            onmouseout="timeFunctionLong(this)" readonly>
@@ -220,7 +220,7 @@
                                                     <label class="">퇴사날짜</label>
                                                     <input class="date-picker form-control" name="emplResigdate"
                                                            th:value="${myInfoForm.emplResigdate}"
-                                                           placeholder="yyyy-mm-dd" type="date" required="required"
+                                                           placeholder="yyyy-mm-dd" type="date"
                                                            onfocus="this.type='date'" onmouseover="this.type='date'"
                                                            onclick="this.type='date'" onblur="this.type='text'"
                                                            onmouseout="timeFunctionLong(this)" readonly>

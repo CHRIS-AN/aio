@@ -1,6 +1,10 @@
 package com.olive.aio.corp;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.olive.aio.domain.Empl;
+import com.olive.aio.orders.Orders;
+import com.olive.aio.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +13,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -46,5 +52,12 @@ public class Corp {
     @ManyToOne
     Empl empl;
 
+    @OneToMany(mappedBy = "corp", cascade = CascadeType.ALL)
+    @JsonBackReference
+    List<Product> products = new ArrayList<>();
+
+    @OneToMany(mappedBy = "corp", cascade = CascadeType.REMOVE)
+    @JsonBackReference
+    List<Orders> orders = new ArrayList<>();
 
 }

@@ -32,6 +32,7 @@ public class Draft {
     Product product;
 
     @ManyToOne
+    @JoinColumn(name = "orders_id")
     @JsonBackReference
     Orders orders;
 

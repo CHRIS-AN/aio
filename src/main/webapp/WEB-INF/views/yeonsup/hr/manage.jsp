@@ -137,7 +137,6 @@
                                         <label>입사일자</label>
                                         <input class="date-picker form-control" name="emplRegdate"
                                                value="${emplForm.emplRegdate}" placeholder="yyyy-mm-dd" type="date"
-                                               required="required"
                                                onfocus="this.type='date'" onmouseover="this.type='date'"
                                                onclick="this.type='date'" onblur="this.type='text'"
                                                onmouseout="timeFunctionLong(this)">
@@ -158,7 +157,7 @@
                                     <div class="form-group has-feedback col-md-6 com-sm-6">
                                         <label>퇴사일자</label>
                                         <input class="date-picker form-control" name="emplResigdate"
-                                               placeholder="yyyy-mm-dd" type="date" required="required"
+                                               placeholder="yyyy-mm-dd" type="date"
                                                onfocus="this.type='date'" onmouseover="this.type='date'"
                                                onclick="this.type='date'" onblur="this.type='text'"
                                                onmouseout="timeFunctionLong(this)" disabled>
@@ -248,8 +247,8 @@
                                     <img src="" id="profile-image2" class="col-md-12 img img-responsive m-auto">
                                     <div class="col-md-12 filebox my-form">
                                         <label for='image-input-file2'>이미지 등록</label>
-                                        <input type="file" class="form-control" id="image-input-file2" required>
-                                        <input type="hidden" id="photo2" name="photo" value='" + data[0].photo + "' required>
+                                        <input type="file" class="form-control" id="image-input-file2">
+                                        <input type="hidden" id="photo2" name="photo" value='" + data[0].photo + "'>
 
                                         <button type="button" class="btn btn-default btn-100" onclick="clearImg2()">이미지 삭제</button>
                                         <span id="photo_validate"></span>

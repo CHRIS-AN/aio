@@ -362,7 +362,7 @@ function clickupdate(data, errors) {
     html += "</div>";
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
     html += "<label>성명</label>";
-    html += "<input type=\"text\" name=\"name\" value=\"" + data[0].name + "\" class=\"form-control\" min=\"2\" max=\"8\" id=\"name\" placeholder=\"사원이름\" required>"
+    html += "<input type=\"text\" name=\"name\" value=\"" + data[0].name + "\" class=\"form-control\" min=\"2\" max=\"8\" id=\"name\" placeholder=\"사원이름\" >"
     if(errors != undefined && errors.valid_name != undefined) {
         html += "<span>" + errors.valid_name + "</span>";
     }
@@ -371,14 +371,14 @@ function clickupdate(data, errors) {
     html += "<div class=\"row\">";
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
     html += "<label>주민등록 번호</label>";
-    html += "<input type=\"text\" name=\"jumin\" value=\"" + data[0].jumin + "\" class=\"form-control\" min=\"12\" max=\"12\" id=\"jumin\" placeholder=\"900000-1111111\" required>";
+    html += "<input type=\"text\" name=\"jumin\" value=\"" + data[0].jumin + "\" class=\"form-control\" min=\"12\" max=\"12\" id=\"jumin\" placeholder=\"900000-1111111\" >";
     if(errors != undefined && errors.valid_jumin != undefined) {
         html += "<span>" + errors.valid_jumin + "</span>";
     }
     html += "</div>";
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
     html += "<label>입사일자</label>";
-    html += "<input class=\"date-picker form-control\"  name=\"emplRegdate\" value=\"" + data[0].emplRegdate + "\" placeholder=\"yyyy-mm-dd\" type=\"date\" required=\"required\"\n" +
+    html += "<input class=\"date-picker form-control\"  name=\"emplRegdate\" value=\"" + data[0].emplRegdate + "\" placeholder=\"yyyy-mm-dd\" type=\"date\" \n" +
             "onfocus=\"this.type='date'\" onmouseover=\"this.type='date'\" onclick=\"this.type='date'\" onblur=\"this.type='text'\"\n" +
             "onmouseout=\"timeFunctionLong(this)\">";
     html += "</div>";
@@ -398,7 +398,7 @@ function clickupdate(data, errors) {
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
 
     html += "<label>퇴사일자</label>";
-    html += "<input class=\"date-picker form-control\" value='" + data[0].emplResigdate + "' name=\"emplResigdate\" placeholder=\"yyyy-mm-dd\" type=\"date\" required=\"required\"" +
+    html += "<input class=\"date-picker form-control\" value='" + data[0].emplResigdate + "' name=\"emplResigdate\" placeholder=\"yyyy-mm-dd\" type=\"date\" " +
             "onfocus=\"this.type='date'\" onmouseover=\"this.type='date'\" onclick=\"this.type='date'\" onblur=\"this.type='text'\"" +
             "onmouseout=\"timeFunctionLong(this)\">";
     html += "</div>";
@@ -407,14 +407,14 @@ function clickupdate(data, errors) {
     html += "<div class=\"row\">";
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
     html += "<label>연락처</label>";
-    html += "<input type=\"text\" name=\"phone\" value='" + data[0].phone + "' class=\"form-control\" min=\"10\" max=\"11\" id=\"phone\" placeholder=\"핸드폰 번호\" required>";
+    html += "<input type=\"text\" name=\"phone\" value='" + data[0].phone + "' class=\"form-control\" min=\"10\" max=\"11\" id=\"phone\" placeholder=\"핸드폰 번호\" >";
     if(errors != undefined && errors.valid_phone != undefined) {
         html += "<span>" + errors.valid_phone + "</span>";
     }
     html += "</div>";
     html += "<div class=\"form-group has-feedback col-md-6 com-sm-6\">";
     html += "<label>Email</label>";
-    html += "<input type=\"text\" name=\"email\" value=\"" + data[0].email + "\" class=\"form-control\" id=\"email\" placeholder=\"Email\" required>"
+    html += "<input type=\"text\" name=\"email\" value=\"" + data[0].email + "\" class=\"form-control\" id=\"email\" placeholder=\"Email\" >"
     if(errors != undefined && errors.valid_email != undefined) {
         html += "<span>" + errors.valid_email + "</span>";
     }
@@ -424,7 +424,7 @@ function clickupdate(data, errors) {
     html += "<div class=\"form-group has-feedback col-md-12 com-sm-12\">";
     html += "<label class=\"col-md-12\">주소</label>";
     html += "<div class=\"col-md-5 col-sm-5\">";
-    html += "<input type=\"text\" name=\"post_num\" value=\"" + data[0].post_num + "\" min=\"5\" max=\"5\"  class=\"form-control\" id=\"uptnum\" placeholder=\"우편번호\" required>";
+    html += "<input type=\"text\" name=\"post_num\" value=\"" + data[0].post_num + "\" min=\"5\" max=\"5\"  class=\"form-control\" id=\"uptnum\" placeholder=\"우편번호\" >";
     html += "</div>";
     html += "<button id=\"postnumBtn\" onclick='showjusoPopup(\"수정\")' class=\"btn btn-default\">검색</button>";
     if(errors != undefined && errors.valid_post_num != undefined) {
@@ -433,7 +433,7 @@ function clickupdate(data, errors) {
     html += "</div>";
     html += "<div class=\"form-group has-feedback col-md-12 com-sm-12\">";
     html += "<div class=\"col-md-12\">";
-    html += "<input type=\"text\" name=\"address\" value=\"" + data[0].address + "\" class=\"form-control\" id=\"updateAddr\" placeholder=\"주소\" required>";
+    html += "<input type=\"text\" name=\"address\" value=\"" + data[0].address + "\" class=\"form-control\" id=\"updateAddr\" placeholder=\"주소\" >";
     if(errors != undefined && errors.valid_address != undefined) {
         html += "<span>" + errors.valid_address + "</span>";
     }

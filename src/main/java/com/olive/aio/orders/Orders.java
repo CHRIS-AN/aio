@@ -44,6 +44,7 @@ public class Orders implements Serializable {
     private int orders_totsum; //총금액
 
     @ManyToOne
+    @JoinColumn(name = "corp_id")
     @JsonManagedReference
     Corp corp;
 
@@ -51,7 +52,7 @@ public class Orders implements Serializable {
     @JsonBackReference
     Empl empl;
 
-    @OneToMany(mappedBy = "orders", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "orders", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference
     private Set<Draft> draft = new HashSet<>();
 
