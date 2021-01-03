@@ -110,7 +110,7 @@
                                                 <select name="corp" class="form-control has-feedback-left" style="width:300px">
                                                     <option disabled selected >거래처</option>
                                                     <c:forEach items="${corpList}" var="corp">
-                                                        <option value="${corp.corp_id}">${corp.corp_name}</option>
+                                                        <option value="${corp.corp_id}">${corp.corpName}</option>
                                                     </c:forEach>
                                                 </select>
                                                 <small class="form-text text-danger">
