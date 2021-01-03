@@ -16,10 +16,11 @@ import javax.validation.constraints.Pattern;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "draft_seq")
+@SequenceGenerator(name = "DRAFT_SEQ_GENERATOR", sequenceName = "DRAFT_SEQ", initialValue = 89, allocationSize = 1)
 public class Draft {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "DRAFT_SEQ_GENERATOR")
     private Long draft_seq; //물품순서
 
     @Pattern(regexp = "^[0-9]{1,10}$", message = "수량을 입력해주세요.")
