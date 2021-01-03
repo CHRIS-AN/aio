@@ -74,9 +74,6 @@ public class ReleaseController {
     }
 
 
-
-
-
     // ======= 중복코드 메소드 ======
     private void viewList(Model model) {
         String requestState = "출고요청";

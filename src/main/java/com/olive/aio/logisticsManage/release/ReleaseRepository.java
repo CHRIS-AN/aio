@@ -18,5 +18,3 @@ public interface ReleaseRepository extends JpaRepository<Release, Integer>{
     Release findByRequestid(Integer requestid);
 
 }
-
-

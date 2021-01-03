@@ -10,7 +10,6 @@ import java.util.List;
 @Transactional(readOnly = true)
 public interface ReleaseListRepository extends JpaRepository<Releaselist, Integer>{
 
-    List<Releaselist> findByReleaseid_Releaid(Integer releaid);
 
 }
 
