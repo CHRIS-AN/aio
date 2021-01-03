@@ -505,7 +505,7 @@
                               <div>
                                   <span class="totalOrdersCnt"></span>
                                   <span>&nbsp;/&nbsp;</span>
-                                  <span class="totalDerivCnt"></span>
+                                  <span class="totalDerivCnt1"></span>
                               </div>
                           </div>
 
