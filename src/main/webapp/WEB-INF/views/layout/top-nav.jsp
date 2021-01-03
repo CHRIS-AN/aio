@@ -24,7 +24,7 @@
                         <li>
                             <a>
                                 <form class="" action="/logout" method="post">
-                                        <button type="submit" style="border: none; background: none;">
+                                        <button type="submit" style="border: none; background: none; color: #5A738E">
                                             <i class="fa fa-sign-out pull-right"></i> 로그아웃
                                         </button>
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />

@@ -5,6 +5,7 @@ import com.olive.aio.domain.Empl;
 import com.olive.aio.employee.CurrentEmpl;
 import com.olive.aio.employee.EmplService;
 import com.olive.aio.employee.form.EmplUpdateForm;
+import com.olive.aio.slip.SlipService;
 import lombok.RequiredArgsConstructor;
 
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -56,6 +58,10 @@ public class MyPageController {
 
         if(errors.hasErrors()) {
             model.addAttribute(myInfoForm);
+            Map<String, String> validatorResult = emplService.validateHandling(errors);
+            for (String key : validatorResult.keySet()) {
+                model.addAttribute(key, validatorResult.get(key));
+            }
             return "thymeleaf/yeonsup/update";
         }
 
