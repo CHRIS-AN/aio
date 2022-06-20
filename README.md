@@ -2,21 +2,18 @@
 
 ## 프로젝트 : ERP 프로그램 (재고 관리 시스템 => 인사관리, 제품관리, 영업관리, 물류관리, 회계관리)
 
+내가 맡은 파트 : 재무관리
+</br>
+</br>
 Language : Java, javascript
+</br>
 </br>
 Skills : springboot, JPA, spring security, JSP, Thymeleaf, HTML, CSS, JQuery, Bootstrap, oracle
 </br>
+</br>
 Tools : IntellJ, oracle developer, github desktop, google Drive, draw.io, OvenApp.io
 
-내가 맡은 파트 : 회계관
 
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 ![1](https://user-images.githubusercontent.com/71064490/174597640-d39e3c5a-b852-406f-b717-660ffa2f3f18.png)
 <br>
 <br>
