@@ -7,6 +7,13 @@ Language : Java, javascript
 Skills : springboot, JPA, spring security, JSP, Thymeleaf, HTML, CSS, JQuery, Bootstrap, oracle
 </br>
 Tools : IntellJ, oracle developer, github desktop, google Drive, draw.io, OvenApp.io
+
+내가 맡은 파트 : 회계관
+
+
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
